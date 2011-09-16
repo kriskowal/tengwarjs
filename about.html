@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <style>
+            body {
+                width: 40em;
+            }
+        </style>
+    </head>
+    <body>
+
+        <p><em><strong>Usage:</strong></em>
+        <a href=".">This</a> is a live transcriber from our Latin phonetic
+        alphabet to the elvish Tengwar alphabet.  Type a message in the bottom
+        text area and it will be displayed in the equivalent elvish letters
+        in the area above.  Copy the link in the address bar and send
+        your message to friends and colleagues.</p>
+
+        <p><em><strong>Compatibility:</strong></em> The transcriber may not
+        work in some browsers because I used fancy early-draft features of some
+        other web browsers. I might go through the motions to make it work in
+        legacy browsers some day, but this would be an expensive and
+        unsatisfying project.</p>
+
+        <p>However, there is a much older
+        <a href="http://tengwar.art.pl/tengwar/ott/start.php?l=en">tengwar transcriber</a>
+        that should suffice in the interim.</p>
+        
+        <p><em><strong>Purpose:</strong></em> The transcriber is suitable for showing
+        how the <a href="http://tolkiengateway.net/wiki/Sindarin">Sindarin</a>
+        language might have been written and attempts to be consistent with
+        <em>The King’s Letter</em> from J.R.R.&nbsp;Tolkien’s book,
+        <a href="http://tolkiengateway.net/wiki/Sauron_Defeated">Sauron&nbsp;Defeated</a>,
+        commonly called the
+        “<a href="http://at.mansbjorkman.net/teng_general.htm">General&nbsp;Use</a>”
+        mode. I used the same mode for my
+        <a href="http://3rin.gs/"><nobr>Map of Middle-earth</nobr></a>.</p>
+
+        <p>I’ve posted some <a href="samples.html">sample transcriptions</a>
+        of Sindarin.</p>
+
+        <p><em><strong>Technical details:</strong></em> The font used is a derrivative of Johan Winge’s
+        <a href="http://home.student.uu.se/jowi4905/fonts/annatar.html">Tengwar Annatar</a>
+        italic and italic alternate characters.  The italic font is designed to
+        resemble the <em>Ring Enscription</em> from <em>The Lord of the
+        Rings</em>, presumably in Sauron’s own cursive.</p>
+
+        <p>The font uses an “encoding” established by
+        <a href="http://www.acondia.com/fonts/tengwar/index.html">Dan Smith</a>
+        wherein letters on an English qwerty keyboard are arranged to correspond
+        with the Tengwar grid transposed on its side.
+        Because there are not enough characters accessible on an the keyboard
+        to represent all of the glyphs and alternate glyphs of the Tengwar
+        alphabet, Johan’s Annatar provides some glyphs in an alternate font.</p>
+
+        <p>Because of limitations in rendering text on the web and the
+        peculiarities of elvish fonts, it was not possible to alternate between
+        the normal and alternate fonts in this application.  Instead, I’ve
+        created a custom version of the font that incorporates the alternate
+        glyphs I needed for this mode using code points that are not so
+        accessible on the keyboard, particularly for doubled long-O and long-U
+        diacritics, the paired curls forward and backward, and also some
+        rotated U-hook tehtar that were less prone to overlap with the
+        underlying tengwar.</p>
+
+        <p>The particular limitation is that diacritics in elvish have no width
+        and are drawn before the cursor. Some of the diacritics I use are in
+        the alternate font.  To put an alternate diacritic over the previous
+        tengwa, consonant, glyph, you have to put it in a
+        <code>&lt;span&gt;</code> tag with the alternate font face, but as a
+        result, the bounding box for the character has zero-width.  I could not
+        find a way to render the text outside the bounding box of the tag.</p>
+
+        <p>This transcriber does not require the character encoding to use code
+        points that are accessible on a qwerty keyboard, so it might be worthwhile to create a new font
+        that seizes a neglected pane of Unicode and uses ligatures and kerning
+        instead of zero-width diacritics.  The difficulty is that every
+        combination and cluster of diacritics would need to have a unique
+        and customized code-point, anchoring diacritics precisely where they
+        need to be or providing ligatures for difficult placements.</p>
+
+        <p>In the interim, I’ve engaged in the process of manually verifying
+        the placement and use of diacritics for every
+        <a href="combinations.html">combination</a> of tengwa and tehta.</p>
+
+        <p>If you take a look under the hood, the transcriber is a CommonJS
+        module and a jQuery plugin.</p>
+
+        <p>Further work might include:</p>
+
+        <ul>
+            <li>More modes of transcription, particularly phonetic and
+            orthographic English and Quenya.</li>
+            <li>Tie-in with IPA dictionaries of various languages</li>
+            <li>Tie-in with elvish dictionary for special-cases</li>
+            <li>Display intermediate encoding that shows the names of each
+            tengwa and tehta in every cluster.</li>
+            <li>Search the dictionary, encyclopedia, and map.</li>
+        </ul>
+
+        <p><nobr>&mdash; Kris Kowal, 2011</nobr></p>
+
+    </body>
+</html>
