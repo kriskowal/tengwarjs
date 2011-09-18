@@ -140,9 +140,15 @@ var mode = {
             "|"
         ],
         */
+        // TODO deal with the fact that all of these
+        // should only be final (for word spacing) except
+        // for the first S-hook for "calma" and "quesse"
+        // since they appear within the tengwa
         "s": {
             "special": true,
             "tinco": "+",
+            "ando": "+",
+            "numen": "+",
             "lambe": "_",
             "calma": "|",
             "quesse": "|",
@@ -150,9 +156,7 @@ var mode = {
         },
         "s-inverse": {
             "special": true,
-            "tinco": "¡",
-            "calma": "&#162;", // cents
-            "quesse": "&#162;", // cents
+            "tinco": "¡"
         },
         "s-extended": {
             "special": true,
