@@ -12,8 +12,7 @@ for use as:
 
 The script depends on a shimmable subset of ECMAScript 5.  You might
 benefit from using ES5 Shim if you're deploying to older browsers.
-
-    <https://github.com/kriskowal/es5-shim>
+<https://github.com/kriskowal/es5-shim>
 
 The API includes:
 
@@ -36,7 +35,7 @@ If used as a jQuery plugin, you can use the "tengwar" method to
 transcribe the contents of selected tags and add the "tengwar" class
 to successfully transcribed tags.
 
-    $("transcribe-tengwar").tengwar();
+    $(".transcribe-tengwar").tengwar();
 
 Be sure to use the included web font, derrived from Johan Winge's
 Tengwar Annatar.  It is customized for this web-deployed transcriber.
