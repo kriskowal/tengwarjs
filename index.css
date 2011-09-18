@@ -38,6 +38,23 @@ a:hover {
 a:focus {
 }
 
+#annotation table {
+    border-collapse: collapse;
+    margin-right: 1em;
+}
+
+#annotation td {
+    border: solid 1px;
+    width: 1em;
+    text-align: left;
+    font-size: 20px;
+    padding: 2px;
+    line-height: 100%;
+    text-shadow: 0px 0px 10px #730 ;
+    white-space: nowrap;
+    font-family: monospace;
+}
+
 #output {
     text-align: center;
     line-height: 150px;

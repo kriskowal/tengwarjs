@@ -2,9 +2,11 @@
 
     var input = $("#input");
     var output = $("#output");
+    var annotation = $("#annotation");
 
-    function update() {
-        var val = input.val();
+    function update(event, val) {
+        val = val || input.val();
+        annotation.html(tengwar.annotateHtml(val));
         output.html(tengwar.transcribeHtml(val));
         location.hash = "#" + encodeURIComponent(val);
         input.css({
@@ -14,15 +16,15 @@
         })
     }
 
+    var val = ">Ash nazg durbatulûk, ash nazg gimbatul,<\nAsh nazg thrakatulûk agh burzum-ishi krimpatul.";
     if (location.hash) {
-        input.val(decodeURIComponent(location.hash.slice(1)));
+        input.val(val = decodeURIComponent(location.hash.slice(1)));
     }
 
     input.keyup(update);
     input.keydown(update);
     output.tengwar();
-    update();
-
     input.select();
+    update(null, val);
 
 })();

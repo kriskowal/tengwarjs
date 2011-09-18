@@ -88,10 +88,12 @@ var mode = {
         // punctuation
         "comma": "=",
         "full-stop": "-",
-        "exclamation": "Á",
+        "exclamation-point": "Á",
         "question-mark": "À",
         "open-paren": "&#140;",
-        "close-paren": "&#156;"
+        "close-paren": "&#156;",
+        "flourish-left": "&#286;",
+        "flourish-right": "&#287;",
     },
     "tehtar": {
         "a": "#EDC",
@@ -146,13 +148,16 @@ var mode = {
             "quesse": "|",
             "short-carrier": "}",
         },
-        /*
         "s-inverse": {
             "special": true,
             "tinco": "¡",
             "calma": "&#162;", // cents
+            "quesse": "&#162;", // cents
         },
-        */
+        "s-extended": {
+            "special": true,
+            "tinco": "&#199;"
+        },
         "s-flourish": {
             "special": true,
             "tinco": "&#163;",
@@ -448,7 +453,8 @@ var mode = {
     "substitutions": {
         "k": "c",
         "x": "cs",
-        "q": "qu",
+        "qu": "cw",
+        "q": "cw",
         "ë": "e",
         "â": "á",
         "ê": "é",
@@ -502,10 +508,10 @@ var mode = {
         "l": "lambe",
         "ll": "lambe:tilde-below",
         "bb": "umbar:tilde-below",
-        "nl": "lambe:tilde-above",
         "s": "silme",
         "ss": "silme:tilde-below",
         "sh": "harma",
+        "j": "anca",
         "z": "esse",
         //"ld": "alda",
         "lh": "alda", // probably not
@@ -544,11 +550,11 @@ var mode = {
     },
     "words": {
         "iant": "yanta;tinco:tilde-above:a",
-        "iaur": "yanta;anna:a;ore",
+        "iaur": "yanta;vala:a;ore",
         "ioreth": "yanta;romen:o;thule:e",
         "noldo": "nwalme;lambe:o;ando;short-carrier:o",
         "noldor": "nwalme;lambe:o;ando;ore:o",
-        "is": "short-carrier:s"
+        "is": "short-carrier:i:s"
     },
     "punctuation": {
         "-": "comma",
@@ -556,10 +562,74 @@ var mode = {
         ":": "comma",
         ";": "full-stop",
         ".": "full-stop",
-        "!": "exclamation",
+        "!": "exclamation-point",
         "?": "question-mark",
         "(": "open-paren",
-        ")": "close-paren"
+        ")": "close-paren",
+        ">": "flourish-left",
+        "<": "flourish-right"
+    },
+    "annotations": {
+        "tinco": {"tengwa": "t"},
+        "parma": {"tengwa": "p"},
+        "calma": {"tengwa": "c"},
+        "quesse": {"tengwa": "c"},
+        "ando": {"tengwa": "d"},
+        "umbar": {"tengwa": "b"},
+        "ungwe": {"tengwa": "g"},
+        "thule": {"tengwa": "th"},
+        "formen": {"tengwa": "f"},
+        "hyarmen": {"tengwa": "h"},
+        "hwesta": {"tengwa": "ch"},
+        "unque": {"tengwa": "gh"},
+        "anto": {"tengwa": "dh"},
+        "anca": {"tengwa": "j"},
+        "ampa": {"tengwa": "v"},
+        "numen": {"tengwa": "n"},
+        "malta": {"tengwa": "m"},
+        "nwalme": {"tengwa": "ñ"},
+        "romen": {"tengwa": "r"},
+        "ore": {"tengwa": "-r"},
+        "lambe": {"tengwa": "l"},
+        "silme": {"tengwa": "s"},
+        "silme-nuquerna": {"tengwa": "s"},
+        "esse": {"tengwa": "z"},
+        "esse-nuquerna": {"tengwa": "z"},
+        "harma": {"tengwa": "sh"},
+        "alda": {"tengwa": "lh"},
+        "arda": {"tengwa": "rh"},
+        "wilya": {"tengwa": "a"},
+        "vala": {"tengwa": "w"},
+        "anna": {"tengwa": "i"},
+        "vala": {"tengwa": "w"},
+        "yanta": {"tengwa": "e"},
+        "hwesta-sindarinwa": {"tengwa": "wh"},
+        "s": {"following": "s"},
+        "s-inverse": {"following": "s<sub>2</sub>"},
+        "s-extended": {"following": "s<sub>3</sub>"},
+        "s-flourish": {"following": "s<sub>4</sub>"},
+        "long-carrier": {"tengwa": "´"},
+        "short-carrier": {},
+        "tilde-above": {"above": "nmñ-"},
+        "tilde-below": {"below": "2"},
+        "a": {"tehta-above": "a"},
+        "e": {"tehta-above": "e"},
+        "i": {"tehta-above": "i"},
+        "o": {"tehta-above": "o"},
+        "u": {"tehta-above": "u"},
+        "ó": {"tehta-above": "ó"},
+        "ú": {"tehta-above": "ú"},
+        "í": {"tehta-above": "y"},
+        "y": {"tehta-below": "y"},
+        "w": {"tehta-above": "w"},
+        "full-stop": {"tengwa": "."},
+        "exclamation-point": {"tengwa": "!"},
+        "question-mark": {"tengwa": "?"},
+        "comma": {"tengwa": "-"},
+        "open-paren": {"tengwa": "("},
+        "close-paren": {"tengwa": ")"},
+        "flourish-left": {"tengwa": "“"},
+        "flourish-right": {"tengwa": "”"}
     }
 };
 
@@ -627,7 +697,7 @@ var transcriptionsRe = new RegExp("^([aeiouóú]?)(" +
     Object.keys(mode.transcriptions).sort(function (a, b) {
         return b.length - a.length;
     }).join("|") +
-")(w?)(y?)(s?)", "ig");
+")(w?)(y?)(s?)('*)", "ig");
 var vowelTranscriptionsRe = new RegExp("^(" + 
     Object.keys(mode.vowelTranscriptions).join("|") +
 ")", "ig");
@@ -649,7 +719,7 @@ function transcribeWordToEncoding(latin) {
     while (latin.length) {
         length = latin.length;
         latin = latin
-        .replace(transcriptionsRe, function ($, vowel, tengwa, w, y, s) {
+        .replace(transcriptionsRe, function ($, vowel, tengwa, w, y, s, prime) {
             //console.log(latin, [vowel, tengwa, w, y, s]);
             w = w || ""; s = s || ""; y = y || "";
             var value = mode.transcriptions[tengwa];
@@ -678,16 +748,29 @@ function transcribeWordToEncoding(latin) {
                 w = "";
                 voweled = true;
             }
-            if (s) {
-                var tehta = tehtaForTengwa(tengwa, "s");
-                if (tehta !== null) {
-                    value += ":" + "s";
-                    s = "";
-                }
-            }
             if (y) {
                 value += ":y";
                 y = "";
+            }
+            // must go last because it has a non-zero width
+            if (s) {
+                var length = prime.length;
+                var possibilities = [
+                    "s",
+                    "s-inverse",
+                    "s-extended",
+                    "s-flourish"
+                ].filter(function (tehta) {
+                    return tehtaForTengwa(tengwa, tehta);
+                });
+                while (possibilities.length && length) {
+                    possibilities.shift();
+                    length--;
+                }
+                if (possibilities.length) {
+                    value += ":" + possibilities.shift();
+                    s = "";
+                }
             }
             parts.push(value);
             first = false;
@@ -748,7 +831,7 @@ function transcribeToEncoding(latin) {
             return paragraph.split(/\n/).map(function (stanza) {
                 return stanza.split(/\s+/).map(function (word) {
                     var parts = []
-                    word.replace(/(\w+)|(\W+)/g, function ($, word, others) {
+                    word.replace(/([\wáéíóúÁÉÍÓÚëËâêîôûÂÊÎÔÛ']+)|(\W+)/g, function ($, word, others) {
                         if (word) {
                             parts.push(transcribeWordToEncoding(word));
                         } else {
@@ -802,6 +885,54 @@ function decodeToFont(transcription) {
             }).join("\n");
         }).join("\n\n");
     }).join("\n\n\n");
+}
+
+exports.annotate = annotate;
+function annotate(latin) {
+    return transcribeToEncoding(latin).split(/\s+/).map(function (word) {
+        return word.split(";").map(function (word) {
+            var form = {};
+            word.split(":").forEach(function (part) {
+                var annotation = mode.annotations[part];
+                for (var name in annotation) {
+                    form[name] = "<abbr title=\"" + part + " (" + name + ")\">" + annotation[name] + "</abbr>";
+                }
+            });
+            var middle = [];
+            if (form.tengwa) {
+                middle.push("<strong>" + form.tengwa + "</strong>");
+            }
+            if (form.following) {
+                middle.push(" -" + form.following);
+            }
+            return [
+                form['tehta-above'],
+                form['above'],
+                middle.join(""),
+                form['below'],
+                form['tehta-below']
+            ];
+        });
+    });
+}
+
+exports.annotateHtml = annotateHtml;
+function annotateHtml(latin) {
+    return annotate(latin).map(function (word) {
+        var table = [[], [], [], [], []];
+        var i = 0;
+        word.forEach(function (cluster) {
+            cluster.forEach(function (note, j) {
+                table[j][i] = note;
+            });
+            i++;
+        });
+        return "<table align=\"left\">" + table.map(function (row) {
+            return "<tr>" + row.map(function (cell) {
+                return "<td>" + (cell || "&nbsp;") + "</td>";
+            }).join("") + "</tr>";
+        }).join("") + "</table>";
+    }).join("");
 }
 
 exports.transcribe = transcribe;
