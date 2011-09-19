@@ -150,7 +150,6 @@ var mode = {
             "ando": "+",
             "numen": "+",
             "lambe": "_",
-            "calma": "|",
             "quesse": "|",
             "short-carrier": "}",
         },
@@ -467,65 +466,90 @@ var mode = {
         "û": "ú"
     },
     "transcriptions": {
+
+        // consonants
         "t": "tinco",
         "nt": "tinco:tilde-above",
         "tt": "tinco:tilde-below",
+
         "p": "parma",
         "mp": "parma:tilde-above",
         "pp": "parma:tilde-below",
+
         "c": "quesse",
         "nc": "quesse:tilde-above",
+
         "d": "ando",
         "nd": "ando:tilde-above",
         "dd": "ando:tilde-below",
+
         "b": "umbar",
         "mb": "umbar:tilde-above",
         "bb": "umbar:tilde-below",
+
         "g": "ungwe",
         "ng": "ungwe:tilde-above",
         "gg": "ungwe:tilde-below",
+
         "th": "thule",
         "nth": "thule:tilde-above",
+
         "f": "formen",
         "ph": "formen",
         "mf": "formen:tilde-above",
         "mph": "formen:tilde-above",
+
+        "sh": "harma",
+
         "h": "hyarmen",
         "ch": "hwesta",
+        "hw": "hwesta-sindarinwa",
+        "wh": "hwesta-sindarinwa",
+
         "gh": "unque",
-        "d": "ando",
-        "nd": "ando:tilde-above",
+        "ngh": "unque:tilde-above",
+
         "dh": "anto",
         "ndh": "anto:tilde-above",
+
         "v": "ampa",
         "bh": "ampa",
         "mv": "ampa:tilde-above",
         "mbh": "ampa:tilde-above",
-        "ngh": "unque:tilde-above",
+
+        "j": "anca",
+        "nj": "anca:tilde-above",
+
         "n": "numen",
         "nn": "numen:tilde-above",
+
         "m": "malta",
         "mm": "malta:tilde-above",
+
         "ng": "nwalme",
+        "ñ": "nwalme",
+        "nwal": "nwalme:w;lambe:a",
+
         "r": "romen",
-        //"rd": "arda",
+        "rr": "romen:tilde-below",
+        "rh": "arda",
+
         "l": "lambe",
         "ll": "lambe:tilde-below",
-        "bb": "umbar:tilde-below",
+        "lh": "alda",
+
         "s": "silme",
         "ss": "silme:tilde-below",
-        "sh": "harma",
-        "j": "anca",
+
         "z": "esse",
-        //"ld": "alda",
-        "lh": "alda", // probably not
-        "rh": "arda",
+
         "á": "wilya:a",
         "é": "long-carrier:e",
         "í": "long-carrier:i",
         "ó": "long-carrier:o",
         "ú": "long-carrier:u",
         "w": "vala",
+
         "ai": "anna:a",
         "oi": "anna:o",
         "ui": "anna:u",
@@ -533,33 +557,37 @@ var mode = {
         "eu": "vala:e",
         "iu": "vala:i",
         "ae": "yanta:a",
-        "hw": "hwesta-sindarinwa",
-        "wh": "hwesta-sindarinwa",
-        "ñ": "nwalme",
-        "nwal": "nwalme:w;lambe:a",
+
     },
     "vowelTranscriptions": {
+
         "a": "short-carrier:a",
         "e": "short-carrier:e",
         "i": "short-carrier:i",
         "o": "short-carrier:o",
         "u": "short-carrier:u",
+
         "á": "wilya:a",
         "é": "long-carrier:e",
         "í": "long-carrier:i",
         "ó": "short-carrier:ó",
         "ú": "short-carrier:ú",
+
         "w": "vala",
         "y": "short-carrier:í"
+
     },
+
     "words": {
         "iant": "yanta;tinco:tilde-above:a",
         "iaur": "yanta;vala:a;ore",
+        "baranduiniant": "umbar;romen:a;ando:tilde-above:a;anna:u;yanta;anto:tilde-above:a",
         "ioreth": "yanta;romen:o;thule:e",
         "noldo": "nwalme;lambe:o;ando;short-carrier:o",
         "noldor": "nwalme;lambe:o;ando;ore:o",
         "is": "short-carrier:i:s"
     },
+
     "punctuation": {
         "-": "comma",
         ",": "comma",
@@ -573,6 +601,7 @@ var mode = {
         ">": "flourish-left",
         "<": "flourish-right"
     },
+
     "annotations": {
         "tinco": {"tengwa": "t"},
         "parma": {"tengwa": "p"},
@@ -708,7 +737,7 @@ var vowelTranscriptionsRe = new RegExp("^(" +
 var substitutionsRe = new RegExp("(" +
     Object.keys(mode.substitutions).join("|") +
 ")", "ig");
-                        
+
 function transcribeWordToEncoding(latin) {
     latin = latin
     .toLowerCase()
@@ -720,7 +749,10 @@ function transcribeWordToEncoding(latin) {
     var parts = [];
     var length;
     var first = true;
+    var maybeFinal;
     while (latin.length) {
+        if (latin[0] != "s")
+            maybeFinal = undefined;
         length = latin.length;
         latin = latin
         .replace(transcriptionsRe, function ($, vowel, tengwa, w, y, s, prime) {
@@ -735,8 +767,14 @@ function transcribeWordToEncoding(latin) {
             if (vowel) {
                 if (!voweled) {
                     // flip if necessary
-                    if (tehtaForTengwa(tengwa, vowel) === null && tehtaForTengwa(tengwa + "-nuquerna", vowel) !== null) {
-                        value = [tengwa + "-nuquerna"].concat(tehtar).concat([vowel]).filter(function (part) {
+                    if (
+                        tehtaForTengwa(tengwa, vowel) === null &&
+                        tehtaForTengwa(tengwa + "-nuquerna", vowel) !== null
+                    ) {
+                        value = [tengwa + "-nuquerna"]
+                        .concat(tehtar)
+                        .concat([vowel])
+                        .filter(function (part) {
                             return part;
                         }).join(":");
                     } else {
@@ -757,7 +795,7 @@ function transcribeWordToEncoding(latin) {
                 y = "";
             }
             // must go last because it has a non-zero width
-            if (s) {
+            if (s && !w) {
                 var length = prime.length;
                 var possibilities = [
                     "s",
@@ -772,13 +810,17 @@ function transcribeWordToEncoding(latin) {
                     length--;
                 }
                 if (possibilities.length) {
-                    value += ":" + possibilities.shift();
-                    s = "";
+                    if (value.split(":").indexOf("quesse") >= 0) {
+                        value = value + ":" + possibilities.shift();
+                        s = "";
+                    } else {
+                        maybeFinal = value + ":" + possibilities.shift();
+                    }
                 }
             }
             parts.push(value);
             first = false;
-            return w + s + y;
+            return w + y + s;
         });
         if (length === latin.length) {
             length = latin.length;
@@ -796,6 +838,11 @@ function transcribeWordToEncoding(latin) {
         }
     }
     if (parts.length) {
+        if (maybeFinal && parts[parts.length - 1] == "silme") {
+            parts.pop();
+            parts.pop();
+            parts.push(maybeFinal);
+        }
         parts.push(parts.pop().replace("romen", "ore"));
     }
     /*
@@ -828,6 +875,7 @@ function transcribeWordToEncoding(latin) {
     return parts.join(";");
 }
 
+exports.transcribeToEncoding = transcribeToEncoding;
 function transcribeToEncoding(latin) {
     latin = latin.replace(/[,:] +/g, ",");
     return latin.split(/\n\n\n+/).map(function (section) {
@@ -947,48 +995,6 @@ function transcribe(latin) {
 exports.transcribeHtml = transcribeHtml;
 function transcribeHtml(latin) {
     return decodeToFontHtml(transcribeToEncoding(latin));
-}
-
-var tests = [
-    "tyelpe",
-    "telperion",
-    "hyarmen",
-    "hwesta sindarinwa",
-    "hobbits",
-    "hobytla",
-    "perian",
-    "periannath",
-    "istar",
-    "istari",
-    "nwalme",
-    "isildur",
-    "helcaraxë",
-    "sul",
-    "amon sûl",
-    "lothlórien",
-    "ardalambion",
-    "baranduiniant",
-    "iant iaur",
-    "glorfindel",
-    "galadriel",
-    "galadhrim",
-    "gwaith iaur arnor",
-    "aldost",
-    "noldo",
-    "noldor",
-    "gwathlo",
-    "ainaldo",
-    "varda",
-    "mae govannen"
-];
-
-exports.displayTests = displayTests;
-function displayTests() {
-    document.body.innerHTML = tests.map(function (test) {
-        var transcribed = transcribeHtml(test);
-        var fontified = decodeToFont(transcribed);
-        return "<p>" + test + ": " + transcribed + " <span class=\"tengwar\">" + fontified + "</span></p>\n";
-    }).join("");
 }
 
 if (typeof jQuery !== "undefined") {
