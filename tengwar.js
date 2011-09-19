@@ -476,6 +476,9 @@ var mode = {
         "mp": "parma:tilde-above",
         "pp": "parma:tilde-below",
 
+        "ch'": "calma", // ch is palatal fricative, as in bach
+        "nch'": "calma:tilde-above",
+
         "c": "quesse",
         "nc": "quesse:tilde-above",
 
@@ -486,6 +489,9 @@ var mode = {
         "b": "umbar",
         "mb": "umbar:tilde-above",
         "bb": "umbar:tilde-below",
+
+        "j": "anca",
+        "nj": "anca:tilde-above",
 
         "g": "ungwe",
         "ng": "ungwe:tilde-above",
@@ -516,9 +522,6 @@ var mode = {
         "bh": "ampa",
         "mv": "ampa:tilde-above",
         "mbh": "ampa:tilde-above",
-
-        "j": "anca",
-        "nj": "anca:tilde-above",
 
         "n": "numen",
         "nn": "numen:tilde-above",
@@ -609,11 +612,12 @@ var mode = {
         "quesse": {"tengwa": "c"},
         "ando": {"tengwa": "d"},
         "umbar": {"tengwa": "b"},
+        "anga": {"tengwa": "ch"},
         "ungwe": {"tengwa": "g"},
         "thule": {"tengwa": "th"},
         "formen": {"tengwa": "f"},
         "hyarmen": {"tengwa": "h"},
-        "hwesta": {"tengwa": "ch"},
+        "hwesta": {"tengwa": "kh"},
         "unque": {"tengwa": "gh"},
         "anto": {"tengwa": "dh"},
         "anca": {"tengwa": "j"},
@@ -726,7 +730,7 @@ function displayTengwarTehtar() {
     }).join(" ");
 }
 
-var transcriptionsRe = new RegExp("^([aeiouóú]?)(" +
+var transcriptionsRe = new RegExp("^([aeiouóú]?'?)(" +
     Object.keys(mode.transcriptions).sort(function (a, b) {
         return b.length - a.length;
     }).join("|") +
