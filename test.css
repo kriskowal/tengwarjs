@@ -3,8 +3,8 @@
     font-family: tengwar;
     src: url('custom-webfont.eot');
     src: url('custom-webfont.eot#iefix'),
-         url('custom-webfont.woff') format('woff'),
-         url('custom-webfont.ttf') format('truetype'),
+         url('custom-webfont.woff') format('woff'), 
+         url('custom-webfont.ttf') format('truetype'), 
          url('custom-webfont.svg#TengwarAnnatarItalic') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -31,6 +31,7 @@ body {
 }
 
 body, textarea {
+    font-family: serif;
     font-size: 25px;
 }
 
@@ -41,7 +42,6 @@ textarea, .copy {
 
 a {
     color: #a00;
-    text-decoration: none;
 }
 
 a:visited {
@@ -91,14 +91,18 @@ a:focus {
 
 #about-box {
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
-    height: 0;
-    width: 0;
+    padding-right: 1ex;
+    padding-bottom: .5ex;
 }
 
-#about {
-    position: relative;
+#mode-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-left: 1ex;
+    padding-bottom: .5ex;
 }
 
 .hbox {
@@ -129,5 +133,13 @@ a:focus {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     box-flex: 1;
+}
+
+table {
+    padding: 4ex;
+}
+
+td {
+    width: 4em;
 }
 

@@ -22,6 +22,7 @@
         "url": "http://github.com/kriskowal/tengwarjs.git"
     },
     "dependencies": {
+        "mr": "0.0.x"
     },
     "devDependencies": {
     }

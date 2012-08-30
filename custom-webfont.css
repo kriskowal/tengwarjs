@@ -3,18 +3,13 @@
     font-family: tengwar;
     src: url('custom-webfont.eot');
     src: url('custom-webfont.eot#iefix'),
-         url('custom-webfont.woff') format('woff'), 
-         url('custom-webfont.ttf') format('truetype'), 
+         url('custom-webfont.woff') format('woff'),
+         url('custom-webfont.ttf') format('truetype'),
          url('custom-webfont.svg#TengwarAnnatarItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
-table {
-    padding: 4ex;
-}
-td {
-    width: 4em;
-}
+
 .tengwar {
     font-family: tengwar;
     font-size: 30px;

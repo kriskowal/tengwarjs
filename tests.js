@@ -87,3 +87,4 @@ Object.keys(tests).forEach(function (input) {
 
 if (require.main === module)
     require("test").run(exports);
+

@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Tengwar Transcriber</title>
+        <link rel="stylesheet" type="text/css" href="test.css">
+    </head>
+    <body>
+
+        <noscript>
+            <br>This transcriber makes extensive use
+            of JavaScript and very new CSS tricks.
+            You might try using the much older
+            <a href="http://tengwar.art.pl/tengwar/ott/start.php?l=en">
+                tengwar transcriber
+            </a> if your browser does not support
+            these features.
+        </noscript>
+
+        <div class="vbox" style="height: 100%; width: 100%">
+            <div class="vbox spring" id="output-box">
+                <div class="spring"></div>
+                <div id="output" class="strut tengwar"></div>
+                <div class="spring"></div>
+                <div class="strut hbox">
+                    <div class="spring"></div>
+                    <div id="annotation"></div>
+                    <div class="spring"></div>
+                </div>
+            </div>
+            <div class="strut hbox">
+                <div class="strut" style="width: 30ex"></div>
+                <div class="spring">
+                    <textarea id="input"></textarea>
+                </div>
+                <div class="strut" style="width: 30ex"></div>
+            </div>
+        </div>
+
+        <div id="mode-box">
+            <input type="radio" name="mode" id="input-general-use" value="general-use" checked>
+            <label for="input-general-use">General Use</label><br>
+            <input type="radio" name="mode" id="input-classical" value="classical">
+            <label for="input-classical">Classical</label><br>
+        </div>
+
+        <div id="about-box">
+            <a href="about.html">about</a>
+        </div>
+
+        <script src="node_modules/mr/bootstrap.js" data-module="test" charset="utf-8"></script>
+
+    </body>
+</html>
