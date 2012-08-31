@@ -180,8 +180,7 @@ function parseTengwa(callback, options, tehta) {
     var font = options.font;
     var makeColumn = font.makeColumn;
     return function (character) {
-        if (false) {
-        } else if (character === "n") {
+        if (character === "n") {
             return function (character) {
                 if (character === "n") { // nn
                     if (options.doubleNasalsWithTildeBelow) {

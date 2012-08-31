@@ -14,11 +14,9 @@ function wfTengwar($input, array $args) {
         htmlspecialchars($input) .
         "\" data-encoded=\"" .
         htmlspecialchars($encoded) .
-        "\" data-bindings=\"" .
-        htmlspecialchars($bindings) .
         "\" data-mode=\"" .
         htmlspecialchars($mode) .
-        "\" ></span>";
+        "\" >" .  htmlspecialchars($bindings) . "</span>";
 }
 
 ?>
