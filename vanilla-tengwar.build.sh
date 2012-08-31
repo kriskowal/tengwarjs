@@ -10,7 +10,8 @@
             tengwar-annatar.js \
             parser.js \
             normalize.js \
-            punctuation.js
+            punctuation.js \
+            notation.js
     echo '})();'
 ) | closure > vanilla-tengwar.min.js
 
