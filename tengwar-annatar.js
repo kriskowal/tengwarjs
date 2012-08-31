@@ -522,10 +522,17 @@ var Font = {
 };
 
 exports.transcribe = transcribe;
-function transcribe(sections) {
+function transcribe(sections, options) {
+    options = options || {};
+    console.log(options);
+    var plain = options.plain || false;
+    var block = options.block || false;
+    var beginParagraph = block ? "<p>" : "";
+    var delimitParagraph = block ? "<br>" : "";
+    var endParagraph = block ? "</p>" : "";
     return sections.map(function (section) {
         return section.map(function (paragraph) {
-            return "<p>" + paragraph.map(function (line) {
+            return beginParagraph + paragraph.map(function (line) {
                 return line.map(function (word) {
                     return word.map(function (column) {
                         var tengwa = column.tengwa || "anna";
@@ -538,13 +545,13 @@ function transcribe(sections) {
                         var html = Font.tengwar[tengwa] + tehtar.map(function (tehta) {
                             return tehtaForTengwa(tengwa, tehta);
                         }).join("");
-                        if (column.errors) {
+                        if (column.errors && !plain) {
                             html = "<abbr class=\"error\" title=\"" + column.errors.join("\n").replace(/"/g, "&quot;") + "\">" + html + "</abbr>";
                         }
                         return html;
                     }).join("");
                 }).join(" ");;
-            }).join("<br>\n") + "</p>";
+            }).join(delimitParagraph + "\n") + endParagraph;
         }).join("\n\n");
     }).join("\n\n\n");
 }

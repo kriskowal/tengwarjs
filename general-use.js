@@ -10,6 +10,8 @@ function makeOptions(options) {
     options = options || defaults;
     return {
         font: options.font || TengwarAnnatar,
+        block: options.block,
+        plain: options.plain,
         doubleNasalsWithTildeBelow: options.doubleNasalsWithTildeBelow,
         // Any tengwa can be doubled by placing a tilde above, and any tengwa
         // can be prefixed with the nasal from the same series by putting a
@@ -28,13 +30,13 @@ exports.transcribe = transcribe;
 function transcribe(text, options) {
     options = makeOptions(options);
     var font = options.font;
-    return font.transcribe(parse(text, options));
+    return font.transcribe(parse(text, options), options);
 }
 
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    return Notation.encode(parse(text, options));
+    return Notation.encode(parse(text, options), options);
 }
 
 // TODO convert to parse tree

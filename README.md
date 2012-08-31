@@ -128,8 +128,10 @@ Using the Modules
     `makeColumn` primitive which is aware of how a column of tengwar and
     tehtar can transform to accommodate additional tehtar with this
     font.
-    -   `transcribe(tengwarObjectNotation)`: to Tengwar Annatar key
+    -   `transcribe(tengwarObjectNotation, options)`: to Tengwar Annatar key
         bindings
+        -   `plain`: plain text, no markup
+        -   `block`: block markup, with paragraph and line break tags
     -   `makeColumn(tengwa, above, below)`
         -   `canAddAbove()`
         -   `addAbove(tehta)`

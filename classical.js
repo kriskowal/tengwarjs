@@ -10,6 +10,8 @@ function makeOptions(options) {
     options = options || defaults;
     return {
         font: options.font || TengwarAnnatar,
+        block: options.block,
+        plain: options.plain,
         vilya: options.vilya,
         // false: (v: vala, w: wilya)
         // true: (v: vilya, w: ERROR)
@@ -43,6 +45,8 @@ function makeOptions(options) {
         // TODO triple dots for y
         // TODO simplification of a, noting non-a
         // TODO following W in this mode?
+        // TODO namarië does not use double U or O curls
+        // TODO namarië does not reverse esse for E tehta
     };
 };
 
@@ -50,13 +54,13 @@ exports.transcribe = transcribe;
 function transcribe(text, options) {
     options = makeOptions(options);
     var font = options.font;
-    return font.transcribe(parse(text, options));
+    return font.transcribe(parse(text, options), options);
 }
 
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    return Notation.encode(parse(text, options));
+    return Notation.encode(parse(text, options), options);
 }
 
 // TODO convert to parse tree
@@ -143,7 +147,7 @@ function parseTengwa(callback, options, previous) {
                 if (character === "n") { // nn
                     return callback([makeColumn("numen").addTildeBelow()]);
                 } else if (character === "t") { // nt
-                    return callback([makeColumn("tinco")]);
+                    return callback([makeColumn("anto")]);
                 } else if (character === "d") { // nd
                     return callback([makeColumn("ando")]);
                 } else if (character === "g") { // ng

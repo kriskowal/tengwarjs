@@ -17,7 +17,8 @@ function onload() {
     var elements = document.querySelectorAll(".tengwar");
     array_.forEach.call(elements, function (element) {
         var data = element.dataset;
-        var tengwar, mode, encoding;
+        var tengwar, mode, encoding, block;
+        block = element.tagName.toLowerCase() === "div";
         if (data) {
             tengwar = data.tengwar;
             mode = data.mode;
@@ -28,11 +29,12 @@ function onload() {
             encoding = element.getAttribute("data-encoding");
         }
         if (encoding) {
-            element.innerText = TengwarAnnatar.transcribe(encoding);
+            element.innerText = TengwarAnnatar.transcribe(encoding, {block: block});
         } else if (tengwar) {
+            console.log(tengwar);
             mode = mode || 'general-use';
             var Mode = mode === 'general-use' ? GeneralUse : Classical;
-            element.innerHTML = Mode.transcribe(tengwar);
+            element.innerHTML = Mode.transcribe(tengwar, {block: block});
         }
     });
 }

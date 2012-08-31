@@ -1,11 +1,11 @@
 
 @font-face {
     font-family: tengwar;
-    src: url('custom-webfont.eot');
-    src: url('custom-webfont.eot#iefix'),
-         url('custom-webfont.woff') format('woff'), 
-         url('custom-webfont.ttf') format('truetype'), 
-         url('custom-webfont.svg#TengwarAnnatarItalic') format('svg');
+    src: url('tengwar-annatar-combined.eot');
+    src: url('tengwar-annatar-combined.eot#iefix'),
+         url('tengwar-annatar-combined.woff') format('woff'), 
+         url('tengwar-annatar-combined.ttf') format('truetype'), 
+         url('tengwar-annatar-combined.svg#TengwarAnnatarItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
