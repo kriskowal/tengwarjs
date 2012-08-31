@@ -10,10 +10,10 @@ function report(latin, mode) {
         .css("padding", "10px")
         .appendTo(element);
     $("<span>")
-        .attr("class", "tengwar")
-        .data({
-            tengwar: latin,
-            mode: mode
+        .attr({
+            "class": "tengwar",
+            "data-tengwar": latin,
+            "data-mode": mode
         })
         .appendTo(element);
     element.appendTo(body);
@@ -30,4 +30,4 @@ Object.keys(generalUse).forEach(function (latin) {
     report(latin, "general-use");
 });
 
-require("./jquery-tengwar");
+require("./vanilla-tengwar");

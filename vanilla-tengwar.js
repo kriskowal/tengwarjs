@@ -5,20 +5,35 @@ var TengwarAnnatar = require("./tengwar-annatar");
 
 var array_ = Array.prototype;
 
-document.addEventListener("DOMContentLoaded", function onload() {
-    if (document.body.dataset && document.querySelectorAll && array_.forEach) {
-        var elements = document.querySelectorAll(".tengwar");
-        array_.forEach.call(elements, function (element) {
-            var data = element.dataset;
-            if (data.encoding) {
-                element.innerText = TengwarAnnatar.transcribe(data.encoding);
-            } else if (data.tengwar) {
-                var mode = data.mode || 'general-use';
-                var Mode = mode === 'general-use' ? GeneralUse : Classical;
-                element.innerText = Mode.transcribe(data.tengwar);
-            }
-        });
+if (document.querySelectorAll && array_.forEach) {
+    if (document.readyState === "complete") {
+        onload();
+    } else {
+        document.addEventListener("DOMContentLoaded", onload, true);
     }
-    document.removeEventListener("DOMContentLoaded", onload);
-});
+}
+
+function onload() {
+    var elements = document.querySelectorAll(".tengwar");
+    array_.forEach.call(elements, function (element) {
+        var data = element.dataset;
+        var tengwar, mode, encoding;
+        if (data) {
+            tengwar = data.tengwar;
+            mode = data.mode;
+            encoding = data.encoding;
+        } else {
+            tengwar = element.getAttribute("data-tengwar");
+            mode = element.getAttribute("data-mode");
+            encoding = element.getAttribute("data-encoding");
+        }
+        if (encoding) {
+            element.innerText = TengwarAnnatar.transcribe(encoding);
+        } else if (tengwar) {
+            mode = mode || 'general-use';
+            var Mode = mode === 'general-use' ? GeneralUse : Classical;
+            element.innerHTML = Mode.transcribe(tengwar);
+        }
+    });
+}
 
