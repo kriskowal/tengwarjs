@@ -1,22 +1,70 @@
 
-var Render = require("./render");
-var makeColumn = require("./column");
+var TengwarAnnatar = require("./tengwar-annatar");
+var makeParser = require("./parser");
+var normalize = require("./normalize");
+var punctuation = require("./punctuation");
+
+var defaults = {};
+function makeOptions(options) {
+    options = options || defaults;
+    return {
+        font: options.font || TengwarAnnatar,
+        vilya: options.vilya,
+        // false: (v: vala, w: wilya)
+        // true: (v: vilya, w: ERROR)
+        harma: options.harma,
+        // between the original formation of the language,
+        // but before the third age,
+        // harma was renamed aha,
+        // and meant breath-h in initial position
+        classical: options.classical,
+        // before the third age
+        // affects use of "r" and "h"
+        // without classic, we default to the mode from the namarie poem.
+        // in the classical period, "r" was transcribed as "ore" only between
+        // vowels.
+        // in the third age, through the namarie poem, "r" is only "ore" before
+        // consontants and at the end of words.
+        // TODO figure out "h"
+        iuRising: options.isRising,
+        // iuRising thirdAge: anna:y,u
+        // otherwise: ure:i
+        // in the third age, "iu" is a rising diphthong,
+        // whereas all others are falling.  rising means
+        // that they are stressed on the second sound, as
+        // in "yule".  whether to use yanta or anna is
+        // not attested.
+        longHalla: options.longHalla
+        // TODO indicates that halla should be used before medial L and W to
+        // indicate that these are pronounced with length.
+        // initial hl and hw remain short.
+        // TODO doubled dots for í
+        // TODO triple dots for y
+        // TODO simplification of a, noting non-a
+        // TODO following W in this mode?
+    };
+};
 
 exports.transcribe = transcribe;
-function transcribe(text) {
-    var tengwarObjects = parse(text);
-    return Render.transcribe(tengwarObjects);
+function transcribe(text, options) {
+    options = makeOptions(options);
+    var font = options.font;
+    return font.transcribe(parse(text, options));
 }
 
 exports.encode = encode;
-function encode(text) {
-    var tengwarObjects = parse(text);
-    return Render.encode(tengwarObjects);
+function encode(text, options) {
+    options = makeOptions(options);
+    var font = options.font;
+    return font.encode(parse(text, options));
 }
 
+// TODO convert to parse tree
 exports.parse = parse;
 function parse(text, options) {
-    options = options || makeOptions();
+    options = makeOptions(options);
+    var font = options.font;
+    var makeColumn = font.makeColumn;
     return text.split(/\n\n\n+/).map(function (section) {
         return section.split(/\n\n/).map(function (paragraph) {
             return paragraph.split(/\n/).map(function (line) {
@@ -27,9 +75,9 @@ function parse(text, options) {
                     function ($, contiguous, other) {
                         if (contiguous) {
                             try {
-                                word.push.apply(word, parseWord(contiguous, options));
+                                word.push.apply(word, parseWord(normalize(contiguous), options));
                             } catch (exception) {
-                                word.push(makeColumn().addError("Cannot transcribe " + JSON.stringify(word) + " because " + exception.message));
+                                word.push(makeColumn().addError("Cannot transcribe " + JSON.stringify(contiguous) + " because " + exception.message));
                             }
                         } else if (punctuation[other]) {
                             word.push(makeColumn(punctuation[other]));
@@ -51,106 +99,12 @@ function parse(text, options) {
 }
 
 // original mode: (classical)
-// interim: (classical + vilya? + aha? + longHalla?)
+// interim: (classical + wilya? + aha? + longHalla?)
 // third age: (iuRising?) default
 
-function makeOptions() {
-    return {
-        vilya: false,
-        // false: (v: vala, w: wilya)
-        // true: (v: vilya, w: ERROR)
-        aha: false,
-        // between the original formation of the language,
-        // but before the third age,
-        // harma was renamed aha,
-        // and meant breath-h in initial position
-        longHalla: false,
-        // TODO indicates that halla should be used before medial L and W to
-        // indicate that these are pronounced with length.
-        // initial hl and hw remain short.
-        classical: false,
-        // before the third age
-        // affects use of "r" and "h"
-        // without classic, we default to the mode from the namarie poem.
-        // in the classical period, "r" was transcribed as "ore" only between
-        // vowels.
-        // in the third age, through the namarie poem, "r" is only "ore" before
-        // consontants and at the end of words.
-        // TODO figure out "h"
-        iuRising: false
-        // iuRising thirdAge: anna:y,u
-        // otherwise: ure:i
-        // in the third age, "iu" is a rising diphthong,
-        // whereas all others are falling.  rising means
-        // that they are stressed on the second sound, as
-        // in "yule".  whether to use yanta or anna is
-        // not attested.
-        // TODO doubled dots for í
-        // TODO triple dots for y
-        // TODO simplification of a, noting non-a
-    };
-};
-
-function parseWord(latin, options) {
-
-    // normalize
-    latin = latin.replace(substitutionsRe, function ($, key) {
-        return substitutions[key];
-    });
-
-    // the parser is a monadic state machine.
-    // each state is represented by a function that accepts
-    // a character.  parse functions accept a callback (for forwarding the
-    // result) and return a state.
-    var result;
-    var state = parseWordTail(function (transcription) {
-        result = transcription;
-        return expectEof();
-    }, options, []);
-    // drive the state machine
-    Array.prototype.forEach.call(latin, function (letter, i) {
-        state = state(letter);
-    });
-    // break break break
-    while (!result) {
-        state = state(""); // EOF
-    }
-    return result;
-
-}
-
-var substitutions = {
-    "k": "c",
-    "x": "cs",
-    "qu": "cw",
-    "q": "cw",
-    "ph": "f",
-    "ë": "e",
-    "â": "á",
-    "ê": "é",
-    "î": "í",
-    "ô": "ó",
-    "û": "ú"
-};
-
-var substitutionsRe = new RegExp("(" +
-    Object.keys(substitutions).join("|") +
-")", "ig");
-
-var vowels = "aeiouyáéíóú";
-var punctuation = {
-    "-": "comma",
-    ",": "comma",
-    ":": "comma",
-    ";": "full-stop",
-    ".": "full-stop",
-    "!": "exclamation-point",
-    "?": "question-mark",
-    "(": "open-paren",
-    ")": "close-paren",
-    ">": "flourish-left",
-    "<": "flourish-right"
-};
+var parseWord = makeParser(function (callback, options) {
+    return parseWordTail(callback, options, []);
+});
 
 // state machine
 
@@ -178,19 +132,23 @@ function parseColumn(callback, options, previous) {
     }, options, previous);
 }
 
+var vowels = "aeiouyáéíóú";
+
 function parseTengwa(callback, options, previous) {
+    var font = options.font;
+    var makeColumn = font.makeColumn;
     return function (character) {
         if (character === "n") { // n
             return function (character) {
                 if (character === "n") { // nn
-                    return callback([makeColumn("numen").addBarBelow()]);
+                    return callback([makeColumn("numen").addTildeBelow()]);
                 } else if (character === "t") { // nt
                     return callback([makeColumn("tinco")]);
                 } else if (character === "d") { // nd
                     return callback([makeColumn("ando")]);
                 } else if (character === "g") { // ng
                     return function (character) {
-                        if (character === "w") { // ngw
+                        if (character === "w") { // ngw -> ñw
                             return callback([makeColumn("ungwe")]);
                         } else { // ng
                             return callback([makeColumn("anga")])(character);
@@ -211,7 +169,7 @@ function parseTengwa(callback, options, previous) {
         } else if (character === "m") {
             return function (character) {
                 if (character === "m") { // mm
-                    return callback([makeColumn("malta").addBarBelow()]);
+                    return callback([makeColumn("malta").addTildeBelow()]);
                 } else if (character === "p") { // mp
                     return callback([makeColumn("ampa")]);
                 } else if (character === "b") { // mb
@@ -247,9 +205,9 @@ function parseTengwa(callback, options, previous) {
                 if (character === "t") { // tt
                     return function (character) {
                         if (character === "y") { // tty
-                            return callback([makeColumn("tinco").addBelow("y").addBarBelow()]);
+                            return callback([makeColumn("tinco").addBelow("y").addTildeBelow()]);
                         } else { // tt
-                            return callback([makeColumn("tinco").addBarBelow()])(character);
+                            return callback([makeColumn("tinco").addTildeBelow()])(character);
                         }
                     };
                 } else if (character === "y") { // ty
@@ -277,9 +235,9 @@ function parseTengwa(callback, options, previous) {
                 if (character === "p") {
                     return function (character) {
                         if (character === "y") {
-                            return callback([makeColumn("parma").addBelow("y").addBarBelow()]);
+                            return callback([makeColumn("parma").addBelow("y").addTildeBelow()]);
                         } else {
-                            return callback([makeColumn("parma").addBarBelow()])(character);
+                            return callback([makeColumn("parma").addTildeBelow()])(character);
                         }
                     };
                 } else if (character === "y") { // py
@@ -302,7 +260,7 @@ function parseTengwa(callback, options, previous) {
         } else if (character === "c") {
             return function (character) {
                 if (character === "c") {
-                    return callback([makeColumn("calma").addBarBelow()]);
+                    return callback([makeColumn("calma").addTildeBelow()]);
                 } else if (character === "s") {
                     return callback([makeColumn("calma").addBelow("s")]);
                 } else if (character === "h") {
@@ -322,20 +280,24 @@ function parseTengwa(callback, options, previous) {
                 return callback([makeColumn("vala")]);
             }
         } else if (character === "w") {
-            if (options.vilya) {
+            if (options.wilya) {
                 return callback([
                     makeColumn("short-carrier").addAbove("u")
                     .addError("Before the introduction of vala, wilya was called vilya and represented the v sound.  There is no tengwa to represent consonantal w.")
                 ]);
             } else {
-                return callback([makeColumn("vala")]);
+                return callback([makeColumn("wilya")]);
             }
-        } else if (character === "r") {
+        } else if (character === "r") { // r
             return function (character) {
                 if (character === "d") { // rd
                     return callback([makeColumn("arda")]);
-                } else if (character === "h") { // hr
-                    return callback([makeColumn("halla"), makeColumn("romen")]);
+                } else if (character === "h") { // rh -> hr
+                    var error = "R should preceed H in the HR diagraph in Classical mode.";
+                    return callback([
+                        makeColumn("halla").addError(error),
+                        makeColumn("romen").addError(error)
+                    ]);
                 } else if (options.classical) {
                     // pre-namarie style, ore when r between vowels
                     if (
@@ -362,15 +324,19 @@ function parseTengwa(callback, options, previous) {
                 if (character === "l") {
                     return function (character) {
                         if (character === "y") {
-                            return callback([makeColumn("lambe").addBelow("y").addBarBelow()]);
+                            return callback([makeColumn("lambe").addBelow("y").addTildeBelow()]);
                         } else {
-                            return callback([makeColumn("lambe").addBarBelow()])(character);
+                            return callback([makeColumn("lambe").addTildeBelow()])(character);
                         }
                     }
                 } else if (character === "y") {
                     return callback([makeColumn("lambe").addBelow("y")]);
-                } else if (character === "h") { // hl
-                    return callback([makeColumn("halla"), makeColumn("lambe")]);
+                } else if (character === "h") { // lh -> hl
+                    var error = "L should preceed H in the HL diagraph in Classical mode.";
+                    return callback([
+                        makeColumn("halla").addError(error),
+                        makeColumn("lambe").addError(error)
+                    ]);
                 } else if (character === "d") {
                     return callback([makeColumn("alda")]);
                 } else if (character === "b") {
@@ -404,19 +370,19 @@ function parseTengwa(callback, options, previous) {
                 } else if (character === "t") {
                     return callback([makeColumn("harma")]);
                 } else if (character === "y") {
-                    if (options.classical && !options.aha) { // initial
+                    if (options.classical && options.harma) { // initial
                         return callback([makeColumn("hyarmen")]);
                     } else { // post-aha, through to the third-age
                         return callback([makeColumn("hyarmen").addBelow("y")]);
                     }
                 } else if (!previous) { // initial
-                    if (options.classical && !options.aha) {
-                        return callback([makeColumn("halla")])(character);
-                    } else { // post-aha
+                    if (options.classical && options.harma) {
                         return callback([makeColumn("harma")])(character);
+                    } else { // post-aha
+                        return callback([makeColumn("halla")])(character);
                     }
                 } else { // medial
-                    if (options.classical && !options.aha) { // initial
+                    if (options.classical && options.harma) { // initial
                         return callback([makeColumn("harma")])(character);
                     } else if (options.classical) { // post-aha
                         return callback([makeColumn("hyarmen")])(character);
@@ -440,6 +406,8 @@ function parseTengwa(callback, options, previous) {
 }
 
 function parseTehta(callback, options, previous) {
+    var font = options.font;
+    var makeColumn = font.makeColumn;
     return function (character) {
         if (character === "a") {
             return function (character) {
@@ -535,28 +503,6 @@ function parseTehta(callback, options, previous) {
             return callback([previous])(character);
         }
     };
-}
-
-// generic parser utilities
-
-function expect(expected, callback) {
-    var displayExpected = expected ? JSON.stringify(expected) : "end of word";
-    return function (character) {
-        if (character !== expected) {
-            var displayCharacter = character ? JSON.stringify(character) : "end of word";
-            throw new Error("Expected " + displayExpected + " but got " + displayCharacter);
-        } else {
-            return callback(expected);
-        }
-    }
-}
-
-function expectEof() {
-    return expect("", function () {
-        return function () {
-            return parseEof();
-        };
-    });
 }
 
 // Notes regarding "h":

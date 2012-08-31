@@ -1,90 +1,87 @@
-var T = require("./tengwar");
+
+var GeneralUse = require("./general-use");
+var Classical = require("./classical");
 
 var tests = {
+    classical: {
 
-    // sindarin (sorted)
-    "ainur": "a/anna numen u/ore",
-    "aldost": "a/lambe ando o/silme-nuquerna tinco",
-    "amon sûl": "a/malta o/numen space silme ú/lambe",
-    "aragorn": "a/romen a/ungwe o/romen numen",
-    "atto": "a/tinco/tilde-below o/short-carrier",
-    "baranduiniant": "umbar a/romen a/ando/tilde-above u/anna yanta a/anto/tilde-above",
-    "dagor bragolach": "ando a/ungwe o/ore space umbar romen a/ungwe o/lambe a/hwesta",
-    "galadhrim": "ungwe a/lambe a/anto romen i/malta",
-    "galadriel": "ungwe a/lambe a/ando romen i/short-carrier e/lambe",
-    "gandalf": "ungwe a/ando/tilde-above a/lambe formen",
-    "glorfindel": "ungwe lambe o/romen formen i/ando/tilde-above e/lambe",
-    "gwaith iaur arnor": "ungwe/w a/anna thule space yanta a/vala ore space a/romen numen o/ore",
-    "gwathló": "ungwe/w a/thule lambe o/long-carrier",
-    "hwesta sindarinwa": "hwesta-sindarinwa e/silme-nuquerna tinco a/short-carrier space silme i/ando/tilde-above a/romen i/numen vala a/short-carrier",
-    "iant": "yanta a/tinco/tilde-above",
-    "iaur": "yanta a/vala ore",
-    "isildur": "i/silme-nuquerna i/lambe ando u/ore",
-    "lhûn": "alda ú/numen",
-    "lothlórien": "lambe o/thule lambe ó/romen i/short-carrier e/numen",
-    "mae govannen": "malta a/yanta space ungwe o/ampa a/numen/tilde-above e/numen",
-    "mellon": "malta e/lambe/tilde-below o/numen",
-    "mordor": "malta o/romen ando o/ore",
-    "moria": "malta o/romen i/short-carrier a/short-carrier",
-    "noldor": "nwalme o/lambe ando o/ore",
-    "nwalme": "nwalme/w a/lambe malta e/short-carrier",
-    "periannath": "parma e/romen i/short-carrier a/numen/tilde-above a/thule",
-    "rhûn": "arda ú/numen",
-    "tyelpe": "tinco/y e/lambe parma e/short-carrier",
-    "varda": "ampa a/romen ando a/short-carrier",
-    "á": "a/wilya",
-    "ñoldor": "nwalme o/lambe ando o/ore",
+        "ainaldo": "yanta:a;numen:a;alda:o",
+        "aldost": "short-carrier:a;alda:o;silme;tinco",
+        "hlóce": "halla;lambe:ó;calma:e", // attested
+        "hríve": "halla;romen;long-carrier:i;vala:e", // attested
+        "hyarmen": "hyarmen:y,a;romen;malta:e;numen",
+        "hyarmen(classical)": "hyarmen:a;romen;malta:e;numen",
+        "hyarmen(classical,aha)": "hyarmen:y,a;romen;malta:e;numen",
+        "lambe": "lambe:a;umbar:e",
+        "moria": "malta:o;romen:i;short-carrier:a"
+        "silme": "silme-nuquerna:i;lambe;malta:e",
+        "syi": "silme:y;short-carrier:i", //*
+        "thúlë": "thule:ú;lambe:e",
+        "tyelpe": "tinco:y,e;lambe;parma:e",
+        "vanwa": "vala:a;numen;wilya:a",
+        "yuldar": "anna:y,u;alda:a;ore",
 
-    // quenya (sorted)
-    "ardalambion": "a/romen ando a/lambe a/umbar/tilde-above i/short-carrier o/numen",
-    "helcaraxë": "hyarmen e/lambe quesse a/romen a/quesse/s e/short-carrier",
-    "hyarmen": "hyarmen/y a/romen malta e/numen",
-    "istari": "i/silme-nuquerna tinco a/romen i/short-carrier",
-    "sinome maruvan": "silme i/numen o/malta e/short-carrier space malta a/romen u/ampa a/numen",
-    "sinome maruvan": "silme i/numen o/malta e/short-carrier space malta a/romen u/ampa a/numen",
-    "telperion": "tinco e/lambe parma e/romen i/short-carrier o/numen",
-    "yuldar": "í/short-carrier u/lambe ando a/ore",
+    },
+    generalUse: {
 
-    // english
-    "hobbits": "hyarmen o/umbar/tilde-below i/tinco/s",
-    "hobbits'": "hyarmen o/umbar/tilde-below i/tinco/s-inverse",
-    "hobbits''": "hyarmen o/umbar/tilde-below i/tinco/s-extended",
+        // sindarin (sorted)
+        "ainur": "anna:a;numen;ore:u",
+        "aldost": "lambe:a;ando;silme-nuquerna:o;tinco",
+        "amon sûl": "malta:a;numen:o silme;lambe:ú",
+        "aragorn": "romen:a;ungwe:a;romen:o;numen",
+        "atto": "tinco:a,tilde-below;short-carrier:o",
+        "baranduiniant": "umbar;romen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
+        "dagor bragolach": "ando;ungwe:a;ore:o umbar;romen;ungwe:a;lambe:o;hwesta:a"
+        "galadhrim": "ungwe;lambe:a;anto:a;romen;malta:i",
+        "galadriel": "ungwe;lambe:a;ando:a;romen;short-carrier:i;lambe:e",
+        "gandalf": "ungwe;ando:a,tilde-above;lambe:a;formen",
+        "glorfindel": "ungwe;lambe;romen:o;formen;ando:i,tilde-above;lambe:e",
+        "gwaith iaur arnor": "ungwe:w;anna:a;thule yanta;vala:a;ore romen:a;numen;ore:o",
+        "gwathló": "ungwe:w;thule:a;lambe;long-carrier:o",
+        "hwesta sindarinwa": "hwesta-sindarinwa;silme-nuquerna:e;tinco;short-carrier:a silme;ando:i,tilde-above;romen:a;numen:i;vala;short-carrier:a",
+        "iant": "yanta;tinco:a,tilde-above",
+        "iaur": "yanta;vala:a;ore",
+        "isildur": "silme-nuquerna:i;lambe:i;ando;ore:u",
+        "lhûn": "alda;numen:ú",
+        "lothlórien": "lambe;thule;lambe;romen:ó;short-carrier:i;numen:e",
+        "mae govannen": "malta;yanta:a ungwe;ampa:o;numen:a,tilde-above;numen:e",
+        "mellon": "malta;lambe:e,tilde-below;numen:o",
+        "mordor": "malta;romen:o;ando:ore:o",
+        "moria": "malta;romen:o;short-carrier:i;short-carrier:a"
+        "noldor": "nwalme;lambe:o;ando;ore:o",
+        "periannath": "parma;romen:e;short-carrier:i;numen:a,tilde-above;thule:a"
+        "rhûn": "arda;numen:ú",
+        "tyelpe": "tinco:y;lambe:e;parma;short-carrier:e",
+        "varda": "ampa;romen:a;ando;short-carrier:a",
+        "á": "wilya:a",
+        "ñoldor": "nwalme;lambe:o;ando;ore:o",
 
-    // old english
-    "írensaga": "i/long-carrier romen e/numen silme a/ungwe a/short-carrier",
+        // quenya (improper mode) (sorted)
+        "ardalambion": "romen:a;ando;lambe:a;umbar:a,tilde-above;short-carrier:i;numen:o",
+        "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
+        "hyarmen": "hyarmen:y;romen:a;malta;numen:e",
+        "istari": "silme-nuqeurna:i;tinco;romen:a;short-carrier:i",
+        "sinome maruvan": "silme;numen:i;malta:o;short-carrier:e malta;romen:a;ampa:u;numen:a",
+        "telperion": "tinco;lambe:e;parma;romen:e;short-carrier:i;numen:o",
+        "yuldar": "short-carrier:í;lambe:u;ando;ore:a",
 
-    // interesting clusters
-    "xx": "quesse/s quesse/s",
-    "tsts": "tinco silme tinco/s",
-    "iqs": "i/quesse vala silme",
-    "aty": "a/tinco/y",
-    "is": "i/short-carrier/s",
-    "allys": "a/lambe/tilde-below/y/s",
-    "alyssa": "a/lambe/y silme/tilde-below a/short-carrier",
+        // english (appropriate mode) (sorted)
+        "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s",
+        "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
+        "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
 
+        // old english
+        "írensaga": "long-carrier:i;romen;numen:e;silme;ungwe:a;short-carrier:a",
 
+        // interesting clusters
+        "xx": "quesse/s;quesse:s",
+        "tsts": "tinco;silme;tinco:s",
+        "iqs": "quesse:i;vala;silme",
+        "aty": "tinco:a,y",
+        "is": "short-carrier:i,s",
+        "allys": "lambe:a,tilde-below,y:s",
+        "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a"
 
-
-}
-
-exports.tests = tests;
-
-Object.keys(tests).forEach(function (input) {
-    exports['test ' + input] = function (assert) {
-        var oracle = tests[input].split(" space ").map(function (phrase) {
-            return phrase.split(/\s+/).map(function (cluster) {
-                return cluster.split("/").sort();
-            });
-        });;
-        var actual = T.transcribeToEncoding(input).split(/\s+/).map(function (phrase) {
-            return phrase.split(";").map(function (cluster) {
-                return cluster.split(":").sort();
-            });
-        });
-        assert.deepEqual(actual, oracle, 'transcribe');
     }
-});
-
-if (require.main === module)
-    require("test").run(exports);
+};
 

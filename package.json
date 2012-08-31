@@ -25,5 +25,9 @@
         "mr": "0.0.x"
     },
     "devDependencies": {
+        "jasmine-node": "1.0.x"
+    },
+    "scripts": {
+        "test": "jasmine-node spec"
     }
 }

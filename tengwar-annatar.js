@@ -1,6 +1,4 @@
 
-var makeColumn = require("./column");
-
 var Font = {
     "names": [
         ["tinco", "parma", "calma", "quesse"],
@@ -13,7 +11,7 @@ var Font = {
         ["silme", "silme-nuquerna", "esse", "esse-nuquerna"],
         ["hyarmen", "hwesta-sindarinwa", "yanta", "ure"],
         ["halla", "short-carrier", "long-carrier", "round-carrier"],
-        ["tinco-extended", "parma-extended", "calma-extended", "quesse-extended"],
+        ["tinco-extended", "parma-extended", "calma-extended", "quesse-extended"]
     ],
     "aliases": {
         "vilya": "wilya",
@@ -84,7 +82,7 @@ var Font = {
         "open-paren": "&#140;",
         "close-paren": "&#156;",
         "flourish-left": "&#286;",
-        "flourish-right": "&#287;",
+        "flourish-right": "&#287;"
     },
     "tehtar": {
         "a": "#EDC",
@@ -118,7 +116,7 @@ var Font = {
             "&#212;",
             "&#213;",
             "&#214;",
-            "&#215;",
+            "&#215;"
         ],
         "w": "èéêë",
         "y": "ÌÍÎÏ´",
@@ -143,7 +141,7 @@ var Font = {
             "lambe": "_",
             "calma": "|",
             "quesse": "|",
-            "short-carrier": "}",
+            "short-carrier": "}"
         },
         "s-inverse": {
             "special": true,
@@ -162,7 +160,7 @@ var Font = {
         "tilde-below": [
             ":",
             ";",
-            "&#176;",
+            "&#176;"
         ],
         "tilde-high-above": ")0",
         "tilde-far-below": "?/",
@@ -531,16 +529,16 @@ function encode(sections) {
                 return line.map(function (word) {
                     return word.map(function (column) {
                         var parts = [];
-                        if (column.below)
-                            parts.push(column.below);
                         if (column.above)
                             parts.push(column.above);
-                        if (column.barAbove)
-                            parts.push("bar-above");
-                        if (column.barBelow)
-                            parts.push("bar-below");
+                        if (column.below)
+                            parts.push(column.below);
                         if (column.following)
                             parts.push(column.following);
+                        if (column.tildeAbove)
+                            parts.push("tilde-above");
+                        if (column.tildeBelow)
+                            parts.push("tilde-below");
                         if (parts.length) {
                             return column.tengwa + ":" + parts.join(",");
                         } else {
@@ -572,9 +570,9 @@ function decodeWord(word) {
         var tehtar = parts.length ? parts.shift().split(",") : [];
         var result = makeColumn(tengwa);
         tehtar.forEach(function (tehta) {
-            if (tehta === "bar-above") {
-                result.addBarAbove();
-            } else if (tehta === "bar-below") {
+            if (tehta === "tilde-above") {
+                result.addTildeAbove();
+            } else if (tehta === "tilde-below") {
                 result.addBarBelow();
             } else if (tehta === "y") {
                 result.addBelow("y");
@@ -611,8 +609,8 @@ function transcribe(sections) {
                         var tehtar = [];
                         if (column.above) tehtar.push(column.above);
                         if (column.below) tehtar.push(column.below);
-                        if (column.barBelow) tehtar.push("bar-below");
-                        if (column.barAbove) tehtar.push("bar-above");
+                        if (column.tildeBelow) tehtar.push("tilde-below");
+                        if (column.tildeAbove) tehtar.push("tilde-above");
                         if (column.following) tehtar.push(column.following);
                         var html = Font.tengwar[tengwa] + tehtar.map(function (tehta) {
                             return tehtaForTengwa(tengwa, tehta);
@@ -661,4 +659,67 @@ function tehtaKeyForTengwa(tengwa, tehta) {
     }
     return 0;
 }
+
+exports.makeColumn = makeColumn;
+function makeColumn(tengwa, above, below) {
+    return new Column(tengwa, above, below);
+};
+
+var Column = function (tengwa, above, below) {
+    this.above = above;
+    this.tildeAbove = void 0;
+    this.tengwa = tengwa;
+    this.tildeBelow = void 0;
+    this.below = below;
+    this.following = void 0;
+    this.error = void 0;
+};
+
+Column.prototype.canAddAbove = function () {
+    return !this.above || (
+        (this.tengwa === "silme" || this.tengwa === "esse")
+        && !this.below
+    );
+};
+
+Column.prototype.addAbove = function (above) {
+    if (this.tengwa === "silme") {
+        this.tengwa = "silme-nuquerna";
+    }
+    if (this.tengwa === "esse") {
+        this.tengwa = "esse-nuquerna";
+    }
+    this.above = above;
+    return this;
+};
+
+Column.prototype.canAddBelow = function () {
+    return !this.below && this.tengwa !== "silme-nuquerna";
+};
+
+Column.prototype.addBelow = function (below) {
+    this.below = below;
+    return this;
+};
+
+Column.prototype.addTildeAbove = function () {
+    this.tildeAbove = true;
+    return this;
+};
+
+Column.prototype.addTildeBelow = function () {
+    this.tildeBelow = true;
+    return this;
+};
+
+Column.prototype.addFollowing = function (following) {
+    this.following = following;
+    return this;
+};
+
+Column.prototype.addError = function (error) {
+    this.errors = this.errors || [];
+    this.errors.push(error);
+    return this;
+};
 

@@ -143,3 +143,7 @@ td {
     width: 4em;
 }
 
+.error {
+    text-shadow: 0px 0px 10px #f00 ;
+}
+
