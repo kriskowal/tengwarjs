@@ -20,12 +20,14 @@ function wfMakeTengwar($input, array $args, $tag) {
     $mode = array_key_exists("mode", $args) ? $args["mode"] : "";
     $encoded = array_key_exists("encoded", $args) ? $args["encoded"] : "";
     $bindings = array_key_exists("bindings", $args) ? $args["bindings"] : "(JavaScript required)";
-    return
+    return array(
         "<" . $tag . " class=\"tengwar\"" .
         ( $input ? " data-tengwar=\"" .  htmlspecialchars($input) . "\"" : "" ) .
         ( $encoded ? " data-encoded=\"" .  htmlspecialchars($encoded) . "\"" : "" ) .
         ( $mode ? " data-mode=\"" .  htmlspecialchars($mode) . "\"" : "" ) .
-        ">" .  htmlspecialchars($bindings) .  "</" . $tag . ">";
+        ">" .  htmlspecialchars($bindings) .  "</" . $tag . ">",
+        "markerType" => "nowiki"
+    );
 }
 
 ?>
