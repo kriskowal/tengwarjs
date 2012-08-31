@@ -1,5 +1,6 @@
 
 var TengwarAnnatar = require("./tengwar-annatar");
+var Notation = require("./notation");
 var makeParser = require("./parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
@@ -55,8 +56,7 @@ function transcribe(text, options) {
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    var font = options.font;
-    return font.encode(parse(text, options));
+    return Notation.encode(parse(text, options));
 }
 
 // TODO convert to parse tree
@@ -280,11 +280,8 @@ function parseTengwa(callback, options, previous) {
                 return callback([makeColumn("vala")]);
             }
         } else if (character === "w") {
-            if (options.wilya) {
-                return callback([
-                    makeColumn("short-carrier").addAbove("u")
-                    .addError("Before the introduction of vala, wilya was called vilya and represented the v sound.  There is no tengwa to represent consonantal w.")
-                ]);
+            if (options.vilya) {
+                return callback([])("u");
             } else {
                 return callback([makeColumn("wilya")]);
             }
@@ -370,24 +367,24 @@ function parseTengwa(callback, options, previous) {
                 } else if (character === "t") {
                     return callback([makeColumn("harma")]);
                 } else if (character === "y") {
-                    if (options.classical && options.harma) { // initial
+                    if (options.classical && options.harma) { // oldest form
                         return callback([makeColumn("hyarmen")]);
                     } else { // post-aha, through to the third-age
                         return callback([makeColumn("hyarmen").addBelow("y")]);
                     }
-                } else if (!previous) { // initial
-                    if (options.classical && options.harma) {
-                        return callback([makeColumn("harma")])(character);
-                    } else { // post-aha
-                        return callback([makeColumn("halla")])(character);
-                    }
-                } else { // medial
-                    if (options.classical && options.harma) { // initial
-                        return callback([makeColumn("harma")])(character);
-                    } else if (options.classical) { // post-aha
+                } else {
+                    if (options.classical) {
+                        if (options.harma) { // before harma became aha initially
+                            return callback([makeColumn("harma")])(character);
+                        } else { // harmen renamed and resounded as aha in initial position
+                            if (previous) { // medial
+                                return callback([makeColumn("hyarmen")])(character);
+                            } else { // initial
+                                return callback([makeColumn("harma")])(character);
+                            }
+                        }
+                    } else { // third age, namarië
                         return callback([makeColumn("hyarmen")])(character);
-                    } else { // namarie, third-age
-                        return callback([makeColumn("harma")])(character);
                     }
                 }
             };

@@ -1,5 +1,6 @@
 
 var TengwarAnnatar = require("./tengwar-annatar");
+var Notation = require("./notation");
 var makeParser = require("./parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
@@ -33,8 +34,7 @@ function transcribe(text, options) {
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    var font = options.font;
-    return font.encode(parse(text, options));
+    return Notation.encode(parse(text, options));
 }
 
 // TODO convert to parse tree
@@ -55,7 +55,7 @@ function parse(text, options) {
                             contiguous = normalize(contiguous);
                             try {
                                 if (book[contiguous]) {
-                                    word.push.apply(word, font.decodeWord(book[contiguous]));
+                                    word.push.apply(word, Notation.decodeWord(book[contiguous], makeColumn));
                                 } else {
                                     word.push.apply(word, parseWord(contiguous, options));
                                 }

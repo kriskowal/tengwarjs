@@ -4,17 +4,206 @@ Elvish from a phonetic encoding of the Latin alphabet, to the General
 Use mode of the Tengwar.  It is written in JavaScript and is suitable
 for use as:
 
--   A plain script in a web page.
--   A jQuery plugin.
--   A CommonJS module as used by Node, with the NPM package name
+-   A plain script in a web page, `vanilla-tengwar.min.js`.
+-   A CommonJS module as used by Node or Mr, with the NPM package name
     ``tengwar``.
--   A RequireJS script as used by Dojo and others.
 
-The script depends on a shimmable subset of ECMAScript 5.  You might
-benefit from using ES5 Shim if you're deploying to older browsers.
-<https://github.com/kriskowal/es5-shim>
+Using the Script
+================
 
-The API includes:
+The script searches the document for elements with the `tengwar` class.
+The body of a `tengwar` class must be rendered with the included Tengar
+Annatar variant webfont, using the included `tengwar-annatar.css`.
+
+If the element has a `data-tengwar` property, that property is expected
+to contain phonetic letters from the latin alphabet and gets transcribed
+into bindings for the Tengwar Anntar font in the General Use mode,
+popular for Sindarin and English.  The script populates the element's
+inner HTML with the font bindings, rendering the desired tengwar text
+visible.
+
+If the element has a `data-mode=classical` property, the latin letters
+are instead transcribed into Tengwar Annatar key bindings through the
+Classical mode, popular for Quenya.
+
+If the element has a `data-encoded` property, the value is expected to
+be a description of the tengwar and tehtar to display like
+`romen:a;ungwe:a;romen:o;numen` for "Aragorn" in the General Use mode.
+
+Of course, a page can bypass the whole automated transcription process
+by statically populating the element with the desired key bindings and
+using neither of these data properties.
+
+The script checks for modern browser features and stops if the necessary
+features are not present.
+
+Using the Modules
+=================
+
+-   `tengwar/general-use` transcribes phonetic latin letters, as Tolkien
+    wrote it, into Tengwar Notation in the General Use mode, suitable
+    for Sindarin and many other languages.
+    -   `transcribe(text, options)` to Tengwar Annatar key bindings
+    -   `encode(text, options)` to Tengwar Notation
+    -   `parse(text, options)` to Tengwar Object Notation
+    -   `makeOptions(options)`
+        -   `font` defaults to the TengwarAnnatar module.
+        -   `doubleNasalsWithTildeBelow`: Many tengwa can be doubled in
+            General Use mode by placing a tilde above the tengwa, and
+            many tengwa can be prefixed with the sound of the
+            corresponding nasal by putting a tilde below the tengwa.
+            Tengwar that represent nasal sounds have the special
+            distinction that either rule might apply in order to double
+            their value.
+            -   `false`: by default, a tilde above doubles a nasal
+            -   `true`: a tilde below doubles a nasal
+        -   `noAchLaut`
+            -   `false`: by default, "ch" is transcribed as ach-laut,
+                the "ch" as in "Bach".  "cc" is transcribed as "ch" as
+                in "chew".
+            -   `true`: "ch" is interpreted as the "ch" as in "chew".
+-   `tengwar/classical` transcribes phonetic latin letters into Tengwar
+    Notation in the Classical mode, most commonly used for Quenya.
+    -   `transcribe(text, options)` to Tengwar Annatar key bindings
+    -   `encode(text, options)` to Tengwar Notation
+    -   `parse(text, options)` to Tengwar Object Notation
+    -   `makeOptions(options)`
+        -   `font` defaults to the TengwarAnnatar module.
+        -   `viyla`: In the earlier forms of the mode, the tengwa
+            "vilya" represented the sound of the letter V.  The tengwa
+            "vala" eventually replaced its role and "vilya" was renamed
+            "wilya", and used for the sound of W, consonantal U.
+            -   `false`: by default "wilya" serves for W and "vala" for
+                V.
+            -   `true`: "vilya" serves for V, and W is interpreted as
+                the vowel U.
+        -   `iuRising`: In the Third Age, IU is a rising diphthong,
+            meaning that the stress is on the second sound.  Whether to
+            represent a rising diphthong in the same fashion as other
+            diphthongs is a matter of conjecture.
+            -   `false`: by default, IU is rendered as the I tehta over
+                "ure", the U tehta.
+            -   `true`: IU is rendered as the tengwa "anna" with a Y
+                tehta below, and a U tehta above.
+        -   `classical`: Before the Third Age (as defined by the
+            Namarië) transcribers dealt with R and H differently.  R can
+            be rendered as either "romen" or "ore", but the rules
+            differ.  In the classical period, R is interpreted as "ore"
+            only when it appears between vowel sounds.  In the Third
+            Age, R is interpreted as "ore" before consonants and at the
+            end of words.  The treatment of H is more complex and I have
+            only given it a rough draft.
+            -   `false`: by default, we transcribe in the pattern of the
+                Namarië poem, where "ore" is used finally and before
+                consonants.
+                -   H is interpreted as "hyarmen".
+                -   HY is interpreted as "hyarmen" with the underposed
+                    "y" tehta.
+                -   HW and WH are interpreted as "hwesta".
+                -   CH is interpreted as "harma".
+                -   HT is interpreted as "harma" followed by "tinco".
+                    Therby, HT implies CHT.
+                -   HL is interpreted as "halla" followed by "lambe".
+                -   HR is interpreted as "halla" followed by "romen".
+            -   `true`: "ore" appears only between vowels.  The
+                treatment of "H" depends on whether "harma" has been
+                introduced yet.
+        -   `harma`: In the Classical period, "hyarmen" implied the
+            following-Y.  Then "hyarmen" served as breath-H medially,
+            and "harma" served as breath-H initially and was renamed
+            "aha" in that role.
+            -   `false`: by default
+                -   H is interpreted as "halla" in all positions
+                -   HY is interpreted as "hyarmen" with underposed "y".
+                -   HT still implies CHT so treated as "harma" as above.
+                -   CH, HL, HR, and HW (and WH) are not affected.
+            -   `true`: the oldest form of the mode
+                -   H initial is interpreted as "harma"
+                -   H medial is interpreted as "hyarmen"
+                -   HY is interpreted as "hyarmen"
+                -   HT still implies CHT so treated as "harma" as above.
+                -   CH, HL, HR, and HW (and WH) are not affected.
+-   `tengwar/tengwar-annatar`: Translates Tengwar Object Notation into
+    key bindings for Johan Winge’s Tengwar Annatar font.  Provides the
+    `makeColumn` primitive which is aware of how a column of tengwar and
+    tehtar can transform to accommodate additional tehtar with this
+    font.
+    -   `transcribe(tengwarObjectNotation)`: to Tengwar Annatar key
+        bindings
+    -   `makeColumn(tengwa, above, below)`
+        -   `canAddAbove()`
+        -   `addAbove(tehta)`
+        -   `canAddBelow()`
+        -   `addBelow(below)`
+        -   `addFollowing(following)`
+        -   `addTildeAbove()`
+        -   `addTildeBelow()`
+        -   `addError(error)`
+-   `notation`
+    -   `encode(tengwarObjectNotation)`: to Tengwar Notation
+    -   `decode(tengwarNotation, makeColumn)`: to Tengwar Object
+        Notation.
+    -   `decodeWord(tengwarNotation makeColumn)`: to Tengwar Object
+        Notation for just one word (no nested arrays).
+
+## Tengwar Notation
+
+Tengwar Notation is useful for succinctly representing the first stage
+of transcription, before translation to key bindings for a particular
+font.  The notation uses the names of the tengwa followed by a list of
+tehtar in a consistent order:
+
+-   **column** =
+    -   **tengwa**
+    -   ":" if there are any following tehtar
+    -   **tehtar** delimited by ","
+        -   **tehta above** if applicable
+        -   **tehta below** if applicable
+        -   **following tehta** if applicable
+        -   "tilde-above" if applicable
+        -   "tilde-below" if applicable
+-   **word** = **column** delimited by ";"
+-   **sentence** = **word** delimited by " "
+-   **stanza** = **sentence** delimited by "\n"
+-   **paragraph** = **stanza** delimited by "\n\n"
+-   **section** = **paragraph** delimited by "\n\n\n+"
+
+The notation is useful for manually describing a transcription, either
+to override the transcriber, or for testing a transcriber.
+
+## Tengwar Object Notation
+
+Tengwar Object Notation represents a word of Tengwar as an array of
+objects.  Each object has properties,
+
+-   `tengwa` the name of one of the tengwar or punctuation mark in my
+    obtuse pidgin of punctuation names: "comma", "full-stop",
+    "exclamation-point", "question-mark", "open-paren", "close-paren",
+    "flourish-left", or "flourish-right".  "vilya" is always represented
+    as "wilya" and "aha" is always "harma", regardless of what name is
+    appropriate for the mode.
+-   `above` may be a tehta including "a", "e", "i", "o", "u", "ó", or
+    "ú".  Note that "á", "é", and "í" are not supported diacritics.
+-   `below` may be "y".
+-   `following` a tehta like "s", "s-inverse", "s-extended", or
+    "s-flourish".
+-   `tilde-above` boolean.
+-   `tilde-below` boolean.
+
+Words are wrapped in an array to make a sentence.  Sentences are wrapped
+to make paragraphs.  Paragraphs are wrapped to make sections.  Somehow
+I’ve neglected stanzas within paragraphs.  This will be remedied in a
+future version, and the nodes will probably be revised to be more
+sophisticated than merely nested arrays.
+
+A font module must have a `makeColumn` function that produces objects
+with these properties and the attendant methods as described for the
+Tengwar Annatar module above.
+
+The Legacy Module
+=================
+
+The `tengwar` module includes:
 
 -   ``transcribe(latin)`` returns a string of characters encoded for the
     custom Tengwar Annatar font included.  Paragraphs and sections are
