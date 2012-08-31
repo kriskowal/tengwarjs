@@ -525,7 +525,7 @@ exports.transcribe = transcribe;
 function transcribe(sections) {
     return sections.map(function (section) {
         return section.map(function (paragraph) {
-            return paragraph.map(function (line) {
+            return "<p>" + paragraph.map(function (line) {
                 return line.map(function (word) {
                     return word.map(function (column) {
                         var tengwa = column.tengwa || "anna";
@@ -544,7 +544,7 @@ function transcribe(sections) {
                         return html;
                     }).join("");
                 }).join(" ");;
-            }).join("\n");
+            }).join("<br>\n") + "</p>";
         }).join("\n\n");
     }).join("\n\n\n");
 }
