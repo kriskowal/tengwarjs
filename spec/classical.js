@@ -8,6 +8,7 @@ module.exports = {
     //"hyarmen(classical,aha)": "hyarmen:a,y;romen;malta:e;numen",
     "lambe": "lambe:a;umbar:e",
     "moria": "malta:o;romen:i;short-carrier:a",
+    "namárië": "numen:a;malta;long-carrier:a;romen:i;short-carrier:e",
     "silme": "silme-nuquerna:i;lambe;malta:e",
     "syi": "silme:y;short-carrier:i", //*
     "thúlë": "thule:ú;lambe:e",

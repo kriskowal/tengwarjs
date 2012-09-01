@@ -4,6 +4,7 @@ var Notation = require("./notation");
 var makeParser = require("./parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
+var parseNumber = require("./numerals");
 
 var defaults = {};
 function makeOptions(options) {
@@ -51,8 +52,8 @@ function parse(text, options) {
                 var words = [];
                 var word = [];
                 line.toLowerCase().replace(
-                    /([\wáéíóúëâêîôûñ']+)|(.)/g,
-                    function ($, contiguous, other) {
+                    /(0[\dab]+)|(\d+)|([\wáéíóúëâêîôûñ']+)|(.)/g,
+                    function ($, dudecimal, decimal, contiguous, other) {
                         if (contiguous) {
                             contiguous = normalize(contiguous);
                             try {
@@ -64,6 +65,10 @@ function parse(text, options) {
                             } catch (exception) {
                                 word.push(makeColumn().addError("Cannot transcribe " + JSON.stringify(word) + " because " + exception.message));
                             }
+                        } else if (dudecimal) {
+                            word.push.apply(word, parseNumber(dudecimal, 12, options));
+                        } else if (decimal) {
+                            word.push.apply(word, parseNumber(decimal, 10, options));
                         } else if (punctuation[other]) {
                             word.push(makeColumn(punctuation[other]));
                         } else if (other === " ") {

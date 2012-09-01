@@ -304,9 +304,8 @@ function tehtaKeyForTengwa(tengwa, tehta) {
         return null;
     if (longVowels.indexOf(tehta) !== -1)
         return null;
-    if (tehtar[tehta].special) {
+    if (tehtar[tehta].special)
         return tehtar[tehta][tengwa] || null;
-    }
     if (Alphabet.barsAndTildes.indexOf(tehta) !== -1) {
         if (tengwa === "lambe" || tengwa === "alda" && tehtar[tehta].length >= 2)
             return 2;

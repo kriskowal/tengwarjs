@@ -1,13 +1,13 @@
 
 var Alphabet = require("./alphabet");
 
-module.exports = function tengwarTehtarCombinations(font) {
+module.exports = function tengwarTehtarCombinations(font, fontClass) {
     return Alphabet.tehtar.map(function (tehta) {
         return "<table align=\"left\"><caption><a name=\"" + tehta + "\" href=\"#" + encodeURIComponent(tehta) + "\">" + tehta + "</a></caption>" +
             Alphabet.tengwar.map(function (row) {
                 return "<tr><td>" + row.map(function (name) {
                     return (
-                        "<span class=\"tengwar annatar\">" +
+                        "<span class=\"tengwar " + fontClass + "\">" +
                         tengwaTehtaPairDisplay(font, name, tehta) +
                         "</span>"
                     );

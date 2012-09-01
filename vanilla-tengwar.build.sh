@@ -8,11 +8,13 @@
             general-use.js \
             classical.js \
             tengwar-annatar.js \
+            tengwar-parmaite.js \
             parser.js \
             normalize.js \
             punctuation.js \
             notation.js \
             alphabet.js \
+            numerals.js \
             dan-smith.js
     echo '})();'
 ) | closure > vanilla-tengwar.min.js

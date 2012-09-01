@@ -2,22 +2,23 @@
 var GeneralUse = require("./general-use");
 var Classical = require("./classical");
 var TengwarAnnatar = require("./tengwar-annatar");
+var TengwarParmaite = require("./tengwar-parmaite");
 
 var array_ = Array.prototype;
 
-if (document.querySelectorAll && array_.forEach) {
-    if (document.readyState === "complete") {
-        onload();
-    } else {
-        document.addEventListener("DOMContentLoaded", onload, true);
-    }
+if (document.readyState === "complete") {
+    onload();
+} else {
+    document.addEventListener("DOMContentLoaded", onload, true);
 }
 
 function onload() {
+    if (!document.body.classList || !document.querySelectorAll || !array_.forEach)
+        return;
     var elements = document.querySelectorAll(".tengwar");
     array_.forEach.call(elements, function (element) {
         var data = element.dataset;
-        var tengwar, mode, encoding, block;
+        var tengwar, mode, font, encoding, block;
         block = element.tagName.toLowerCase() === "div";
         if (data) {
             tengwar = data.tengwar;
@@ -31,10 +32,13 @@ function onload() {
         if (encoding) {
             element.innerText = TengwarAnnatar.transcribe(encoding, {block: block});
         } else if (tengwar) {
-            console.log(tengwar);
             mode = mode || 'general-use';
+            font = element.classList.contains("parmaite") ? TengwarParmaite : TengwarAnnatar;
             var Mode = mode === 'general-use' ? GeneralUse : Classical;
-            element.innerHTML = Mode.transcribe(tengwar, {block: block});
+            element.innerHTML = Mode.transcribe(tengwar, {
+                block: block,
+                font: font
+            });
         }
     });
 }

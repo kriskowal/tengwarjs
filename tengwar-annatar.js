@@ -278,7 +278,6 @@ var positions = exports.positions = {
 exports.transcribe = transcribe;
 function transcribe(sections, options) {
     options = options || {};
-    console.log(options);
     var plain = options.plain || false;
     var block = options.block || false;
     var beginParagraph = block ? "<p>" : "";
@@ -313,7 +312,7 @@ function transcribe(sections, options) {
 exports.tehtaForTengwa = tehtaForTengwa;
 function tehtaForTengwa(tengwa, tehta) {
     var tehtaKey = tehtaKeyForTengwa(tengwa, tehta);
-    if (tehtaKey === null)
+    if (tehtaKey == null)
         return null;
     return (
         tehtar[tehta][tengwa] ||

@@ -3,7 +3,7 @@ var classical = require("./spec/classical");
 var generalUse = require("./spec/general-use");
 
 var body = $("body");
-function report(latin, mode) {
+function report(latin, mode, font) {
     var element = $("<nobr>");
     $("<span></span>")
         .text(latin + ": ")
@@ -11,7 +11,7 @@ function report(latin, mode) {
         .appendTo(element);
     $("<span>")
         .attr({
-            "class": "tengwar annatar",
+            "class": "tengwar " + font,
             "data-tengwar": latin,
             "data-mode": mode
         })
@@ -20,14 +20,20 @@ function report(latin, mode) {
     $("<span> </span>").appendTo(body);
 }
 
-$("<h2>Classical</h2>").appendTo(body);
-Object.keys(classical).forEach(function (latin) {
-    report(latin, "classical");
-});
+["annatar", "parmaite"].forEach(function (font) {
 
-$("<h2>General Use</h2>").appendTo(body);
-Object.keys(generalUse).forEach(function (latin) {
-    report(latin, "general-use");
+    $("<h1>tengwar " + font + "</h1>").appendTo(body);
+
+    $("<h2>Classical</h2>").appendTo(body);
+    Object.keys(classical).forEach(function (latin) {
+        report(latin, "classical", font);
+    });
+
+    $("<h2>General Use</h2>").appendTo(body);
+    Object.keys(generalUse).forEach(function (latin) {
+        report(latin, "general-use", font);
+    });
+
 });
 
 require("./vanilla-tengwar");

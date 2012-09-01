@@ -63,7 +63,20 @@ exports.tengwar = {
     "open-paren": "&#140;",
     "close-paren": "&#156;",
     "flourish-left": "&#286;",
-    "flourish-right": "&#287;"
+    "flourish-right": "&#287;",
+    // numerals
+    "#0": "",
+    "#1": "Ò",
+    "#2": "Ú",
+    "#3": "Û",
+    "#4": "Ù",
+    "#5": "ı",
+    "#6": "ˆ",
+    "#7": "˜",
+    "#8": "¯",
+    "#9": "˘",
+    "#10": "˙",
+    "#11": "˚"
 };
 
 exports.tehtar = {

@@ -1,20 +1,4 @@
 
-@font-face {
-    font-family: tengwar;
-    src: url('tengwar-annatar.eot');
-    src: url('tengwar-annatar.eot#iefix'),
-         url('tengwar-annatar.woff') format('woff'), 
-         url('tengwar-annatar.ttf') format('truetype'), 
-         url('tengwar-annatar.svg#TengwarAnnatarItalic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-.tengwar {
-    font-family: tengwar;
-    font-size: 30px;
-}
-
 body {
     color: #ff0;
 
@@ -97,7 +81,7 @@ a:focus {
     padding-bottom: .5ex;
 }
 
-#mode-box {
+#option-box {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -145,5 +129,13 @@ td {
 
 .error {
     text-shadow: 0px 0px 10px #f00 ;
+}
+
+.tengwar.annatar > p {
+    line-height: 210%;
+}
+
+.tengwar.parmaite > p {
+    line-height: 100%;
 }
 
