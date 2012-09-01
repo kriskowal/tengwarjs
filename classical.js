@@ -416,7 +416,7 @@ function parseTehta(callback, options, previous) {
                     return callback([previous, makeColumn("yanta", "a")]);
                 } else if (character === "u") {
                     return callback([previous, makeColumn("ure", "a")]);
-                } else if (previous && previous.canAddAbove()) {
+                } else if (previous && previous.canAddAbove("a")) {
                     previous.addAbove("a");
                     return callback([previous])(character);
                 } else {
@@ -427,9 +427,8 @@ function parseTehta(callback, options, previous) {
             return function (character) {
                 if (character === "u") {
                     return callback([previous, makeColumn("ure", "e")]);
-                } else if (previous && previous.canAddAbove()) {
-                    previous.addAbove("e");
-                    return callback([previous])(character);
+                } else if (previous && previous.canAddAbove("e")) {
+                    return callback([previous.addAbove("e")])(character);
                 } else {
                     return callback([previous, makeColumn("short-carrier", "e")])(character);
                 }
@@ -442,9 +441,8 @@ function parseTehta(callback, options, previous) {
                     } else {
                         return callback([previous, makeColumn("ure", "i")]);
                     }
-                } else if (previous && previous.canAddAbove()) {
-                    previous.addAbove("i");
-                    return callback([previous])(character);
+                } else if (previous && previous.canAddAbove("i")) {
+                    return callback([previous.addAbove("i")])(character);
                 } else {
                     return callback([previous, makeColumn("short-carrier", "i")])(character);
                 }
@@ -453,9 +451,8 @@ function parseTehta(callback, options, previous) {
             return function (character) {
                 if (character === "i") {
                     return callback([previous, makeColumn("yanta", "o")]);
-                } else if (previous && previous.canAddAbove()) {
-                    previous.addAbove("o");
-                    return callback([previous])(character);
+                } else if (previous && previous.canAddAbove("o")) {
+                    return callback([previous.addAbove("o")])(character);
                 } else {
                     return callback([previous, makeColumn("short-carrier", "o")])(character);
                 }
@@ -464,15 +461,14 @@ function parseTehta(callback, options, previous) {
             return function (character) {
                 if (character === "i") {
                     return callback([previous, makeColumn("yanta", "u")]);
-                } else if (previous && previous.canAddAbove()) {
-                    previous.addAbove("u");
-                    return callback([previous])(character);
+                } else if (previous && previous.canAddAbove("u")) {
+                    return callback([previous.addAbove("u")])(character);
                 } else {
                     return callback([previous, makeColumn("short-carrier", "u")])(character);
                 }
             };
         } else if (character === "y") {
-            if (previous && previous.canAddBelow()) {
+            if (previous && previous.canAddBelow("y")) {
                 return callback([previous.addBelow("y")]);
             } else {
                 var next = makeColumn("anna").addBelow("y");
@@ -487,16 +483,14 @@ function parseTehta(callback, options, previous) {
         } else if (character === "í") {
             return callback([previous, makeColumn("long-carrier", "i")]);
         } else if (character === "ó") {
-            if (previous && previous.canAddAbove()) {
-                previous.addAbove('ó');
-                return callback([previous]);
+            if (previous && previous.canAddAbove("ó")) {
+                return callback([previous.addAbove("ó")]);
             } else {
                return callback([previous, makeColumn("long-carrier", "o")]);
             }
         } else if (character === "ú") {
-            if (previous && previous.canAddAbove()) {
-                previous.addAbove('ú');
-                return callback([previous]);
+            if (previous && previous.canAddAbove("ú")) {
+                return callback([previous.addAbove("ú")]);
             } else {
                 return callback([previous, makeColumn("long-carrier", "u")]);
             }

@@ -11,7 +11,9 @@
             parser.js \
             normalize.js \
             punctuation.js \
-            notation.js
+            notation.js \
+            alphabet.js \
+            dan-smith.js
     echo '})();'
 ) | closure > vanilla-tengwar.min.js
 

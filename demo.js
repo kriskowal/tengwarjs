@@ -11,7 +11,7 @@ function report(latin, mode) {
         .appendTo(element);
     $("<span>")
         .attr({
-            "class": "tengwar",
+            "class": "tengwar annatar",
             "data-tengwar": latin,
             "data-mode": mode
         })

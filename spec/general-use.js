@@ -42,7 +42,7 @@ module.exports = {
     "yuldar": "wilya:y;lambe:u;ando;ore:a",
 
     // english (appropriate mode) (sorted)
-    "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s",
+    "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
     "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
     "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
     "hobbits'''": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
@@ -52,10 +52,13 @@ module.exports = {
 
     // interesting clusters
     "xx": "quesse:s;quesse:s",
-    "tsts": "tinco;silme;tinco:s",
+    "tsts": "tinco;silme;tinco:s-final",
     "iqs": "quesse:i;vala;silme",
     "aty": "tinco:a,y",
     "is": "short-carrier:i,s",
-    "allys": "lambe:a,y,s,tilde-below",
-    "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a"
+    "allys": "lambe:a,y,s-final,tilde-below",
+    "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",
+    "ls": "lambe:s-final",
+    "ls'": "lambe:s-flourish"
+
 };

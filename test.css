@@ -1,11 +1,11 @@
 
 @font-face {
     font-family: tengwar;
-    src: url('tengwar-annatar-combined.eot');
-    src: url('tengwar-annatar-combined.eot#iefix'),
-         url('tengwar-annatar-combined.woff') format('woff'), 
-         url('tengwar-annatar-combined.ttf') format('truetype'), 
-         url('tengwar-annatar-combined.svg#TengwarAnnatarItalic') format('svg');
+    src: url('tengwar-annatar.eot');
+    src: url('tengwar-annatar.eot#iefix'),
+         url('tengwar-annatar.woff') format('woff'), 
+         url('tengwar-annatar.ttf') format('truetype'), 
+         url('tengwar-annatar.svg#TengwarAnnatarItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }

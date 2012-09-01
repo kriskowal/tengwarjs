@@ -120,7 +120,7 @@ function parseColumn(callback, options, previous) {
         return parseTengwa(function (tengwa) {
             if (tengwa) {
                 if (tehta) {
-                    if (canAddAboveTengwa(tehta) && tengwa.canAddAbove()) {
+                    if (canAddAboveTengwa(tehta) && tengwa.canAddAbove(tehta)) {
                         tengwa.addAbove(tehta);
                         return parseTengwaAnnotations(function (tengwa) {
                             return callback([tengwa]);
@@ -409,7 +409,7 @@ function parseTengwaAnnotations(callback, column) {
 // add a following-w above the current character if the next character is W and
 // there is room for it.
 function parseFollowingW(callback, column) {
-    if (column.canAddAbove()) {
+    if (column.canAddAbove("w")) {
         return function (character) {
             if (character === "w") {
                 return callback(column.addAbove("w"));
@@ -424,7 +424,7 @@ function parseFollowingW(callback, column) {
 
 function parseFollowingY(callback, column) {
     return function (character) {
-        if (character === "y" && column.canAddBelow()) {
+        if (character === "y" && column.canAddBelow("y")) {
             return callback(column.addBelow("y"));
         } else {
             return callback(column)(character);
@@ -432,35 +432,31 @@ function parseFollowingY(callback, column) {
     };
 }
 
-var essables = ["tinco", "parma", "short-carrier", "lambe"];
 function parseFollowingS(callback, column) {
-    if (column.tengwa === "quesse" && column.canAddBelow()) {
-        return function (character) {
-            if (character === "s") {
+    return function (character) {
+        if (character === "s") {
+            if (column.canAddBelow("s")) {
                 return callback(column.addBelow("s"));
             } else {
-                return callback(column)(character);
-            }
-        };
-    } else if (essables.indexOf(column.tengwa) !== -1) {
-        return function (character) {
-            if (character === "s") {
                 return countPrimes(function (primes) {
                     return function (character) {
                         if (character === "") { // end of word
-                            if (primes === 0) {
-                                column.addFollowing("s");
-                            } else if (primes === 1) {
+                            if (column.canAddFollowing("s-final") && primes-- === 0) {
+                                column.addFollowing("s-final");
+                            } else if (column.canAddFollowing("s-inverse") && primes -- === 0) {
                                 column.addFollowing("s-inverse");
-                            } else if (primes === 2) {
+                            } else if (column.canAddFollowing("s-extended") && primes-- === 0) {
                                 column.addFollowing("s-extended");
-                            } else if (primes === 3) {
+                            } else if (column.canAddFollowing("s-flourish")) {
                                 column.addFollowing("s-flourish");
+                                if (primes > 0) {
+                                    column.addError(
+                                        "Following S only has 3 alternate " +
+                                        "flourishes."
+                                    );
+                                }
                             } else {
-                                column.addFollowing("s-flourish").addError(
-                                    "Following S only has 3 alternate " +
-                                    "flourishes."
-                                );
+                                return callback(column)("s")(character);
                             }
                             return callback(column)(character);
                         } else {
@@ -468,13 +464,11 @@ function parseFollowingS(callback, column) {
                         }
                     };
                 });
-            } else {
-                return callback(column)(character);
             }
-        };
-    } else {
-        return callback(column);
-    }
+        } else {
+            return callback(column)(character);
+        }
+    };
 }
 
 function countPrimes(callback, primes) {
