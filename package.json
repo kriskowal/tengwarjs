@@ -22,7 +22,8 @@
         "url": "http://github.com/kriskowal/tengwarjs.git"
     },
     "dependencies": {
-        "mr": "0.0.x"
+        "mr": "0.0.x",
+        "qs": "0.1.x"
     },
     "devDependencies": {
         "jasmine-node": "1.0.x"
