@@ -119,12 +119,8 @@ var positions = exports.positions = {
     },
     "anna": {
         "a": 1,
-        "e": 2,
-        "i": 2,
-        "o": 2,
-        "u": 3,
         "w": 3,
-        "others": 1
+        "others": 2
     },
     "wilya": {
         "a": 1,
