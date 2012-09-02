@@ -19,11 +19,12 @@ body {
     background: linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* W3C */
 
     text-shadow: 0px 0px 10px #730 ;
+
 }
 
 body, textarea {
-    font-family: serif;
-    font-size: 25px;
+    font-family: Lucida Grande, sans-serif;
+    font-size: 16px;
 }
 
 textarea, .copy {
