@@ -79,6 +79,10 @@ a:focus {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dae7f2', endColorstr='#646c70',GradientType=0 ); /* IE6-9 */
 
     -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: non;
 }
 
 #input {
