@@ -62,6 +62,11 @@ Using the Modules
                 the "ch" as in "Bach".  "cc" is transcribed as "ch" as
                 in "chew".
             -   `true`: "ch" is interpreted as the "ch" as in "chew".
+        -   `isHook`
+            -   `false`: by default, "is" is silme-nuquerna with an I
+                tehta.
+            -   `true`: "is" is a short carrier with an I tehta and S
+                hook.
 -   `tengwar/classical` transcribes phonetic latin letters into Tengwar
     Notation in the Classical mode, most commonly used for Quenya.
     -   `transcribe(text, options)` to Tengwar Annatar key bindings

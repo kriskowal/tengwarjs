@@ -21,9 +21,12 @@ function makeOptions(options) {
         // or below.
         // false: by default, place a tilde above doubled nasals.
         // true: place the tilde below doubled nasals.
-        noAchLaut: options.noAchLaut
+        noAchLaut: options.noAchLaut,
         // false: "ch" is interpreted as ach-laut, "cc" as "ch" as in "chew"
         // true: "ch" is interpreted as "ch" as in chew
+        isHook: options.isHook
+        // false: "is" is silme with I tehta
+        // true: "is" is short carrier with S hook and I tehta
     };
 }
 
@@ -125,7 +128,13 @@ function parseColumn(callback, options, previous) {
         return parseTengwa(function (tengwa) {
             if (tengwa) {
                 if (tehta) {
-                    if (canAddAboveTengwa(tehta) && tengwa.canAddAbove(tehta)) {
+                    if (tengwa.tengwa === "silme" && tehta === "i" && options.isHook) {
+                        return callback([
+                            makeColumn("short-carrier")
+                            .addAbove("i")
+                            .addBelow("s")
+                        ]);
+                    } else if (canAddAboveTengwa(tehta) && tengwa.canAddAbove(tehta)) {
                         tengwa.addAbove(tehta);
                         return parseTengwaAnnotations(function (tengwa) {
                             return callback([tengwa]);
