@@ -17,11 +17,16 @@ function wfTengwarBlock($input, array $args) {
 }
 
 function wfMakeTengwar($input, array $args, $tag) {
-    $encoded = array_key_exists("encoded", $args) ? $args["encoded"] : "";
     $bindings = array_key_exists("bindings", $args) ? $args["bindings"] : "(JavaScript required)";
-    $mode = $args["mode"];
-    if ($mode != "general-use" && $mode != "classical") {
-        $mode = "general-use";
+    if (array_key_exists("encoded", $args)) {
+        $encoded = $input;
+        $input = "";
+        $mode = "";
+    } else {
+        $mode = $args["mode"];
+        if ($mode != "general-use" && $mode != "classical") {
+            $mode = "general-use";
+        }
     }
     $font = $args["font"];
     if ($font != "parmaite" && $font != "annatar") {
@@ -36,5 +41,8 @@ function wfMakeTengwar($input, array $args, $tag) {
         "markerType" => "nowiki"
     );
 }
+
+$temp= wfMakeTengwar("numen;anna", array("encoded"=>true), "span");
+echo $temp[0];
 
 ?>
