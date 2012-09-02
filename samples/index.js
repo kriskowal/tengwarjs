@@ -1,6 +1,6 @@
 
-var classical = require("./spec/classical");
-var generalUse = require("./spec/general-use");
+var classical = require("../spec/classical");
+var generalUse = require("../spec/general-use");
 
 var body = $("body");
 function report(latin, mode, font) {
@@ -36,5 +36,5 @@ function report(latin, mode, font) {
 
 });
 
-require("./vanilla-tengwar");
+require("../vanilla-tengwar");
 
