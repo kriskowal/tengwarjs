@@ -1,0 +1,175 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    overflow: auto;
+    color: #ff0;
+
+    background-repeat: no-repeat;
+    background: #fefcea; /* Old browsers */
+    background: -moz-linear-gradient(top, #fefcea 0%, #f9e63b 7%, #e0a928 53%, #d69a2c 94%, #c97e16 99%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefcea), color-stop(7%,#f9e63b), color-stop(53%,#e0a928), color-stop(94%,#d69a2c), color-stop(99%,#c97e16)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#c97e16',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* W3C */
+
+    text-shadow: 0px 0px 10px #730 ;
+}
+
+body, textarea {
+    font-family: serif;
+    font-size: 25px;
+}
+
+textarea, .copy {
+    font-family: monospace;
+    color: black;
+}
+
+a {
+    color: #a00;
+}
+
+a:visited {
+    color: #c00;
+}
+
+a:hover {
+}
+
+a:focus {
+}
+
+.error {
+    text-shadow: 0px 0px 10px #f00 ;
+}
+
+.tengwar.annatar > p {
+    line-height: 210%;
+}
+
+.tengwar.parmaite > p {
+    line-height: 100%;
+}
+
+#output {
+    text-align: center;
+    line-height: 150px;
+    font-size: 60px;
+}
+
+#output-box, #input-box {
+    overflow: auto;
+}
+
+#divider {
+    background: #dae7f2; /* Old browsers */
+    background: -moz-linear-gradient(top,  #dae7f2 0%, #646c70 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dae7f2), color-stop(100%,#646c70)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #dae7f2 0%,#646c70 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #dae7f2 0%,#646c70 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #dae7f2 0%,#646c70 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #dae7f2 0%,#646c70 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dae7f2', endColorstr='#646c70',GradientType=0 ); /* IE6-9 */
+
+    -webkit-user-select: none;
+}
+
+#input {
+    font-family: monospace;
+    text-align: center;
+}
+
+/* layout */
+
+#body-box {
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+#output-box {
+    -webkit-flex: 3;
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    padding: 30px;
+}
+
+#divider {
+    -webkit-flex: 0 0 10px;
+    background-color: #aaa;
+    cursor: row-resize;
+}
+
+#transliteration-box {
+    display: -webkit-flex;
+    -webkit-flex-flow: row;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    overflow: auto;
+}
+
+#transliteration-box > div {
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    padding: 0 4px;
+}
+
+#transliteration-box > div > div {
+    font-family: monospace;
+}
+
+#input-box {
+    height: 10em;
+    display: -webkit-flex;
+    -webkit-flex-flow: row;
+    -webkit-justify-content: center;
+    -webkit-align-items: stretch;
+    overflow: hidden;
+}
+
+#form-box {
+    padding: 20px;
+    overflow: auto;
+}
+
+#content-box {
+    -webkit-flex: 1;
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-align-items: stretch;
+    -webkit-justify-content: stretch;
+    padding: 10px;
+}
+
+#input {
+    -webkit-flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#about-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 20px 35px;
+}
+
+/* animation */
+
+body.bootstrap #input-box {
+    -webkit-transition-property: height;
+    -webkit-transition-duration: 500ms;
+}
+
