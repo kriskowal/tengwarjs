@@ -37,10 +37,13 @@ function report(latin, mode, font) {
 });
 
 var GeneralUse = require("../general-use");
+var TengwarParmaite = require("../tengwar-parmaite");
 $(".transcribe").each(function () {
     var element = this;
     element.classList.remove("transcribe");
-    element.innerHTML = GeneralUse.transcribe(element.innerHTML);
+    element.innerHTML = GeneralUse.transcribe(element.innerHTML, {
+        font: TengwarParmaite
+    });
     element.classList.add("tengwar");
     element.classList.add("parmaite");
 });
