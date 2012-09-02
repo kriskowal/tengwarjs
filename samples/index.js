@@ -36,5 +36,14 @@ function report(latin, mode, font) {
 
 });
 
+var GeneralUse = require("../general-use");
+$(".transcribe").each(function () {
+    var element = this;
+    element.classList.remove("transcribe");
+    element.innerHTML = GeneralUse.transcribe(element.innerHTML);
+    element.classList.add("tengwar");
+    element.classList.add("parmaite");
+});
+
 require("../vanilla-tengwar");
 
