@@ -1,9 +1,9 @@
 
 var QS = require("qs");
-var GeneralUse = require("./general-use");
-var Classical = require("./classical");
-var TengwarAnnatar = require("./tengwar-annatar");
-var TengwarParmaite = require("./tengwar-parmaite");
+var GeneralUse = require("../general-use");
+var Classical = require("../classical");
+var TengwarAnnatar = require("../tengwar-annatar");
+var TengwarParmaite = require("../tengwar-parmaite");
 
 var body = document.body;
 var input = document.querySelector("#input");
