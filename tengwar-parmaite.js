@@ -137,7 +137,7 @@ var positions = exports.positions = {
         "i": 2,
         "o": 1,
         "u": 1,
-        "y": null,
+        "y": 3,
         "o-under": null,
         "others": 1
     },
