@@ -13,7 +13,7 @@ module.exports = {
     "glorfindel": "ungwe;lambe;romen:o;formen;ando:i,tilde-above;lambe:e",
     "gwaith iaur arnor": "ungwe:w;anna:a;thule yanta;vala:a;ore romen:a;numen;ore:o",
     "gwathló": "ungwe:w;thule:a;lambe;long-carrier:o",
-    "hwesta sindarinwa": "hwesta-sindarinwa;silme-nuquerna:e;tinco;short-carrier:a silme;ando:i,tilde-above;romen:a;short-carrier:i;nwalme:w;short-carrier:a",
+    "hwesta sindarinwa": "hwesta-sindarinwa;silme-nuquerna:e;tinco;short-carrier:a silme;ando:i,tilde-above;romen:a;short-carrier:i;numen:w;short-carrier:a",
     "iant": "yanta;tinco:a,tilde-above",
     "iaur": "yanta;vala:a;ore",
     "isildur": "silme-nuquerna:i;lambe:i;ando;ore:u",

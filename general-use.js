@@ -220,8 +220,23 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("ungwe").addTildeAbove());
                 } else if (character === "j") { // nj
                     return callback(makeColumn("anca").addTildeAbove());
-                } else  if (character === "w") { // nw -> ñw XXX maybe
+                } else  if (character === "w") { // nw -> ñw
+                    return function (character) {
+                        if (character === "a") { // nwa
+                            return function (character) { // nwal
+                                if (character === "l") {
+                                    return callback(makeColumn("nwalme").addAbove("w"))("a")(character);
+                                } else { // nwa.
+                                    return callback(makeColumn("numen").addAbove("w"))("a")(character);
+                                }
+                            };
+                        } else if (character === "nw'") { // nw' prime -> ñw
+                            return callback(makeColumn("nwalme").addAbove("w"));
+                        } else { // nw.
+                            return callback(makeColumn("numen").addAbove("w"))(character);
+                        }
                     return callback(makeColumn("nwalme").addAbove("w"));
+                    };
                 } else { // n.
                     return callback(makeColumn("numen"))(character);
                 }
