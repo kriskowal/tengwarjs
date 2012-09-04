@@ -5,7 +5,7 @@ var Parser = require("./parser");
 var makeDocumentParser = require("./document-parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
-var parseNumber = require("./numerals");
+var parseNumber = require("./numbers");
 
 exports.name = "General Use Mode";
 
@@ -154,6 +154,8 @@ function parseColumn(callback, options, previous) {
                 return function (character) {
                     if (Parser.isBreak(character)) {
                         return callback([]);
+                    } else if (/\d/.test(character)) {
+                        return parseNumber(callback, options)(character);
                     } else if (punctuation[character]) {
                         return callback([makeColumn(punctuation[character])]);
                     } else {

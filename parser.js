@@ -56,30 +56,31 @@ function makeExpect(expected) {
 }
 
 exports.makeParseSome = makeParseSome;
-function makeParseSome(expected) {
+function makeParseSome(parseOne) {
     var parseSome = function (callback) {
-        return function (character) {
-            if (character === expected) {
-                return parseRemaining(callback);
+        return parseOne(function (one) {
+            if (one != null) {
+                return parseRemaining(callback, [one]);
             } else {
-                return callback()(character);
+                return callback([]);
             }
-        };
+        });
     };
-    var parseRemaining = makeParseAny(expected);
+    var parseRemaining = makeParseAny(parseOne);
     return parseSome;
 }
 
 exports.makeParseAny = makeParseAny;
-function makeParseAny(expected) {
-    return function parseRemaining(callback) {
-        return function (character) {
-            if (character === expected) {
-                return parseRemaining(callback);
+function makeParseAny(parseOne) {
+    return function parseRemaining(callback, any) {
+        any = any || [];
+        return parseOne(function (one) {
+            if (one != null) {
+                return parseRemaining(callback, any.concat([one]));
             } else {
-                return callback(expected)(character);
+                return callback(any);
             }
-        };
+        });
     };
 }
 

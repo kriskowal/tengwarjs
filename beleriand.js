@@ -4,6 +4,7 @@ var Parser = require("./parser");
 var makeDocumentParser = require("./document-parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
+var parseNumber = require("./numbers");
 
 exports.name = "Mode of Beleriand";
 
@@ -47,7 +48,15 @@ function parseWord(callback, options, columns) {
                 columns.concat([column])
             );
         } else {
-            return callback(columns);
+            return function (character) {
+                if (/\d/.test(character)) {
+                    return parseNumber(function (number) {
+                        return parseWord(callback, options, columns.concat(number));
+                    }, options)(character);
+                } else {
+                    return callback(columns)(character);
+                }
+            };
         }
     }, options);
 }
@@ -300,7 +309,7 @@ function parseTengwa(callback, options) {
             return callback(makeColumn("silme").addError("Z does not appear in the mode of Beleriand"));
         } else if (punctuation[character]) {
             return callback(makeColumn(punctuation[character]));
-        } else if (Parser.isBreak(character)) {
+        } else if (Parser.isBreak(character) || /\d/.test(character)) {
             return callback()(character);
         } else {
             return callback(makeColumn("anna").addError("Unexpected character: " + JSON.stringify(character)));

@@ -15,10 +15,11 @@ function makeDocumentParser(parseWord, makeOptions) {
     });
 }
 
-var parseAnySpaces = Parser.makeParseAny(" ");
-var parseSomeSpaces = Parser.makeParseSome(" ");
+var parseSpace = Parser.makeExpect(" ");
+var parseAnySpaces = Parser.makeParseAny(parseSpace);
+var parseSomeSpaces = Parser.makeParseSome(parseSpace);
 var parseNewline = Parser.makeExpect("\n");
-var parseNewlines = Parser.makeParseSome("\n");
+var parseNewlines = Parser.makeParseSome(parseNewline);
 
 function parseNewlineSpace(callback) {
     return parseAnySpaces(function () {

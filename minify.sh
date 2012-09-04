@@ -15,7 +15,7 @@
             dan-smith.js \
             alphabet.js \
             punctuation.js \
-            numerals.js \
+            numbers.js \
             notation.js \
             normalize.js \
             parser.js \
