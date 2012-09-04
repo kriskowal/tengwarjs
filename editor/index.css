@@ -69,14 +69,6 @@ a:focus {
 }
 
 #divider {
-    background: #dae7f2; /* Old browsers */
-    background: -moz-linear-gradient(top,  #dae7f2 0%, #646c70 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dae7f2), color-stop(100%,#646c70)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #dae7f2 0%,#646c70 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #dae7f2 0%,#646c70 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #dae7f2 0%,#646c70 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #dae7f2 0%,#646c70 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dae7f2', endColorstr='#646c70',GradientType=0 ); /* IE6-9 */
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -110,8 +102,7 @@ a:focus {
 }
 
 #divider {
-    -webkit-flex: 0 0 10px;
-    background-color: #aaa;
+    -webkit-flex: 0 0 20px;
     cursor: row-resize;
 }
 
@@ -146,11 +137,14 @@ a:focus {
 
 #form-box {
     padding: 20px;
-    overflow: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-flex: 1 .5;
+    -webkit-align-self: flex-end;
 }
 
 #content-box {
-    -webkit-flex: 1;
+    -webkit-flex: 0 1 80ex;
     display: -webkit-flex;
     -webkit-flex-flow: column;
     -webkit-align-items: stretch;
@@ -158,17 +152,19 @@ a:focus {
     padding: 10px;
 }
 
+#about-box {
+    padding: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+    -webkit-flex: 1 .5;
+    -webkit-align-self: flex-end;
+}
+
 #input {
     -webkit-flex: 1;
     height: 100%;
     width: 100%;
-}
-
-#about-box {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 20px 35px;
 }
 
 /* animation */
