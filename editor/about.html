@@ -10,7 +10,7 @@
     <body>
 
         <p><em><strong>Usage:</strong></em>
-        <a href=".">This</a> is a live transcriber from our Latin phonetic
+        <a href="index.html">This</a> is a live transcriber from our Latin phonetic
         alphabet to the elvish Tengwar alphabet.  Type a message in the bottom
         text area and it will be displayed in the equivalent elvish letters
         in the area above.  Copy the link in the address bar and send
@@ -26,24 +26,42 @@
         <a href="http://tengwar.art.pl/tengwar/ott/start.php?l=en">tengwar transcriber</a>
         that should suffice in the interim.</p>
         
-        <p><em><strong>Purpose:</strong></em> The transcriber is suitable for showing
-        how the <a href="http://tolkiengateway.net/wiki/Sindarin">Sindarin</a>
-        language might have been written and attempts to be consistent with
+        <p><em><strong>Purpose:</strong></em> The transcriber is suitable for
+        rendering <a href="http://tolkiengateway.net/wiki/Sindarin">Sindarin</a> in
+        <a href="http://at.mansbjorkman.net/teng_general.htm">General&nbsp;Use&nbsp</a>,
+        more or the
+        <a href="http://at.mansbjorkman.net/teng_beleriand.htm">Mode&nbsp;of&nbsp;Beleriand</a>,
+        and <a href="http://tolkiengateway.net/wiki/Quenay">Quenya</a> in the
+        <a href="http://at.mansbjorkman.net/teng_quenya.htm">Classical</a> mode.</p>
+
+        <p>The General Use mode is suitable for showing how Sindarin might
+        have been written and attempts to be consistent with
         <em>The King’s Letter</em> from J.R.R.&nbsp;Tolkien’s book,
         <a href="http://tolkiengateway.net/wiki/Sauron_Defeated">Sauron&nbsp;Defeated</a>,
-        commonly called the
-        “<a href="http://at.mansbjorkman.net/teng_general.htm">General&nbsp;Use</a>”
-        mode. I used the same mode for my
+        I used the same mode for my
         <a href="http://3rin.gs/"><nobr>Map of Middle-earth</nobr></a>.</p>
 
-        <p>I’ve posted some <a href="samples.html">sample transcriptions</a>
-        of Sindarin.</p>
+        <p>I’ve posted some <a href="../samples/index.html">sample
+        transcriptions</a> in various modes.</p>
 
-        <p><em><strong>Technical details:</strong></em> The font used is a derrivative of Johan Winge’s
+        <p><em><strong>Technical details:</strong></em>
+        The transcriber gives you the option of using either the italic of
+        Johan Winge’s
         <a href="http://home.student.uu.se/jowi4905/fonts/annatar.html">Tengwar Annatar</a>
-        italic and italic alternate characters.  The italic font is designed to
-        resemble the <em>Ring Enscription</em> from <em>The Lord of the
-        Rings</em>, presumably in Sauron’s own cursive.</p>
+        or Måns Björkman’s book-hand
+        <a href="http://at.mansbjorkman.net/parmaite.htm">Tengwar Parmaitë</a>.
+        Both fonts have been modified to include certain alternate characters
+        in the untypable regions of a single font because of technical
+        limitations of rendering fonts in web browsers.  Particularly, a font
+        cannot paint outside its container, so a tehta rendered alone in a span
+        would be rendered invisible.
+
+        <p><em>Tengwar Annatar’s</em> italic resembles the <em>Ring
+        Inscription</em> from <em>The Lord of the Rings</em>, presumably in
+        Sauron’s own cursive.</p>
+
+        <p><em>Tengwar Parmaitë</em> is a script suitable for writing with a
+        pen.</p>
 
         <p>The font uses an “encoding” established by
         <a href="http://www.acondia.com/fonts/tengwar/index.html">Dan Smith</a>
@@ -72,19 +90,24 @@
         find a way to render the text outside the bounding box of the tag.</p>
 
         <p>This transcriber does not require the character encoding to use code
-        points that are accessible on a qwerty keyboard, so it might be worthwhile to create a new font
-        that seizes a neglected pane of Unicode and uses ligatures and kerning
-        instead of zero-width diacritics.  The difficulty is that every
-        combination and cluster of diacritics would need to have a unique
-        and customized code-point, anchoring diacritics precisely where they
-        need to be or providing ligatures for difficult placements.</p>
+        points that are accessible on a qwerty keyboard, so it might be
+        worthwhile to create a new font that seizes a neglected pane of Unicode
+        and uses ligatures and kerning instead of zero-width diacritics.  The
+        difficulty is that every combination and cluster of diacritics would
+        need to have a unique and customized code-point, anchoring diacritics
+        precisely where they need to be or providing ligatures for difficult
+        placements.</p>
 
         <p>In the interim, I’ve engaged in the process of manually verifying
         the placement and use of diacritics for every
-        <a href="combinations.html">combination</a> of tengwa and tehta.</p>
+        combination of tengwa and tehta for
+        <a href="../combinations/tengwar-parmaite.html">both</a>
+        <a href="../combinations/tengwar-annatar.html">fonts</a></p>
 
         <p>If you take a look under the hood, the transcriber is a CommonJS
-        module and a jQuery plugin.</p>
+        module, suitable for use both with a NodeJS package available in NPM as
+        <code>tengwar</code> and usable as a browser script with the minified
+        bundle.</p>
 
         <p>Further work might include:</p>
 
@@ -98,7 +121,7 @@
             <li>Search the dictionary, encyclopedia, and map.</li>
         </ul>
 
-        <p><nobr>&mdash; Kris Kowal, 2011</nobr></p>
+        <p><nobr>&mdash; Kris Kowal, 2011, updated 2012</nobr></p>
 
         <script src="http://static.getclicky.com/js" type="text/javascript"></script> 
         <script type="text/javascript">clicky.init(237383);</script> 

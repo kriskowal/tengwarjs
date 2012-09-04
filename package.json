@@ -16,7 +16,6 @@
             "url": "http://github.com/kriskowal/tengwarjs/raw/master/tengwar-annatar/tngandoc.pdf"
         }
     ],
-    "main": "tengwar.js",
     "repository": {
         "type": "git",
         "url": "http://github.com/kriskowal/tengwarjs.git"

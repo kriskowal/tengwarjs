@@ -41,7 +41,9 @@ function normalize(callback) {
 };
 
 // This is a parser adapter that always returns the same state, but internally
-// tracks the state of the wrapped parser.  Each time a character
+// tracks the state of the wrapped parser.  Each time the adapter receives a
+// character, it converts it to lower case and uses that character to advance
+// the state.
 function toLowerCase(callback) {
     return function passthrough(character) {
         callback = callback(character.toLowerCase());

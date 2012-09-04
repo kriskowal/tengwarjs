@@ -1,5 +1,5 @@
 
-var Alphabet = require("./alphabet");
+var Alphabet = require("../alphabet");
 
 module.exports = function tengwarTehtarCombinations(font, fontClass) {
     return Alphabet.tehtar.map(function (tehta) {

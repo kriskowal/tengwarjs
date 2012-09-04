@@ -2,9 +2,9 @@
 (
     echo '(function () {'
     closure --process_common_js_modules \
-        --common_js_entry_module vanilla-tengwar.js \
+        --common_js_entry_module tengwar.js \
         --js \
-            vanilla-tengwar.js \
+            tengwar.js \
             modes.js \
             general-use.js \
             classical.js \
@@ -24,8 +24,8 @@
             trie-parser.js
 
     echo '})();'
-) | closure > vanilla-tengwar.min.js
+) | closure > tengwar.min.js
 
-wc -c vanilla-tengwar.min.js
-cat vanilla-tengwar.min.js | gzip | wc -c
+wc -c tengwar.min.js
+cat tengwar.min.js | gzip | wc -c
 
