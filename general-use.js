@@ -220,6 +220,8 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("ungwe").addTildeAbove());
                 } else if (character === "j") { // nj
                     return callback(makeColumn("anca").addTildeAbove());
+                } else if (character === "f") { // nf -> nv
+                    return callback(makeColumn("numen"))("v");
                 } else  if (character === "w") { // nw -> ñw
                     return function (character) {
                         if (character === "a") { // nwa
