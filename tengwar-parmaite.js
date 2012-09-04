@@ -45,6 +45,7 @@ var positions = exports.positions = {
     "formen": {
         "a": 3,
         "w": 3,
+        "í": 3,
         "others": 2
     },
     "harma": {
@@ -54,6 +55,7 @@ var positions = exports.positions = {
         "o": 1,
         "u": 1,
         "w": 0,
+        "í": 0,
         "others": 1
     },
     "hwesta": {
@@ -115,6 +117,7 @@ var positions = exports.positions = {
         "o": 2,
         "w": 1,
         "y": 1,
+        "í": 2,
         "others": 3
     },
     "anna": {
@@ -123,11 +126,8 @@ var positions = exports.positions = {
         "others": 2
     },
     "wilya": {
-        "a": 1,
-        "e": 1,
         "i": 2,
-        "o": 1,
-        "u": 1,
+        "í": 2,
         "others": 1
     },
 
@@ -148,6 +148,7 @@ var positions = exports.positions = {
         "o": 1,
         "u": 1,
         "w": 1,
+        "í": 2,
         "y": null,
         "o-under": null,
         "others": 0
@@ -225,24 +226,28 @@ var positions = exports.positions = {
         "a": 3,
         "w": 3,
         "y": 3,
+        "í": 3,
         "others": 2
     },
     "parma-extended": {
         "a": 3,
         "w": 3,
         "y": 3,
+        "í": 3,
         "others": 2
     },
     "calma-extended": {
         "i": 1,
         "w": 1,
         "y": 0,
+        "í": 0,
         "others": 0
     },
     "quesse-extended": {
         "i": 1,
         "w": 1,
         "y": 0,
+        "í": 0,
         "others": 0
     }
 
@@ -294,7 +299,7 @@ function tehtaForTengwa(tengwa, tehta) {
     );
 }
 
-var longVowels = "áéíóú";
+var longVowels = "áéóú";
 function tehtaKeyForTengwa(tengwa, tehta) {
     if (!tehtar[tehta])
         return null;

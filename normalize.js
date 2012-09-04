@@ -1,17 +1,29 @@
 
-module.exports = function normalize(text) {
-    // normalize
-    return text.replace(normalFormsRe, function ($, key) {
-        return normalForms[key];
-    });
+var Parser = require("./parser");
+var makeTrie = require("./trie");
+var makeParserFromTrie = require("./trie-parser");
+var array_ = Array.prototype;
+
+module.exports = normalize;
+function normalize(callback) {
+    return toLowerCase(simplify(callback));
 };
 
-var normalForms = {
+function toLowerCase(callback) {
+    return function passthrough(character) {
+        callback = callback(character.toLowerCase());
+        return passthrough;
+    };
+}
+
+var table = {
     "k": "c",
     "x": "cs",
-    "qu": "cw",
     "q": "cw",
+    "qu": "cw",
+    "p": "p",
     "ph": "f",
+    "b": "b",
     "bh": "v",
     "ë": "e",
     "â": "á",
@@ -21,8 +33,24 @@ var normalForms = {
     "û": "ú"
 };
 
-var normalFormsRe = new RegExp("(" +
-    Object.keys(normalForms).join("|") +
-")", "ig");
+var trie = makeTrie(table);
 
+var simplify = makeParserFromTrie(
+    trie,
+    function makeProducer(string) {
+        return function (callback) {
+            return Array.prototype.reduce.call(string, function (callback, character) {
+                return callback(character);
+            }, callback);
+        };
+    },
+    function callback(callback) {
+        return simplify(callback);
+    },
+    function fallback(callback) {
+        return function (character) {
+            return simplify(callback(character));
+        };
+    }
+);
 

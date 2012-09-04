@@ -1,8 +1,10 @@
 
 var GeneralUse = require("./general-use");
 var Classical = require("./classical");
+var Beleriand = require("./beleriand");
 var TengwarAnnatar = require("./tengwar-annatar");
 var TengwarParmaite = require("./tengwar-parmaite");
+var modes = require("./modes");
 
 var array_ = Array.prototype;
 
@@ -32,13 +34,20 @@ function onload() {
         if (encoding) {
             element.innerText = TengwarAnnatar.transcribe(encoding, {block: block});
         } else if (tengwar) {
-            mode = mode || 'general-use';
             font = element.classList.contains("parmaite") ? TengwarParmaite : TengwarAnnatar;
-            var Mode = mode === 'general-use' ? GeneralUse : Classical;
-            element.innerHTML = Mode.transcribe(tengwar, {
-                block: block,
-                font: font
+            var flags = mode.split(/\s+/);
+            var mode = flags.shift();
+            var Mode = modes[mode] || GeneralUse;
+            var options = Mode.makeOptions();
+            flags.forEach(function (flag) {
+                flag = flag.replace(/\-(\w)/g, function ($, $1) {
+                    return $1.toUpperCase();
+                });
+                options[flag] = true;
             });
+            options.block = block;
+            options.font = font;
+            element.innerHTML = Mode.transcribe(tengwar, options);
         }
     });
 }

@@ -5,17 +5,24 @@
         --common_js_entry_module vanilla-tengwar.js \
         --js \
             vanilla-tengwar.js \
+            modes.js \
             general-use.js \
             classical.js \
+            beleriand.js \
+            fonts.js \
             tengwar-annatar.js \
             tengwar-parmaite.js \
-            parser.js \
-            normalize.js \
-            punctuation.js \
-            notation.js \
+            dan-smith.js \
             alphabet.js \
+            punctuation.js \
             numerals.js \
-            dan-smith.js
+            notation.js \
+            normalize.js \
+            parser.js \
+            document-parser.js \
+            trie.js \
+            trie-parser.js
+
     echo '})();'
 ) | closure > vanilla-tengwar.min.js
 

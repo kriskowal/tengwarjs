@@ -47,6 +47,7 @@ exports.tehtar = [].concat(
 
 exports.aliases = {
     "vilya": "wilya",
-    "aha": "harma"
+    "aha": "harma",
+    "gasdil": "halla"
 };
 

@@ -4,6 +4,7 @@ module.exports = {
     "aldost": "lambe:a;ando;silme-nuquerna:o;tinco",
     "amon sûl": "malta:a;numen:o silme;lambe:ú",
     "aragorn": "romen:a;ungwe:a;romen:o;numen",
+    "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;comma\ntinco;lambe:e;quesse;tinco:o,tilde-above;romen:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
     "atto": "tinco:a,tilde-below;short-carrier:o",
     "baranduiniant": "umbar;romen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
     "dagor bragolach": "ando;ungwe:a;ore:o umbar;romen;ungwe:a;lambe:o;hwesta:a",

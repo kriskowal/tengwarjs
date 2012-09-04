@@ -1,12 +1,16 @@
 
 var TengwarAnnatar = require("./tengwar-annatar");
 var Notation = require("./notation");
-var makeParser = require("./parser");
+var Parser = require("./parser");
+var makeDocumentParser = require("./document-parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
 var parseNumber = require("./numerals");
 
+exports.name = "General Use Mode";
+
 var defaults = {};
+exports.makeOptions = makeOptions;
 function makeOptions(options) {
     options = options || defaults;
     return {
@@ -21,6 +25,9 @@ function makeOptions(options) {
         // or below.
         // false: by default, place a tilde above doubled nasals.
         // true: place the tilde below doubled nasals.
+        reverseCurls: options.reverseCurls,
+        // false: by default, o is forward, u is backward
+        // true: o is backward, u is forward
         noAchLaut: options.noAchLaut,
         // false: "ch" is interpreted as ach-laut, "cc" as "ch" as in "chew"
         // true: "ch" is interpreted as "ch" as in chew
@@ -43,52 +50,22 @@ function encode(text, options) {
     return Notation.encode(parse(text, options), options);
 }
 
-// TODO convert to parse tree
-exports.parse = parse;
-function parse(text, options) {
-    options = makeOptions(options);
+var parse = exports.parse = makeDocumentParser(parseNormalWord, makeOptions);
+
+function parseNormalWord(callback, options) {
+    return normalize(parseWord(callback, options));
+}
+
+function parseWord(callback, options) {
     var font = options.font;
     var makeColumn = font.makeColumn;
-    return text.split(/\n\n\n+/).map(function (section) {
-        return section.split(/\n\n/).map(function (paragraph) {
-            return paragraph.split(/\n/).map(function (line) {
-                var words = [];
-                var word = [];
-                line.toLowerCase().replace(
-                    /(0[\dab]+)|(\d+)|([\wáéíóúëâêîôûñ']+)|(.)/g,
-                    function ($, dudecimal, decimal, contiguous, other) {
-                        if (contiguous) {
-                            contiguous = normalize(contiguous);
-                            try {
-                                if (book[contiguous]) {
-                                    word.push.apply(word, Notation.decodeWord(book[contiguous], makeColumn));
-                                } else {
-                                    word.push.apply(word, parseWord(contiguous, options));
-                                }
-                            } catch (exception) {
-                                word.push(makeColumn().addError("Cannot transcribe " + JSON.stringify(word) + " because " + exception.message));
-                            }
-                        } else if (dudecimal) {
-                            word.push.apply(word, parseNumber(dudecimal, 12, options));
-                        } else if (decimal) {
-                            word.push.apply(word, parseNumber(decimal, 10, options));
-                        } else if (punctuation[other]) {
-                            word.push(makeColumn(punctuation[other]));
-                        } else if (other === " ") {
-                            words.push(word);
-                            word = [];
-                        } else {
-                            word.push(makeColumn().addError("Cannot transcribe " + JSON.stringify(other)));
-                        }
-                    }
-                );
-                if (word.length) {
-                    words.push(word);
-                }
-                return words;
-            });
-        });
-    });
+    return scanWord(function (word) {
+        if (book[word]) {
+            return callback(Notation.decodeWord(book[word], makeColumn));
+        } else {
+            return callback(parseWordPiecewise(word, options));
+        }
+    }, options);
 }
 
 var book = {
@@ -101,7 +78,18 @@ var book = {
     "is": "short-carrier:i,s"
 };
 
-var parseWord = makeParser(function (callback, options) {
+function scanWord(callback, options, word) {
+    word = word || "";
+    return function (character) {
+        if (Parser.isBreak(character)) {
+            return callback(word)(character);
+        } else {
+            return scanWord(callback, options, word + character);
+        }
+    };
+}
+
+var parseWordPiecewise = Parser.makeParser(function (callback, options) {
     return parseWordTail(callback, options, []);
 });
 
@@ -135,6 +123,9 @@ function parseColumn(callback, options, previous) {
                             .addBelow("s")
                         ]);
                     } else if (canAddAboveTengwa(tehta) && tengwa.canAddAbove(tehta)) {
+                        if (options.reverseCurls) {
+                            tehta = reverseCurls[tehta] || tehta;
+                        }
                         tengwa.addAbove(tehta);
                         return parseTengwaAnnotations(function (tengwa) {
                             return callback([tengwa]);
@@ -160,7 +151,15 @@ function parseColumn(callback, options, previous) {
                     return callback([carrier]);
                 }, makeCarrier(tehta));
             } else {
-                return callback([]);
+                return function (character) {
+                    if (Parser.isBreak(character)) {
+                        return callback([]);
+                    } else if (punctuation[character]) {
+                        return callback([makeColumn(punctuation[character])]);
+                    } else {
+                        return callback([makeColumn("anna").addError("Unexpected character: " + JSON.stringify(character))]);
+                    }
+                };
             }
         }, options, tehta);
     });
@@ -187,6 +186,7 @@ function parseTehta(callback) {
 var tengwaTehtar = "aeiouóú";
 var vowels = "aeiouáéíóú";
 var shorterVowels = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"};
+var reverseCurls = {"o": "u", "u": "o", "ó": "ú", "ú": "ó"};
 
 function canAddAboveTengwa(tehta) {
     return tengwaTehtar.indexOf(tehta) !== -1;
@@ -235,7 +235,6 @@ function parseTengwa(callback, options, tehta) {
                         } else { // nw.
                             return callback(makeColumn("numen").addAbove("w"))(character);
                         }
-                    return callback(makeColumn("nwalme").addAbove("w"));
                     };
                 } else { // n.
                     return callback(makeColumn("numen"))(character);
@@ -265,7 +264,7 @@ function parseTengwa(callback, options, tehta) {
             };
         } else if (character === "ñ") { // ñ
             return function (character) {
-                // ññ does not really exist
+                // ññ does not exist to the best of my knowledge
                 // ñw is handled naturally by following w
                 if (character === "c") { // ñc
                     return callback(makeColumn("quesse").addTildeAbove());
@@ -281,6 +280,14 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("tinco").addTildeBelow());
                 } else if (character === "h") { // th
                     return callback(makeColumn("thule"));
+                } else if (character === "c") { // tc
+                    return function (character) {
+                        if (character === "h") { // tch -> tinco calma
+                            return callback(makeColumn("tinco"))("c")("h")("'");
+                        } else {
+                            return callback(makeColumn("tinco"))("c")(character);
+                        }
+                    };
                 } else { // t.
                     return callback(makeColumn("tinco"))(character);
                 }
@@ -314,6 +321,8 @@ function parseTengwa(callback, options, tehta) {
             return function (character) {
                 if (character === "d") { // dd
                     return callback(makeColumn("ando").addTildeBelow());
+                } else if (character === "j") { // dj
+                    return callback(makeColumn("anga"));
                 } else if (character === "h") { // dh
                     return callback(makeColumn("anto"));
                 } else { // d.
@@ -369,7 +378,7 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("esse"))(character);
                 }
             };
-        } else if (character === "h") { //
+        } else if (character === "h") { // h
             return function (character) {
                 if (character === "w") { // hw
                     return callback(makeColumn("hwesta-sindarinwa"));
@@ -467,7 +476,7 @@ function parseFollowingS(callback, column) {
             if (column.canAddBelow("s")) {
                 return callback(column.addBelow("s"));
             } else {
-                return countPrimes(function (primes) {
+                return Parser.countPrimes(function (primes) {
                     return function (character) {
                         if (character === "") { // end of word
                             if (column.canAddFollowing("s-final") && primes-- === 0) {
@@ -496,17 +505,6 @@ function parseFollowingS(callback, column) {
             }
         } else {
             return callback(column)(character);
-        }
-    };
-}
-
-function countPrimes(callback, primes) {
-    primes = primes || 0;
-    return function (character) {
-        if (character === "'") {
-            return countPrimes(callback, primes + 1);
-        } else {
-            return callback(primes)(character);
         }
     };
 }
