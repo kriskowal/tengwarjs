@@ -45,7 +45,9 @@ function update() {
     var mode = modes[query.mode] || TengwarParmaite;
     var font = fonts[query.font] || TengwarAnnatar;
     output.classList.remove(query.font !== "parmaite" ? "parmaite" : "annatar");
+    body.classList.remove(query.font !== "parmaite" ? "parmaite" : "annatar");
     output.classList.add(query.font === "parmaite" ? "parmaite" : "annatar");
+    body.classList.add(query.font === "parmaite" ? "parmaite" : "annatar");
     output.innerHTML = mode.transcribe(value, {font: font, block: true});
     inputBox.style.height = query.height + "px";
 }

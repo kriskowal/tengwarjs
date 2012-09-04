@@ -6,7 +6,10 @@ body {
     width: 100%;
 
     overflow: auto;
-    color: #ff0;
+
+}
+
+body.annatar {
 
     background-repeat: no-repeat;
     background: #fefcea; /* Old browsers */
@@ -18,8 +21,25 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#c97e16',GradientType=0 ); /* IE6-9 */
     background: linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* W3C */
 
+    color: #ff0;
     text-shadow: 0px 0px 10px #730 ;
+}
 
+body.parmaite {
+    background-image: url(paper.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    color: #000;
+    text-shadow: 0px 0px 4px #ffc;
+}
+
+body.annatar .error {
+    text-shadow: 0px 0px 10px #f00 ;
+}
+
+body.parmaite .error {
+    color: #700;
 }
 
 body, textarea {
@@ -32,22 +52,25 @@ textarea, .copy {
     color: black;
 }
 
-a {
+body..annatar a {
     color: #a00;
 }
-
-a:visited {
+body.annatar a:visited {
     color: #c00;
 }
+
+body.parmaite a {
+    color: #00a;
+}
+body.parmaite a:visited {
+    color: #007;
+}
+
 
 a:hover {
 }
 
 a:focus {
-}
-
-.error {
-    text-shadow: 0px 0px 10px #f00 ;
 }
 
 .tengwar.annatar > p {
@@ -61,7 +84,14 @@ a:focus {
 #output {
     text-align: center;
     line-height: 150px;
+}
+
+#output.tengwar.annatar {
     font-size: 60px;
+}
+
+#output.tengwar.parmaite {
+    font-size: 100px;
 }
 
 #output-box, #input-box {
