@@ -53,7 +53,5 @@ function convert(string, primes, makeColumn) {
     });
 }
 
-
 var parseDigits = Parser.makeParseSome(parseDigit);
-var parseDot = Parser.makeExpect(".");
 

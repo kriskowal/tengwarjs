@@ -21,7 +21,8 @@
             parser.js \
             document-parser.js \
             trie.js \
-            trie-parser.js
+            trie-parser.js \
+            detect-web-font.js
 
     echo '})();'
 ) | closure > tengwar.min.js

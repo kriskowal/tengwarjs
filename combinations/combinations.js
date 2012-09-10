@@ -7,7 +7,7 @@ module.exports = function tengwarTehtarCombinations(font, fontClass) {
             Alphabet.tengwar.map(function (row) {
                 return "<tr><td>" + row.map(function (name) {
                     return (
-                        "<span class=\"tengwar " + fontClass + "\">" +
+                        "<span class=\"rendered tengwar " + fontClass + "\">" +
                         tengwaTehtaPairDisplay(font, name, tehta) +
                         "</span>"
                     );

@@ -10,7 +10,7 @@
     font-style: normal;
 }
 
-.tengwar.annatar {
+.tengwar.annatar.rendered {
     font-family: Tengwar Annatar;
     font-size: 30px;
     line-height: 200%;
