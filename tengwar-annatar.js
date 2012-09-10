@@ -20,13 +20,13 @@ var positions = exports.positions = {
         "o": 3,
         "w": 3,
         "u": 3,
-        "o-under": 1,
+        "o-below": 1,
         "others": 2
     },
     "quesse": {
         "o": 3,
         "w": 3,
-        "o-under": 1,
+        "o-below": 1,
         "others": 2
     },
     "ando": {
@@ -167,7 +167,8 @@ var positions = exports.positions = {
         "ó": 2,
         "ú": 2,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 1
     },
     "arda": {
@@ -180,7 +181,8 @@ var positions = exports.positions = {
         "ó": 2,
         "ú": 2,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 0
     },
     "lambe": {
@@ -189,17 +191,19 @@ var positions = exports.positions = {
         "y": 4,
         "ó": 1,
         "ú": 1,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 0
     },
     "alda": {
         "wide": true,
-        "o-under": null,
+        "o-below": null,
         "others": 1
     },
     "silme": {
         "y": 3,
-        "o-under": 2,
+        "o-below": 2,
+        "i-below": 2,
         "others": null
     },
     "silme-nuquerna": {
@@ -209,7 +213,8 @@ var positions = exports.positions = {
         "ó": 3,
         "ú": 3,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 1
     },
     "esse": {
@@ -250,12 +255,14 @@ var positions = exports.positions = {
     },
     // should not occur:
     "halla": {
+        "i-below": 3,
         "others": null
     },
     "short-carrier": 3,
     "long-carrier": {
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 3
     },
     "round-carrier": 3,

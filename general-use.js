@@ -441,16 +441,16 @@ function parseTengwa(callback, options, tehta) {
 
 exports.parseTengwaAnnotations = parseTengwaAnnotations;
 function parseTengwaAnnotations(callback, column) {
-    return parseFollowingW(function (column) {
-        return parseFollowingY(function (column) {
-            return parseFollowingS(callback, column);
+    return parseFollowingAbove(function (column) {
+        return parseFollowingBelow(function (column) {
+            return parseFollowing(callback, column);
         }, column);
     }, column);
 }
 
 // add a following-w above the current character if the next character is W and
 // there is room for it.
-function parseFollowingW(callback, column) {
+function parseFollowingAbove(callback, column) {
     if (column.canAddAbove("w")) {
         return function (character) {
             if (character === "w") {
@@ -464,17 +464,28 @@ function parseFollowingW(callback, column) {
     }
 }
 
-function parseFollowingY(callback, column) {
+function parseFollowingBelow(callback, column) {
     return function (character) {
         if (character === "y" && column.canAddBelow("y")) {
             return callback(column.addBelow("y"));
+        } else if (character === "e" && column.canAddBelow("i-below")) {
+            return Parser.countPrimes(function (primes) {
+                if (primes === 0) {
+                    return callback(column)(character);
+                } else {
+                    if (primes > 1) {
+                        column.addError("Following E has only one variation.");
+                    }
+                    return callback(column.addBelow("i-below"));
+                }
+            });
         } else {
             return callback(column)(character);
         }
     };
 }
 
-function parseFollowingS(callback, column) {
+function parseFollowing(callback, column) {
     return function (character) {
         if (character === "s") {
             if (column.canAddBelow("s")) {

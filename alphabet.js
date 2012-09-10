@@ -20,7 +20,7 @@ exports.tehtarAbove = [
 ];
 
 exports.tehtarBelow = [
-    "y", "s", "o-under"
+    "y", "s", "o-below", "i-below"
 ];
 
 exports.tehtarFollowing = [

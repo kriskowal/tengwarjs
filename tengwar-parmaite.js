@@ -11,12 +11,12 @@ var positions = exports.positions = {
     "parma": 2,
     "calma": {
         "y": 1,
-        "o-under": 1,
+        "o-below": 1,
         "others": 2
     },
     "quesse": {
         "y": 1,
-        "o-under": 1,
+        "o-below": 1,
         "others": 2
     },
 
@@ -118,6 +118,7 @@ var positions = exports.positions = {
         "w": 1,
         "y": 1,
         "í": 2,
+        "i-below": 1,
         "others": 3
     },
     "anna": {
@@ -138,7 +139,8 @@ var positions = exports.positions = {
         "o": 1,
         "u": 1,
         "y": 3,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 1
     },
     "arda": {
@@ -150,7 +152,8 @@ var positions = exports.positions = {
         "w": 1,
         "í": 2,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 0
     },
     "lambe": {
@@ -158,26 +161,30 @@ var positions = exports.positions = {
         "e": 1,
         "y": 4,
         "w": 0,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 0
     },
     "alda": {
         "wide": true,
         "w": 0,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 1
     },
 
     "silme": {
         "y": 2,
-        "o-under": 2,
+        "o-below": 2,
+        "i-below": 2,
         "others": null
     },
     "silme-nuquerna": {
         "e": 2,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 1
     },
     "esse": {
@@ -186,17 +193,22 @@ var positions = exports.positions = {
     "esse-nuquerna": {
         "e": 2,
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 1
     },
 
     "hyarmen": {
         "y": 1,
+        "o-below": 1,
+        "i-below": 1,
         "others": 3
     },
     "hwesta-sindarinwa": {
         "w": 1,
         "y": 1,
+        "o-below": 1,
+        "i-below": 1,
         "others": 0
     },
     "yanta": {
@@ -209,6 +221,8 @@ var positions = exports.positions = {
     },
 
     "halla": {
+        "i-below": 3,
+        "o-below": 3,
         "others": null
     },
     "short-carrier": {
@@ -217,7 +231,8 @@ var positions = exports.positions = {
     },
     "long-carrier": {
         "y": null,
-        "o-under": null,
+        "o-below": null,
+        "i-below": null,
         "others": 3
     },
     "round-carrier": 2,
@@ -227,6 +242,7 @@ var positions = exports.positions = {
         "w": 3,
         "y": 3,
         "í": 3,
+        "o-below": 3,
         "others": 2
     },
     "parma-extended": {
@@ -234,6 +250,7 @@ var positions = exports.positions = {
         "w": 3,
         "y": 3,
         "í": 3,
+        "o-below": 3,
         "others": 2
     },
     "calma-extended": {
@@ -241,6 +258,8 @@ var positions = exports.positions = {
         "w": 1,
         "y": 0,
         "í": 0,
+        "i-below": 1,
+        "o-below": 1,
         "others": 0
     },
     "quesse-extended": {
@@ -248,6 +267,8 @@ var positions = exports.positions = {
         "w": 1,
         "y": 0,
         "í": 0,
+        "i-below": 1,
+        "o-below": 1,
         "others": 0
     }
 
