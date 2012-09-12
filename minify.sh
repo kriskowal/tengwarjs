@@ -13,6 +13,7 @@
             tengwar-annatar.js \
             tengwar-parmaite.js \
             dan-smith.js \
+            column.js \
             alphabet.js \
             punctuation.js \
             numbers.js \

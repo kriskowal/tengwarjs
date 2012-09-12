@@ -118,13 +118,18 @@ function isFinal(character) {
 
 // used by multiple modes
 exports.countPrimes = countPrimes;
-function countPrimes(callback, primes) {
+function countPrimes(callback, primes, rewind) {
     primes = primes || 0;
+    rewind = rewind || function (state) {
+        return state;
+    };
     return function (character) {
         if (character === "'") {
-            return countPrimes(callback, primes + 1);
+            return countPrimes(callback, primes + 1, function (state) {
+                return rewind(state)("'");
+            });
         } else {
-            return callback(primes)(character);
+            return callback(primes, rewind)(character);
         }
     };
 }

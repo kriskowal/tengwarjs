@@ -297,7 +297,7 @@ function parseTengwa(callback, options) {
             return callback(makeColumn("ure").addAbove("e"));
         } else if (character === "h") {
             return function (character) {
-                //if (character === "m") {
+                //if (character === "m") { // TODO
                 //    return callback(makeColumn("ore-nasalized"));
                 if (character === "w") {
                     return callback(makeColumn("hwesta-sindarinwa"));

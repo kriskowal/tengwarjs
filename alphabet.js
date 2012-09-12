@@ -10,7 +10,8 @@ exports.tengwar = [
     ["silme", "silme-nuquerna", "esse", "esse-nuquerna"],
     ["hyarmen", "hwesta-sindarinwa", "yanta", "ure"],
     ["halla", "short-carrier", "long-carrier", "round-carrier"],
-    ["tinco-extended", "parma-extended", "calma-extended", "quesse-extended"]
+    ["tinco-extended", "parma-extended", "calma-extended", "quesse-extended"],
+    ["ando-extended", "umbar-extended", "anga-extended", "ungwe-extended"]
 ];
 
 exports.tehtarAbove = [

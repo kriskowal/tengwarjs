@@ -209,20 +209,20 @@ of transcription, before translation to key bindings for a particular
 font.  The notation uses the names of the tengwa followed by a list of
 tehtar in a consistent order:
 
--   **column** =
-    -   **tengwa**
+-   *column* =
+    -   *tengwa*
     -   ":" if there are any following tehtar
-    -   **tehtar** delimited by ","
-        -   **tehta above** if applicable
-        -   **tehta below** if applicable
-        -   **following tehta** if applicable
+    -   *tehtar* delimited by ","
+        -   *tehta above* if applicable
+        -   *tehta below* if applicable
+        -   *following tehta* if applicable
         -   "tilde-above" if applicable
         -   "tilde-below" if applicable
--   **word** = **column** delimited by ";"
--   **sentence** = **word** delimited by " "
--   **stanza** = **sentence** delimited by "\n"
--   **paragraph** = **stanza** delimited by "\n\n"
--   **section** = **paragraph** delimited by "\n\n\n+"
+-   *word* = *column* delimited by ";"
+-   *sentence* = *word* delimited by " "
+-   *stanza* = *sentence* delimited by "\n"
+-   *paragraph* = *stanza* delimited by "\n\n"
+-   *section* = *paragraph* delimited by "\n\n\n+"
 
 The notation is useful for manually describing a transcription, either
 to override the transcriber, or for testing a transcriber.

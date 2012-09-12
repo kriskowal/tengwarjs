@@ -1,6 +1,7 @@
 
 var Alphabet = require("./alphabet");
 var Bindings = require("./dan-smith");
+var makeFontColumn = require("./column");
 
 var tengwar = exports.tengwar = Bindings.tengwar;
 var tehtar = exports.tehtar = Bindings.tehtar;
@@ -140,7 +141,7 @@ var positions = exports.positions = {
         "u": 1,
         "y": 3,
         "o-below": null,
-        "i-below": null,
+        "i-below": 3,
         "others": 1
     },
     "arda": {
@@ -151,9 +152,9 @@ var positions = exports.positions = {
         "u": 1,
         "w": 1,
         "í": 2,
-        "y": null,
+        "y": 3,
         "o-below": null,
-        "i-below": null,
+        "i-below": 3,
         "others": 0
     },
     "lambe": {
@@ -162,7 +163,7 @@ var positions = exports.positions = {
         "y": 4,
         "w": 0,
         "o-below": null,
-        "i-below": null,
+        "i-below": 4,
         "others": 0
     },
     "alda": {
@@ -270,6 +271,23 @@ var positions = exports.positions = {
         "i-below": 1,
         "o-below": 1,
         "others": 0
+    },
+
+    "ando-extended": {
+        "wide": true,
+        "others": 0
+    },
+    "umbar-extended": {
+        "wide": true,
+        "others": 0
+    },
+    "anga-extended": {
+        "wide": true,
+        "others": 0
+    },
+    "ungwe-extended": {
+        "wide": true,
+        "others": 0
     }
 
 };
@@ -345,73 +363,7 @@ function tehtaKeyForTengwa(tengwa, tehta) {
 }
 
 exports.makeColumn = makeColumn;
-function makeColumn(tengwa, above, below) {
-    return new Column(tengwa, above, below);
-};
-
-var Column = function (tengwa, above, below) {
-    this.above = above;
-    this.tildeAbove = void 0;
-    this.tengwa = tengwa;
-    this.tildeBelow = void 0;
-    this.below = below;
-    this.following = void 0;
-    this.error = void 0;
-};
-
-Column.prototype.canAddAbove = function (tehta) {
-    return (
-        !this.above && !!tehtaForTengwa(this.tengwa, tehta)
-    ) || ( // or flip it
-        !this.below && (
-            this.tengwa === "silme" && tehtaForTengwa("silme-nuquerna", tehta) ||
-            this.tengwa === "esse" && tehtaForTengwa("esse-nuquerna", tehta)
-        )
-    );
-};
-
-Column.prototype.addAbove = function (above) {
-    if (this.tengwa === "silme") {
-        this.tengwa = "silme-nuquerna";
-    }
-    if (this.tengwa === "esse") {
-        this.tengwa = "esse-nuquerna";
-    }
-    this.above = above;
-    return this;
-};
-
-Column.prototype.canAddBelow = function (tehta) {
-    return !this.below && !!tehtaForTengwa(this.tengwa, tehta);
-};
-
-Column.prototype.addBelow = function (below) {
-    this.below = below;
-    return this;
-};
-
-Column.prototype.addTildeAbove = function () {
-    this.tildeAbove = true;
-    return this;
-};
-
-Column.prototype.addTildeBelow = function () {
-    this.tildeBelow = true;
-    return this;
-};
-
-Column.prototype.canAddFollowing = function (following) {
-    return !this.following && !!tehtaForTengwa(this.tengwa, following);
-};
-
-Column.prototype.addFollowing = function (following) {
-    this.following = following;
-    return this;
-};
-
-Column.prototype.addError = function (error) {
-    this.errors = this.errors || [];
-    this.errors.push(error);
-    return this;
-};
+function makeColumn(tengwa) {
+    return makeFontColumn(exports, tengwa);
+}
 

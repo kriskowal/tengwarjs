@@ -25,9 +25,16 @@ function makeOptions(options) {
         // or below.
         // false: by default, place a tilde above doubled nasals.
         // true: place the tilde below doubled nasals.
-        reverseCurls: options.reverseCurls,
+        reverseCurls: options.reverseCurls || options.blackSpeech,
         // false: by default, o is forward, u is backward
         // true: o is backward, u is forward
+        medialOre: options.medialOre || options.blackSpeech,
+        // false: by default, ore only appears in final position
+        // true: ore also appears before consonants, as in the ring inscription
+        blackSpeech: options.blackSpeech,
+        // false: sh is harma, gh is unque
+        // true: sh is calma-extended, gh is ungwe-extended, as in the ring
+        // inscription
         noAchLaut: options.noAchLaut,
         // false: "ch" is interpreted as ach-laut, "cc" as "ch" as in "chew"
         // true: "ch" is interpreted as "ch" as in chew
@@ -113,23 +120,23 @@ function parseColumn(callback, options, previous) {
     var makeColumn = font.makeColumn;
 
     return parseTehta(function (tehta) {
-        return parseTengwa(function (tengwa) {
-            if (tengwa) {
+        return parseTengwa(function (column) {
+            if (column) {
                 if (tehta) {
-                    if (tengwa.tengwa === "silme" && tehta === "i" && options.isHook) {
+                    if (column.tengwa === "silme" && tehta === "i" && options.isHook) {
                         return callback([
                             makeColumn("short-carrier")
                             .addAbove("i")
                             .addBelow("s")
                         ]);
-                    } else if (canAddAboveTengwa(tehta) && tengwa.canAddAbove(tehta)) {
+                    } else if (canAddAboveTengwa(tehta) && column.canAddAbove(tehta)) {
                         if (options.reverseCurls) {
                             tehta = reverseCurls[tehta] || tehta;
                         }
-                        tengwa.addAbove(tehta);
-                        return parseTengwaAnnotations(function (tengwa) {
-                            return callback([tengwa]);
-                        }, tengwa);
+                        column.addAbove(tehta);
+                        return parseTengwaAnnotations(function (column) {
+                            return callback([column]);
+                        }, column);
                     } else {
                         // some tengwar inherently lack space above them
                         // and cannot be reversed to make room.
@@ -137,14 +144,14 @@ function parseColumn(callback, options, previous) {
                         // a tengwa.
                         // put the previous tehta over the appropriate carrier
                         // then follow up with this tengwa.
-                        return parseTengwaAnnotations(function (tengwa) {
-                            return callback([makeCarrier(tehta), tengwa]);
-                        }, tengwa);
+                        return parseTengwaAnnotations(function (column) {
+                            return callback([makeCarrier(tehta), column]);
+                        }, column);
                     }
                 } else {
-                    return parseTengwaAnnotations(function (tengwa) {
-                        return callback([tengwa]);
-                    }, tengwa);
+                    return parseTengwaAnnotations(function (column) {
+                        return callback([column]);
+                    }, column);
                 }
             } else if (tehta) {
                 return parseTengwaAnnotations(function (carrier) {
@@ -347,7 +354,11 @@ function parseTengwa(callback, options, tehta) {
                 if (character === "g") { // gg
                     return callback(makeColumn("ungwe").addTildeBelow());
                 } else if (character === "h") { // gh
-                    return callback(makeColumn("unque"));
+                    if (options.blackSpeech) {
+                        return callback(makeColumn("ungwe-extended"));
+                    } else {
+                        return callback(makeColumn("unque"));
+                    }
                 } else { // g.
                     return callback(makeColumn("ungwe"))(character);
                 }
@@ -367,11 +378,29 @@ function parseTengwa(callback, options, tehta) {
         } else if (character === "s") { // s
             return function (character) {
                 if (character === "s") { // ss
-                    return callback(makeColumn("silme").addTildeBelow());
+                    return Parser.countPrimes(function (primes) {
+                        var tengwa = primes > 0 ? "silme-nuquerna" : "silme";
+                        var column = makeColumn(tengwa).addTildeBelow();
+                        if (primes > 1) {
+                            column.addError("Silme does not have this many alternate forms.");
+                        }
+                        return callback(column);
+                    });
                 } else if (character === "h") { // sh
-                    return callback(makeColumn("harma"));
+                    if (options.blackSpeech) {
+                        return callback(makeColumn("calma-extended"));
+                    } else {
+                        return callback(makeColumn("harma"));
+                    }
                 } else { // s.
-                    return callback(makeColumn("silme"))(character);
+                    return Parser.countPrimes(function (primes) {
+                        var tengwa = primes > 0 ? "silme-nuquerna" : "silme";
+                        var column = makeColumn(tengwa);
+                        if (primes > 1) {
+                            column.addError("Silme does not have this many alternate forms.");
+                        }
+                        return callback(column);
+                    })(character);
                 }
             };
         } else if (character === "z") { // z
@@ -396,7 +425,12 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("romen").addTildeBelow());
                 } else if (character === "h") { // rh
                     return callback(makeColumn("arda"));
-                } else if (character === "") { // r final
+                } else if (
+                    Parser.isFinal(character) || (
+                        options.medialOre &&
+                        vowels.indexOf(character) === -1
+                    )
+                ) { // r final (optionally r before consonant)
                     return callback(makeColumn("ore"))(character);
                 } else { // r.
                     return callback(makeColumn("romen"))(character);
@@ -424,7 +458,7 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("vala"))(character);
                 }
             };
-        } else if (character === "e" && (!tehta || tehta === "a")) { // e
+        } else if (character === "e" && (!tehta || tehta === "a")) { // ae or e after consonants
             return callback(makeColumn("yanta"));
         } else if (character === "y") {
             return callback(makeColumn("wilya").addBelow("y"));
@@ -491,29 +525,27 @@ function parseFollowing(callback, column) {
             if (column.canAddBelow("s")) {
                 return callback(column.addBelow("s"));
             } else {
-                return Parser.countPrimes(function (primes) {
+                return Parser.countPrimes(function (primes, rewind) {
                     return function (character) {
-                        if (character === "") { // end of word
+                        if (Parser.isFinal(character)) { // end of word
                             if (column.canAddFollowing("s-final") && primes-- === 0) {
                                 column.addFollowing("s-final");
                             } else if (column.canAddFollowing("s-inverse") && primes -- === 0) {
                                 column.addFollowing("s-inverse");
                             } else if (column.canAddFollowing("s-extended") && primes-- === 0) {
                                 column.addFollowing("s-extended");
-                            } else if (column.canAddFollowing("s-flourish")) {
+                            } else if (column.canAddFollowing("s-flourish") && primes-- === 0) {
                                 column.addFollowing("s-flourish");
-                                if (primes > 0) {
-                                    column.addError(
-                                        "Following S only has 3 alternate " +
-                                        "flourishes."
-                                    );
-                                }
                             } else {
-                                return callback(column)("s")(character);
+                                var state = callback(column)("s");
+                                while (primes-- > 0) {
+                                    state = state("'");
+                                }
+                                return state;
                             }
-                            return callback(column)(character);
+                            return callback(column);
                         } else {
-                            return callback(column)("s")(character);
+                            return rewind(callback(column)("s"))(character);
                         }
                     };
                 });

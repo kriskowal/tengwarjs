@@ -1,11 +1,13 @@
 
 var Alphabet = require("./alphabet");
 var Bindings = require("./dan-smith");
+var makeFontColumn = require("./column");
 
 var tengwar = exports.tengwar = Bindings.tengwar;
 var tehtar = exports.tehtar = Bindings.tehtar;
 
 var positions = exports.positions = {
+
     "tinco": {
         "o": 3,
         "w": 3,
@@ -29,6 +31,7 @@ var positions = exports.positions = {
         "o-below": 1,
         "others": 2
     },
+
     "ando": {
         "wide": true,
         "e": 1,
@@ -60,6 +63,7 @@ var positions = exports.positions = {
         "ú": 1,
         "others": 0
     },
+
     "thule": {
         "others": 3
     },
@@ -80,6 +84,7 @@ var positions = exports.positions = {
         "w": 0,
         "others": 1
     },
+
     "anto": {
         "wide": true,
         "ó": 1,
@@ -104,6 +109,7 @@ var positions = exports.positions = {
         "u": 7,
         "others": 0
     },
+
     "numen": {
         "wide": true,
         "ó": 1,
@@ -128,6 +134,7 @@ var positions = exports.positions = {
         "ú": 1,
         "others": 0
     },
+
     "ore": {
         "e": 3,
         "o": 3,
@@ -160,15 +167,16 @@ var positions = exports.positions = {
         "ú": 3,
         "others": 1
     },
+
     "romen": {
         "e": 3,
         "o": 3,
         "u": 3,
         "ó": 2,
         "ú": 2,
-        "y": null,
+        "y": 3,
         "o-below": null,
-        "i-below": null,
+        "i-below": 3,
         "others": 1
     },
     "arda": {
@@ -180,9 +188,9 @@ var positions = exports.positions = {
         "í": 1,
         "ó": 2,
         "ú": 2,
-        "y": null,
+        "y": 3,
         "o-below": null,
-        "i-below": null,
+        "i-below": 3,
         "others": 0
     },
     "lambe": {
@@ -192,7 +200,7 @@ var positions = exports.positions = {
         "ó": 1,
         "ú": 1,
         "o-below": null,
-        "i-below": null,
+        "i-below": 4,
         "others": 0
     },
     "alda": {
@@ -200,6 +208,7 @@ var positions = exports.positions = {
         "o-below": null,
         "others": 1
     },
+
     "silme": {
         "y": 3,
         "o-below": 2,
@@ -229,6 +238,7 @@ var positions = exports.positions = {
         "ú": 3,
         "others": 1
     },
+
     "hyarmen": 3,
     "hwesta-sindarinwa": {
         "o": 2,
@@ -253,6 +263,7 @@ var positions = exports.positions = {
         "ú": 3,
         "others": 1
     },
+
     // should not occur:
     "halla": {
         "i-below": 3,
@@ -266,6 +277,7 @@ var positions = exports.positions = {
         "others": 3
     },
     "round-carrier": 3,
+
     "tinco-extended": 3,
     "parma-extended": 3,
     "calma-extended": {
@@ -279,6 +291,38 @@ var positions = exports.positions = {
         "o": 0,
         "u": 7,
         "others": 1
+    },
+
+    "ando-extended": {
+        "wide": true,
+        "e": 1,
+        "o": 2,
+        "ó": 1,
+        "ú": 1,
+        "others": 0
+    },
+    "umbar-extended": {
+        "wide": true,
+        "e": 1,
+        "o": 2,
+        "ó": 1,
+        "ú": 1,
+        "others": 0
+    },
+    "anga-extended": {
+        "wide": true,
+        "e": 1,
+        "ó": 1,
+        "ú": 1,
+        "others": 0
+    },
+    "ungwe-extended": {
+        "wide": true,
+        "e": 1,
+        "o": 1,
+        "ó": 1,
+        "ú": 1,
+        "others": 0
     }
 };
 
@@ -350,73 +394,7 @@ function tehtaKeyForTengwa(tengwa, tehta) {
 }
 
 exports.makeColumn = makeColumn;
-function makeColumn(tengwa, above, below) {
-    return new Column(tengwa, above, below);
-};
-
-var Column = function (tengwa, above, below) {
-    this.above = above;
-    this.tildeAbove = void 0;
-    this.tengwa = tengwa;
-    this.tildeBelow = void 0;
-    this.below = below;
-    this.following = void 0;
-    this.error = void 0;
-};
-
-Column.prototype.canAddAbove = function (tehta) {
-    return (
-        !this.above && !!tehtaForTengwa(this.tengwa, tehta)
-    ) || ( // or flip it
-        !this.below && (
-            this.tengwa === "silme" && tehtaForTengwa("silme-nuquerna", tehta) ||
-            this.tengwa === "esse" && tehtaForTengwa("esse-nuquerna", tehta)
-        )
-    );
-};
-
-Column.prototype.addAbove = function (above) {
-    if (this.tengwa === "silme") {
-        this.tengwa = "silme-nuquerna";
-    }
-    if (this.tengwa === "esse") {
-        this.tengwa = "esse-nuquerna";
-    }
-    this.above = above;
-    return this;
-};
-
-Column.prototype.canAddBelow = function (tehta) {
-    return !this.below && !!tehtaForTengwa(this.tengwa, tehta);
-};
-
-Column.prototype.addBelow = function (below) {
-    this.below = below;
-    return this;
-};
-
-Column.prototype.addTildeAbove = function () {
-    this.tildeAbove = true;
-    return this;
-};
-
-Column.prototype.addTildeBelow = function () {
-    this.tildeBelow = true;
-    return this;
-};
-
-Column.prototype.canAddFollowing = function (following) {
-    return !this.following && !!tehtaForTengwa(this.tengwa, following);
-};
-
-Column.prototype.addFollowing = function (following) {
-    this.following = following;
-    return this;
-};
-
-Column.prototype.addError = function (error) {
-    this.errors = this.errors || [];
-    this.errors.push(error);
-    return this;
-};
+function makeColumn(tengwa) {
+    return makeFontColumn(exports, tengwa);
+}
 

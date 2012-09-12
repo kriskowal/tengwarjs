@@ -55,6 +55,10 @@ exports.tengwar = {
     "parma-extended": "Q",
     "calma-extended": "A",
     "quesse-extended": "Z",
+    "ando-extended": "@",
+    "umbar-extended": "W",
+    "anga-extended": "S",
+    "ungwe-extended": "X",
     // punctuation
     "comma": "=",
     "full-stop": "-",
@@ -126,7 +130,8 @@ exports.tehtar = {
         "&#200;",
         "&#201;",
         "&#202;",
-        "&#203;"
+        "&#203;",
+        "&#76"
     ],
     "s": {
         "special": true,
