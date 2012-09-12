@@ -28,6 +28,9 @@ function makeOptions(options) {
         reverseCurls: options.reverseCurls || options.blackSpeech,
         // false: by default, o is forward, u is backward
         // true: o is backward, u is forward
+        swapDotSlash: options.swapDotSlash,
+        // false: by default, e is a slash, i is a dot
+        // true: e is a dot, i is a slash
         medialOre: options.medialOre || options.blackSpeech,
         // false: by default, ore only appears in final position
         // true: ore also appears before consonants, as in the ring inscription
@@ -133,6 +136,9 @@ function parseColumn(callback, options, previous) {
                         if (options.reverseCurls) {
                             tehta = reverseCurls[tehta] || tehta;
                         }
+                        if (options.swapDotSlash) {
+                            tehta = swapDotSlash[tehta] || tehta;
+                        }
                         column.addAbove(tehta);
                         return parseTengwaAnnotations(function (column) {
                             return callback([column]);
@@ -196,6 +202,7 @@ var tengwaTehtar = "aeiouóú";
 var vowels = "aeiouáéíóú";
 var shorterVowels = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"};
 var reverseCurls = {"o": "u", "u": "o", "ó": "ú", "ú": "ó"};
+var swapDotSlash = {"i": "e", "e": "i"};
 
 function canAddAboveTengwa(tehta) {
     return tengwaTehtar.indexOf(tehta) !== -1;

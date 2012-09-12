@@ -36,6 +36,7 @@ options can also be applied.
     data-mode="general-use no-ach-laut reverse-curls"
     data-mode="classical reverse-curls"
     data-mode="beleriand"
+    data-mode="general-use black-speech"
 
 If the element has a `data-encoded` property, the value is expected to
 be a description of the tengwar and tehtar to display like
@@ -66,6 +67,11 @@ Using the Modules
             breaks.
         -   `plain` whether to exclude all HTML from the output,
             making it suitable for plain text..
+        -   `blackSpeech`: In the Black Speech of the ring inscription,
+            the "o" and "u" curls are reversed, medial "r" is ore before
+            consonants in addition to final "r", and "sh" and "gh" used
+            extended tengwar.  This implies `reverseCurls` and
+            `medialOre`.
         -   `doubleNasalsWithTildeBelow`: Many tengwa can be doubled in
             General Use mode by placing a tilde above the tengwa, and
             many tengwa can be prefixed with the sound of the
@@ -80,6 +86,9 @@ Using the Modules
             -   `false`: by default, the "o" tehta curls forward, and
                 "u" backward.
             -   `true`: "o" curls backward, "u" forward.
+        -   `swapDotSlash`
+            -   `false`: by default, "i" is a dot and "e" is a slash.
+            -   `true`: "i" is a slash, "e" is a dot.
         -   `noAchLaut`
             -   `false`: by default, "ch" is transcribed as ach-laut,
                 the "ch" as in "Bach".  "cc" is transcribed as "ch" as
