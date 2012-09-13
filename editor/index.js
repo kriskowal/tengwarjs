@@ -1,7 +1,7 @@
 
 var QS = require("qs");
-var modes = require("../modes");
-var fonts = require("../fonts");
+var modes = require("tengwar/modes");
+var fonts = require("tengwar/fonts");
 
 var body = document.body;
 var input = document.querySelector("#input");

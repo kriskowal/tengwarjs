@@ -1,8 +1,11 @@
 {
-    "name": "tengwar",
-    "version": "0.1.0",
-    "homepage": "http://3rin.gs/tengwar",
-    "author": "Kris Kowal <kris@cixar.com> (http://github.com/kriskowal/)",
+    "name": "tengwar-editor",
+    "version": "0.0.0",
+    "dependencies": {
+        "mr": "0.0.x",
+        "qs": "0.1.x",
+        "tengwar": "0.1.x"
+    },
     "bugs": {
         "mail": "kris@cixar.com",
         "web": "http://github.com/kriskowal/tengwarjs/issues"
@@ -19,11 +22,5 @@
     "repository": {
         "type": "git",
         "url": "http://github.com/kriskowal/tengwarjs.git"
-    },
-    "devDependencies": {
-        "jasmine-node": "1.0.x"
-    },
-    "scripts": {
-        "test": "jasmine-node spec"
     }
 }
