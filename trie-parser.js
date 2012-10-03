@@ -1,6 +1,4 @@
 
-var Parser = require("./parser");
-
 module.exports = makeParserFromTrie;
 function makeParserFromTrie(trie, makeProducer, callback, fallback) {
     var children = {};

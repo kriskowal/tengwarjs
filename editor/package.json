@@ -2,6 +2,7 @@
     "name": "tengwar-editor",
     "version": "0.0.0",
     "dependencies": {
+        "frb": "0.0.x",
         "mr": "0.0.x",
         "qs": "0.1.x",
         "tengwar": "0.1.x"
