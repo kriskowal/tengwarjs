@@ -298,6 +298,8 @@ function parseTengwa(callback, options, tehta) {
                     return callback(makeColumn("tinco").addTildeBelow());
                 } else if (character === "h") { // th
                     return callback(makeColumn("thule"));
+                } else if (character === "s") { // ts
+                    return callback(makeColumn("calma"));
                 } else if (character === "c") { // tc
                     return function (character) {
                         if (character === "h") { // tch -> tinco calma
@@ -340,6 +342,8 @@ function parseTengwa(callback, options, tehta) {
                 if (character === "d") { // dd
                     return callback(makeColumn("ando").addTildeBelow());
                 } else if (character === "j") { // dj
+                    return callback(makeColumn("anga"));
+                } else if (character === "z") { // dz
                     return callback(makeColumn("anga"));
                 } else if (character === "h") { // dh
                     return callback(makeColumn("anto"));
