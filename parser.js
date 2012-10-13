@@ -12,6 +12,7 @@ function makeParser(production, errorHandler) {
         // each state is represented by a function that accepts
         // a character.  parse functions accept a callback (for forwarding the
         // result) and return a state.
+        text = text.trim();
         var result;
         var state = production.apply(null, [function (_result) {
             result = _result;

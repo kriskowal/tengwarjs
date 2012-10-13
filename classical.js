@@ -25,7 +25,8 @@ function makeOptions(options) {
         // but before the third age,
         // harma was renamed aha,
         // and meant breath-h in initial position
-        classical: options.classical,
+        classicalH: options.classicalH,
+        classicalR: options.classicalR,
         // before the third age
         // affects use of "r" and "h"
         // without classic, we default to the mode from the namarie poem.
@@ -33,11 +34,14 @@ function makeOptions(options) {
         // vowels.
         // in the third age, through the namarie poem, "r" is only "ore" before
         // consontants and at the end of words.
+        swapDotSlash: options.swapDotSlash,
+        // false: by default, e is a slash, i is a dot
+        // true: e is a dot, i is a slash
         // TODO figure out "h"
         reverseCurls: options.reverseCurls,
         // false: by default, o is forward, u is backward
         // true: o is backward, u is forward
-        iuRising: options.isRising,
+        iuRising: options.iuRising,
         // iuRising thirdAge: anna:y,u
         // otherwise: ure:i
         // in the third age, "iu" is a rising diphthong,
@@ -45,7 +49,7 @@ function makeOptions(options) {
         // that they are stressed on the second sound, as
         // in "yule".  whether to use yanta or anna is
         // not attested.
-        longHalla: options.longHalla
+        longHalla: options.longHalla,
         // TODO indicates that halla should be used before medial L and W to
         // indicate that these are pronounced with length.
         // initial hl and hw remain short.
@@ -55,6 +59,7 @@ function makeOptions(options) {
         // TODO following W in this mode?
         // TODO namarië does not use double U or O curls
         // TODO namarië does not reverse esse for E tehta
+        duodecimal: options.duodecimal
     };
 };
 
@@ -111,7 +116,7 @@ function parseColumn(callback, options, previous) {
                     } else if (punctuation[character]) {
                         return callback([makeColumn(punctuation[character])]);
                     } else {
-                        return callback([makeColumn("anna").addError(
+                        return callback([makeColumn("ure").addError(
                             "Cannot transcribe " + JSON.stringify(character) +
                             " in Classical Mode"
                         )]);
@@ -285,7 +290,7 @@ function parseTengwa(callback, options, previous) {
                         makeColumn("halla").addError(error),
                         makeColumn("romen").addError(error)
                     ]);
-                } else if (options.classical) {
+                } else if (options.classicalR) {
                     // pre-namarie style, ore when r between vowels
                     if (
                         previous &&
@@ -357,20 +362,24 @@ function parseTengwa(callback, options, previous) {
                 } else if (character === "t") {
                     return callback([makeColumn("harma")]);
                 } else if (character === "y") {
-                    if (options.classical && options.harma) { // oldest form
+                    if (options.classicalH && !options.harma) { // oldest form
                         return callback([makeColumn("hyarmen")]);
                     } else { // post-aha, through to the third-age
                         return callback([makeColumn("hyarmen").addBelow("y")]);
                     }
                 } else {
-                    if (options.classical) {
+                    if (options.classicalH) {
                         if (options.harma) { // before harma became aha initially
-                            return callback([makeColumn("harma")])(character);
+                            if (previous) { // medial
+                                return callback([makeColumn("halla")])(character);
+                            } else { // initial
+                                return callback([makeColumn("harma")])(character);
+                            }
                         } else { // harmen renamed and resounded as aha in initial position
                             if (previous) { // medial
                                 return callback([makeColumn("hyarmen")])(character);
                             } else { // initial
-                                return callback([makeColumn("harma")])(character);
+                                return callback([makeColumn("halla")])(character);
                             }
                         }
                     } else { // third age, namarië
@@ -379,11 +388,11 @@ function parseTengwa(callback, options, previous) {
                 }
             };
         } else if (character === "d") {
-            return callback([makeColumn("ando").addError("D cannot appear except after N, L, or R")]);
+            return callback([makeColumn("ando").addError("D cannot appear except after N, L, or R in Classical Mode")]);
         } else if (character === "b") {
-            return callback([makeColumn("umbar").addError("B cannot appear except after M or L")]);
+            return callback([makeColumn("umbar").addError("B cannot appear except after M or L in Classical Mode")]);
         } else if (character === "g") {
-            return callback([makeColumn("anga").addError("G cannot appear except after N or Ñ")]);
+            return callback([makeColumn("anga").addError("G cannot appear except after N or Ñ in Classical Mode")]);
         } else if (character === "j") {
             return callback([makeColumn().addError("J cannot be transcribed in Classical Mode")]);
         } else {
@@ -409,27 +418,29 @@ function parseTehta(callback, options, previous) {
                 }
             };
         } else if (character === "e") {
+            var tehta = swapDotSlash("e", options);
             return function (character) {
                 if (character === "u") {
-                    return callback([previous, makeColumn("ure").addAbove("e")]);
+                    return callback([previous, makeColumn("ure").addAbove(tehta)]);
                 } else if (previous && previous.canAddAbove("e")) {
-                    return callback([previous.addAbove("e")])(character);
+                    return callback([previous.addAbove(tehta)])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier").addAbove("e")])(character);
+                    return callback([previous, makeColumn("short-carrier").addAbove(tehta)])(character);
                 }
             };
         } else if (character === "i") {
+            var iTehta = swapDotSlash("i", options);
             return function (character) {
                 if (character === "u") {
                     if (options.iuRising) {
                         return callback([previous, makeColumn("anna").addAbove(reverseCurls("u", options)).addBelow("y")]);
                     } else {
-                        return callback([previous, makeColumn("ure").addAbove("i")]);
+                        return callback([previous, makeColumn("ure").addAbove(iTehta)]);
                     }
-                } else if (previous && previous.canAddAbove("i")) {
-                    return callback([previous.addAbove("i")])(character);
+                } else if (previous && previous.canAddAbove(iTehta)) {
+                    return callback([previous.addAbove(iTehta)])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier").addAbove("i")])(character);
+                    return callback([previous, makeColumn("short-carrier").addAbove(iTehta)])(character);
                 }
             };
         } else if (character === "o") {
@@ -464,9 +475,9 @@ function parseTehta(callback, options, previous) {
         } else if (character === "á") {
             return callback([previous, makeColumn("long-carrier").addAbove("a")]);
         } else if (character === "é") {
-            return callback([previous, makeColumn("long-carrier").addAbove("e")]);
+            return callback([previous, makeColumn("long-carrier").addAbove(swapDotSlash("e", options))]);
         } else if (character === "í") {
-            return callback([previous, makeColumn("long-carrier").addAbove("i")]);
+            return callback([previous, makeColumn("long-carrier").addAbove(swapDotSlash("i", options))]);
         } else if (character === "ó") {
             if (previous && previous.canAddAbove("ó")) {
                 return callback([previous.addAbove(reverseCurls("ó", options))]);
@@ -489,6 +500,14 @@ var curlReversals = {"o": "u", "u": "o", "ó": "ú", "ú": "ó"};
 function reverseCurls(tehta, options) {
     if (options.reverseCurls) {
         tehta = curlReversals[tehta] || tehta;
+    }
+    return tehta;
+}
+
+var dotSlashSwaps = {"e": "i", "i": "e"};
+function swapDotSlash(tehta, options) {
+    if (options.swapDotSlash) {
+        tehta = dotSlashSwaps[tehta] || tehta;
     }
     return tehta;
 }

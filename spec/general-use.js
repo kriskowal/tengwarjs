@@ -56,7 +56,6 @@ module.exports = {
     "tsts": "tinco;silme;tinco:s-final",
     "iqs": "quesse:i;vala;silme",
     "aty": "tinco:a,y",
-    "is": "short-carrier:i,s",
     "allys": "lambe:a,y,s-final,tilde-below",
     "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",
     "ls": "lambe:s-final",

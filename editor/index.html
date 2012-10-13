@@ -26,32 +26,16 @@
             </div>
             <div id="divider"></div>
             <div id="input-box">
-                <form id="form-box">
-
-                    <input type="radio" name="mode" id="input-general-use" value="general-use" checked>
-                    <label for="input-general-use">General Use</label><br>
-                    <input type="radio" name="mode" id="input-classical" value="classical">
-                    <label for="input-classical">Classical</label><br>
-                    <input type="radio" name="mode" id="input-beleriand" value="beleriand">
-                    <label for="input-beleriand">Beleriand</label><br>
-
-                    <input type="radio" name="font" id="input-tengwar-annatar" value="annatar" checked>
-                    <label for="input-tengwar-annatar">Tengwar Annatar</label><br>
-                    <input type="radio" name="font" id="input-tengwar-parmaite" value="parmaite">
-                    <label for="input-tengwar-parmaite">Tengwar Parmaitë</label><br>
-
-                    <!--
-                    <input type="checkbox" name="transliteration" id="input-transliteration">
-                    <label for="input-transliteration">Show transliteration</label>
-                    -->
-
-                </form>
+                <div id="form-box">
+                    <a id="select-mode" href="#">Select Mode</a>
+                </div>
                 <div id="content-box" style="">
                     <textarea id="input" spellcheck="false"></textarea>
                     <!--<div id="input" contenteditable spellcheck="false"></div>-->
                 </div>
                 <div id="about-box">
-                    <a href="about.html">about</a>
+                    <a id="wiki-text" href="#">View Wiki Markup</a> &mdash;
+                    <a href="about.html">About</a>
                 </div>
             </div>
         </div>

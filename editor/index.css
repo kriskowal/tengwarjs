@@ -52,18 +52,18 @@ textarea, .copy {
     color: black;
 }
 
-body..annatar a {
+body.annatar a {
     color: #a00;
 }
 body.annatar a:visited {
-    color: #c00;
+    color: #a00;
 }
 
 body.parmaite a {
     color: #00a;
 }
 body.parmaite a:visited {
-    color: #007;
+    color: #00a;
 }
 
 
@@ -157,20 +157,18 @@ a:focus {
 }
 
 #input-box {
-    height: 10em;
     display: -webkit-flex;
     -webkit-flex-flow: row;
     -webkit-justify-content: center;
     -webkit-align-items: stretch;
-    overflow: hidden;
 }
 
 #form-box {
-    padding: 20px;
-    overflow: hidden;
     white-space: nowrap;
+    padding: 10px;
     -webkit-flex: 1 .5;
     -webkit-align-self: flex-end;
+    text-align: center;
 }
 
 #content-box {
@@ -183,17 +181,15 @@ a:focus {
 }
 
 #about-box {
-    padding: 20px;
-    overflow: hidden;
+    padding: 10px;
     white-space: nowrap;
-    text-align: right;
+    text-align: center;
     -webkit-flex: 1 .5;
     -webkit-align-self: flex-end;
 }
 
 #input {
     -webkit-flex: 1;
-    height: 100%;
     width: 100%;
 }
 

@@ -332,7 +332,7 @@ function transcribe(sections, options) {
     var plain = options.plain || false;
     var block = options.block || false;
     var beginParagraph = block ? "<p>" : "";
-    var delimitParagraph = block ? "<br>" : "";
+    var delimitParagraph = "<br>";
     var endParagraph = block ? "</p>" : "";
     return sections.map(function (section) {
         return section.map(function (paragraph) {

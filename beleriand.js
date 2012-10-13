@@ -15,7 +15,8 @@ function makeOptions(options) {
     return {
         font: options.font || TengwarParmaite,
         block: options.block,
-        plain: options.plain
+        plain: options.plain,
+        duodecimal: options.duodecimal
     };
 }
 
