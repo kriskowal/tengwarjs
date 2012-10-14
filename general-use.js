@@ -156,7 +156,7 @@ function parseColumn(callback, options, previous) {
                         // put the previous tehta over the appropriate carrier
                         // then follow up with this tengwa.
                         return parseTengwaAnnotations(function (column) {
-                            return callback([makeCarrier(tehta), column]);
+                            return callback([makeCarrier(tehta, options), column]);
                         }, column);
                     }
                 } else {
@@ -173,7 +173,7 @@ function parseColumn(callback, options, previous) {
                 }
                 return parseTengwaAnnotations(function (carrier) {
                     return callback([carrier]);
-                }, makeCarrier(tehta));
+                }, makeCarrier(tehta, options));
             } else {
                 return function (character) {
                     if (Parser.isBreak(character)) {
@@ -190,18 +190,33 @@ function parseColumn(callback, options, previous) {
         }, options, tehta);
     });
 
-    function makeCarrier(tehta) {
-        if (shorterVowels[tehta]) {
-            return makeColumn("long-carrier").addAbove(shorterVowels[tehta]);
-        } else {
-            return makeColumn("short-carrier").addAbove(tehta);
-        }
+}
+
+function makeCarrier(tehta, options) {
+    var font = options.font;
+    var makeColumn = font.makeColumn;
+    if (tehta === "á") {
+        return makeColumn("wilya").addAbove("a");
+    } else if (shorterVowels[tehta]) {
+        return makeColumn("long-carrier").addAbove(shorterVowels[tehta]);
+    } else {
+        return makeColumn("short-carrier").addAbove(tehta);
     }
 }
 
 function parseTehta(callback) {
     return function (character) {
-        if (tengwaTehtar.indexOf(character) !== -1) {
+        if (character === "") {
+            return callback();
+        } else if (lengthenableVowels.indexOf(character) !== -1) {
+            return function (nextCharacter) {
+                if (nextCharacter === character) {
+                    return callback(longerVowels[character]);
+                } else {
+                    return callback(character)(nextCharacter);
+                }
+            };
+        } else if (nonLengthenableVowels.indexOf(character) !== -1) {
             return callback(character);
         } else {
             return callback()(character);
@@ -209,14 +224,17 @@ function parseTehta(callback) {
     };
 }
 
-var tengwaTehtar = "aeiouóú";
+var lengthenableVowels = "aeiou";
+var longerVowels = {"a": "á", "e": "é", "i": "í", "o": "ó", "u": "ú"};
+var nonLengthenableVowels = "aeióú";
+var tehtarThatCanBeAddedAbove = "aeiouóú";
 var vowels = "aeiouáéíóú";
 var shorterVowels = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"};
 var reverseCurls = {"o": "u", "u": "o", "ó": "ú", "ú": "ó"};
 var swapDotSlash = {"i": "e", "e": "i"};
 
 function canAddAboveTengwa(tehta) {
-    return tengwaTehtar.indexOf(tehta) !== -1;
+    return tehtarThatCanBeAddedAbove.indexOf(tehta) !== -1;
 }
 
 function parseTengwa(callback, options, tehta) {
@@ -501,10 +519,8 @@ function parseTengwa(callback, options, tehta) {
         } else if (character === "y") {
             return callback(makeColumn("wilya").addBelow("y"));
             // TODO consider alt: return callback(makeColumn("long-carrier").addAbove("i"));
-        } else if (character === "á") {
-            return callback(makeColumn("wilya").addAbove("a"));
-        } else if (shorterVowels[character] && tengwaTehtar.indexOf(character) == -1) {
-            return callback(makeColumn("long-carrier").addAbove(shorterVowels[character]));
+        } else if (shorterVowels[character]) {
+            return callback(makeCarrier(character, options).addAbove(shorterVowels[character]));
         } else {
             return callback()(character);
         }

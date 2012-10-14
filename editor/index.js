@@ -51,59 +51,43 @@ var bindings = Bindings.create(null, {
     },
 
     "heightPx": {
-        dependencies: "state.height",
-        get: function () {
-            return this.state.height + "px";
+        "<-": "state.height",
+        convert: function (height) {
+            return height + "px";
         },
-        set: function (height) {
-            this.state.height = parseInt(height, 10);
+        revert: function (height) {
+            return parseInt(height, 10);
         }
     },
 
     "mode": {
-        dependencies: "state.mode",
-        get: function () {
-            return modes[this.state.mode] || modes['general-use'];
+        args: ["state.mode"],
+        compute: function (mode) {
+            return modes[mode] || modes['general-use'];
         }
     },
 
     "font": {
-        dependencies: "state.font",
-        get: function () {
-            return fonts[this.state.font] || modes['annatar'];
+        args: ["state.font"],
+        compute: function (font) {
+            return fonts[font] || modes['annatar'];
         }
     },
 
-    "transcription": {
-        dependencies: ["mode", "font", "state.q"],
-        get: function () {
+    "outputElement.innerHTML": {
+        args: ["mode", "font", "state.q", "state.options"],
+        compute: function (mode, font, input, flags) {
             var options = {
-                font: this.font,
+                font: font,
                 block: true
             };
-            this.state.options.forEach(function (flag) {
+            flags.forEach(function (flag) {
                 flag = flag.replace(/\-(\w)/g, function ($, $1) {
                     return $1.toUpperCase();
                 });
                 options[flag] = true;
             });
-            return this.mode.transcribe(this.state.q, options);
-        }
-    },
-
-    "outputElement.innerHTML": {
-        "<-": "transcription"
-    },
-
-    "searchString": {
-        dependencies: ["state.q", "state.mode", "state.font", "state.height", "state.options"],
-        get: function () {
-            if (!this.state)
-                return;
-            delete this.state[""]; // XXX QS bug interprets empty array as & and back to an empty assignment
-            var string = "?" + QS.stringify(this.state);
-            window.history.replaceState(this.state, "", string);
-            return string;
+            return mode.transcribe(input, options);
         }
     },
 
@@ -111,18 +95,38 @@ var bindings = Bindings.create(null, {
         "<-": "'modes.html' + searchString"
     },
 
+    "searchString": {
+        args: ["state.q", "state.mode", "state.font", "state.height", "state.options"],
+        compute: function () {
+            var state = this.state;
+
+            // remove things that QS can't seem to handle
+            delete state[""]; // XXX QS bug interprets empty array as & and back to an empty assignment
+            if (state.options.length == 0) {
+                delete state.options;
+            }
+            var string = "?" + QS.stringify(this.state);
+            window.history.replaceState(this.state, "", string);
+
+            state.options = state.options || [];
+            return string;
+        }
+    },
+
+    "wikiTextElement.href": {
+        "<-": "'data:text/plain;charset=utf-8,' + wikiText"
+    },
+
     "wikiText": {
-        "dependencies": ["state.q", "state.mode", "state.font", "state.height", "state.options"],
-        get: function () {
-            var text = this.state.q;
-            var font = this.state.font;
-            var mode = [this.state.mode].concat(this.state.options).filter(Boolean).join(" ");
+        args: ["state.q", "state.mode", "state.font", "state.height", "state.options"],
+        compute: function (text, mode, font, height, flags) {
+            var modeLine = [mode].concat(flags).filter(Boolean).join(" ");
             if (/\n/.test(text)) {
                 return encodeURIComponent(
                     "<tengwarblock " +
                     "font=\"" + font + "\" " +
                     "mode=\"" + mode + "\">\n" +
-                    text +
+                    encodeHtml(text) +
                     "\n</tengwarblock>"
                 );
             } else {
@@ -130,15 +134,11 @@ var bindings = Bindings.create(null, {
                     "<tengwar " +
                     "font=\"" + font + "\" " +
                     "mode=\"" + mode + "\">" +
-                    text +
+                    encodeHtml(text) +
                     "</tengwar>"
                 );
             }
         }
-    },
-
-    "wikiTextElement.href": {
-        "<-": "'data:text/plain,' + wikiText"
     }
 
 });
@@ -167,4 +167,11 @@ divider.addEventListener("mousedown", function (event) {
         window.removeEventListener("mousemove", mousemove);
     }
 });
+
+function encodeHtml(string) {
+    return String(string)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
 

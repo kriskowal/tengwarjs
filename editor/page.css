@@ -18,12 +18,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    text-decoration: none;
-    color: #700;
-}
-
-a.dagger:after {
-    content: "†";
+    color: #a00;
 }
 
 table {
@@ -40,6 +35,11 @@ th {
 
 td .tengwar {
     white-space: nowrap;
+}
+
+label {
+    display: block;
+    cursor: pointer;
 }
 
 hr {

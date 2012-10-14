@@ -1,6 +1,9 @@
 
+// TODO parse following "w"
+
 var TengwarParmaite = require("./tengwar-parmaite");
 var Parser = require("./parser");
+var Notation = require("./notation");
 var makeDocumentParser = require("./document-parser");
 var normalize = require("./normalize");
 var punctuation = require("./punctuation");
@@ -234,10 +237,10 @@ function parseTengwa(callback, options) {
                             return callback(makeColumn("short-carrier"));
                         } else if (primes === 1) {
                             return callback(makeColumn("short-carrier").addAbove("i"));
+                        } else if (primes === 2) {
+                            return callback(makeColumn("long-carrier").addAbove("i"));
                         } else if (primes === 3) {
                             return callback(makeColumn("long-carrier"));
-                        } else if (primes === 4) {
-                            return callback(makeColumn("long-carrier").addAbove("i"));
                         } else {
                             return callback(makeColumn("long-carrier").addAbove("i").addError("I only has four variants between short or long and dotted or not."));
                         }

@@ -13,14 +13,14 @@ if (window.location.search) {
         q: "",
         mode: "general-use",
         font: "annatar",
-        options: [],
         height: void 0
     }
 }
 
-if (inputState.q === "Mae Govannen, Arda!") {
+if (inputState.q === "Mae govannen, Arda!") {
     inputState.q = "";
 }
+inputState.options = inputState.options || [];
 
 var traceAll = false;
 
@@ -52,30 +52,26 @@ function TengwarComponent(element, state) {
         },
 
         "mode": {
-            "dependencies": "state.mode",
-            "get": function () {
-                return modes[this.state.mode];
+            "args": ["state.mode"],
+            "compute": function (mode) {
+                return modes[mode];
             }
         },
 
-        "font": {
-            "dependencies": "state.font",
-            "get": function () {
-                return fonts[this.state.font];
+        "options.font": {
+            "args": ["state.font"],
+            "compute": function (font) {
+                return fonts[font];
             }
         },
 
-        "options.font": {"<-": "font"},
-
-        "transcription": {
-            "dependencies": ["options.font", "mode", "input"],
-            "get": function () {
-                var options = this.mode.makeOptions(this.options);
-                return this.mode.transcribe(this.input, options);
+        "element.innerHTML": {
+            "args": ["options.font", "mode", "input", "options"],
+            "compute": function (font, mode, input, options) {
+                var options = mode.makeOptions(options);
+                return mode.transcribe(input, options);
             }
-        },
-
-        "element.innerHTML": {"<-": "transcription"},
+        }
 
     });
 }
@@ -130,28 +126,35 @@ var states = {};
 // template modes
 
 Button(document.getElementById("kings-letter-general-use-button"), {
-    q: inputState.q || "Elessar Telcontar: Aragorn Arathornion Edhelharn, aran Gondor ar Hîr i Mbair Annui, anglennatha i Varanduiniant erin dolothen Ethuil, egor ben genediad Drannail erin Gwirith edwen.",
+    q: document.getElementById("kings-letter-general-use-tengwar").dataset.tengwar,
     font: "parmaite",
     mode: "general-use",
     options: []
 });
 
 Button(document.getElementById("kings-letter-beleriand-button"), {
-    q: inputState.q || "Elessar Telcontar: Aragorn Arathornion Edhelharn, aran Gondor ar Hîr i Mbair Annui, anglennatha i Varanduiniant erin dolothen Ethuil, egor ben genediad Drannail erin Gwirith edwen.",
+    q: document.getElementById("kings-letter-beleriand-tengwar").dataset.tengwar,
+    font: "parmaite",
+    mode: "beleriand",
+    options: []
+});
+
+Button(document.getElementById("doors-of-durin-button"), {
+    q: document.getElementById("doors-of-durin-tengwar").dataset.tengwar,
     font: "parmaite",
     mode: "beleriand",
     options: []
 });
 
 Button(document.getElementById("black-speech-button"), {
-    q: inputState.q || ">ashnazgdurbatulûk, ashnazggimbatul<\nashnazgthrakatulûk, aghburzumishikrimpatul",
+    q: document.getElementById("black-speech-tengwar").dataset.tengwar,
     font: "annatar",
     mode: "general-use",
     options: ["black-speech"]
 });
 
 Button(document.getElementById("namarie-button"), {
-    q: inputState.q || "Ai! laurië lantar lassi súrinen,\nYéni únótimë ve rámar aldaron!",
+    q: document.getElementById("namarie-tengwar").dataset.tengwar,
     font: "parmaite",
     mode: "classical",
     options: []
@@ -303,6 +306,8 @@ Bindings.create(null, {
 ["general-use", "classical", "beleriand"].forEach(function (mode) {
     var state = states[mode];
     state.q = inputState.q || "";
-    state.options.swap(0, states[mode].options.length, inputState.options);
+    state.options.swap(0, states[mode].options.length, inputState.options.filter(function (option) {
+        return option && option !== "undefined";
+    }));
 });
 

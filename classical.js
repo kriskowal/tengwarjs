@@ -407,7 +407,9 @@ function parseTehta(callback, options, previous) {
     return function (character) {
         if (character === "a") {
             return function (character) {
-                if (character === "i") {
+                if (character === "a") {
+                    return parseTehta(callback, options, previous)("á");
+                } else if (character === "i") {
                     return callback([previous, makeColumn("yanta").addAbove("a")]);
                 } else if (character === "u") {
                     return callback([previous, makeColumn("ure").addAbove("a")]);
@@ -420,7 +422,9 @@ function parseTehta(callback, options, previous) {
         } else if (character === "e") {
             var tehta = swapDotSlash("e", options);
             return function (character) {
-                if (character === "u") {
+                if (character === "e") {
+                    return parseTehta(callback, options, previous)("é");
+                } else if (character === "u") {
                     return callback([previous, makeColumn("ure").addAbove(tehta)]);
                 } else if (previous && previous.canAddAbove("e")) {
                     return callback([previous.addAbove(tehta)])(character);
@@ -431,7 +435,9 @@ function parseTehta(callback, options, previous) {
         } else if (character === "i") {
             var iTehta = swapDotSlash("i", options);
             return function (character) {
-                if (character === "u") {
+                if (character === "i") {
+                    return parseTehta(callback, options, previous)("í");
+                } else if (character === "u") {
                     if (options.iuRising) {
                         return callback([previous, makeColumn("anna").addAbove(reverseCurls("u", options)).addBelow("y")]);
                     } else {
@@ -445,7 +451,9 @@ function parseTehta(callback, options, previous) {
             };
         } else if (character === "o") {
             return function (character) {
-                if (character === "i") {
+                if (character === "o") {
+                    return parseTehta(callback, options, previous)("ó");
+                } else if (character === "i") {
                     return callback([previous, makeColumn("yanta").addAbove(reverseCurls("o", options))]);
                 } else if (previous && previous.canAddAbove("o")) {
                     return callback([previous.addAbove(reverseCurls("o", options))])(character);
@@ -455,7 +463,9 @@ function parseTehta(callback, options, previous) {
             };
         } else if (character === "u") {
             return function (character) {
-                if (character === "i") {
+                if (character === "u") {
+                    return parseTehta(callback, options, previous)("ú");
+                } else if (character === "i") {
                     return callback([previous, makeColumn("yanta").addAbove("u")]);
                 } else if (previous && previous.canAddAbove("u")) {
                     return callback([previous.addAbove(reverseCurls("u", options))])(character);

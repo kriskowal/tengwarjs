@@ -59,6 +59,18 @@ module.exports = {
     "allys": "lambe:a,y,s-final,tilde-below",
     "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",
     "ls": "lambe:s-final",
-    "ls'": "lambe:s-flourish"
+    "ls'": "lambe:s-flourish",
+
+    // long vowels
+    "á": "wilya:a",
+    "aa": "wilya:a",
+    "é": "long-carrier:e",
+    "ee": "long-carrier:e",
+    "í": "long-carrier:i",
+    "ii": "long-carrier:i",
+    "ó": "long-carrier:o",
+    "oo": "long-carrier:o",
+    "ú": "long-carrier:u",
+    "uu": "long-carrier:u"
 
 };

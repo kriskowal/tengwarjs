@@ -1,20 +1,21 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <style>
-            body {
-                width: 40em;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="page.css">
     </head>
-    <body>
+    <body><div>
+
+        <h1>Tengwar Transcriber</h1>
 
         <p><em><strong>Usage:</strong></em>
-        <a href="index.html">This</a> is a live transcriber from our Latin phonetic
-        alphabet to the elvish Tengwar alphabet.  Type a message in the bottom
-        text area and it will be displayed in the equivalent elvish letters
-        in the area above.  Copy the link in the address bar and send
-        your message to friends and colleagues.</p>
+        <a href="index.html">This</a> is a live transcriber from our Latin
+        phonetic alphabet to the Elvish Tengwar alphabet.  Type a message in
+        the bottom text area and it will be displayed in the equivalent Elvish
+        letters in the area above.  Copy the link in the address bar and send
+        your message to friends and colleagues.  Copy the Wiki text and paste
+        the Tengwar Markup block into an article on a Wiki that
+        <a href="#support-wiki-markup">supports</a> this Tengwar
+        Transcriber.</p>
 
         <p><em><strong>Compatibility:</strong></em> The transcriber may not
         work in some browsers because I used fancy early-draft features of some
@@ -25,6 +26,19 @@
         <p>However, there is a much older
         <a href="http://tengwar.art.pl/tengwar/ott/start.php?l=en">tengwar transcriber</a>
         that should suffice in the interim.</p>
+
+        <a name="wiki-markup-support"></a>
+        <p><em><strong>Wiki Markup Support:</strong></em> At present, no wikis
+        support Tengwar transcription with this tool.  If you maintain a
+        MediaWiki installation and would like to add support for this tool,
+        I’ve published an open-source
+        <a href="https://github.com/kriskowal/tengwarjs/blob/master/mediawiki/tengwar.php">MediaWiki extension</a>.
+        Install that PHP script and incorporate the transcriber’s static assets
+        in your page, which include <code>tengwar.min.js</code>, and the
+        <code>css</code>, <code>ttf</code>, <code>eot</code>, <code>svg</code>,
+        <code>woff</code> files for <code>tengwar-annatar</code> and
+        <code>tengwar-parmaite</code> from
+        <a href="https://github.com/kriskowal/tengwarjs">TengwarJS</a>.</p>
         
         <p><em><strong>Purpose:</strong></em> The transcriber is suitable for
         rendering <a href="http://tolkiengateway.net/wiki/Sindarin">Sindarin</a> in
@@ -32,17 +46,10 @@
         more or the
         <a href="http://at.mansbjorkman.net/teng_beleriand.htm">Mode&nbsp;of&nbsp;Beleriand</a>,
         and <a href="http://tolkiengateway.net/wiki/Quenay">Quenya</a> in the
-        <a href="http://at.mansbjorkman.net/teng_quenya.htm">Classical</a> mode.</p>
-
-        <p>The General Use mode is suitable for showing how Sindarin might
-        have been written and attempts to be consistent with
-        <em>The King’s Letter</em> from J.R.R.&nbsp;Tolkien’s book,
-        <a href="http://tolkiengateway.net/wiki/Sauron_Defeated">Sauron&nbsp;Defeated</a>,
-        I used the same mode for my
-        <a href="http://3rin.gs/"><nobr>Map of Middle-earth</nobr></a>.</p>
-
-        <p>I’ve posted some <a href="../samples/index.html">sample
-        transcriptions</a> in various modes.</p>
+        <a href="http://at.mansbjorkman.net/teng_quenya.htm">Classical</a>
+        mode.  The <a href="modes.html">Mode Selector</a> provides information,
+        options, and instructions for comparing Tengwar modes, fonts, and the
+        supported languages.</p>
 
         <p><em><strong>Technical details:</strong></em>
         The transcriber gives you the option of using either the italic of
@@ -54,7 +61,7 @@
         in the untypable regions of a single font because of technical
         limitations of rendering fonts in web browsers.  Particularly, a font
         cannot paint outside its container, so a tehta rendered alone in a span
-        would be rendered invisible.
+        would be invisible.
 
         <p><em>Tengwar Annatar’s</em> italic resembles the <em>Ring
         Inscription</em> from <em>The Lord of the Rings</em>, presumably in
@@ -72,7 +79,7 @@
         alphabet, Johan’s Annatar provides some glyphs in an alternate font.</p>
 
         <p>Because of limitations in rendering text on the web and the
-        peculiarities of elvish fonts, it was not possible to alternate between
+        peculiarities of Elvish fonts, it was not possible to alternate between
         the normal and alternate fonts in this application.  Instead, I’ve
         created a custom version of the font that incorporates the alternate
         glyphs I needed for this mode using code points that are not so
@@ -81,7 +88,7 @@
         rotated U-hook tehtar that were less prone to overlap with the
         underlying tengwar.</p>
 
-        <p>The particular limitation is that diacritics in elvish have no width
+        <p>The particular limitation is that diacritics in Elvish have no width
         and are drawn before the cursor. Some of the diacritics I use are in
         the alternate font.  To put an alternate diacritic over the previous
         tengwa, consonant, glyph, you have to put it in a
@@ -98,16 +105,11 @@
         precisely where they need to be or providing ligatures for difficult
         placements.</p>
 
-        <p>In the interim, I’ve engaged in the process of manually verifying
-        the placement and use of diacritics for every
-        combination of tengwa and tehta for
-        <a href="../combinations/tengwar-parmaite.html">both</a>
-        <a href="../combinations/tengwar-annatar.html">fonts</a></p>
-
-        <p>If you take a look under the hood, the transcriber is a CommonJS
-        module, suitable for use both with a NodeJS package available in NPM as
-        <code>tengwar</code> and usable as a browser script with the minified
-        bundle.</p>
+        <p>If you take a look
+        <a href="https://github.com/kriskowal/tengwarjs">under the bonnet</a>,
+        the transcriber is a CommonJS module, suitable for use both with a
+        NodeJS package available in NPM as <code>tengwar</code> and usable as a
+        browser script with the minified bundle.</p>
 
         <p>Further work might include:</p>
 
@@ -115,7 +117,7 @@
             <li>More modes of transcription, particularly phonetic and
             orthographic English and Quenya.</li>
             <li>Tie-in with IPA dictionaries of various languages</li>
-            <li>Tie-in with elvish dictionary for special-cases</li>
+            <li>Tie-in with Elvish dictionary for special-cases</li>
             <li>Display intermediate encoding that shows the names of each
             tengwa and tehta in every cluster.</li>
             <li>Search the dictionary, encyclopedia, and map.</li>
@@ -139,5 +141,5 @@
             })();
         </script>
 
-    </body>
+    </div></body>
 </html>
