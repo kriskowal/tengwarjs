@@ -4,7 +4,7 @@ Elvish from a phonetic encoding of the Latin alphabet, to the General
 Use mode of the Tengwar.  It is written in JavaScript and is suitable
 for use as:
 
--   A plain script in a web page, `vanilla-tengwar.min.js`.
+-   A plain script in a web page, `tengwar.min.js`.
 -   A CommonJS module as used by Node or Mr, with the NPM package name
     ``tengwar``.
 
@@ -94,7 +94,7 @@ Using the Modules
                 the "ch" as in "Bach".  "cc" is transcribed as "ch" as
                 in "chew".
             -   `true`: "ch" is interpreted as the "ch" as in "chew".
-        -   `isHook`
+        -   `sHook`
             -   `false`: by default, "is" is silme-nuquerna with an I
                 tehta.
             -   `true`: "is" is a short carrier with an I tehta and S
@@ -264,35 +264,4 @@ sophisticated than merely nested arrays.
 A font module must have a `makeColumn` function that produces objects
 with these properties and the attendant methods as described for the
 Tengwar Annatar module above.
-
-The Legacy Module
-=================
-
-The `tengwar` module includes:
-
--   ``transcribe(latin)`` returns a string of characters encoded for the
-    custom Tengwar Annatar font included.  Paragraphs and sections are
-    encoded with new lines.
--   ``transcribeHtml(latin)`` returns a string of HTML.  Stanzas,
-    paragraphs, and sections are encoded with HTML tags, ``br`` and
-    ``p``.
--   ``annotate(latin)`` returns a multi-dimensional array that describes
-    the phoneme produced by each character and diacritic of the
-    corresponding elvish.
--   ``annotateHtml(latin)`` returns an HTML table of the annotation
-    data.
-
-When used as a script, the API is planted in a ``tengwar`` global
-variable.
-
-If used as a jQuery plugin, you can use the "tengwar" method to
-transcribe the contents of selected tags and add the "tengwar" class
-to successfully transcribed tags.
-
-    $(".transcribe-tengwar").tengwar();
-
-Be sure to use the included web font, derrived from Johan Winge's
-Tengwar Annatar.  It is customized for this web-deployed transcriber.
-
-If used as a Node module, the ``tengwar`` module exports the API.
 
