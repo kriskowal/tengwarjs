@@ -2,14 +2,9 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
-
-    overflow: auto;
-
 }
 
-body.annatar {
+body.annatar #body-box {
 
     background-repeat: no-repeat;
     background: #fefcea; /* Old browsers */
@@ -25,7 +20,7 @@ body.annatar {
     text-shadow: 0px 0px 10px #730 ;
 }
 
-body.parmaite {
+body.parmaite #body-box {
     background-image: url(paper.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
@@ -115,11 +110,15 @@ a:focus {
 /* layout */
 
 #body-box {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
     display: -webkit-flex;
     -webkit-flex-flow: column;
     -webkit-align-items: stretch;
-    height: 100%;
-    width: 100%;
 }
 
 #output-box {

@@ -1,7 +1,6 @@
 
 var Bindings = require("frb");
 require("frb/dom");
-var Properties = require("frb/properties");
 var QS = require("qs");
 var modes = require("tengwar/modes");
 var fonts = require("tengwar/fonts");
@@ -17,8 +16,11 @@ state.mode = state.mode || "general-use";
 state.font = state.font || "annatar";
 state.options = state.options || [];
 state.height = state.height || null;
+state.language = state.language || null;
 
-var bindings = Bindings.create(null, {
+var bindings = Bindings.defineBindings({
+    modes: modes,
+    fonts: fonts,
     state: state,
     window: window,
     bodyElement: document.body,
@@ -27,7 +29,23 @@ var bindings = Bindings.create(null, {
     dividerElement: document.querySelector("#divider"),
     inputBoxElement: document.querySelector("#input-box"),
     selectModeElement: document.querySelector("#select-mode"),
-    wikiTextElement: document.querySelector("#wiki-text")
+    wikiTextElement: document.querySelector("#wiki-text"),
+
+    searchString: function () {
+        var state = this.state;
+
+        // remove things that QS can't seem to handle
+        delete state[""]; // XXX QS bug interprets empty array as & and back to an empty assignment
+        if (state.options.length == 0) {
+            delete state.options;
+        }
+        var string = "?" + QS.stringify(this.state);
+        window.history.replaceState(this.state, "", string);
+
+        state.options = state.options || [];
+        return string;
+    }
+
 }, {
 
     "inputElement.value": {"<->": "state.q"},
@@ -47,38 +65,23 @@ var bindings = Bindings.create(null, {
     },
 
     "inputBoxElement.style.height": {
-        "<-": "heightPx"
-    },
-
-    "heightPx": {
-        "<-": "state.height",
-        convert: function (height) {
-            return height + "px";
-        },
-        revert: function (height) {
-            return parseInt(height, 10);
-        }
+        "<-": "state.height + 'px'"
     },
 
     "mode": {
-        args: ["state.mode"],
-        compute: function (mode) {
-            return modes[mode] || modes['general-use'];
-        }
+        "<-": "modes[state.mode] ?? modes['general-use']"
     },
 
     "font": {
-        args: ["state.font"],
-        compute: function (font) {
-            return fonts[font] || modes['annatar'];
-        }
+        "<-": "fonts[state.font] ?? fonts['annatar']"
     },
 
     "outputElement.innerHTML": {
-        args: ["mode", "font", "state.q", "state.options"],
-        compute: function (mode, font, input, flags) {
+        args: ["mode", "font", "state.language ?? 'unknown'", "state.q", "state.options"],
+        compute: function (mode, font, language, input, flags) {
             var options = {
                 font: font,
+                language: language,
                 block: true
             };
             flags.forEach(function (flag) {
@@ -92,25 +95,7 @@ var bindings = Bindings.create(null, {
     },
 
     "selectModeElement.href": {
-        "<-": "'modes.html' + searchString"
-    },
-
-    "searchString": {
-        args: ["state.q", "state.mode", "state.font", "state.height", "state.options"],
-        compute: function () {
-            var state = this.state;
-
-            // remove things that QS can't seem to handle
-            delete state[""]; // XXX QS bug interprets empty array as & and back to an empty assignment
-            if (state.options.length == 0) {
-                delete state.options;
-            }
-            var string = "?" + QS.stringify(this.state);
-            window.history.replaceState(this.state, "", string);
-
-            state.options = state.options || [];
-            return string;
-        }
+        "<-": "'modes.html' + searchString(state.q, state.mode, state.font, state.height ?? 0, state.options)"
     },
 
     "wikiTextElement.href": {

@@ -53,7 +53,7 @@ function decodeWord(word, makeColumn) {
             if (tehta === "tilde-above") {
                 result.addTildeAbove();
             } else if (tehta === "tilde-below") {
-                result.addBarBelow();
+                result.addTildeBelow();
             } else if (tehta === "y") {
                 result.addBelow("y");
             } else if (

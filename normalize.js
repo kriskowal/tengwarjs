@@ -54,7 +54,7 @@ function toLowerCase(callback) {
 // the keys of this table are characters and clusters of characters that must
 // be simplified to the corresponding values before pumping them into an
 // adapted parser.  The adapted parser therefore only needs to handle the
-// normal phoneitc form of the cluster.
+// normal phonetic form of the cluster.
 var table = {
     "k": "c",
     "x": "cs",
@@ -64,7 +64,6 @@ var table = {
     "ph": "f",
     "b": "b",
     "bh": "v",
-    "ë": "e",
     "â": "á",
     "ê": "é",
     "î": "í",

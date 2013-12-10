@@ -217,7 +217,7 @@ function parseTengwa(callback, options) {
                     return callback(makeColumn("round-carrier"))(character);
                 }
             };
-        } else if (character === "e") { // e
+        } else if (character === "e" || character === "ë") { // e
             return function (character) {
                 if (character === "i") { // ei
                     return callback(makeColumn("yanta").addAbove("í"));

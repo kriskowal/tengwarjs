@@ -64,8 +64,8 @@ exports.tengwar = {
     "full-stop": "-",
     "exclamation-point": "Á",
     "question-mark": "À",
-    "open-paren": "&#140;",
-    "close-paren": "&#156;",
+    "open-paren": "=", // alt "&#140;",
+    "close-paren": "=", // alt "&#156;",
     "flourish-left": "&#286;",
     "flourish-right": "&#287;",
     // numbers

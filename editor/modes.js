@@ -30,7 +30,7 @@ var $$ = document.querySelectorAll.bind(document);
 function TengwarComponent(element, state) {
 
     // extract options from the mode string
-    var flags = element.dataset.mode.split(" ");
+    var flags = (element.dataset.mode || "").split(" ");
     flags.shift();
     var options = {};
     flags.forEach(function (flag) {
@@ -40,30 +40,24 @@ function TengwarComponent(element, state) {
         options[flag] = true;
     });
 
-    Bindings.create(null, {
+    Bindings.defineBindings({
+        fonts: fonts,
+        modes: modes,
         input: element.dataset.tengwar,
         element: element,
         options: options,
         state: state
     }, {
 
-        "element.classList.*": {
-            "<-": "('tengwar', state.font, state.mode, 'rendered')"
+        "element.classList.rangeContent()": {
+            "<-": "['tengwar', state.font, state.mode, 'rendered']"
         },
 
-        "mode": {
-            "args": ["state.mode"],
-            "compute": function (mode) {
-                return modes[mode];
-            }
-        },
+        "mode": {"<-": "modes[state.mode]"},
 
-        "options.font": {
-            "args": ["state.font"],
-            "compute": function (font) {
-                return fonts[font];
-            }
-        },
+        "options.font": {"<-": "fonts[state.font]"},
+
+        "options.language": {"<-": "state.language"},
 
         "element.innerHTML": {
             "args": ["options.font", "mode", "input", "options"],
@@ -81,7 +75,8 @@ function TengwarComponent(element, state) {
 Array.prototype.forEach.call($$(".dynamic-tengwar"), function (element) {
     TengwarComponent(element, {
         font: element.dataset.font,
-        mode: element.dataset.mode.split(" ")[0]
+        mode: (element.dataset.mode || "").split(" ")[0],
+        language: element.dataset.lang || "unknown"
     });
 });
 
@@ -90,7 +85,7 @@ function Button(element, state) {
         event.stopPropagation();
         event.preventDefault();
         state.options.sort();
-        window.location = "index.html?" + QS.stringify(state);
+        window.location = "./?" + QS.stringify(state);
     });
 }
 
@@ -110,13 +105,13 @@ var states = {};
         TengwarComponent(element, state);
     });
 
-    Bindings.create(null, {
+    Bindings.defineBindings({
         parmaite: document.getElementById(mode + "-font-parmaite"),
         annatar: document.getElementById(mode + "-font-annatar"),
         state: state
     }, {
-        "state.font = 'parmaite'": {"<->": "parmaite.checked"},
-        "state.font = 'annatar'": {"<->": "annatar.checked"}
+        "state.font == 'parmaite'": {"<->": "parmaite.checked"},
+        "state.font == 'annatar'": {"<->": "annatar.checked"}
     });
 
     Button(document.getElementById(mode + "-button"), state);
@@ -150,7 +145,16 @@ Button(document.getElementById("black-speech-button"), {
     q: document.getElementById("black-speech-tengwar").dataset.tengwar,
     font: "annatar",
     mode: "general-use",
-    options: ["black-speech"]
+    language: "blackSpeech",
+    options: []
+});
+
+Button(document.getElementById("english-general-use-button"), {
+    q: document.getElementById("english-general-use-tengwar").dataset.tengwar,
+    font: "parmaite",
+    mode: "general-use",
+    language: "english",
+    options: []
 });
 
 Button(document.getElementById("namarie-button"), {
@@ -260,7 +264,7 @@ Button(document.getElementById("namarie-button"), {
     }
 
 ].forEach(function (flag) {
-    Bindings.create(null, {
+    Bindings.defineBindings({
         option: flag.option,
         off: $("#" + flag.off),
         on: $("#" + flag.on),
@@ -278,7 +282,7 @@ Button(document.getElementById("namarie-button"), {
 });
 
 // special multi-way binding for treatment of H
-Bindings.create(null, {
+Bindings.defineBindings({
     halla: $("#classical-period-halla"),
     aha: $("#classical-period-aha"),
     hyarmen: $("#classical-period-hyarmen"),

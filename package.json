@@ -1,29 +1,29 @@
 {
-    "name": "tengwar",
-    "version": "0.1.2",
-    "homepage": "http://3rin.gs/tengwar",
-    "author": "Kris Kowal <kris@cixar.com> (http://github.com/kriskowal/)",
-    "bugs": {
-        "mail": "kris@cixar.com",
-        "web": "http://github.com/kriskowal/tengwarjs/issues"
+  "name": "tengwar",
+  "version": "0.1.2",
+  "homepage": "http://3rin.gs/tengwar",
+  "author": "Kris Kowal <kris@cixar.com> (http://github.com/kriskowal/)",
+  "bugs": {
+    "mail": "kris@cixar.com",
+    "url": "http://github.com/kriskowal/tengwarjs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/kriskowal/tengwarjs/raw/master/LICENSE"
     },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "http://github.com/kriskowal/tengwarjs/raw/master/LICENSE"
-        },
-        {
-            "url": "http://github.com/kriskowal/tengwarjs/raw/master/tengwar-annatar/tngandoc.pdf"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/kriskowal/tengwarjs.git"
-    },
-    "devDependencies": {
-        "jasmine-node": "1.0.x"
-    },
-    "scripts": {
-        "test": "jasmine-node spec"
+    {
+      "url": "http://github.com/kriskowal/tengwarjs/raw/master/tengwar-annatar/tngandoc.pdf"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/kriskowal/tengwarjs.git"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1"
+  },
+  "scripts": {
+    "test": "jasmine-node spec"
+  }
 }

@@ -419,7 +419,7 @@ function parseTehta(callback, options, previous) {
                     return callback([previous, makeColumn("short-carrier").addAbove("a")])(character);
                 }
             };
-        } else if (character === "e") {
+        } else if (character === "e" || character === "ë") {
             var tehta = swapDotSlash("e", options);
             return function (character) {
                 if (character === "e") {

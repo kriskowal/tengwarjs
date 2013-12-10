@@ -1,27 +1,27 @@
 {
-    "name": "tengwar-editor",
-    "version": "0.0.0",
-    "dependencies": {
-        "frb": "0.0.x",
-        "mr": "0.0.x",
-        "qs": "0.1.x",
-        "tengwar": "0.1.x"
+  "name": "tengwar-editor",
+  "version": "0.0.0",
+  "dependencies": {
+    "frb": "~0.2.16",
+    "qs": "0.5.x",
+    "tengwar": "0.1.x",
+    "mr": "~0.14.2"
+  },
+  "bugs": {
+    "mail": "kris@cixar.com",
+    "web": "http://github.com/kriskowal/tengwarjs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/kriskowal/tengwarjs/raw/master/LICENSE"
     },
-    "bugs": {
-        "mail": "kris@cixar.com",
-        "web": "http://github.com/kriskowal/tengwarjs/issues"
-    },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "http://github.com/kriskowal/tengwarjs/raw/master/LICENSE"
-        },
-        {
-            "url": "http://github.com/kriskowal/tengwarjs/raw/master/tengwar-annatar/tngandoc.pdf"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/kriskowal/tengwarjs.git"
+    {
+      "url": "http://github.com/kriskowal/tengwarjs/raw/master/tengwar-annatar/tngandoc.pdf"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/kriskowal/tengwarjs.git"
+  }
 }
