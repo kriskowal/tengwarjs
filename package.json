@@ -20,10 +20,11 @@
     "type": "git",
     "url": "http://github.com/kriskowal/tengwarjs.git"
   },
+  "dependencies": {},
   "devDependencies": {
-    "jasmine-node": "~1"
+    "jasminum": "^2.0.7"
   },
   "scripts": {
-    "test": "jasmine-node spec"
+    "test": "jasminum test"
   }
 }
