@@ -1,3 +1,4 @@
+// TODO remove this since it canvases over the origin of certain clusters
 
 //  This module adapts streams of characters sent to one parser into a
 //  simplified normal form piped to another.  Internally, a stream is

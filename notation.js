@@ -66,12 +66,12 @@ function decodeWord(word, makeColumn) {
                     tehta === "s" &&
                     (tengwa === "calma" || tengwa === "quesse")
                 ) {
-                    result.addBelow(tehta);
+                    result.addBelow(tehta, "s");
                 } else {
-                    result.addFollowing(tehta);
+                    result.addFollowing(tehta, "s");
                 }
             } else {
-                result.addAbove(tehta);
+                result.addAbove(tehta, "s");
             }
         });
         return result;

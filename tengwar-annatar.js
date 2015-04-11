@@ -394,7 +394,7 @@ function tehtaKeyForTengwa(tengwa, tehta) {
 }
 
 exports.makeColumn = makeColumn;
-function makeColumn(tengwa) {
-    return makeFontColumn(exports, tengwa);
+function makeColumn(tengwa, tengwarFrom) {
+    return makeFontColumn(exports, tengwa, tengwarFrom);
 }
 
