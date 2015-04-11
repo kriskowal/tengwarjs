@@ -339,25 +339,30 @@ function transcribe(sections, options) {
             return beginParagraph + paragraph.map(function (line) {
                 return line.map(function (word) {
                     return word.map(function (column) {
-                        var tengwa = column.tengwa || "anna";
-                        var tehtar = [];
-                        if (column.above) tehtar.push(column.above);
-                        if (column.below) tehtar.push(column.below);
-                        if (column.tildeBelow) tehtar.push("tilde-below");
-                        if (column.tildeAbove) tehtar.push("tilde-above");
-                        if (column.following) tehtar.push(column.following);
-                        var html = tengwar[tengwa] + tehtar.map(function (tehta) {
-                            return tehtaForTengwa(tengwa, tehta);
-                        }).join("");
-                        if (column.errors && !plain) {
-                            html = "<abbr class=\"error\" title=\"" + column.errors.join("\n").replace(/"/g, "&quot;") + "\">" + html + "</abbr>";
-                        }
-                        return html;
+                        return transcribeColumn(column, options);
                     }).join("");
                 }).join(" ");;
             }).join(delimitParagraph + "\n") + endParagraph;
         }).join("\n\n");
     }).join("\n\n\n");
+}
+
+exports.transcribeColumn = transcribeColumn;
+function transcribeColumn(column, options) {
+    var tengwa = column.tengwa || "anna";
+    var tehtar = [];
+    if (column.above) tehtar.push(column.above);
+    if (column.below) tehtar.push(column.below);
+    if (column.tildeBelow) tehtar.push("tilde-below");
+    if (column.tildeAbove) tehtar.push("tilde-above");
+    if (column.following) tehtar.push(column.following);
+    var html = tengwar[tengwa] + tehtar.map(function (tehta) {
+        return tehtaForTengwa(tengwa, tehta);
+    }).join("");
+    if (column.errors && !plain) {
+        html = "<abbr class=\"error\" title=\"" + column.errors.join("\n").replace(/"/g, "&quot;") + "\">" + html + "</abbr>";
+    }
+    return html;
 }
 
 exports.tehtaForTengwa = tehtaForTengwa;
