@@ -196,13 +196,11 @@ function parseWord(callback, options) {
             } else if (word === "of'the") {
                 return callback([
                     makeOf(makeColumn),
-                    makeThe(makeColumn)
-                ]);
+                ])("t")("h")("e");
             } else if (word === "of'the'") {
                 return callback([
-                    makeOfPrime(makeColumn),
-                    makeThePrime(makeColumn)
-                ]);
+                    makeOfPrime(makeColumn)
+                ])("t")("h")("e")("'");
             } else if (word === "and") {
                 return callback([
                     makeAnd(makeColumn)

@@ -424,7 +424,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("a")) {
                     return callback([previous.addAbove("a", {from: "a"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "a"}).addAbove("", {from: ""})])(character);
+                    return callback([previous, makeColumn("short-carrier", {from: "a"}).addAbove("a", {from: ""})])(character);
                 }
             };
         } else if (character === "e" || character === "ë") {
@@ -495,7 +495,7 @@ function parseTehta(callback, options, previous) {
         } else if (character === "é") {
             return callback([previous, makeColumn("long-carrier", {from: "é"}).addAbove(swapDotSlash("e", options), {from: ""})]);
         } else if (character === "í") {
-            return callback([previous, makeColumn("long-carrier", {from: "í"}).addAbove(swapDotSlash("i", options)), {from: ""}]);
+            return callback([previous, makeColumn("long-carrier", {from: "í"}).addAbove(swapDotSlash("i", options), {from: ""})]);
         } else if (character === "ó") {
             if (previous && previous.canAddAbove("ó")) {
                 return callback([previous.addAbove(reverseCurls("ó", options), {from: "ó"})]);
