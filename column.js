@@ -20,6 +20,8 @@ var Column = function (font, tengwa, tengwaNote) {
     this.tildeBelowNote = void 0;
     this.belowNote = void 0;
     this.followingNote = void 0;
+
+    this.hasVariant = false;
 };
 
 Column.prototype.canAddAbove = function (tehta, reversed) {
@@ -107,6 +109,11 @@ Column.prototype.reverse = function () {
 Column.prototype.addError = function (error) {
     this.errors = this.errors || [];
     this.errors.push(error);
+    return this;
+};
+
+Column.prototype.varies = function () {
+    this.hasVariant = true;
     return this;
 };
 
