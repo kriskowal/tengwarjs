@@ -295,7 +295,6 @@ var positions = exports.positions = {
 exports.transcribe = transcribe;
 function transcribe(sections, options) {
     options = options || {};
-    var plain = options.plain || false;
     var block = options.block || false;
     var beginParagraph = block ? "<p>" : "";
     var delimitParagraph = "<br>";
@@ -305,7 +304,7 @@ function transcribe(sections, options) {
             return beginParagraph + paragraph.map(function (line) {
                 return line.map(function (word) {
                     return word.map(function (column) {
-                        return transcribeColumn(column);
+                        return transcribeColumn(column, options);
                     }).join("");
                 }).join(" ");;
             }).join(delimitParagraph + "\n") + endParagraph;
@@ -314,7 +313,8 @@ function transcribe(sections, options) {
 }
 
 exports.transcribeColumn = transcribeColumn;
-function transcribeColumn(column) {
+function transcribeColumn(column, options) {
+    var plain = options.plain || false;
     var tengwa = column.tengwa || "anna";
     var tehtar = [];
     if (column.above) tehtar.push(column.above);
@@ -325,7 +325,7 @@ function transcribeColumn(column) {
     var html = tengwar[tengwa] + tehtar.map(function (tehta) {
         return tehtaForTengwa(tengwa, tehta);
     }).join("");
-    if (column.errors) { // TODO && !plain
+    if (column.errors && !plain) {
         html = "<abbr class=\"error\" title=\"" + column.errors.join("\n").replace(/"/g, "&quot;") + "\">" + html + "</abbr>";
     }
     return html;

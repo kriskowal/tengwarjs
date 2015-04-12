@@ -329,7 +329,6 @@ var positions = exports.positions = {
 exports.transcribe = transcribe;
 function transcribe(sections, options) {
     options = options || {};
-    var plain = options.plain || false;
     var block = options.block || false;
     var beginParagraph = block ? "<p>" : "";
     var delimitParagraph = "<br>";
@@ -349,6 +348,7 @@ function transcribe(sections, options) {
 
 exports.transcribeColumn = transcribeColumn;
 function transcribeColumn(column, options) {
+    var plain = options.plain || false;
     var tengwa = column.tengwa || "anna";
     var tehtar = [];
     if (column.above) tehtar.push(column.above);
