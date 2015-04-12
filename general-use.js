@@ -82,12 +82,14 @@ function parseNormalWord(callback, options) {
 }
 
 function makeOf(makeColumn) {
-    return makeColumn("umbar-extended", {from: "of"});
+    return makeColumn("umbar-extended", {from: "of"})
+        .varies();
 }
 
 function makeOfPrime(makeColumn) {
     return makeOf(makeColumn)
-        .addAbove("o", {from: "(o)"}); // TODO is this supposed to be u above?
+        .addAbove("o", {from: "(o)"})
+        .varies(); // TODO is this supposed to be u above?
 }
 
 function makeOfPrimePrime(makeColumn) {
@@ -96,11 +98,13 @@ function makeOfPrimePrime(makeColumn) {
 }
 
 function makeThe(makeColumn) {
-    return makeColumn("ando-extended", {from: "the"});
+    return makeColumn("ando-extended", {from: "the"})
+        .varies();
 }
 
 function makeThePrime(makeColumn) {
-    return makeThe(makeColumn).addBelow("i-below", {from: "′"});
+    return makeThe(makeColumn).addBelow("i-below", {from: ""})
+        .varies();
 }
 
 function makeThePrimePrime(makeColumn) {
@@ -119,7 +123,8 @@ function makeAnd(makeColumn) {
 
 function makeAndPrime(makeColumn) {
     return makeAnd(makeColumn)
-        .addBelow("i-below", {from: "′"});
+        .addBelow("i-below", {from: ""})
+        .varies();
 }
 
 function makeAndPrimePrime(makeColumn) {
@@ -219,8 +224,9 @@ function parseWord(callback, options) {
             } else if (word === "we") {
                 return callback([
                     makeColumn("vala", {from: "w"}),
-                    makeColumn("short-carrier", {from: ""}) // TODO note variants
+                    makeColumn("short-carrier", {from: ""})
                         .addAbove("e", {from: "e"})
+                        .varies()
                 ]);
             } else if (word === "we'") { // Unattested, my invention - kriskowal
                 return callback([
@@ -374,12 +380,14 @@ function makeCarrier(tehta, tehtaFrom, options) {
     var font = options.font;
     var makeColumn = font.makeColumn;
     if (tehta === "á") {
-        return makeColumn("wilya", {from: "a"}).addAbove("a", {from: "a"});
+        return makeColumn("wilya", {from: "a"})
+            .addAbove("a", {from: "a"});
     } else if (shorterVowels[tehta]) {
         return makeColumn("long-carrier", {from: tehtaFrom})
             .addAbove(shorterVowels[tehta], {from: ""});
     } else {
-        return makeColumn("short-carrier", {from: tehtaFrom}).addAbove(tehta, {from: ""});
+        return makeColumn("short-carrier", {from: tehtaFrom})
+            .addAbove(tehta, {from: ""});
     }
 }
 
@@ -428,16 +436,36 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             return function (character) {
                 if (character === "n") { // nn
                     if (options.doubleNasalsWithTildeBelow) {
-                        return callback(makeColumn("numen", {from: "n"}).addTildeBelow({from: "n"}), tehta, tehtaFrom);
+                        return callback(
+                            makeColumn("numen", {from: "n"})
+                                .addTildeBelow({from: "n"}),
+                            tehta,
+                            tehtaFrom
+                        );
                     } else {
-                        return callback(makeColumn("numen", {from: "n"}).addTildeAbove({from: "n"}), tehta, tehtaFrom);
+                        return callback(
+                            makeColumn("numen", {from: "n"})
+                                .addTildeAbove({from: "n"}),
+                            tehta,
+                            tehtaFrom
+                        );
                     }
                 } else if (character === "t") { // nt
                     return function (character) {
                         if (character === "h") { // nth
-                            return callback(makeColumn("thule", {from: "th"}).addTildeAbove({from: "n"}), tehta, tehtaFrom);
+                            return callback(
+                                makeColumn("thule", {from: "th"})
+                                    .addTildeAbove({from: "n"}),
+                                tehta,
+                                tehtaFrom
+                            );
                         } else { // nt.
-                            return callback(makeColumn("tinco", {from: "t"}).addTildeAbove({from: "n"}), tehta, tehtaFrom)(character);
+                            return callback(
+                                makeColumn("tinco", {from: "t"})
+                                    .addTildeAbove({from: "n"}),
+                                tehta,
+                                tehtaFrom
+                            )(character);
                         }
                     };
                 } else if (character === "d") { // nd
@@ -560,6 +588,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 } else if (character === "j") { // dj
                     return callback(makeColumn("anga", {from: "dj"}), tehta, tehtaFrom);
                 } else if (character === "z" && options.tsdz) { // dz
+                    // TODO annotate dz to indicate that options.tsdz affects this cluster
                     return callback(makeColumn("anga", {from: "dz"}), tehta, tehtaFrom);
                 } else if (character === "h") { // dh
                     return callback(makeColumn("anto", {from: "dh"}), tehta, tehtaFrom);
@@ -611,6 +640,9 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                         var tengwa = primes > 0 ? "silme-nuquerna" : "silme";
                         var tengwaFrom = primes > 0 ? "s′" : "s";
                         var column = makeColumn(tengwa, {from: tengwaFrom}).addTildeBelow({from: "s"});
+                        if (primes === 0) {
+                            column.varies();
+                        }
                         if (primes > 1) {
                             column.addError("Silme does not have this many alternate forms.");
                         }
@@ -627,6 +659,9 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                         var tengwa = primes > 0 ? "silme-nuquerna" : "silme";
                         var tengwaFrom = primes > 0 ? "s′" : "s";
                         var column = makeColumn(tengwa, {from: tengwaFrom});
+                        if (primes === 0) {
+                            column.varies();
+                        }
                         if (primes > 1) {
                             column.addError("Silme does not have this many alternate forms.");
                         }
@@ -640,6 +675,9 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return Parser.countPrimes(function (primes) {
                         var tengwa = primes > 0 ? "esse-nuquerna" : "esse";
                         var column = makeColumn(tengwa, {from: "z"}).addTildeBelow({from: "z"});
+                        if (primes === 0) {
+                            column.varies();
+                        }
                         if (primes > 1) {
                             column.addError("Esse does not have this many alternate forms.");
                         }
@@ -649,6 +687,9 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return Parser.countPrimes(function (primes) {
                         var tengwa = primes > 0 ? "esse-nuquerna" : "esse";
                         var column = makeColumn(tengwa, {from: "z"});
+                        if (primes === 0) {
+                            column.varies();
+                        }
                         if (primes > 1) {
                             column.addError("Silme does not have this many alternate forms.");
                         }
@@ -779,9 +820,10 @@ function parseFollowingBelow(callback, column, length, options) {
                 return function (character) {
                     if (Parser.isFinal(character) && options.language === "english" && length > 2) {
                         if (primes === 0) {
-                            // TODO expand "from" information to explain silent
-                            // e and suggest ' for alternatives
-                            return callback(column.addBelow("i-below", {from: "e"}))(character);
+                            return callback(
+                                column.addBelow("i-below", {from: "e", silent: true})
+                                    .varies()
+                            )(character);
                         } else {
                             if (primes > 1) {
                                 column.addError("Following E has only one variation.");
@@ -790,13 +832,12 @@ function parseFollowingBelow(callback, column, length, options) {
                         }
                     } else {
                         if (primes === 0) {
-                            return callback(column)("e")(character);
+                            return callback(column.varies())("e")(character);
                         } else {
                             if (primes > 1) {
                                 column.addError("Following E has only one variation.");
                             }
-                            // TODO add annotation for silent -e
-                            return callback(column.addBelow("i-below", {from: "(e)"}))(character);
+                            return callback(column.addBelow("i-below", {from: "e", eilent: true}))(character);
                         }
                     }
                 };
@@ -813,7 +854,7 @@ function parseFollowing(callback, column) {
             if (column.canAddBelow("s")) {
                 return Parser.countPrimes(function (primes, rewind) {
                     if (primes === 0) {
-                        return callback(column.addBelow("s", {from: "s"}));
+                        return callback(column.addBelow("s", {from: "s"}).varies());
                     } else if (primes) {
                         if (primes > 1) {
                             column.addError("Only one alternate form for following S.");
@@ -829,11 +870,21 @@ function parseFollowing(callback, column) {
                                 column.addFollowing("s-final", {from: "s"});
                             } else if (column.canAddFollowing("s-inverse") && primes -- === 0) {
                                 column.addFollowing("s-inverse", {from: "s"});
+                                if (column.canAddFollowing("s-final")) {
+                                    column.varies();
+                                }
                             } else if (column.canAddFollowing("s-extended") && primes-- === 0) {
                                 column.addFollowing("s-extended", {from: "s"});
+                                if (column.canAddFollowing("s-inverse")) {
+                                    column.varies();
+                                }
                             } else if (column.canAddFollowing("s-flourish") && primes-- === 0) {
                                 column.addFollowing("s-flourish", {from: "s"});
+                                if (column.canAddFollowing("s-extended")) {
+                                    column.varies();
+                                }
                             } else {
+                                // rewind primes for subsequent alterations
                                 var state = callback(column)("s");
                                 while (primes-- > 0) {
                                     state = state("'");
