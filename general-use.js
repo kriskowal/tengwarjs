@@ -17,6 +17,9 @@ function makeOptions(options) {
     if (options.blackSpeech) {
         options.language = "blackSpeech";
     }
+    if (options.language === "blackSpeech") {
+        options.language = "black-speech";
+    }
     return {
         font: options.font || TengwarAnnatar,
         block: options.block,
@@ -29,13 +32,13 @@ function makeOptions(options) {
         // or below.
         // false: by default, place a tilde above doubled nasals.
         // true: place the tilde below doubled nasals.
-        reverseCurls: options.reverseCurls || options.language === "blackSpeech",
+        reverseCurls: options.reverseCurls || options.language === "black-speech",
         // false: by default, o is forward, u is backward
         // true: o is backward, u is forward
         swapDotSlash: options.swapDotSlash,
         // false: by default, e is a slash, i is a dot
         // true: e is a dot, i is a slash
-        medialOre: options.medialOre || options.language === "blackSpeech",
+        medialOre: options.medialOre || options.language === "black-speech",
         // false: by default, ore only appears in final position
         // true: ore also appears before consonants, as in the ring inscription
         language: options.language,
@@ -43,7 +46,7 @@ function makeOptions(options) {
         // "english": final e implicitly silent
         // "black speech": sh is calma-extended, gh is ungwe-extended, as in
         // the ring inscription
-        // not "blackSpeech": sh is harma, gh is unque
+        // not "black-speech": sh is harma, gh is unque
         noAchLaut: options.noAchLaut,
         // false: "ch" is interpreted as ach-laut, "cc" as "ch" as in "chew"
         // true: "ch" is interpreted as "ch" as in chew
@@ -316,7 +319,7 @@ function parseColumn(callback, length, options, previous) {
                         // put the previous tehta over the appropriate carrier
                         // then follow up with this tengwa.
                         return parseTengwaAnnotations(function (column) {
-                            return callback([makeCarrier(tehta, options), column]);
+                            return callback([makeCarrier(tehta, tehtaFrom, options), column]);
                         }, column, length, options);
                     }
                 } else {
@@ -333,7 +336,7 @@ function parseColumn(callback, length, options, previous) {
                 }
                 return parseTengwaAnnotations(function (carrier) {
                     return callback([carrier]);
-                }, makeCarrier(tehta, options), length, options);
+                }, makeCarrier(tehta, tehtaFrom, options), length, options);
             } else {
                 return function (character) {
                     if (Parser.isBreak(character)) {
@@ -359,15 +362,15 @@ function parseColumn(callback, length, options, previous) {
 
 }
 
-function makeCarrier(tehta, options) {
+function makeCarrier(tehta, tehtaFrom, options) {
     var font = options.font;
     var makeColumn = font.makeColumn;
     if (tehta === "á") {
         return makeColumn("wilya", {from: "a"}).addAbove("a", {from: "a"});
     } else if (shorterVowels[tehta]) {
-        return makeColumn("long-carrier", {from: shorterVowels[tehta]}).addAbove(shorterVowels[tehta], {from: shorterVowels[tehta]});
+        return makeColumn("long-carrier", {from: tehtaFrom}).addAbove(shorterVowels[tehta], {from: ""});
     } else {
-        return makeColumn("short-carrier", {from: ""}).addAbove(tehta, {from: tehta});
+        return makeColumn("short-carrier", {from: tehtaFrom}).addAbove(tehta, {from: ""});
     }
 }
 
@@ -571,7 +574,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 if (character === "g") { // gg
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeBelow({from: "g"}), tehta, tehtaFrom);
                 } else if (character === "h") { // gh
-                    if (options.language === "blackSpeech") {
+                    if (options.language === "black-speech") {
                         return callback(makeColumn("ungwe-extended", {from: "gh"}), tehta, tehtaFrom);
                     } else {
                         return callback(makeColumn("unque", {from: "gh"}), tehta, tehtaFrom);
@@ -605,7 +608,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                         return callback(column, tehta, tehtaFrom);
                     });
                 } else if (character === "h") { // sh
-                    if (options.language === "blackSpeech") {
+                    if (options.language === "black-speech") {
                         return callback(makeColumn("calma-extended", {from: "sh"}), tehta, tehtaFrom);
                     } else {
                         return callback(makeColumn("harma", {from: "sh"}), tehta, tehtaFrom);
@@ -706,7 +709,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 }
             });
         } else if (shorterVowels[character]) {
-            return callback(makeCarrier(character, options).addAbove(shorterVowels[character]), tehta, tehtaFrom);
+            return callback(makeCarrier(character, character, options).addAbove(shorterVowels[character], {from: ""}), tehta, tehtaFrom);
         } else if (character === "'" && options.language === "english" && tehta === "e") {
             // final e' in english should be equivalent to diaresis
             return callback(makeColumn("short-carrier", {from: ""}).addAbove("e", {from: "e"}));
