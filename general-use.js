@@ -178,7 +178,7 @@ function parseWord(callback, options) {
                 ]);
             } else if (word === "we'") { // Unattested, my invention - kriskowal
                 return callback([
-                    makeColumn("vala", {from: "w"})
+                    makeColumn("vala", {from: "w", diphthong: true})
                         .addBelow("y", {from: "ē"})
                 ]);
             }
@@ -733,19 +733,19 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 }
             };
         } else if (character === "i") { // i
-            return callback(makeColumn("anna", {from: "i"}), tehta, tehtaFrom);
+            return callback(makeColumn("anna", {from: "i", diphthong: true}), tehta, tehtaFrom);
         } else if (character === "u") { // u
-            return callback(makeColumn("vala", {from: "u"}), tehta, tehtaFrom);
+            return callback(makeColumn("vala", {from: "u", diphthong: true}), tehta, tehtaFrom);
         } else if (character === "w") { // w
             return function (character) {
                 if (character === "h") { // wh
                     return callback(makeColumn("hwesta-sindarinwa", {from: "wh"}), tehta, tehtaFrom);
                 } else { // w.
-                    return callback(makeColumn("vala", {from: "w"}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("vala", {from: "w", dipththong: true}), tehta, tehtaFrom)(character);
                 }
             };
         } else if (character === "e" && (!tehta || tehta === "a")) { // ae or e after consonants
-            return callback(makeColumn("yanta", {from: "e"}), tehta, tehtaFrom);
+            return callback(makeColumn("yanta", {from: "e", diphthong: true}), tehta, tehtaFrom);
         } else if (character === "ë") { // if "ë" makes it this far, it's a diaresis for english
             return callback(makeColumn("short-carrier", {from: ""}).addAbove("e", {from: "e"}));
         } else if (character === "y") {
