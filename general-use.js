@@ -88,7 +88,7 @@ function makeOf(makeColumn) {
 
 function makeOfPrime(makeColumn) {
     return makeOf(makeColumn)
-        .addAbove("o", {from: "(o)"})
+        .addAbove("o", {from: "o", silent: true})
         .varies(); // TODO is this supposed to be u above?
 }
 
@@ -108,7 +108,7 @@ function makeThePrime(makeColumn) {
 }
 
 function makeThePrimePrime(makeColumn) {
-    return makeColumn("thule", {from: "th"}).addBelow("i-below", {from: "(e)"});
+    return makeColumn("thule", {from: "th"}).addBelow("i-below", {from: "e", silent: true});
 }
 
 function makeOfThe(makeColumn) {

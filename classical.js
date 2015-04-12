@@ -418,9 +418,9 @@ function parseTehta(callback, options, previous) {
                 if (character === "a") {
                     return parseTehta(callback, options, previous)("á");
                 } else if (character === "i") {
-                    return callback([previous, makeColumn("yanta", {from: "i", ditphong: true}).addAbove("a", {from: "a"})]);
+                    return callback([previous, makeColumn("yanta", {from: "i", diphthong: true}).addAbove("a", {from: "a"})]);
                 } else if (character === "u") {
-                    return callback([previous, makeColumn("ure", {from: "u", ditphong: true}).addAbove("a", {from: "a"})]);
+                    return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove("a", {from: "a"})]);
                 } else if (previous && previous.canAddAbove("a")) {
                     return callback([previous.addAbove("a", {from: "a"})])(character);
                 } else {
@@ -433,7 +433,7 @@ function parseTehta(callback, options, previous) {
                 if (character === "e") {
                     return parseTehta(callback, options, previous)("é");
                 } else if (character === "u") {
-                    return callback([previous, makeColumn("ure", {from: "u", dipthong: true}).addAbove(tehta, {from: "e"})]);
+                    return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove(tehta, {from: "e"})]);
                 } else if (previous && previous.canAddAbove("e")) {
                     return callback([previous.addAbove(tehta, {from: "e"})])(character);
                 } else {
@@ -447,9 +447,9 @@ function parseTehta(callback, options, previous) {
                     return parseTehta(callback, options, previous)("í");
                 } else if (character === "u") {
                     if (options.iuRising) {
-                        return callback([previous, makeColumn("anna", {from: "i", ditphong: true}).addAbove(reverseCurls("u", options), {from: "u"}).addBelow("y", {from: "y"})]);
+                        return callback([previous, makeColumn("anna", {from: "i", diphthong: true}).addAbove(reverseCurls("u", options), {from: "u"}).addBelow("y", {from: "y"})]);
                     } else {
-                        return callback([previous, makeColumn("ure", {from: "u", dipthong: true}).addAbove(iTehta, {from: "i"})]);
+                        return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove(iTehta, {from: "i"})]);
                     }
                 } else if (previous && previous.canAddAbove(iTehta)) {
                     return callback([previous.addAbove(iTehta, {from: "i"})])(character);
@@ -462,7 +462,7 @@ function parseTehta(callback, options, previous) {
                 if (character === "o") {
                     return parseTehta(callback, options, previous)("ó");
                 } else if (character === "i") {
-                    return callback([previous, makeColumn("yanta", {from: "i", dipthong: true}).addAbove(reverseCurls("o", options), {from: "o"})]);
+                    return callback([previous, makeColumn("yanta", {from: "i", diphthong: true}).addAbove(reverseCurls("o", options), {from: "o"})]);
                 } else if (previous && previous.canAddAbove("o")) {
                     return callback([previous.addAbove(reverseCurls("o", options), {from: "o"})])(character);
                 } else {
@@ -474,7 +474,7 @@ function parseTehta(callback, options, previous) {
                 if (character === "u") {
                     return parseTehta(callback, options, previous)("ú");
                 } else if (character === "i") {
-                    return callback([previous, makeColumn("yanta", {from: "i", dipthong: true}).addAbove(reverseCurls("u", options), {from: "u"})]);
+                    return callback([previous, makeColumn("yanta", {from: "i", diphthong: true}).addAbove(reverseCurls("u", options), {from: "u"})]);
                 } else if (previous && previous.canAddAbove("u")) {
                     return callback([previous.addAbove(reverseCurls("u", options), {from: "u"})])(character);
                 } else {
