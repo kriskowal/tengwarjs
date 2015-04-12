@@ -314,6 +314,7 @@ function transcribe(sections, options) {
 
 exports.transcribeColumn = transcribeColumn;
 function transcribeColumn(column, options) {
+    options = options || {};
     var plain = options.plain || false;
     var tengwa = column.tengwa || "anna";
     var tehtar = [];
