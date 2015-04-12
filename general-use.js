@@ -368,7 +368,8 @@ function makeCarrier(tehta, tehtaFrom, options) {
     if (tehta === "á") {
         return makeColumn("wilya", {from: "a"}).addAbove("a", {from: "a"});
     } else if (shorterVowels[tehta]) {
-        return makeColumn("long-carrier", {from: tehtaFrom}).addAbove(shorterVowels[tehta], {from: ""});
+        return makeColumn("long-carrier", {from: tehtaFrom})
+            .addAbove(shorterVowels[tehta], {from: ""});
     } else {
         return makeColumn("short-carrier", {from: tehtaFrom}).addAbove(tehta, {from: ""});
     }
@@ -391,7 +392,7 @@ function parseTehta(callback, options) {
                 }
             };
         } else if (nonLengthenableVowels.indexOf(character) !== -1) {
-            return callback(character, {from: character});
+            return callback(character, character);
         } else {
             return callback()(character);
         }
@@ -709,10 +710,18 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 }
             });
         } else if (shorterVowels[character]) {
-            return callback(makeCarrier(character, character, options).addAbove(shorterVowels[character], {from: ""}), tehta, tehtaFrom);
+            return callback(
+                makeCarrier(character, character, options)
+                    .addAbove(shorterVowels[character], {from: ""}),
+                tehta,
+                tehtaFrom
+            );
         } else if (character === "'" && options.language === "english" && tehta === "e") {
             // final e' in english should be equivalent to diaresis
-            return callback(makeColumn("short-carrier", {from: ""}).addAbove("e", {from: "e"}));
+            return callback(
+                makeColumn("short-carrier", {from: ""})
+                    .addAbove("e", {from: "e"})
+            );
         } else if (character === "" && options.language === "english" && tehta === "e") {
             // tehta deliberately consumed in this one case, not passed forward
             return callback(
