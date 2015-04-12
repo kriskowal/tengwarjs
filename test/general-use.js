@@ -36,6 +36,7 @@ module.exports = {
         "cake": "quesse;quesse:a,i-below",
         "cakes": "quesse;quesse:a;silme-nuquerna:e",
         "cats.": "quesse;tinco:a,s-final;full-stop", // regression
+        "green": "ungwe;romen;long-carrier:e;numen",
         "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
         "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
         "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",

@@ -306,6 +306,14 @@ function parseColumn(callback, length, options, previous) {
                             .addAbove(tehta, {from: tehtaFrom})
                             .addBelow("s", {from: "s"})
                         ]);
+                    } else if (options.language === "english" && shorterVowels[tehta]) {
+                        // doubled vowels are composed from individual letters,
+                        // not long forms.
+                        return callback([
+                            makeColumn("long-carrier", {from: shorterVowels[tehta]})
+                                .addAbove(shorterVowels[tehta], {from: shorterVowels[tehta]}),
+                            column
+                        ]);
                     } else if (canAddAboveTengwa(tehta) && column.canAddAbove(tehta)) {
                         column.addAbove(tehta, {from: tehtaFrom});
                         return parseTengwaAnnotations(function (column) {
