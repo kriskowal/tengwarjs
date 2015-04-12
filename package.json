@@ -25,6 +25,7 @@
     "jasminum": "^2.0.7"
   },
   "scripts": {
-    "test": "jasminum test && jasminum-phantom test"
+    "test": "jasminum test",
+    "test-phantom": "jasminum-phantom test"
   }
 }
