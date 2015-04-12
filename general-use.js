@@ -81,58 +81,6 @@ function parseNormalWord(callback, options) {
     return normalize(parseWord(callback, options));
 }
 
-function makeOf(makeColumn) {
-    return makeColumn("umbar-extended", {from: "of"})
-        .varies();
-}
-
-function makeOfPrime(makeColumn) {
-    return makeOf(makeColumn)
-        .addAbove("o", {from: "o", silent: true})
-        .varies(); // TODO is this supposed to be u above?
-}
-
-function makeOfPrimePrime(makeColumn) {
-    return makeColumn("formen", {from: "f"})
-        .addAbove("o", {from: "o"});
-}
-
-function makeThe(makeColumn) {
-    return makeColumn("ando-extended", {from: "the"})
-        .varies();
-}
-
-function makeThePrime(makeColumn) {
-    return makeThe(makeColumn).addBelow("i-below", {from: ""})
-        .varies();
-}
-
-function makeThePrimePrime(makeColumn) {
-    return makeColumn("thule", {from: "th"}).addBelow("i-below", {from: "e", silent: true});
-}
-
-function makeOfThe(makeColumn) {
-    return makeColumn("umbar-extended", {from: "of the"})
-        .addTildeBelow({from: ""});
-}
-
-function makeAnd(makeColumn) {
-    return makeColumn("ando", {from: "and"})
-        .addTildeAbove({from: ""});
-}
-
-function makeAndPrime(makeColumn) {
-    return makeAnd(makeColumn)
-        .addBelow("i-below", {from: ""})
-        .varies();
-}
-
-function makeAndPrimePrime(makeColumn) {
-    return makeColumn("ando", {from: "d"})
-        .addTildeAbove("n", {from: "n"})
-        .addAbove("a", {from: "a"});
-}
-
 function parseWord(callback, options) {
     var font = options.font;
     var makeColumn = font.makeColumn;
@@ -290,6 +238,58 @@ function parseWordTail(callback, length, options, columns, previous) {
             );
         }
     }, length, options, previous);
+}
+
+function makeOf(makeColumn) {
+    return makeColumn("umbar-extended", {from: "of"})
+        .varies();
+}
+
+function makeOfPrime(makeColumn) {
+    return makeOf(makeColumn)
+        .addAbove("o", {from: "o", silent: true})
+        .varies(); // TODO is this supposed to be u above?
+}
+
+function makeOfPrimePrime(makeColumn) {
+    return makeColumn("formen", {from: "f"})
+        .addAbove("o", {from: "o"});
+}
+
+function makeThe(makeColumn) {
+    return makeColumn("ando-extended", {from: "the"})
+        .varies();
+}
+
+function makeThePrime(makeColumn) {
+    return makeThe(makeColumn).addBelow("i-below", {from: ""})
+        .varies();
+}
+
+function makeThePrimePrime(makeColumn) {
+    return makeColumn("thule", {from: "th"}).addBelow("i-below", {from: "e", silent: true});
+}
+
+function makeOfThe(makeColumn) {
+    return makeColumn("umbar-extended", {from: "of the"})
+        .addTildeBelow({from: ""});
+}
+
+function makeAnd(makeColumn) {
+    return makeColumn("ando", {from: "and"})
+        .addTildeAbove({from: ""});
+}
+
+function makeAndPrime(makeColumn) {
+    return makeAnd(makeColumn)
+        .addBelow("i-below", {from: ""})
+        .varies();
+}
+
+function makeAndPrimePrime(makeColumn) {
+    return makeColumn("ando", {from: "d"})
+        .addTildeAbove("n", {from: "n"})
+        .addAbove("a", {from: "a"});
 }
 
 function parseColumn(callback, length, options, previous) {
