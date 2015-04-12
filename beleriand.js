@@ -316,7 +316,7 @@ function parseTengwa(callback, options) {
         } else if (Parser.isBreak(character) || /\d/.test(character)) {
             return callback()(character);
         } else {
-            return callback(makeColumn("anna", {from: "character"}).addError("Unexpected character: " + JSON.stringify(character)));
+            return callback(makeColumn("anna", {from: character}).addError("Unexpected character: " + JSON.stringify(character)));
         }
     };
 }
