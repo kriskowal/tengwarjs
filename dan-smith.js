@@ -66,21 +66,21 @@ exports.tengwar = {
     "question-mark": "À",
     "open-paren": "=", // alt "&#140;",
     "close-paren": "=", // alt "&#156;",
-    "flourish-left": "&#286;",
-    "flourish-right": "&#287;",
+    "flourish-left": "Ğ",
+    "flourish-right": "ğ",
     // numbers
-    "0":  "&#240",
-    "1":  "&#241",
-    "2":  "&#242",
-    "3":  "&#243",
-    "4":  "&#244",
-    "5":  "&#245",
-    "6":  "&#246",
-    "7":  "&#247",
-    "8":  "&#248",
-    "9":  "&#249",
-    "10": "&#250",
-    "11": "&#251"
+    "0":  "ð",
+    "1":  "ñ",
+    "2":  "ò",
+    "3":  "ó",
+    "4":  "ô",
+    "5":  "õ",
+    "6":  "ö",
+    "7":  "÷",
+    "8":  "ø",
+    "9":  "ù",
+    "10": "ú",
+    "11": "û"
 };
 
 exports.tehtar = {
@@ -93,45 +93,45 @@ exports.tehtar = {
         "U",
         "J",
         "M",
-        "&#256;", // backward hooks, from the alt font to the custom font
-        "&#257;",
-        "&#258;",
-        "&#259;"
+        "Ā", // backward hooks, from the alt font to the custom font
+        "ā",
+        "Ă",
+        "ă"
     ],
     //"á": "",
     "ó": [
-        "&#260;",
-        "&#261;",
-        "&#262;",
-        "&#263;"
+        "Ą",
+        "ą",
+        "Ć",
+        "ć"
     ],
     "ú": [
-        "&#264;",
-        "&#265;",
-        "&#266;",
-        "&#267;"
+        "Ĉ",
+        "ĉ",
+        "Ċ",
+        "ċ"
     ],
     "í": [
-        "&#212;",
-        "&#213;",
-        "&#214;",
-        "&#215;"
+        "Ô",
+        "Õ",
+        "Ö",
+        "×"
     ],
     "w": "èéêë", // TODO custom hooks for tengwar parmaite from the alternate font
     "y": "ÌÍÎÏ´",
     "o-below": [
         "ä",
-        "&#229;", // a ring above
+        "å",
         "æ",
         "ç",
         "|"
     ],
     "i-below": [
-        "&#200;",
-        "&#201;",
-        "&#202;",
-        "&#203;",
-        "&#76"
+        "È",
+        "É",
+        "Ê",
+        "Ë",
+        "L"
     ],
     "s": {
         "special": true,
@@ -152,18 +152,18 @@ exports.tehtar = {
     },
     "s-extended": {
         "special": true,
-        "tinco": "&#199;"
+        "tinco": "Ç"
     },
     "s-flourish": {
         "special": true,
-        "tinco": "&#163;",
-        "lambe": "&#165;"
+        "tinco": "£",
+        "lambe": "¥"
     },
     "tilde-above": "Pp",
     "tilde-below": [
         ":",
         ";",
-        "&#176;"
+        "°"
     ],
     "tilde-high-above": ")0",
     "tilde-far-below": "?/",
@@ -171,7 +171,7 @@ exports.tehtar = {
     "bar-below": [
         '"',
         "'",
-        "&#184;" // cedilla
+        "ç" // cedilla
     ],
     "bar-high-above": "ìî",
     "bar-far-below": "íï"
