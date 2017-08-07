@@ -145,7 +145,7 @@ function parseTengwa(callback, options) {
                         if (column.tengwa === "halla") {
                             column.addError("Lenited G (halla) should not be nasalized with prefix N");
                         }
-                        return callback(column.addTildeAbove({from: characte}));
+                        return callback(column.addTildeAbove({from: character}));
                     }, options)(character);
                 } else { // ñ.
                     return callback(makeColumn("noldo", {from: "ñ"}))(character);

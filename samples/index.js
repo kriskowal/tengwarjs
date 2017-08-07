@@ -1,6 +1,6 @@
 
-var classical = require("../spec/classical");
-var generalUse = require("../spec/general-use");
+var classical = require("../classical");
+var generalUse = require("../general-use");
 
 var body = $("body");
 function report(latin, mode, font) {

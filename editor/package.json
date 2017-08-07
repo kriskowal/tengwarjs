@@ -2,10 +2,10 @@
   "name": "tengwar-editor",
   "version": "0.0.0",
   "dependencies": {
-    "frb": "~0.2.16",
+    "frb": "~0.2",
     "qs": "0.5.x",
-    "tengwar": "0.1.x",
-    "mr": "~0.14.2"
+    "system": "^2.0.1",
+    "tengwar": "^1"
   },
   "bugs": {
     "mail": "kris@cixar.com",
