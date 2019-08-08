@@ -48,6 +48,7 @@ module.exports = {
         "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
         "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
         "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
+        "y": "anna",
 
         // abbreviated words
         "of": "umbar-extended",
@@ -119,8 +120,8 @@ module.exports = {
         "istari": "silme-nuquerna:i;tinco;romen:a;short-carrier:i",
         "sinome maruvan": "silme;numen:i;malta:o;short-carrier:e malta;romen:a;ampa:u;numen:a",
         "telperion": "tinco;lambe:e;parma;romen:e;short-carrier:i;numen:o",
-        "yuldar": "wilya:y;lambe:u;ando;ore:a",
-        "y'uldar": "long-carrier:i;lambe:u;ando;ore:a"
+        "yuldar": "anna;lambe:u;ando;ore:a",
+        "y'uldar": "long-carrier:i;lambe:u;ando;ore:a",
     }
 
 };

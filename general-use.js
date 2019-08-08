@@ -751,7 +751,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
         } else if (character === "y") {
             return Parser.countPrimes(function (primes) {
                 if (primes === 0) {
-                    return callback(makeColumn("wilya", {from: ""}).addBelow("y", {from: "y"}), tehta, tehtaFrom);
+                    return callback(makeColumn("anna", {from: ""}), tehta, tehtaFrom);
                 } else if (primes === 1) {
                     return callback(makeColumn("long-carrier", {from: "y"}).addAbove("i", {from: ""}), tehta, tehtaFrom);
                 } else {
