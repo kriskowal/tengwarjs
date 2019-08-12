@@ -1,0 +1,4 @@
+#!/bin/bash
+ls *-webfont* | while read name; do
+    cp $name ../${name/-webfont/}
+done

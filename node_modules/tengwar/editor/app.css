@@ -1,0 +1,201 @@
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body.annatar #body-box {
+
+    background-repeat: no-repeat;
+    background: #fefcea; /* Old browsers */
+    background: -moz-linear-gradient(top, #fefcea 0%, #f9e63b 7%, #e0a928 53%, #d69a2c 94%, #c97e16 99%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefcea), color-stop(7%,#f9e63b), color-stop(53%,#e0a928), color-stop(94%,#d69a2c), color-stop(99%,#c97e16)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#c97e16',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #fefcea 0%,#f9e63b 7%,#e0a928 53%,#d69a2c 94%,#c97e16 99%); /* W3C */
+
+    color: #ff0;
+    text-shadow: 0px 0px 10px #730 ;
+}
+
+body.parmaite #body-box {
+    background-image: url(paper.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    color: #000;
+    text-shadow: 0px 0px 4px #ffc;
+}
+
+body.annatar .error {
+    text-shadow: 0px 0px 10px #f00 ;
+}
+
+body.parmaite .error {
+    color: #700;
+}
+
+body, textarea {
+    font-family: Lucida Grande, sans-serif;
+    font-size: 16px;
+}
+
+textarea, .copy {
+    font-family: monospace;
+    color: black;
+}
+
+body.annatar a {
+    color: #a00;
+}
+body.annatar a:visited {
+    color: #a00;
+}
+
+body.parmaite a {
+    color: #00a;
+}
+body.parmaite a:visited {
+    color: #00a;
+}
+
+
+a:hover {
+}
+
+a:focus {
+}
+
+.tengwar.annatar > p {
+    line-height: 210%;
+}
+
+.tengwar.parmaite > p {
+    line-height: 100%;
+}
+
+#output {
+    text-align: center;
+    line-height: 150px;
+}
+
+#output.tengwar.annatar {
+    font-size: 60px;
+}
+
+#output.tengwar.parmaite {
+    font-size: 100px;
+}
+
+#output-box, #input-box {
+    overflow: auto;
+}
+
+#divider {
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: non;
+}
+
+#input {
+    font-family: monospace;
+    text-align: center;
+}
+
+/* layout */
+
+#body-box {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-align-items: stretch;
+}
+
+#output-box {
+    -webkit-flex: 3;
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    padding: 30px;
+}
+
+#divider {
+    -webkit-flex: 0 0 20px;
+    cursor: row-resize;
+}
+
+#transliteration-box {
+    display: -webkit-flex;
+    -webkit-flex-flow: row;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    overflow: auto;
+}
+
+#transliteration-box > div {
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    padding: 0 4px;
+}
+
+#transliteration-box > div > div {
+    font-family: monospace;
+}
+
+#input-box {
+    display: -webkit-flex;
+    -webkit-flex-flow: row;
+    -webkit-justify-content: center;
+    -webkit-align-items: stretch;
+}
+
+#form-box {
+    white-space: nowrap;
+    padding: 10px;
+    -webkit-flex: 1 .5;
+    -webkit-align-self: flex-end;
+    text-align: center;
+}
+
+#content-box {
+    -webkit-flex: 0 1 80ex;
+    display: -webkit-flex;
+    -webkit-flex-flow: column;
+    -webkit-align-items: stretch;
+    -webkit-justify-content: stretch;
+    padding: 10px;
+}
+
+#about-box {
+    padding: 10px;
+    white-space: nowrap;
+    text-align: center;
+    -webkit-flex: 1 .5;
+    -webkit-align-self: flex-end;
+}
+
+#input {
+    -webkit-flex: 1;
+    width: 100%;
+}
+
+/* animation */
+
+body.bootstrap #input-box {
+    -webkit-transition-property: height;
+    -webkit-transition-duration: 500ms;
+}
+

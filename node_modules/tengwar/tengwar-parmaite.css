@@ -1,0 +1,18 @@
+
+@font-face {
+    font-family: Tengwar Parmaite;
+    src: url('tengwar-parmaite.eot');
+    src: url('tengwar-parmaite.eot#iefix'),
+         url('tengwar-parmaite.woff') format('woff'),
+         url('tengwar-parmaite.ttf') format('truetype'),
+         url('tengwar-parmaite.svg#tengwar_parmaiteregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.tengwar.parmaite.rendered {
+    font-family: Tengwar Parmaite;
+    font-size: 50px;
+    line-height: 100%;
+}
+

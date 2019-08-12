@@ -1,0 +1,96 @@
+
+n -> ore
+nn -> numen
+nt -> tinco tilde-above
+nth -> thule tilde-above
+nc -> calma tilde-above
+nch -> harma tilde-above
+nchw -> unque tilde-above
+ncw -> quesse tilde-above
+ng -> 
+ngh ->
+nghw ->
+ngw -> 
+nd -> ando tilde-above
+ndh -> anto tilde-above
+ng -> anga tilde-above
+ng (final) -> noldo
+
+t -> tinco
+th -> thule
+d -> ando
+dh -> anto
+
+m -> vala
+mm -> malta
+mp -> parma tilde-above
+mb -> umbar tilde-above
+mf -> formen tilde-above
+mf (final) -> ampa tilde-above
+mv -> ampa tilde-above
+
+p -> parma
+b -> umbar
+f (final) -> ampa
+f -> formen
+v -> ampa
+
+ñ -> noldo
+ñc -> calma tilde-above
+ñch -> harma tilde-above
+ñcw -> quesse tilde-above
+ñg -> anga tilde-above
+ñgh -> anca tilde-above
+ñghw -> unque tilde-above
+ñgw -> ungwe tilde-above
+ñw -> nwalme tilde-above
+
+c -> calma
+cw -> quesse
+ch -> harma
+chw -> hwesta
+g -> anga
+gw -> ungwe
+gh -> anca
+ghw -> unque
+g' -> halla (indicating lenition)
+
+r -> romen
+rh -> arda
+l -> lambe
+lh -> alda
+
+s -> silme
+
+a -> round-carrier
+a' -> round-carrier i-above
+ai -> round-carrier y-above
+au -> round-carrier w
+e -> yanta
+ei -> yanta y-above
+i -> short-carrier
+i' -> short-carrier i-above
+i'' -> long-carrier
+ii -> short-carrier e-above
+ii' -> long-carrier e-above
+o -> anna
+u -> ure
+ui -> ure y-above
+w -> wilya
+y -> silme-nuquerna
+yy -> silme-nuquerna e-tehta
+
+á -> round-carrier e-tehta
+é -> yanta e-tehta
+í -> short or long carrier e-tehta
+ó -> anna e-tehta
+ú -> ure e-tehta
+
+h -> hyarmen
+hm -> XXX nasalized ore
+hw -> hwesta-sindarinwa
+hl -> use lh
+hr -> use rh
+
+z -> do not use
+
