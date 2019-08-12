@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "dependencies": {
     "frb": "~0.2",
-    "qs": "0.5.x",
+    "qs": "~0.5",
     "system": "^2.0.1",
-    "tengwar": "^1"
+    "tengwar": "^1.2.6",
+    "webpack": "^4.39.1"
   },
   "bugs": {
     "mail": "kris@cixar.com",
@@ -23,5 +24,9 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/kriskowal/tengwarjs.git"
+  },
+  "devDependencies": {
+    "mop": "^16.1.8",
+    "webpack-cli": "^3.3.6"
   }
 }

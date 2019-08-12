@@ -2,13 +2,19 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Tengwar Transcriber</title>
-        <link rel="stylesheet" type="text/css" href="node_modules/tengwar/tengwar-parmaite.css">
-        <link rel="stylesheet" type="text/css" href="node_modules/tengwar/tengwar-annatar.css">
+        <link rel="stylesheet" type="text/css" href="tengwar-parmaite.css">
+        <link rel="stylesheet" type="text/css" href="tengwar-annatar.css">
         <link rel="stylesheet" type="text/css" href="page.css">
-        <script src="node_modules/system/boot.js" data-import="./modes"></script>
     </head>
     <body><div>
 
+        <p><em><strong>Disclaimer:</strong></em>
+        This transcriber is an amateur’s best attempt to render Tolkien’s
+        Elvish languages.
+        The Elvish languages are incredibly sophisticated and I do not pretend
+        to be an expert, nor pretend that this tool is defect free.
+        Please cross-check anything this tool produces with an expert before
+        commiting the text to a tattoo or metal.</p>
 
         <h1>Modes of the Tengwar</h1>
         <h3><em>For a Tengar Transcriber</em></h3>
@@ -1195,12 +1201,6 @@
 
         <p><button id="beleriand-button">Select</button></p>
 
-
-
-        <script src="http://static.getclicky.com/js" type="text/javascript"></script> 
-        <script type="text/javascript">clicky.init(237383);</script> 
-        <noscript><p><img alt="Clicky" width="1" height="1" src="http://in.getclicky.com/237383ns.gif" /></p></noscript> 
-
         <script type="text/javascript">
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-25808349-1']);
@@ -1213,5 +1213,6 @@
             })();
         </script>
 
+        <script src="webpack/modes.js"></script>
     </div></body>
 </html>
