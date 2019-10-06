@@ -62,14 +62,15 @@ var table = {
     "q": "cw",
     "qu": "cw",
     "p": "p",
-    "ph": "f",
+ //hh   "ph": "f",  
     "b": "b",
     "bh": "v",
     "â": "á",
     "ê": "é",
     "î": "í",
     "ô": "ó",
-    "û": "ú"
+    "û": "ú",
+    "'": "/"
 };
 
 // This generates a data structure that can be walked by a parser, where each
@@ -103,4 +104,3 @@ var simplify = makeParserFromTrie(
         };
     }
 );
-
