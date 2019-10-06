@@ -1,9 +1,12 @@
 
 module.exports = {
-    "-": "comma",
+    "-": "hyphen",
+    "[": "parenthesis",
+    "]": "parenthesis",
+    "/": "apostrophe",
     ",": "comma",
-    ":": "comma",
-    ";": "full-stop",
+    ":": "colon",
+    ";": "semi-colon",
     ".": "full-stop",
     "!": "exclamation-point",
     "?": "question-mark",
