@@ -29,6 +29,6 @@
   "scripts": {
     "test": "jasminum test",
     "test-phantom": "jasminum-phantom test",
-    "build": "mkdir public; echo hello > public/index.html"
+    "build": "true"
   }
 }
