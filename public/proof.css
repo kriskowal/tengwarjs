@@ -9,7 +9,7 @@ body {
 p {
     width: 60ex;
 }
-table {
+table, .case {
     border: solid black 1px;
     margin: 10px;
     padding: 10px;
@@ -17,4 +17,11 @@ table {
 .tables {
     display: flex;
     flex-wrap: wrap;
+}
+
+.pass {
+    background-color: lightgreen;
+}
+.fail {
+    background-color: pink;
 }

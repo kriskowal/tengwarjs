@@ -1,3 +1,31 @@
+
+function equals(name, expected, actual, errata) {
+    if (expected === actual) {
+        return `<div class="case pass">
+            <tt>${name} <strong>input</strong></tt><br>
+            <tt>${expected} <strong>output</strong></tt>
+            ${errata}
+        </div>`
+    }
+    return `<div class="case fail">
+        ${name}
+        <ul>
+            <tt>${expect}</tt> expected<br>
+            <tt>${actual}</tt> actual
+        </ul>
+    </div>`;
+}
+
+var Beleriand = require("./beleriand");
+var beleriandTests = require("./test/beleriand");
+
+document.querySelector("#beleriand").innerHTML = Object.entries(beleriandTests).map(function ([input, expected]) {
+    var actual = Beleriand.encode(input, {});
+    return equals(input, expected, actual, `<br>
+        <span class="rendered tengwar parmaite">${Beleriand.transcribe(input, {})}</span>
+    `);
+}).join("");
+
 var Alphabet = require("./alphabet");
 var TengwarParmaite = require("./tengwar-parmaite");
 var TengwarAnnatar = require("./tengwar-annatar");
