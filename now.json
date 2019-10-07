@@ -1,0 +1,7 @@
+{
+    "name": "tengwarjs",
+    "version": 2,
+    "builds": [
+        {"src": "**", "use": "@now/static"}
+    ]
+}
