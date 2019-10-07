@@ -1,7 +1,8 @@
+var Alphabet = require("./alphabet");
+var TengwarParmaite = require("./tengwar-parmaite");
+var TengwarAnnatar = require("./tengwar-annatar");
 
-var Alphabet = require("../alphabet");
-
-module.exports = function tengwarTehtarCombinations(font, fontClass) {
+function tengwarTehtarCombinations(font, fontClass) {
     return Alphabet.tehtar.map(function (tehta) {
         return "<table align=\"left\"><caption><a name=\"" + tehta + "\" href=\"#" + encodeURIComponent(tehta) + "\">" + tehta + "</a></caption>" +
             Alphabet.tengwar.map(function (row) {
@@ -30,3 +31,5 @@ function tengwaTehtaPairDisplay(font, tengwa, tehta) {
     }
 }
 
+document.querySelector("#parmaite").innerHTML = tengwarTehtarCombinations(TengwarAnnatar, "parmaite");
+document.querySelector("#annatar").innerHTML = tengwarTehtarCombinations(TengwarParmaite, "annatar");
