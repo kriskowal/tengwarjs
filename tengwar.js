@@ -1,3 +1,4 @@
+// Compiles to public/tengwar.js
 
 var GeneralUse = require("./general-use");
 var Classical = require("./classical");

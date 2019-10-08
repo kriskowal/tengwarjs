@@ -29,6 +29,6 @@
   "scripts": {
     "test": "jasminum test",
     "test-phantom": "jasminum-phantom test",
-    "build": "true"
+    "build": "sysjs proof.js > public/proof.js && sysjs sample.js > public/sample.js && sysjs tengwar.js > public/tengwar.js"
   }
 }
