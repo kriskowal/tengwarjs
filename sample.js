@@ -1,8 +1,9 @@
+// Compiles to public/sample.js
 
-var classical = require("../classical");
-var generalUse = require("../general-use");
+var classical = require("./classical");
+var generalUse = require("./general-use");
 
-var body = $("body");
+var body = document.body;
 function report(latin, mode, font) {
     var element = $("<nobr>");
     $("<span></span>")
@@ -50,6 +51,3 @@ $(".transcribe").each(function () {
         element.classList.add("rendered");
     }, 0);
 });
-
-require("../tengwar");
-
