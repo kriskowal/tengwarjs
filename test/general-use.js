@@ -36,18 +36,20 @@ module.exports = {
         "cake": "quesse;quesse:a,i-below",
         "cakes": "quesse;quesse:a;silme-nuquerna:e",
         "cats.": "quesse;tinco:a,s-final;full-stop", // regression
+        "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
+        "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
+        "font": "formen;tinco:o,tilde-above",
         "green": "ungwe;romen;long-carrier:e;numen",
+        "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
+        "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
         "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
         "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
         "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
         "hobbits'''": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
+        "phone": "parma-extended;numen:o,i-below",
         "there": "thule;romen:e,i-below",
         "these": "thule;silme-nuquerna:e;short-carrier:i-below",
         "these'": "thule;silme-nuquerna:e;short-carrier:e",
-        "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
-        "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
-        "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
-        "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
         "y": "anna",
 
         // abbreviated words

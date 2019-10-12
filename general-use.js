@@ -557,8 +557,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 // ph is simplified to f by the normalizer (deprecated)
                 if (character === "p") { // pp
                     return callback(makeColumn("parma", {from: "p"}).addTildeBelow({from: "p"}), tehta, tehtaFrom);
-                } else if (character === "h") { // ph
-                    return callback(makeColumn("formen", {from: "ph"}), tehta, tehtaFrom);
+                } else if (character === "h") {
+                    return callback(makeColumn("parma-extended", {from: "ph"}), tehta, tehtaFrom);
                 } else { // p.
                     return callback(makeColumn("parma", {from: "p"}), tehta, tehtaFrom)(character);
                 }
@@ -601,8 +601,6 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 // bh is simplified to v by the normalizer (deprecated)
                 if (character === "b") { // bb
                     return callback(makeColumn("umbar", {from: "b"}).addTildeBelow({from: "b"}), tehta, tehtaFrom);
-                } else if (character === "bh") { // bh
-                    return callback(makeColumn("ampa", {from: "bh (v)"}), tehta, tehtaFrom);
                 } else { // b.
                     return callback(makeColumn("umbar", {from: "b"}), tehta, tehtaFrom)(character);
                 }
