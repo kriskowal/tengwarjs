@@ -33,17 +33,22 @@ module.exports = {
     english: {
 
         // english (appropriate mode) (sorted)
+        "Jack": "anga;quesse:a,tilde-below",
+        "happy": "hyarmen;parma:a,tilde-below;long-carrier:y",
+        "style": "silme;tinco;lambe:y,i-below",
+        "yellow": "anna;lambe:e,tilde-below;vala:o",
+        "phone": "formenparma;numen:o,i-below",
         "cake": "quesse;quesse:a,i-below",
         "cakes": "quesse;quesse:a;silme-nuquerna:e",
         "cats.": "quesse;tinco:a,s-final;full-stop", // regression
-        "green": "ungwe;romen;long-carrier:e;numen",
+        "green": "ungwe;romen;short-carrier:e;numen:e",
         "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
         "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
         "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
         "hobbits'''": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
-        "there": "thule;romen:e,i-below",
+        "there": "thule;ore:e,i-below",
         "these": "thule;silme-nuquerna:e;short-carrier:i-below",
-        "these'": "thule;silme-nuquerna:e;short-carrier:e",
+        "these'": "thule;silme-nuquerna:e;short-carrier:e", // invalid input
         "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
         "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
         "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
