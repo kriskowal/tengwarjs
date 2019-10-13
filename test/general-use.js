@@ -50,7 +50,10 @@ module.exports = {
         "there": "thule;romen:e,i-below",
         "these": "thule;silme-nuquerna:e;short-carrier:i-below",
         "these'": "thule;silme-nuquerna:e;short-carrier:e",
+
+        // for code coverage
         "y": "anna",
+        "x": "quesse:s",
 
         // abbreviated words
         "of": "umbar-extended",

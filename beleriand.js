@@ -167,6 +167,8 @@ function parseTengwa(callback, options) {
                     return callback(makeColumn("calma", {from: "c"}))(character);
                 }
             };
+        } else if (character === "x") {
+            return callback(makeColumn("calma", {from: "x (k-)"}).addBelow("s", {from: "x (-s)"}));
         } else if (character === "g") {
             return function (character) {
                 if (character === "h") { // gh

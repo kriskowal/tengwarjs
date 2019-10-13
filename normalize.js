@@ -58,7 +58,6 @@ function toLowerCase(callback) {
 // normal phonetic form of the cluster.
 var table = {
     "k": "c",
-    "x": "cs",
     "q": "cw",
     "qu": "cw",
     "p": "p",

@@ -581,6 +581,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return callback(makeColumn("quesse", {from: "c"}), tehta, tehtaFrom)(character);
                 }
             };
+        } else if (character === "x") {
+            return callback(makeColumn("quesse", {from: "x (k-)"}).addBelow("s", {from: "x (-s)"}), tehta, tehtaFrom);
         } else if (character === "d") {
             return function (character) {
                 if (character === "d") { // dd

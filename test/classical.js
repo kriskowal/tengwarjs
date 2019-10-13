@@ -26,6 +26,8 @@ module.exports = {
     "ó": "long-carrier:o",
     "oo": "long-carrier:o",
     "ú": "long-carrier:u",
-    "uu": "long-carrier:u"
+    "uu": "long-carrier:u",
 
+    // for code coverage
+    "x": "calma:s",
 };
