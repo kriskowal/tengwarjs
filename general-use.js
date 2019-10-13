@@ -3,7 +3,6 @@ var TengwarAnnatar = require("./tengwar-annatar");
 var Notation = require("./notation");
 var Parser = require("./parser");
 var makeDocumentParser = require("./document-parser");
-var normalize = require("./normalize");
 var punctuation = require("./punctuation");
 var parseNumber = require("./numbers");
 
@@ -66,20 +65,16 @@ exports.transcribe = transcribe;
 function transcribe(text, options) {
     options = makeOptions(options);
     var font = options.font;
-    return font.transcribe(parse(text, options), options);
+    return font.transcribe(parse(text.toLowerCase(), options), options);
 }
 
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    return Notation.encode(parse(text, options), options);
+    return Notation.encode(parse(text.toLowerCase(), options), options);
 }
 
-var parse = exports.parse = makeDocumentParser(parseNormalWord, makeOptions);
-
-function parseNormalWord(callback, options) {
-    return normalize(parseWord(callback, options));
-}
+var parse = exports.parse = makeDocumentParser(parseWord, makeOptions);
 
 function parseWord(callback, options) {
     var font = options.font;
@@ -509,10 +504,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                         return callback(makeColumn("malta", {from: "m"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
                     }
                 } else if (character === "p") { // mp
-                    // mph is simplified to mf using the normalizer (deprecated TODO)
                     return callback(makeColumn("parma", {from: "p"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
                 } else if (character === "b") { // mb
-                    // mbh is simplified to mf using the normalizer (deprecated TODO)
                     return callback(makeColumn("umbar", {from: "b"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
                 } else if (character === "f") { // mf
                     return callback(makeColumn("formen", {from: "f"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
@@ -556,7 +549,6 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             };
         } else if (character === "p") { // p
             return function (character) {
-                // ph is simplified to f by the normalizer (deprecated)
                 if (character === "p") { // pp
                     return callback(makeColumn("parma", {from: "p"}).addTildeBelow({from: "p"}), tehta, tehtaFrom);
                 } else if (character === "h") {
@@ -604,7 +596,6 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             };
         } else if (character === "b") { // b
             return function (character) {
-                // bh is simplified to v by the normalizer (deprecated)
                 if (character === "b") { // bb
                     return callback(makeColumn("umbar", {from: "b"}).addTildeBelow({from: "b"}), tehta, tehtaFrom);
                 } else { // b.

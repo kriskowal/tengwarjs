@@ -5,7 +5,6 @@ var TengwarParmaite = require("./tengwar-parmaite");
 var Parser = require("./parser");
 var Notation = require("./notation");
 var makeDocumentParser = require("./document-parser");
-var normalize = require("./normalize");
 var punctuation = require("./punctuation");
 var parseNumber = require("./numbers");
 
@@ -27,20 +26,16 @@ exports.transcribe = transcribe;
 function transcribe(text, options) {
     options = makeOptions(options);
     var font = options.font;
-    return font.transcribe(parse(text, options), options);
+    return font.transcribe(parse(text.toLowerCase(), options), options);
 }
 
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    return Notation.encode(parse(text, options), options);
+    return Notation.encode(parse(text.toLowerCase(), options), options);
 }
 
-var parse = exports.parse = makeDocumentParser(parseNormalWord, makeOptions);
-
-function parseNormalWord(callback, options) {
-    return normalize(parseWord(callback, options));
-}
+var parse = exports.parse = makeDocumentParser(parseWord, makeOptions);
 
 function parseWord(callback, options, columns) {
     columns = columns || [];
