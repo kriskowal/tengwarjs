@@ -11,7 +11,7 @@ module.exports = {
         "allys": "lambe:a,y,s-final,tilde-below",
         "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",
         "ls": "lambe:s-final",
-        "ls'": "lambe:s-flourish",
+        "ls`": "lambe:s-flourish",
 
         // long vowels
         "á": "wilya:a",
@@ -26,7 +26,7 @@ module.exports = {
         "uu": "long-carrier:u",
 
         // final-e modification for non-english
-        "cake'": "quesse;quesse:a,i-below",
+        "cake`": "quesse;quesse:a,i-below",
 
     },
 
@@ -43,13 +43,13 @@ module.exports = {
         "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
         "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
         "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
-        "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
-        "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
-        "hobbits'''": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
+        "hobbits`": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
+        "hobbits``": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
+        "hobbits```": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
         "phone": "parma-extended;numen:o,i-below",
         "there": "thule;romen:e,i-below",
         "these": "thule;silme-nuquerna:e;short-carrier:i-below",
-        "these'": "thule;silme-nuquerna:e;short-carrier:e",
+        "these`": "thule;silme-nuquerna:e;short-carrier:e",
 
         // for code coverage
         "y": "anna",
@@ -59,9 +59,9 @@ module.exports = {
         "of": "umbar-extended",
         "the": "ando-extended",
         "of the": "umbar-extended:tilde-below",
-        "of'the": "umbar-extended ando-extended",
+        "of`the": "umbar-extended ando-extended",
         "and": "ando:tilde-above",
-        "and'": "ando:i-below,tilde-above"
+        "and`": "ando:i-below,tilde-above"
 
     },
 
@@ -127,7 +127,7 @@ module.exports = {
         "sinome maruvan": "silme;numen:i;malta:o;short-carrier:e malta;romen:a;ampa:u;numen:a",
         "telperion": "tinco;lambe:e;parma;romen:e;short-carrier:i;numen:o",
         "yuldar": "anna;lambe:u;ando;ore:a",
-        "y'uldar": "long-carrier:i;lambe:u;ando;ore:a",
+        "y`uldar": "long-carrier:i;lambe:u;ando;ore:a",
     }
 
 };

@@ -89,12 +89,12 @@ function parseWord(callback, options) {
                                 return callback([
                                     makeOfThe(makeColumn)
                                 ]);
-                            } else if (word === "the'") {
+                            } else if (word === "the`") {
                                 return callback([
                                     makeOf(makeColumn),
                                     makeThePrime(makeColumn)
                                 ]);
-                            } else if (word === "the''") {
+                            } else if (word === "the``") {
                                 return callback([
                                     makeOf(makeColumn),
                                     makeThePrime(makeColumn)
@@ -109,19 +109,19 @@ function parseWord(callback, options) {
                         return callback([makeOf(makeColumn)])(character);
                     }
                 }
-            } else if (word === "of'") {
+            } else if (word === "of`") {
                 return scanWord(function (word, rewind) {
                     if (word === "the") {
                         return callback([
                             makeOfPrime(makeColumn),
                             makeThe(makeColumn)
                         ]);
-                    } else if (word === "the'") {
+                    } else if (word === "the`") {
                         return callback([
                             makeOfPrime(makeColumn),
                             makeThePrime(makeColumn)
                         ]);
-                    } else if (word === "the''") {
+                    } else if (word === "the``") {
                         return callback([
                             makeOfPrime(makeColumn),
                             makeThePrimePrime(makeColumn)
@@ -136,31 +136,31 @@ function parseWord(callback, options) {
                 return callback([
                     makeThe(makeColumn)
                 ]);
-            } else if (word === "the'") {
+            } else if (word === "the`") {
                 return callback([
                     makeThePrime(makeColumn)
                 ]);
-            } else if (word === "the''") {
+            } else if (word === "the``") {
                 return callback([
                     makeThePrimePrime(makeColumn)
                 ]);
-            } else if (word === "of'the") {
+            } else if (word === "of`the") {
                 return callback([
                     makeOf(makeColumn),
                 ])("t")("h")("e");
-            } else if (word === "of'the'") {
+            } else if (word === "of`the`") {
                 return callback([
                     makeOfPrime(makeColumn)
-                ])("t")("h")("e")("'");
+                ])("t")("h")("e")("`");
             } else if (word === "and") {
                 return callback([
                     makeAnd(makeColumn)
                 ]);
-            } else if (word === "and'") {
+            } else if (word === "and`") {
                 return callback([
                     makeAndPrime(makeColumn)
                 ]);
-            } else if (word === "and''") {
+            } else if (word === "and``") {
                 return callback([
                     makeAndPrimePrime(makeColumn)
                 ]);
@@ -171,7 +171,7 @@ function parseWord(callback, options) {
                         .addAbove("e", {from: "e"})
                         .varies()
                 ]);
-            } else if (word === "we'") { // Unattested, my invention - kriskowal
+            } else if (word === "we`") { // Unattested, my invention - kriskowal
                 return callback([
                     makeColumn("vala", {from: "w", diphthong: true})
                         .addBelow("y", {from: "ē"})
@@ -485,7 +485,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                                     return callback(makeColumn("numen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)("a")(character);
                                 }
                             };
-                        } else if (character === "nw'") { // nw' prime -> ñw
+                        } else if (character === "nw`") { // nw/ prime -> ñw
                             return callback(makeColumn("nwalme", {from: "ñ"}).addAbove("w", {from: "w"}), tehta, tehtaFrom);
                         } else { // nw.
                             return callback(makeColumn("numen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)(character);
@@ -536,7 +536,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 } else if (character === "c") { // tc
                     return function (character) {
                         if (character === "h") { // tch -> tinco calma
-                            return callback(makeColumn("tinco", {from: "t"}), tehta, tehtaFrom)("c")("h")("'");
+                            return callback(makeColumn("tinco", {from: "t"}), tehta, tehtaFrom)("c")("h")("`");
                         } else {
                             return callback(makeColumn("tinco", {from: "t"}), tehta, tehtaFrom)("c")(character);
                         }
@@ -760,8 +760,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 tehta,
                 tehtaFrom
             );
-        } else if (character === "'" && options.language === "english" && tehta === "e") {
-            // final e' in english should be equivalent to diaresis
+        } else if (character === "`" && options.language === "english" && tehta === "e") {
+            // final e/ in english should be equivalent to diaresis
             return callback(
                 makeColumn("short-carrier", {from: ""})
                     .addAbove("e", {from: "e"})
@@ -882,7 +882,7 @@ function parseFollowing(callback, column) {
                                 // rewind primes for subsequent alterations
                                 var state = callback(column)("s");
                                 while (primes-- > 0) {
-                                    state = state("'");
+                                    state = state("`");
                                 }
                                 return state;
                             }

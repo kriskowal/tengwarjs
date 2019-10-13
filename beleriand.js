@@ -184,7 +184,7 @@ function parseTengwa(callback, options) {
                     };
                 } else if (character === "w") { // gw
                     return callback(makeColumn("ungwe", {from: "gw"}));
-                } else if (character === "'") { // g'
+                } else if (character === "/") { // g/
                     return callback(makeColumn("halla", {from: "g"})); // gasdil
                 } else { // g.
                     return callback(makeColumn("anga", {from: "g"}).varies())(character);
@@ -214,7 +214,7 @@ function parseTengwa(callback, options) {
                     return callback(makeColumn("round-carrier", {from: "a", diphthong: true}).addAbove("í", {from: "i"}));
                 } else if (character === "u") { // au
                     return callback(makeColumn("round-carrier", {from: "a", diphthong: true}).addAbove("w", {from: "u"}));
-                } else if (character === "'") { // a'
+                } else if (character === "/") { // a/
                     return callback(makeColumn("round-carrier", {from: "a"}).addAbove("i", {from: "a"}));
                 } else if (character === "a") { // aa
                     return callback(makeColumn("round-carrier", {from: "a", long: true}).addAbove("e", {from: "a"}));
