@@ -3,7 +3,6 @@ var TengwarAnnatar = require("./tengwar-annatar");
 var Notation = require("./notation");
 var Parser = require("./parser");
 var makeDocumentParser = require("./document-parser");
-var normalize = require("./normalize");
 var punctuation = require("./punctuation");
 var parseNumber = require("./numbers");
 
@@ -66,20 +65,16 @@ exports.transcribe = transcribe;
 function transcribe(text, options) {
     options = makeOptions(options);
     var font = options.font;
-    return font.transcribe(parse(text, options), options);
+    return font.transcribe(parse(text.toLowerCase(), options), options);
 }
 
 exports.encode = encode;
 function encode(text, options) {
     options = makeOptions(options);
-    return Notation.encode(parse(text, options), options);
+    return Notation.encode(parse(text.toLowerCase(), options), options);
 }
 
-var parse = exports.parse = makeDocumentParser(parseNormalWord, makeOptions);
-
-function parseNormalWord(callback, options) {
-    return normalize(parseWord(callback, options));
-}
+var parse = exports.parse = makeDocumentParser(parseWord, makeOptions);
 
 function parseWord(callback, options) {
     var font = options.font;
@@ -393,10 +388,11 @@ function makeCarrier(tehta, tehtaFrom, options) {
 
 function parseTehta(callback, options) {
     return function (character) {
-        var firstCharacter = character;
+        var from = character;
         if (character === "ë" && options.language !== "english") {
             character = "e";
         }
+        character = normalVowels[character] || character;
         if (character === "") {
             return callback();
         } else if (lengthenableVowels.indexOf(character) !== -1) {
@@ -404,17 +400,18 @@ function parseTehta(callback, options) {
                 if (nextCharacter === character) {
                     return callback(longerVowels[character], longerVowels[character]);
                 } else {
-                    return callback(character, character)(nextCharacter);
+                    return callback(character, from)(nextCharacter);
                 }
             };
         } else if (nonLengthenableVowels.indexOf(character) !== -1) {
-            return callback(character, character);
+            return callback(character, from);
         } else {
-            return callback()(character);
+            return callback()(from);
         }
     };
 }
 
+var normalVowels = {"â": "á", "ê": "é", "î": "í", "ô": "ó", "û": "ú"};
 var lengthenableVowels = "aeiou";
 var longerVowels = {"a": "á", "e": "é", "i": "í", "o": "ó", "u": "ú"};
 var nonLengthenableVowels = "aeióú";
@@ -470,8 +467,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     };
                 } else if (character === "d") { // nd
                     return callback(makeColumn("ando", {from: "d"}).addTildeAbove({from: "n"}), tehta, tehtaFrom);
-                } else if (character === "c") { // nc -> ñc
-                    return callback(makeColumn("quesse", {from: "c"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
+                } else if (character === "c" || character === "k") { // nc -> ñc
+                    return callback(makeColumn("quesse", {from: character}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else if (character === "g") { // ng -> ñg
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else if (character === "j") { // nj
@@ -507,10 +504,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                         return callback(makeColumn("malta", {from: "m"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
                     }
                 } else if (character === "p") { // mp
-                    // mph is simplified to mf using the normalizer (deprecated TODO)
                     return callback(makeColumn("parma", {from: "p"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
                 } else if (character === "b") { // mb
-                    // mbh is simplified to mf using the normalizer (deprecated TODO)
                     return callback(makeColumn("umbar", {from: "b"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
                 } else if (character === "f") { // mf
                     return callback(makeColumn("formen", {from: "f"}).addTildeAbove({from: "m"}), tehta, tehtaFrom);
@@ -524,8 +519,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             return function (character) {
                 // ññ does not exist to the best of my knowledge
                 // ñw is handled naturally by following w
-                if (character === "c") { // ñc
-                    return callback(makeColumn("quesse", {from: "c"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
+                if (character === "c" || character === "k") { // ñc
+                    return callback(makeColumn("quesse", {from: character}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else if (character === "g") { // ñg
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else { // ñ.
@@ -554,33 +549,36 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             };
         } else if (character === "p") { // p
             return function (character) {
-                // ph is simplified to f by the normalizer (deprecated)
                 if (character === "p") { // pp
                     return callback(makeColumn("parma", {from: "p"}).addTildeBelow({from: "p"}), tehta, tehtaFrom);
-                } else if (character === "h") { // ph
-                    return callback(makeColumn("formen", {from: "ph"}), tehta, tehtaFrom);
+                } else if (character === "h") {
+                    return callback(makeColumn("parma-extended", {from: "ph"}), tehta, tehtaFrom);
                 } else { // p.
                     return callback(makeColumn("parma", {from: "p"}), tehta, tehtaFrom)(character);
                 }
             };
-        } else if (character === "c") { // c
-            return function (character) {
-                // cw should be handled either by following-w or a subsequent
-                // vala
-                if (character === "c") { // ch as in charm
-                    return callback(makeColumn("calma", {from: "cc"}), tehta, tehtaFrom);
-                } else if (character === "h") { // ch, ach-laut, as in bach
-                    return Parser.countPrimes(function (primes) {
-                        if (options.noAchLaut && !primes) {
-                            return callback(makeColumn("calma", {from: "ch"}), tehta, tehtaFrom); // ch as in charm
-                        } else {
-                            return callback(makeColumn("hwesta", {from: "ch"}), tehta, tehtaFrom); // ch as in bach
-                        }
-                    });
+        } else if (character === "c") {
+            return function (character2) {
+                if (character2 == "h" && options.language !== "english") {
+                    return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                } else if (character2 === "h" || character2 === "c") { // ch and cc
+                    return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom);
                 } else { // c.
-                    return callback(makeColumn("quesse", {from: "c"}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom)(character2);
                 }
             };
+        } else if (character === "k") {
+            return function (character2) {
+                if (character2 === "h" && !options.noAchLaut) { // ach laut
+                    return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                } else { // c.
+                    return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom)(character2);
+                }
+            };
+        } else if (character === "q") {
+            return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom);
+        } else if (character === "x") {
+            return callback(makeColumn("quesse", {from: "x (k-)"}).addBelow("s", {from: "x (-s)"}), tehta, tehtaFrom);
         } else if (character === "d") {
             return function (character) {
                 if (character === "d") { // dd
@@ -598,11 +596,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             };
         } else if (character === "b") { // b
             return function (character) {
-                // bh is simplified to v by the normalizer (deprecated)
                 if (character === "b") { // bb
                     return callback(makeColumn("umbar", {from: "b"}).addTildeBelow({from: "b"}), tehta, tehtaFrom);
-                } else if (character === "bh") { // bh
-                    return callback(makeColumn("ampa", {from: "bh (v)"}), tehta, tehtaFrom);
                 } else { // b.
                     return callback(makeColumn("umbar", {from: "b"}), tehta, tehtaFrom)(character);
                 }

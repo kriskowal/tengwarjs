@@ -19,6 +19,11 @@ module.exports = {
     "teithant": "tinco;yanta:í;thule;round-carrier;tinco:tilde-above",
     "i''": "long-carrier:i",
     "thiw": "thule;short-carrier;wilya",
-    "hi'n.": "hyarmen;short-carrier:i;ore;full-stop"
+    "hi'n.": "hyarmen;short-carrier:i;ore;full-stop",
 
+    // for code coverage
+    "x": "calma:s",
+    "q": "quesse",
+    "qu": "quesse",
+    "qw": "quesse",
 };

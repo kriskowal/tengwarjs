@@ -6,7 +6,7 @@ module.exports = {
         // interesting clusters
         "xx": "quesse:s;quesse:s",
         "tsts": "tinco;silme;tinco:s-final",
-        "iqs": "quesse:i;vala;silme",
+        "iqs": "quesse:i,s",
         "aty": "tinco:a,y",
         "allys": "lambe:a,y,s-final,tilde-below",
         "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",
@@ -36,19 +36,24 @@ module.exports = {
         "cake": "quesse;quesse:a,i-below",
         "cakes": "quesse;quesse:a;silme-nuquerna:e",
         "cats.": "quesse;tinco:a,s-final;full-stop", // regression
+        "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
+        "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
+        "font": "formen;tinco:o,tilde-above",
         "green": "ungwe;romen;long-carrier:e;numen",
+        "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
+        "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
         "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
         "hobbits'": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
         "hobbits''": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
         "hobbits'''": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
+        "phone": "parma-extended;numen:o,i-below",
         "there": "thule;romen:e,i-below",
         "these": "thule;silme-nuquerna:e;short-carrier:i-below",
         "these'": "thule;silme-nuquerna:e;short-carrier:e",
-        "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
-        "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
-        "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
-        "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
+
+        // for code coverage
         "y": "anna",
+        "x": "quesse:s",
 
         // abbreviated words
         "of": "umbar-extended",
@@ -66,12 +71,13 @@ module.exports = {
 
     sindarin: {
         // (sorted)
+        "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;comma\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
         "ainur": "anna:a;numen;ore:u",
         "aldost": "lambe:a;ando;silme-nuquerna:o;tinco",
         "amon sûl": "malta:a;numen:o silme;lambe:ú",
         "aragorn": "romen:a;ungwe:a;romen:o;numen",
-        "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;comma\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
         "atto": "tinco:a,tilde-below;short-carrier:o",
+        "barad dûr": "umbar;romen:a;ando:a ando;ore:ú",
         "baranduiniant": "umbar;romen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
         "dagor bragolach": "ando;ungwe:a;ore:o umbar;romen;ungwe:a;lambe:o;hwesta:a",
         "galadhrim": "ungwe;lambe:a;anto:a;romen;malta:i",
