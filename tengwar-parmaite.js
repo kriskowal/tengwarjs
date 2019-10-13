@@ -182,7 +182,6 @@ var positions = exports.positions = {
         "y": 2,
         "o-below": 2,
         "i-below": 2,
-        "y-above": 2,
         "others": null
     },
     "silme-nuquerna": {
@@ -200,7 +199,6 @@ var positions = exports.positions = {
         "y": null,
         "o-below": null,
         "i-below": null,
-        "y-above": null,
         "others": 1
     },
 
