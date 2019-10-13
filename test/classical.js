@@ -1,7 +1,4 @@
 module.exports = {
-    "ainaldo": "yanta:a;numen:a;alda:o",
-    "ainaldo i-luin:\nheru aldost.": "yanta:a;numen:a;alda:o short-carrier:i;comma;lambe;yanta:u;numen;comma\nhyarmen:e;romen:u short-carrier:a;alda:o;silme;tinco;full-stop",
-    "aldost": "short-carrier:a;alda:o;silme;tinco",
     "hlóce": "halla;lambe:ó;calma:e", // attested
     "hríve": "halla;romen;long-carrier:i;vala:e", // attested
     "hyarmen": "hyarmen:a,y;ore;malta:e;numen",
