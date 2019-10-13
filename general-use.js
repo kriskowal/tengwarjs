@@ -572,6 +572,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             return function (character2) {
                 if (character2 == "h" && options.language !== "english") {
                     return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                } else if (character2 === "k") {
+                    return callback(makeColumn("quesse", {from: character2}).addTildeBelow({from: character}), tehta, tehtaFrom);
                 } else if (character2 === "h" || character2 === "c") { // ch and cc
                     return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom);
                 } else { // c.
@@ -638,7 +640,21 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
         } else if (character === "v") { // v
             return callback(makeColumn("ampa", {from: "v"}), tehta, tehtaFrom);
         } else if (character === "j") { // j
-            return callback(makeColumn("anga", {from: "j"}), tehta, tehtaFrom); //HH Changed anca to anga
+            if (options.language === 'english') {
+                return Parser.countPrimes(function (primes) {
+                    if (primes === 0) {
+                        return callback(makeColumn("anga", {from: "j"}).varies(), tehta, tehtaFrom); //HH Changed anca to anga
+                    } else {
+                        var column = callback(makeColumn("anca", {from: "j"}), tehta, tehtaFrom);
+                        if (primes > 1) {
+                            column.addError("J only has two English variants: 1. anga, as pronounced in JACK and 2. anca , as pronounced in measure.");
+                        }
+                        return column;
+                    }
+                });
+            } else {
+                return callback(makeColumn("anca", {from: "j"}), tehta, tehtaFrom);
+            }
         } else if (character === "s") { // s
             return function (character) {
                 if (character === "s") { // ss

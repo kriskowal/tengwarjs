@@ -53,6 +53,7 @@ module.exports = {
         english: {
 
             // english (appropriate mode) (sorted)
+            "Jack": "anga;quesse:a,tilde-below",
             "cake": "quesse;quesse:a,i-below",
             "cakes": "quesse;quesse:a;silme-nuquerna:e",
             "cats.": "quesse;tinco:a,s-final;full-stop", // regression
