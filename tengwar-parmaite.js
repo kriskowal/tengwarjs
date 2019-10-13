@@ -200,6 +200,7 @@ var positions = exports.positions = {
         "y": null,
         "o-below": null,
         "i-below": null,
+        "y-above": null,
         "others": 1
     },
 
