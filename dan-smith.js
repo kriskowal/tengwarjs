@@ -70,8 +70,7 @@ exports.tengwar = {
     "question-mark": "À",
     "open-bracket": "›",
     "close-bracket": "›",
-    "open-paren": "Œ", // alt "&#140;",
-    "close-paren": "œ", // alt "&#156;",
+    // open-paren and close-paren vary by font.
     "flourish-left": "Ğ",
     "flourish-right": "ğ",
     // numbers

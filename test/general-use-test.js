@@ -3,15 +3,15 @@ var GeneralUse = require("../general-use");
 var tests = require("./general-use");
 
 describe("general use", function () {
-    Object.keys(tests).forEach(function (language) {
-        var languageTests = tests[language];
-        describe(language, function () {
-            Object.keys(languageTests).forEach(function (input) {
-                it("should encode " + input, function () {
-                    var expected = languageTests[input];
-                    expect(GeneralUse.encode(input, {
-                        language: language
-                    })).toEqual(expected);
+    Object.entries(tests).forEach(function ([fontName, tests]) {
+        Object.entries(tests).forEach(function ([language, tests]) {
+            describe(language, function () {
+                Object.entries(tests).forEach(function ([input, expected]) {
+                    it("should encode " + input, function () {
+                        expect(GeneralUse.encode(input, {
+                            language: language
+                        })).toEqual(expected);
+                    });
                 });
             });
         });

@@ -6,7 +6,7 @@ var makeDocumentParser = require("./document-parser");
 var punctuation = require("./punctuation");
 var parseNumber = require("./numbers");
 
-exports.name = "General Use Mode";
+exports.name = "Mode for general use";
 
 var defaults = {};
 exports.makeOptions = makeOptions;
