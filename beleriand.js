@@ -291,24 +291,24 @@ function parseTengwa(callback, options) {
                     return callback(makeColumn("silme-nuquerna", {from: "y"}))(character);
                 }
             };
-        } else if (character === "á") {
-            return callback(makeColumn("round-carrier", {from: "a", long: true}).addAbove("e", {from: "a"}));
-        } else if (character === "é") {
-            return callback(makeColumn("yanta", {from: "é"}).addAbove("e"));
-        } else if (character === "í") {
+        } else if (character === "á" || character === "â") {
+            return callback(makeColumn("round-carrier", {from: character, long: true}).addAbove("e", {}));
+        } else if (character === "é" || character === "ê") {
+            return callback(makeColumn("yanta", {from: character, long: true}).addAbove("e", {}));
+        } else if (character === "í" || character === "î") {
             return Parser.countPrimes(function (primes) {
                 if (primes === 0) {
-                    return callback(makeColumn("short-carrier", {from: "i"}).addAbove("e", {from: "i"}).varies());
+                    return callback(makeColumn("short-carrier", {from: character, long: true}).addAbove("e", {}).varies());
                 } else if (primes === 1) {
-                    return callback(makeColumn("long-carrier", {from: "í", long: true}).addAbove("e", {from: ""}));
+                    return callback(makeColumn("long-carrier", {from: character, long: true}).addAbove("e", {}));
                 } else {
-                    return callback(makeColumn("long-carrier").addAbove("e").addError("Í only has one variant."));
+                    return callback(makeColumn("long-carrier", {from: character, long: true}).addAbove("e", {}).addError(character + " has only has one variant."));
                 }
             });
-        } else if (character === "ó") {
-            return callback(makeColumn("anna", {from: "ó", long: true}).addAbove("e", {from: ""}));
-        } else if (character === "ú") {
-            return callback(makeColumn("ure", {from :"ú", long: true}).addAbove("e", {from: ""}));
+        } else if (character === "ó" || character === "ô") {
+            return callback(makeColumn("anna", {from: character, long: true}).addAbove("e", {}));
+        } else if (character === "ú" || character === "û") {
+            return callback(makeColumn("ure", {from: character, long: true}).addAbove("e", {}));
         } else if (character === "h") {
             return function (character) {
                 //if (character === "m") { // TODO

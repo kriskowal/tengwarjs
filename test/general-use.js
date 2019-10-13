@@ -71,12 +71,13 @@ module.exports = {
 
     sindarin: {
         // (sorted)
+        "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;comma\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
         "ainur": "anna:a;numen;ore:u",
         "aldost": "lambe:a;ando;silme-nuquerna:o;tinco",
         "amon sûl": "malta:a;numen:o silme;lambe:ú",
         "aragorn": "romen:a;ungwe:a;romen:o;numen",
-        "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;comma\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
         "atto": "tinco:a,tilde-below;short-carrier:o",
+        "barad dûr": "umbar;romen:a;ando:a ando;ore:ú",
         "baranduiniant": "umbar;romen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
         "dagor bragolach": "ando;ungwe:a;ore:o umbar;romen;ungwe:a;lambe:o;hwesta:a",
         "galadhrim": "ungwe;lambe:a;anto:a;romen;malta:i",

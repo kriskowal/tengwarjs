@@ -116,7 +116,7 @@ function parseColumn(callback, options, previous) {
                     } else if (punctuation[character]) {
                         return callback([makeColumn(punctuation[character], {from: character})]);
                     } else {
-                        return callback([makeColumn("ure", {from: ""}).addError(
+                        return callback([makeColumn("ure", {}).addError(
                             "Cannot transcribe " + JSON.stringify(character) +
                             " in Classical Mode"
                         )]);
@@ -434,7 +434,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("a")) {
                     return callback([previous.addAbove("a", {from: "a"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "a"}).addAbove("a", {from: ""})])(character);
+                    return callback([previous, makeColumn("short-carrier", {from: "a"}).addAbove("a", {})])(character);
                 }
             };
         } else if (character === "e" || character === "ë") {
@@ -447,7 +447,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("e")) {
                     return callback([previous.addAbove(tehta, {from: "e"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "e"}).addAbove(tehta, {from: ""})])(character);
+                    return callback([previous, makeColumn("short-carrier", {from: "e"}).addAbove(tehta, {})])(character);
                 }
             };
         } else if (character === "i") {
@@ -464,7 +464,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove(iTehta)) {
                     return callback([previous.addAbove(iTehta, {from: "i"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "i"}).addAbove(iTehta, {from: ""})])(character);
+                    return callback([previous, makeColumn("short-carrier", {from: "i"}).addAbove(iTehta, {})])(character);
                 }
             };
         } else if (character === "o") {
@@ -476,7 +476,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("o")) {
                     return callback([previous.addAbove(reverseCurls("o", options), {from: "o"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "o"}).addAbove(reverseCurls("o", options), {from: ""})])(character);
+                    return callback([previous, makeColumn("short-carrier", {from: "o"}).addAbove(reverseCurls("o", options), {})])(character);
                 }
             };
         } else if (character === "u") {
@@ -488,35 +488,35 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("u")) {
                     return callback([previous.addAbove(reverseCurls("u", options), {from: "u"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "u"}).addAbove(reverseCurls("u", options), {from: ""})])(character);
+                    return callback([previous, makeColumn("short-carrier", {from: "u"}).addAbove(reverseCurls("u", options), {})])(character);
                 }
             };
         } else if (character === "y") {
             if (previous && previous.canAddBelow("y")) {
                 return parseTehta(callback, options, previous.addBelow("y", {from: "y"}));
             } else {
-                var next = makeColumn("anna", {from: ""}).addBelow("y", {from: "y"});
+                var next = makeColumn("anna", {}).addBelow("y", {from: "y"});
                 return parseTehta(function (moreColumns) {
                     return callback([previous].concat(moreColumns));
                 }, options, next);
             }
-        } else if (character === "á") {
-            return callback([previous, makeColumn("long-carrier", {from: "á"}).addAbove("a", {from: ""})]);
-        } else if (character === "é") {
-            return callback([previous, makeColumn("long-carrier", {from: "é"}).addAbove(swapDotSlash("e", options), {from: ""})]);
-        } else if (character === "í") {
-            return callback([previous, makeColumn("long-carrier", {from: "í"}).addAbove(swapDotSlash("i", options), {from: ""})]);
-        } else if (character === "ó") {
+        } else if (character === "á" || character === "â") {
+            return callback([previous, makeColumn("long-carrier", {from: character}).addAbove("a", {})]);
+        } else if (character === "é" || character === "ê") {
+            return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(swapDotSlash("e", options), {})]);
+        } else if (character === "í" || character === "î") {
+            return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(swapDotSlash("i", options), {})]);
+        } else if (character === "ó" || character === "ô") {
             if (previous && previous.canAddAbove("ó")) {
-                return callback([previous.addAbove(reverseCurls("ó", options), {from: "ó"})]);
+                return callback([previous.addAbove(reverseCurls("ó", options), {from: character})]);
             } else {
-               return callback([previous, makeColumn("long-carrier", {from: "ó"}).addAbove(reverseCurls("o", options), {from: ""})]);
+               return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(reverseCurls("o", options), {})]);
             }
-        } else if (character === "ú") {
+        } else if (character === "ú" || character === "û") {
             if (previous && previous.canAddAbove("ú")) {
-                return callback([previous.addAbove(reverseCurls("ú", options), {from: "ú"})]);
+                return callback([previous.addAbove(reverseCurls("ú", options), {from: character})]);
             } else {
-                return callback([previous, makeColumn("long-carrier", {from: "ú"}).addAbove(reverseCurls("u", options), {from: ""})]);
+                return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(reverseCurls("u", options), {})]);
             }
         } else {
             return callback([previous])(character);

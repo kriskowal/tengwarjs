@@ -57,13 +57,6 @@ function toLowerCase(callback) {
 // adapted parser.  The adapted parser therefore only needs to handle the
 // normal phonetic form of the cluster.
 var table = {
-    "p": "p",
-    "b": "b",
-    "â": "á",
-    "ê": "é",
-    "î": "í",
-    "ô": "ó",
-    "û": "ú"
 };
 
 // This generates a data structure that can be walked by a parser, where each

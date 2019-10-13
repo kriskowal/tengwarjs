@@ -393,10 +393,11 @@ function makeCarrier(tehta, tehtaFrom, options) {
 
 function parseTehta(callback, options) {
     return function (character) {
-        var firstCharacter = character;
+        var from = character;
         if (character === "ë" && options.language !== "english") {
             character = "e";
         }
+        character = normalVowels[character] || character;
         if (character === "") {
             return callback();
         } else if (lengthenableVowels.indexOf(character) !== -1) {
@@ -404,17 +405,18 @@ function parseTehta(callback, options) {
                 if (nextCharacter === character) {
                     return callback(longerVowels[character], longerVowels[character]);
                 } else {
-                    return callback(character, character)(nextCharacter);
+                    return callback(character, from)(nextCharacter);
                 }
             };
         } else if (nonLengthenableVowels.indexOf(character) !== -1) {
-            return callback(character, character);
+            return callback(character, from);
         } else {
-            return callback()(character);
+            return callback()(from);
         }
     };
 }
 
+var normalVowels = {"â": "á", "ê": "é", "î": "í", "ô": "ó", "û": "ú"};
 var lengthenableVowels = "aeiou";
 var longerVowels = {"a": "á", "e": "é", "i": "í", "o": "ó", "u": "ú"};
 var nonLengthenableVowels = "aeióú";
