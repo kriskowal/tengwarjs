@@ -61,6 +61,7 @@ module.exports = {
             "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
             "font": "formen;tinco:o,tilde-above",
             "green": "ungwe;romen;long-carrier:e;numen",
+            "green": "ungwe;romen;short-carrier:e;numen:e",
             "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
             "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
             "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
@@ -155,4 +156,3 @@ module.exports = {
 
     },
 };
-

@@ -397,8 +397,13 @@ function parseTehta(callback, options) {
             return callback();
         } else if (lengthenableVowels.indexOf(character) !== -1) {
             return function (nextCharacter) {
-                if (nextCharacter === character) {
-                    return callback(longerVowels[character], longerVowels[character]);
+                // Doubling vowels as in the English word GREEN is generally
+                // rendered orthographically, with two separate E tehtar.
+                // However, in other languages, it is convenient to allow users
+                // who do not have ready access to diacrtics on their keyboard
+                // the ability to get a long vowel by doubling.
+                if (options.language !== "english" && nextCharacter === character) { // doubled
+                    return callback(longerVowels[character], character + nextCharacter);
                 } else {
                     return callback(character, from)(nextCharacter);
                 }
