@@ -71,7 +71,7 @@ module.exports = {
 
     sindarin: {
         // (sorted)
-        "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;comma\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
+        "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;colon\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
         "ainur": "anna:a;numen;ore:u",
         "aldost": "lambe:a;ando;silme-nuquerna:o;tinco",
         "amon sûl": "malta:a;numen:o silme;lambe:ú",
@@ -81,7 +81,7 @@ module.exports = {
         "baranduiniant": "umbar;romen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
         "dagor bragolach": "ando;ungwe:a;ore:o umbar;romen;ungwe:a;lambe:o;hwesta:a",
         "galadhrim": "ungwe;lambe:a;anto:a;romen;malta:i",
-        "galadriel": "ungwe;lambe:a;ando:a;romen;short-carrier:i;lambe:e",
+        "galadriel": "ungwe;lambe:a;ando:a;romen;yanta:i;lambe",
         "gandalf": "ungwe;ando:a,tilde-above;lambe:a;formen",
         "glorfindel": "ungwe;lambe;romen:o;formen;ando:i,tilde-above;lambe:e",
         "gwaith iaur arnor": "ungwe:w;anna:a;thule yanta;vala:a;ore romen:a;numen;ore:o",
@@ -91,7 +91,7 @@ module.exports = {
         "iaur": "yanta;vala:a;ore",
         "isildur": "silme-nuquerna:i;lambe:i;ando;ore:u",
         "lhûn": "alda;numen:ú",
-        "lothlórien": "lambe;thule:o;lambe;romen:ó;short-carrier:i;numen:e",
+        "lothlórien": "lambe;thule:o;lambe;romen:ó;yanta:i;numen",
         "mae govannen": "malta;yanta:a ungwe;ampa:o;numen:a,tilde-above;numen:e",
         "mellon": "malta;lambe:e,tilde-below;numen:o",
         "mordor": "malta;romen:o;ando;ore:o",
