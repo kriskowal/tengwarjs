@@ -17,7 +17,7 @@ exports.tengwar = [
 exports.tehtarAbove = [
     "a", "e", "i", "o", "u",
     "á", "é", "í", "ó", "ú",
-    "w"
+    "w", "y-above",
 ];
 
 exports.tehtarBelow = [

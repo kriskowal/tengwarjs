@@ -120,6 +120,7 @@ var positions = exports.positions = {
         "y": 1,
         "í": 2,
         "i-below": 1,
+        "y-above": 2,
         "others": 3
     },
     "anna": {
@@ -130,6 +131,7 @@ var positions = exports.positions = {
     "wilya": {
         "i": 2,
         "í": 2,
+        "y-above": 2,
         "others": 1
     },
 
@@ -153,6 +155,7 @@ var positions = exports.positions = {
         "w": 1,
         "í": 2,
         "y": 3,
+        "y-above": 2,
         "o-below": null,
         "i-below": 3,
         "others": 0
@@ -179,6 +182,7 @@ var positions = exports.positions = {
         "y": 2,
         "o-below": 2,
         "i-below": 2,
+        "y-above": 2,
         "others": null
     },
     "silme-nuquerna": {
