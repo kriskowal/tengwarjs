@@ -493,7 +493,7 @@ function parseTehta(callback, options, previous) {
             };
         } else if (character === "y") {
             if (previous && previous.canAddBelow("y")) {
-                return callback([previous.addBelow("y", {from: "y"})]);
+                return parseTehta(callback, options, previous.addBelow("y", {from: "y"}));
             } else {
                 var next = makeColumn("anna", {from: ""}).addBelow("y", {from: "y"});
                 return parseTehta(function (moreColumns) {
