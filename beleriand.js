@@ -85,7 +85,7 @@ function parseTengwa(callback, options) {
                     return parseTengwa(function (column) {
                         return callback(column.addTildeAbove());
                     }, options)(character);
-                } else if (character === "c" || character === "g") { // n{c,g}
+                } else if (character === "c" || character === "k" || character === "g") { // n{c,k,g}
                     return parseTengwa(callback, options)("ñ")(character);
                 } else if (character === "n") { // nn
                     return callback(makeColumn("numen", {from : "nn"}));
@@ -140,7 +140,7 @@ function parseTengwa(callback, options) {
             return callback(makeColumn("ampa", {from: "v"}));
         } else if (character === "ñ") { // ñ
             return function (character) {
-                if (character === "c" || character === "g") {
+                if (character === "c" || character === "k" || character === "g") {
                     return parseTengwa(function (column) {
                         if (column.tengwa === "halla") {
                             column.addError("Lenited G (halla) should not be nasalized with prefix N");
@@ -151,20 +151,20 @@ function parseTengwa(callback, options) {
                     return callback(makeColumn("noldo", {from: "ñ"}))(character);
                 }
             };
-        } else if (character === "c") { // c
-            return function (character) {
-                if (character === "h") { // ch
-                    return function (character) {
-                        if (character === "w") { // chw
-                            return callback(makeColumn("hwesta", {from: "chw"}));
-                        } else { // ch.
-                            return callback(makeColumn("harma", {from: "ch"}))(character);
+        } else if (character === "c" || character === "k") { // c or k
+            return function (character2) {
+                if (character2 === "h") { // ch or kh
+                    return function (character3) {
+                        if (character3 === "w") { // chw or khw
+                            return callback(makeColumn("hwesta", {from: character + "hw"}));
+                        } else { // ch. or kh.
+                            return callback(makeColumn("harma", {from: character + "h"}))(character3);
                         }
                     };
-                } else if (character === "w") { // cw
-                    return callback(makeColumn("quesse", {from: "cw"}));
+                } else if (character2 === "w") { // cw
+                    return callback(makeColumn("quesse", {from: character + "w"}));
                 } else { // c.
-                    return callback(makeColumn("calma", {from: "c"}))(character);
+                    return callback(makeColumn("calma", {from: character}))(character2);
                 }
             };
         } else if (character === "x") {

@@ -134,31 +134,31 @@ function parseTengwa(callback, options, previous) {
     var makeColumn = font.makeColumn;
     return function (character) {
         if (character === "n") { // n
-            return function (character) {
-                if (character === "n") { // nn
+            return function (character2) {
+                if (character2 === "n") { // nn
                     return callback([makeColumn("numen", {from: "n"}).addTildeBelow({from: "n"})]);
-                } else if (character === "t") { // nt
+                } else if (character2 === "t") { // nt
                     return callback([makeColumn("anto", {from: "nt"})]);
-                } else if (character === "d") { // nd
+                } else if (character2 === "d") { // nd
                     return callback([makeColumn("ando", {from: "nd"})]);
-                } else if (character === "g") { // ng
-                    return function (character) {
-                        if (character === "w") { // ngw -> ñw
+                } else if (character2 === "g") { // ng
+                    return function (character3) {
+                        if (character3 === "w") { // ngw -> ñw
                             return callback([makeColumn("ungwe", {from: "ñgw"})]);
                         } else { // ng
-                            return callback([makeColumn("anga", {from: "ñg"})])(character);
+                            return callback([makeColumn("anga", {from: "ñg"})])(character3);
                         }
                     };
-                } else if (character === "c") { // nc
-                    return function (character) {
-                        if (character === "w") { // ncw
-                            return callback([makeColumn("unque", {from: "ñcw"})]);
+                } else if (character2 === "c" || character2 == "k") { // nc or nk
+                    return function (character3) {
+                        if (character3 === "w") { // ncw
+                            return callback([makeColumn("unque", {from: "ñ" + character2 + "w"})]);
                         } else { // nc
-                            return callback([makeColumn("anca", {from: "ñc"})])(character);
+                            return callback([makeColumn("anca", {from: "ñ" + character2})])(character3);
                         }
                     };
                 } else {
-                    return callback([makeColumn("numen", {from: "n"})])(character);
+                    return callback([makeColumn("numen", {from: "n"})])(character2);
                 }
             };
         } else if (character === "m") {
@@ -252,18 +252,18 @@ function parseTengwa(callback, options, previous) {
                     return callback([makeColumn("parma", {from: "p"})])(character);
                 }
             };
-        } else if (character === "c") {
-            return function (character) {
-                if (character === "c") {
-                    return callback([makeColumn("calma", {from: "c"}).addTildeBelow({from: "c"})]);
-                } else if (character === "s") {
-                    return callback([makeColumn("calma", {from: "s"}).addBelow("s", {from: "s"})]);
-                } else if (character === "h") {
-                    return callback([makeColumn("harma", {from: "ch"})]);
-                } else if (character === "w") {
-                    return callback([makeColumn("quesse", {from: "chw"})]);
+        } else if (character === "c" || character === "k") {
+            return function (character2) {
+                if (character2 === "c" || character2 === "k") {
+                    return callback([makeColumn("calma", {from: character}).addTildeBelow({from: character2})]);
+                } else if (character2 === "s") {
+                    return callback([makeColumn("calma", {from: character}).addBelow("s", {from: character2})]);
+                } else if (character2 === "h") {
+                    return callback([makeColumn("harma", {from: character + character2})]);
+                } else if (character2 === "w") {
+                    return callback([makeColumn("quesse", {from: character + character2})]);
                 } else {
-                    return callback([makeColumn("calma", {from: "c"})])(character);
+                    return callback([makeColumn("calma", {from: character})])(character2);
                 }
             };
         } else if (character === "x") {

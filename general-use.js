@@ -470,8 +470,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     };
                 } else if (character === "d") { // nd
                     return callback(makeColumn("ando", {from: "d"}).addTildeAbove({from: "n"}), tehta, tehtaFrom);
-                } else if (character === "c") { // nc -> ñc
-                    return callback(makeColumn("quesse", {from: "c"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
+                } else if (character === "c" || character === "k") { // nc -> ñc
+                    return callback(makeColumn("quesse", {from: character}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else if (character === "g") { // ng -> ñg
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else if (character === "j") { // nj
@@ -524,8 +524,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             return function (character) {
                 // ññ does not exist to the best of my knowledge
                 // ñw is handled naturally by following w
-                if (character === "c") { // ñc
-                    return callback(makeColumn("quesse", {from: "c"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
+                if (character === "c" || character === "k") { // ñc
+                    return callback(makeColumn("quesse", {from: character}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else if (character === "g") { // ñg
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else { // ñ.
@@ -563,24 +563,26 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return callback(makeColumn("parma", {from: "p"}), tehta, tehtaFrom)(character);
                 }
             };
-        } else if (character === "c" || character == "q") { // c or q
+        } else if (character === "c") {
             return function (character2) {
-                // cw should be handled either by following-w or a subsequent
-                // vala
-                if (character2 === "c") { // ch as in charm
+                if (character2 == "h" && options.language !== "english") {
+                    return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                } else if (character2 === "h" || character2 === "c") { // ch and cc
                     return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom);
-                } else if (character2 === "h") { // ch, ach-laut, as in bach
-                    return Parser.countPrimes(function (primes) {
-                        if (options.noAchLaut == !!primes) {
-                            return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom); // ch as in charm
-                        } else {
-                            return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom); // ch as in bach
-                        }
-                    });
                 } else { // c.
                     return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom)(character2);
                 }
             };
+        } else if (character === "k") {
+            return function (character2) {
+                if (character2 === "h" && !options.noAchLaut) { // ach laut
+                    return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                } else { // c.
+                    return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom)(character2);
+                }
+            };
+        } else if (character === "q") {
+            return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom);
         } else if (character === "x") {
             return callback(makeColumn("quesse", {from: "x (k-)"}).addBelow("s", {from: "x (-s)"}), tehta, tehtaFrom);
         } else if (character === "d") {
