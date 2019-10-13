@@ -23,4 +23,7 @@ module.exports = {
 
     // for code coverage
     "x": "calma:s",
+    "q": "quesse",
+    "qu": "quesse",
+    "qw": "quesse",
 };

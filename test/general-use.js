@@ -6,7 +6,7 @@ module.exports = {
         // interesting clusters
         "xx": "quesse:s;quesse:s",
         "tsts": "tinco;silme;tinco:s-final",
-        "iqs": "quesse:i;vala;silme",
+        "iqs": "quesse:i,s",
         "aty": "tinco:a,y",
         "allys": "lambe:a,y,s-final,tilde-below",
         "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",

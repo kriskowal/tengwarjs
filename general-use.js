@@ -563,22 +563,22 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return callback(makeColumn("parma", {from: "p"}), tehta, tehtaFrom)(character);
                 }
             };
-        } else if (character === "c") { // c
-            return function (character) {
+        } else if (character === "c" || character == "q") { // c or q
+            return function (character2) {
                 // cw should be handled either by following-w or a subsequent
                 // vala
-                if (character === "c") { // ch as in charm
-                    return callback(makeColumn("calma", {from: "cc"}), tehta, tehtaFrom);
-                } else if (character === "h") { // ch, ach-laut, as in bach
+                if (character2 === "c") { // ch as in charm
+                    return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom);
+                } else if (character2 === "h") { // ch, ach-laut, as in bach
                     return Parser.countPrimes(function (primes) {
-                        if (options.noAchLaut && !primes) {
-                            return callback(makeColumn("calma", {from: "ch"}), tehta, tehtaFrom); // ch as in charm
+                        if (options.noAchLaut == !!primes) {
+                            return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom); // ch as in charm
                         } else {
-                            return callback(makeColumn("hwesta", {from: "ch"}), tehta, tehtaFrom); // ch as in bach
+                            return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom); // ch as in bach
                         }
                     });
                 } else { // c.
-                    return callback(makeColumn("quesse", {from: "c"}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom)(character2);
                 }
             };
         } else if (character === "x") {

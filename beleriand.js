@@ -169,6 +169,14 @@ function parseTengwa(callback, options) {
             };
         } else if (character === "x") {
             return callback(makeColumn("calma", {from: "x (k-)"}).addBelow("s", {from: "x (-s)"}));
+        } else if (character === "q") {
+            return function (character) {
+                if (character == "u" || character == "w") {
+                    return callback(makeColumn("quesse", {from: "q" + character}));
+                } else {
+                    return callback(makeColumn("quesse", {from: "q"}))(character);
+                }
+            };
         } else if (character === "g") {
             return function (character) {
                 if (character === "h") { // gh
