@@ -28,6 +28,12 @@ module.exports = {
         // final-e modification for non-english
         "cake`": "quesse;quesse:a,i-below",
 
+        // punctuation
+        "()": "open-paren;close-paren",
+        "[]": "open-bracket;close-bracket",
+        ",:.": "comma;colon;full-stop",
+        "'": "apostrophe",
+
     },
 
     english: {

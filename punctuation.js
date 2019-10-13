@@ -1,9 +1,7 @@
 
 module.exports = {
     "-": "hyphen",
-    "[": "parenthesis",
-    "]": "parenthesis",
-    "/": "apostrophe",
+    "'": "apostrophe",
     ",": "comma",
     ":": "colon",
     ";": "semi-colon",
@@ -12,6 +10,8 @@ module.exports = {
     "?": "question-mark",
     "(": "open-paren",
     ")": "close-paren",
+    "[": "open-bracket",
+    "]": "close-bracket",
     ">": "flourish-left",
     "<": "flourish-right"
 };
