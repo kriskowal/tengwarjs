@@ -123,8 +123,9 @@ exports.tehtar = {
         "×"
     ],
     "w": "èéêë", // TODO custom hooks for tengwar parmaite from the alternate font
-    "y": "ÌÍÎÏ´",
-    "y-above": "ØÙÚÛ",
+    "y-english": "ØÙÚÛ",
+    "y-sindarin": "ÔÕÖ×",
+    "y-quenya": "ÌÍÎÏ´",
     "o-below": [
         "ä",
         "å",

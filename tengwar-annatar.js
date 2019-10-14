@@ -178,7 +178,7 @@ var positions = exports.positions = {
         "u": 3,
         "ó": 2,
         "ú": 2,
-        "y": 3,
+        "y-quenya": 3,
         "o-below": null,
         "i-below": 3,
         "others": 1
@@ -192,7 +192,7 @@ var positions = exports.positions = {
         "í": 1,
         "ó": 2,
         "ú": 2,
-        "y": 3,
+        "y-quenya": 3,
         "o-below": null,
         "i-below": 3,
         "others": 0
@@ -200,7 +200,7 @@ var positions = exports.positions = {
     "lambe": {
         "wide": true,
         "e": 1,
-        "y": 4,
+        "y-quenya": 4,
         "ó": 1,
         "ú": 1,
         "o-below": null,
@@ -214,7 +214,7 @@ var positions = exports.positions = {
     },
 
     "silme": {
-        "y": 3,
+        "y-quenya": 3,
         "o-below": 2,
         "i-below": 2,
         "others": null
@@ -225,13 +225,13 @@ var positions = exports.positions = {
         "u": 3,
         "ó": 3,
         "ú": 3,
-        "y": null,
+        "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 1
     },
     "esse": {
-        "y": null,
+        "y-quenya": null,
         "others": null
     },
     "esse-nuquerna": {
@@ -275,7 +275,7 @@ var positions = exports.positions = {
     },
     "short-carrier": 3,
     "long-carrier": {
-        "y": null,
+        "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 3

@@ -195,13 +195,13 @@ function parseTengwa(callback, options, previous) {
                 if (character === "t") { // tt
                     return function (character) {
                         if (character === "y") { // tty
-                            return callback([makeColumn("tinco", {from: "t"}).addBelow("y", {from: "y"}).addTildeBelow({from: "t"})]);
+                            return callback([makeColumn("tinco", {from: "t"}).addBelow("y-quenya", {from: "y"}).addTildeBelow({from: "t"})]);
                         } else { // tt
                             return callback([makeColumn("tinco", {from: "t"}).addTildeBelow({from: "t"})])(character);
                         }
                     };
                 } else if (character === "y") { // ty
-                    return callback([makeColumn("tinco", {from: "t"}).addBelow("y", {from: "y"})]);
+                    return callback([makeColumn("tinco", {from: "t"}).addBelow("y-quenya", {from: "y"})]);
                 } else if (character === "h") { // th
                     return callback([makeColumn("thule", {from: "th"})]);
                 } else if (character === "s") {
@@ -225,13 +225,13 @@ function parseTengwa(callback, options, previous) {
                 if (character === "p") {
                     return function (character) {
                         if (character === "y") { // ppy
-                            return callback([makeColumn("parma", {from: "p"}).addBelow("y", {from: "y"}).addTildeBelow({from: "p"})]);
+                            return callback([makeColumn("parma", {from: "p"}).addBelow("y-quenya", {from: "y"}).addTildeBelow({from: "p"})]);
                         } else { // pp
                             return callback([makeColumn("parma", {from: "p"}).addTildeBelow({from: "p"})])(character);
                         }
                     };
                 } else if (character === "y") { // py
-                    return callback([makeColumn("parma", {from: "p"}).addBelow("y", {from: "y"})]);
+                    return callback([makeColumn("parma", {from: "p"}).addBelow("y-quenya", {from: "y"})]);
                 } else if (character === "s") { // ps
                     return function (character) {
                         if (Parser.isFinal(character)) { // ps final
@@ -324,13 +324,13 @@ function parseTengwa(callback, options, previous) {
                 if (character === "l") {
                     return function (character) {
                         if (character === "y") { // lly
-                            return callback([makeColumn("lambe", {from: "l"}).addBelow("y", {from: "y"}).addTildeBelow({from: "l"})]);
+                            return callback([makeColumn("lambe", {from: "l"}).addBelow("y-quenya", {from: "y"}).addTildeBelow({from: "l"})]);
                         } else { // ll
                             return callback([makeColumn("lambe", {from: "l"}).addTildeBelow({from: "y"})])(character);
                         }
                     }
                 } else if (character === "y") { // ly
-                    return callback([makeColumn("lambe", {from: "l"}).addBelow("y", {from: "y"})]);
+                    return callback([makeColumn("lambe", {from: "l"}).addBelow("y-quenya", {from: "y"})]);
                 } else if (character === "h") { // lh -> hl
                     var error = "L should preceed H in the HL diagraph in Classical mode.";
                     return callback([
@@ -378,7 +378,7 @@ function parseTengwa(callback, options, previous) {
                     if (options.classicalH && !options.harma) { // oldest form
                         return callback([makeColumn("hyarmen", {from: "hy"})]);
                     } else { // post-aha, through to the third-age
-                        return callback([makeColumn("hyarmen", {from: "hy"}).addBelow("y", {from: "y"})]);
+                        return callback([makeColumn("hyarmen", {from: "hy"}).addBelow("y-quenya", {from: "y"})]);
                     }
                 } else { // h
                     if (options.classicalH) {
@@ -452,7 +452,7 @@ function parseTehta(callback, options, previous) {
                     return parseTehta(callback, options, previous)("í");
                 } else if (character === "u") {
                     if (options.iuRising) {
-                        return callback([previous, makeColumn("anna", {from: "i", diphthong: true}).addAbove(reverseCurls("u", options), {from: "u"}).addBelow("y", {from: "y"})]);
+                        return callback([previous, makeColumn("anna", {from: "i", diphthong: true}).addAbove(reverseCurls("u", options), {from: "u"}).addBelow("y-quenya", {from: "y"})]);
                     } else {
                         return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove(iTehta, {from: "i"})]);
                     }
@@ -487,10 +487,10 @@ function parseTehta(callback, options, previous) {
                 }
             };
         } else if (character === "y") {
-            if (previous && previous.canAddBelow("y")) {
-                return parseTehta(callback, options, previous.addBelow("y", {from: "y"}));
+            if (previous && previous.canAddBelow("y-quenya")) {
+                return parseTehta(callback, options, previous.addBelow("y-quenya", {from: "y"}));
             } else {
-                var next = makeColumn("anna", {}).addBelow("y", {from: "y"});
+                var next = makeColumn("anna", {}).addBelow("y-quenya", {from: "y"});
                 return parseTehta(function (moreColumns) {
                     return callback([previous].concat(moreColumns));
                 }, options, next);

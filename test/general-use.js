@@ -27,9 +27,8 @@ module.exports = {
             "xx": "quesse:s;quesse:s",
             "tsts": "tinco;silme;tinco:s-final",
             "iqs": "quesse:i,s",
-            "aty": "tinco:a,y",
-            "allys": "lambe:a,y,s-final,tilde-below",
-            "alyssa": "lambe:a,y;silme:tilde-below;short-carrier:a",
+            "allys": "lambe:a,tilde-below;silme-nuquerna:y-sindarin",
+            "Alyssa": "lambe:a;silme-nuquerna:y-sindarin,tilde-below;short-carrier:a",
             "ls": "lambe:s-final",
             "ls`": "lambe:s-flourish",
 
@@ -53,6 +52,7 @@ module.exports = {
         english: {
 
             // english (appropriate mode) (sorted)
+            "Alyssa": "lambe:a;silme-nuquerna:y-english,tilde-below;short-carrier:a",
             "Jack": "anga;quesse:a,tilde-below",
             "cake": "quesse;quesse:a,i-below",
             "cakes": "quesse;quesse:a;silme-nuquerna:e",
@@ -60,24 +60,28 @@ module.exports = {
             "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
             "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
             "font": "formen;tinco:o,tilde-above",
-            "green": "ungwe;romen;long-carrier:e;numen",
             "green": "ungwe;romen;short-carrier:e;numen:e",
+            "happy": "hyarmen;parma:a,tilde-below;short-carrier:y-english",
             "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
             "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
             "hobbits": "hyarmen;umbar:o,tilde-below;tinco:i,s-final",
             "hobbits`": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
             "hobbits``": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
             "hobbits```": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
+            "onyx": "numen:o;quesse:y-english,s",
             "phone": "parma-extended;numen:o,i-below",
-            "there": "thule;romen:e,i-below",
+            "style": "silme;tinco:y-english;lambe:i-below",
             "these": "thule;silme-nuquerna:e;short-carrier:i-below",
-            "these`": "thule;silme-nuquerna:e;short-carrier:e",
+            "these`": "thule;silme-nuquerna:e;short-carrier:e", // invalid input
+            "yellow": "anna;lambe:e,tilde-below;vala:o",
+            "yes": "anna;silme-nuquerna:e",
 
             // for code coverage
-            "y": "anna",
-            "x": "quesse:s",
             "ie": "yanta:i",
             "oe": "yanta:o",
+            "x": "quesse:s",
+            "y": "anna",
+            "yippy": "anna;parma:i,tilde-below;short-carrier:y-english",
 
             // abbreviated words
             "of": "umbar-extended",
@@ -123,10 +127,11 @@ module.exports = {
             "noldor": "nwalme;lambe:o;ando;ore:o",
             "periannath": "parma;romen:e;short-carrier:i;numen:a,tilde-above;thule:a",
             "rhûn": "arda;numen:ú",
-            "tyelpe": "tinco:y;lambe:e;parma;short-carrier:e",
+            "tyelpe": "tinco:y-sindarin;lambe:e;parma;short-carrier:e",
             "varda": "ampa;romen:a;ando;short-carrier:a",
             "á": "wilya:a",
             "ñoldor": "nwalme;lambe:o;ando;ore:o",
+            "y": "short-carrier:y-sindarin",
         },
 
         blackSpeech: {
@@ -141,18 +146,6 @@ module.exports = {
             "krimpatul": "quesse;romen;parma:i,tilde-above;tinco:a;lambe:o"
         },
 
-        quenya: {
-            // (improper mode) (sorted)
-            "ardalambion": "romen:a;ando;lambe:a;umbar:a,tilde-above;short-carrier:i;numen:o",
-            "ëa": "short-carrier:e;short-carrier:a",
-            "helcaraxë": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:e",
-            "hyarmen": "hyarmen:y;romen:a;malta;numen:e",
-            "istari": "silme-nuquerna:i;tinco;romen:a;short-carrier:i",
-            "sinome maruvan": "silme;numen:i;malta:o;short-carrier:e malta;romen:a;ampa:u;numen:a",
-            "telperion": "tinco;lambe:e;parma;romen:e;short-carrier:i;numen:o",
-            "yuldar": "anna;lambe:u;ando;ore:a",
-            "y`uldar": "long-carrier:i;lambe:u;ando;ore:a",
-        }
-
     },
+
 };
