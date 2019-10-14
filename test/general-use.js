@@ -24,17 +24,17 @@ module.exports = {
             "'": "apostrophe",
 
             // interesting clusters
-            "xx": "quesse:s;quesse:s",
-            "tsts": "tinco;silme;tinco:s-final",
-            "iqs": "quesse:i,s",
-            "allys": "lambe:a,tilde-below;silme-nuquerna:y-sindarin",
             "Alyssa": "lambe:a;silme-nuquerna:y-sindarin,tilde-below;short-carrier:a",
+            "allys": "lambe:a,tilde-below;silme-nuquerna:y-sindarin",
+            "iqs": "quesse:i,s",
             "ls": "lambe:s-final",
             "ls`": "lambe:s-flourish",
+            "tsts": "tinco;silme;tinco:s-final",
+            "xx": "quesse:s;quesse:s",
 
             // long vowels
-            "á": "wilya:a",
-            "aa": "wilya:a",
+            "á": "anna:a",
+            "aa": "anna:a",
             "é": "long-carrier:e",
             "ee": "long-carrier:e",
             "í": "long-carrier:i",
@@ -46,7 +46,6 @@ module.exports = {
 
             // final-e modification for non-english
             "cake`": "quesse;quesse:a,i-below",
-
         },
 
         english: {
@@ -129,9 +128,9 @@ module.exports = {
             "rhûn": "arda;numen:ú",
             "tyelpe": "tinco:y-sindarin;lambe:e;parma;short-carrier:e",
             "varda": "ampa;romen:a;ando;short-carrier:a",
-            "á": "wilya:a",
-            "ñoldor": "nwalme;lambe:o;ando;ore:o",
             "y": "short-carrier:y-sindarin",
+            "á": "anna:a",
+            "ñoldor": "nwalme;lambe:o;ando;ore:o",
         },
 
         blackSpeech: {

@@ -388,7 +388,7 @@ function makeCarrier(tehta, tehtaFrom, options) {
     var font = options.font;
     var makeColumn = font.makeColumn;
     if (tehta === "á") {
-        return makeColumn("wilya", {from: "a"})
+        return makeColumn("anna", {from: "a"})
             .addAbove("a", {from: "a"});
     } else if (shorterVowels[tehta]) {
         return makeColumn("long-carrier", {from: tehtaFrom})
