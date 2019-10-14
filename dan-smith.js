@@ -62,7 +62,7 @@ exports.tengwar = {
     // punctuation
     "colon": "ˆ",
     "apostrophe": "²",
-    "hyphen": ":",
+    "hyphen": "¬",
     "semi-colon": "Â",
     "comma": "=",
     "full-stop": "-",
