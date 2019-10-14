@@ -74,6 +74,8 @@ module.exports = {
             // for code coverage
             "y": "anna",
             "x": "quesse:s",
+            "ie": "yanta:i",
+            "oe": "yanta:o",
 
             // abbreviated words
             "of": "umbar-extended",
