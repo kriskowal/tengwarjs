@@ -292,29 +292,38 @@ function parseColumn(callback, length, options, previous) {
     var makeColumn = font.makeColumn;
 
     return parseTehta(function (tehta, tehtaFrom) {
+        if (tehta === "y" && options.language === "english" && previous == null) {
+            return callback([makeColumn("anna", {from: "y (initial)"})]);
+        }
         return parseTengwa(function (column, tehta, tehtaFrom) {
+            if (tehta) {
+                if (options.reverseCurls) {
+                    tehta = reverseCurls[tehta] || tehta;
+                }
+                if (options.swapDotSlash) {
+                    tehta = swapDotSlash[tehta] || tehta;
+                }
+            }
             if (column) {
                 if (tehta) {
-                    if (options.reverseCurls) {
-                        tehta = reverseCurls[tehta] || tehta;
-                    }
-                    if (options.swapDotSlash) {
-                        tehta = swapDotSlash[tehta] || tehta;
-                    }
                     if (column.tengwa === "silme" && tehta && options.sHook) {
                         return callback([
                             makeColumn("short-carrier", {from: ""})
                             .addAbove(tehta, {from: tehtaFrom})
                             .addBelow("s", {from: "s"})
                         ]);
-                    } else if (options.language === "english" && shorterVowels[tehta]) {
-                        // doubled vowels are composed from individual letters,
-                        // not long forms.
-                        return callback([
-                            makeColumn("long-carrier", {from: shorterVowels[tehta]})
-                                .addAbove(shorterVowels[tehta], {from: shorterVowels[tehta]}),
-                            column
-                        ]);
+                    } else if (tehta === "y") {
+                        var columns = [column];
+                        if (options.language === "english" && column.canAddAbove("y-english")) {
+                            column.addAbove("y-english", {from: tehtaFrom});
+                        } else if (column.canAddAbove("y-sindarin")) {
+                            column.addAbove("y-sindarin", {from: tehtaFrom});
+                        } else {
+                            columns.push(makeColumn("anna", {from: "y"}));
+                        }
+                        return parseTengwaAnnotations(function (column) {
+                            return callback(columns);
+                        }, column, length, options);
                     } else if (canAddAboveTengwa(tehta) && column.canAddAbove(tehta)) {
                         column.addAbove(tehta, {from: tehtaFrom});
                         return parseTengwaAnnotations(function (column) {
@@ -336,13 +345,17 @@ function parseColumn(callback, length, options, previous) {
                         return callback([column]);
                     }, column, length, options);
                 }
+            } else if (tehta === "y") {
+                var column;
+                if (options.language === "english") {
+                    column = makeColumn("short-carrier").addAbove("y-english", {from: "y"});
+                } else {
+                    column = makeColumn("short-carrier").addAbove("y-sindarin", {from: "y"});
+                }
+                return parseTengwaAnnotations(function (column) {
+                    return callback([column]);
+                }, column, length, options);
             } else if (tehta) {
-                if (options.reverseCurls) {
-                    tehta = reverseCurls[tehta] || tehta;
-                }
-                if (options.swapDotSlash) {
-                    tehta = swapDotSlash[tehta] || tehta;
-                }
                 return parseTengwaAnnotations(function (carrier) {
                     return callback([carrier]);
                 }, makeCarrier(tehta, tehtaFrom, options), length, options);
@@ -375,7 +388,7 @@ function makeCarrier(tehta, tehtaFrom, options) {
     var font = options.font;
     var makeColumn = font.makeColumn;
     if (tehta === "á") {
-        return makeColumn("wilya", {from: "a"})
+        return makeColumn("anna", {from: "a"})
             .addAbove("a", {from: "a"});
     } else if (shorterVowels[tehta]) {
         return makeColumn("long-carrier", {from: tehtaFrom})
@@ -397,8 +410,13 @@ function parseTehta(callback, options) {
             return callback();
         } else if (lengthenableVowels.indexOf(character) !== -1) {
             return function (nextCharacter) {
-                if (nextCharacter === character) {
-                    return callback(longerVowels[character], longerVowels[character]);
+                // Doubling vowels as in the English word GREEN is generally
+                // rendered orthographically, with two separate E tehtar.
+                // However, in other languages, it is convenient to allow users
+                // who do not have ready access to diacrtics on their keyboard
+                // the ability to get a long vowel by doubling.
+                if (options.language !== "english" && nextCharacter === character) { // doubled
+                    return callback(longerVowels[character], character + nextCharacter);
                 } else {
                     return callback(character, from)(nextCharacter);
                 }
@@ -414,7 +432,7 @@ function parseTehta(callback, options) {
 var normalVowels = {"â": "á", "ê": "é", "î": "í", "ô": "ó", "û": "ú"};
 var lengthenableVowels = "aeiou";
 var longerVowels = {"a": "á", "e": "é", "i": "í", "o": "ó", "u": "ú"};
-var nonLengthenableVowels = "aeióú";
+var nonLengthenableVowels = "aeióúy";
 var tehtarThatCanBeAddedAbove = "aeiouóú";
 var vowels = "aeëiouáéíóú";
 var shorterVowels = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"};
@@ -572,6 +590,8 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             return function (character2) {
                 if (character2 == "h" && options.language !== "english") {
                     return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                } else if (character2 === "k") {
+                    return callback(makeColumn("quesse", {from: character2}).addTildeBelow({from: character}), tehta, tehtaFrom);
                 } else if (character2 === "h" || character2 === "c") { // ch and cc
                     return callback(makeColumn("calma", {from: character + character2}), tehta, tehtaFrom);
                 } else { // c.
@@ -638,7 +658,21 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
         } else if (character === "v") { // v
             return callback(makeColumn("ampa", {from: "v"}), tehta, tehtaFrom);
         } else if (character === "j") { // j
-            return callback(makeColumn("anga", {from: "j"}), tehta, tehtaFrom); //HH Changed anca to anga
+            if (options.language === 'english') {
+                return Parser.countPrimes(function (primes) {
+                    if (primes === 0) {
+                        return callback(makeColumn("anga", {from: "j"}).varies(), tehta, tehtaFrom); //HH Changed anca to anga
+                    } else {
+                        var column = callback(makeColumn("anca", {from: "j"}), tehta, tehtaFrom);
+                        if (primes > 1) {
+                            column.addError("J only has two English variants: 1. anga, as pronounced in JACK and 2. anca , as pronounced in measure.");
+                        }
+                        return column;
+                    }
+                });
+            } else {
+                return callback(makeColumn("anca", {from: "j"}), tehta, tehtaFrom);
+            }
         } else if (character === "s") { // s
             return function (character) {
                 if (character === "s") { // ss
@@ -824,8 +858,10 @@ function parseFollowingBelow(callback, column, length, options) {
         if (character === "ë" && options.language !== "english") {
             character = "e";
         }
-        if (character === "y" && column.canAddBelow("y")) {
-            return callback(column.addBelow("y", {from: "y"}));
+        if (options.language === "english" && character === "y" && column.canAddAbove("y-english")) {
+            return callback(column.addAbove("y-english", {from: "y"}));
+        } else if (character === "y" && column.canAddAbove("y-sindarin")) {
+            return callback(column.addAbove("y-sindarin", {from: "y"}));
         } else if (character === "e" && column.canAddBelow("i-below")) {
             return Parser.countPrimes(function (primes) {
                 return function (character) {

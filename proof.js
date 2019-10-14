@@ -51,16 +51,16 @@ for (let [fontName, fontTests] of Object.entries(generalUseTests)) {
 }
 
 document.querySelector("#classical").innerHTML = Object.entries(classicalTests).map(function ([input, expected]) {
-    let actual = classical.encode(input, {});
+    let actual = classical.encode(input, {font: TengwarParmaite});
     return equals(input, expected, actual, `<br>
-        <span class="rendered tengwar parmaite">${classical.transcribe(input, {})}</span>
+        <span class="rendered tengwar parmaite">${classical.transcribe(input, {font: TengwarParmaite})}</span>
     `);
 }).join("");
 
 document.querySelector("#beleriand").innerHTML = Object.entries(beleriandTests).map(function ([input, expected]) {
-    let actual = beleriand.encode(input, {});
+    let actual = beleriand.encode(input, {font: TengwarParmaite});
     return equals(input, expected, actual, `<br>
-        <span class="rendered tengwar parmaite">${beleriand.transcribe(input, {})}</span>
+        <span class="rendered tengwar parmaite">${beleriand.transcribe(input, {front: TengwarParmaite})}</span>
     `);
 }).join("");
 

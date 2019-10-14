@@ -17,11 +17,13 @@ exports.tengwar = [
 exports.tehtarAbove = [
     "a", "e", "i", "o", "u",
     "á", "é", "í", "ó", "ú",
-    "w", "y-above",
+    "w",
+    "y-english", "y-sindarin",
 ];
 
 exports.tehtarBelow = [
-    "y", "s", "o-below", "i-below"
+    "y-quenya",
+    "s", "o-below", "i-below",
 ];
 
 exports.tehtarFollowing = [

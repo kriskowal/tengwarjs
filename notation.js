@@ -54,8 +54,12 @@ function decodeWord(word, makeColumn) {
                 result.addTildeAbove();
             } else if (tehta === "tilde-below") {
                 result.addTildeBelow();
-            } else if (tehta === "y") {
-                result.addBelow("y");
+            } else if (tehta === "y-quenya") {
+                result.addBelow("y-quenya");
+            } else if (tehta === "y-sindarin") {
+                result.addAbove("y-sindarin");
+            } else if (tehta === "y-english") {
+                result.addAbove("y-english");
             } else if (
                 tehta === "s" ||
                 tehta === "s-inverse" ||

@@ -15,12 +15,12 @@ var positions = exports.positions = {
     "tinco": 2,
     "parma": 2,
     "calma": {
-        "y": 1,
+        "y-quenya": 1,
         "o-below": 1,
         "others": 2
     },
     "quesse": {
-        "y": 1,
+        "y-quenya": 1,
         "o-below": 1,
         "others": 2
     },
@@ -45,31 +45,29 @@ var positions = exports.positions = {
     "thule": {
         "a": 3,
         "w": 3,
+        "y-sindarin": 3,
         "others": 2
     },
     "formen": {
         "a": 3,
         "w": 3,
         "í": 3,
+        "y-sindarin": 3,
         "others": 2
     },
     "harma": {
         "a": 0,
         "e": 0,
-        "i": 1,
-        "o": 1,
-        "u": 1,
         "w": 0,
         "í": 0,
+        "y-sindarin": 0,
         "others": 1
     },
     "hwesta": {
         "a": 0,
         "e": 0,
-        "i": 1,
-        "o": 1,
-        "u": 1,
         "w": 0,
+        "y-sindarin": 0,
         "others": 1
     },
 
@@ -121,10 +119,11 @@ var positions = exports.positions = {
         "i": 2,
         "o": 2,
         "w": 1,
-        "y": 1,
+        "y-quenya": 1,
+        "y-sindarin": 2,
+        "y-english": 2,
         "í": 2,
         "i-below": 1,
-        "y-above": 2,
         "others": 3
     },
     "anna": {
@@ -135,7 +134,8 @@ var positions = exports.positions = {
     "wilya": {
         "i": 2,
         "í": 2,
-        "y-above": 2,
+        "y-english": 2,
+        "y-sindarin": 2,
         "others": 1
     },
 
@@ -145,7 +145,7 @@ var positions = exports.positions = {
         "i": 2,
         "o": 1,
         "u": 1,
-        "y": 3,
+        "y-quenya": 3,
         "o-below": null,
         "i-below": 3,
         "others": 1
@@ -158,8 +158,9 @@ var positions = exports.positions = {
         "u": 1,
         "w": 1,
         "í": 2,
-        "y": 3,
-        "y-above": 2,
+        "y-quenya": 3,
+        "y-sindarin": 2,
+        "y-english": 2,
         "o-below": null,
         "i-below": 3,
         "others": 0
@@ -167,7 +168,7 @@ var positions = exports.positions = {
     "lambe": {
         "wide": true,
         "e": 1,
-        "y": 4,
+        "y-quenya": 4,
         "w": 0,
         "o-below": null,
         "i-below": 4,
@@ -176,21 +177,21 @@ var positions = exports.positions = {
     "alda": {
         "wide": true,
         "w": 0,
-        "y": null,
+        "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 1
     },
 
     "silme": {
-        "y": 2,
+        "y-quenya": 2,
         "o-below": 2,
         "i-below": 2,
         "others": null
     },
     "silme-nuquerna": {
         "e": 2,
-        "y": null,
+        "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 1
@@ -200,21 +201,21 @@ var positions = exports.positions = {
     },
     "esse-nuquerna": {
         "e": 2,
-        "y": null,
+        "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 1
     },
 
     "hyarmen": {
-        "y": 1,
+        "y-quenya": 1,
         "o-below": 1,
         "i-below": 1,
         "others": 3
     },
     "hwesta-sindarinwa": {
         "w": 1,
-        "y": 1,
+        "y-quenya": 1,
         "o-below": 1,
         "i-below": 1,
         "others": 0
@@ -234,11 +235,11 @@ var positions = exports.positions = {
         "others": null
     },
     "short-carrier": {
-        "y": null,
+        "y-quenya": null,
         "others": 3
     },
     "long-carrier": {
-        "y": null,
+        "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 3
@@ -248,7 +249,8 @@ var positions = exports.positions = {
     "tinco-extended": {
         "a": 3,
         "w": 3,
-        "y": 3,
+        "y-quenya": 3,
+        "y-sindarin": 3,
         "í": 3,
         "o-below": 3,
         "others": 2
@@ -256,7 +258,8 @@ var positions = exports.positions = {
     "parma-extended": {
         "a": 3,
         "w": 3,
-        "y": 3,
+        "y-quenya": 3,
+        "y-sindarin": 3,
         "í": 3,
         "o-below": 3,
         "others": 2
@@ -264,7 +267,7 @@ var positions = exports.positions = {
     "calma-extended": {
         "i": 1,
         "w": 1,
-        "y": 0,
+        "y-quenya": 0,
         "í": 0,
         "i-below": 1,
         "o-below": 1,
@@ -273,7 +276,7 @@ var positions = exports.positions = {
     "quesse-extended": {
         "i": 1,
         "w": 1,
-        "y": 0,
+        "y-quenya": 0,
         "í": 0,
         "i-below": 1,
         "o-below": 1,

@@ -1,18 +1,18 @@
 module.exports = {
     "hlóce": "halla;lambe:ó;calma:e", // attested
     "hríve": "halla;romen;long-carrier:i;vala:e", // attested
-    "hyarmen": "hyarmen:a,y;ore;malta:e;numen",
+    "hyarmen": "hyarmen:a,y-quenya;ore;malta:e;numen",
     "lambe": "lambe:a;umbar:e",
     "moria": "malta:o;romen:i;short-carrier:a",
     "namaarië": "numen:a;malta;long-carrier:a;romen:i;short-carrier:e",
     "namárië": "numen:a;malta;long-carrier:a;romen:i;short-carrier:e",
-    "quenya": "quesse:e;numen:a,y",
+    "quenya": "quesse:e;numen:a,y-quenya",
     "silme": "silme-nuquerna:i;lambe;malta:e",
-    "syi": "silme:y;short-carrier:i", //*
+    "syi": "silme:y-quenya;short-carrier:i", //*
     "thúlë": "thule:ú;lambe:e",
-    "tyelpe": "tinco:e,y;lambe;parma:e",
+    "tyelpe": "tinco:e,y-quenya;lambe;parma:e",
     "vanwa": "vala:a;numen;wilya:a",
-    "yuldar": "anna:u,y;alda:a;ore",
+    "yuldar": "anna:u,y-quenya;alda:a;ore",
 
     // long vowels
     "á": "long-carrier:a",
