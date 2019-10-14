@@ -1,14 +1,17 @@
 
 module.exports = {
-    "-": "comma",
+    "-": "hyphen",
+    "'": "apostrophe",
     ",": "comma",
-    ":": "comma",
-    ";": "full-stop",
+    ":": "colon",
+    ";": "semi-colon",
     ".": "full-stop",
     "!": "exclamation-point",
     "?": "question-mark",
     "(": "open-paren",
     ")": "close-paren",
+    "[": "open-bracket",
+    "]": "close-bracket",
     ">": "flourish-left",
     "<": "flourish-right"
 };

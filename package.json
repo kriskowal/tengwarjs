@@ -21,7 +21,7 @@
     "url": "http://github.com/kriskowal/tengwarjs.git"
   },
   "dependencies": {
-    "system": "^1.3.0"
+    "system": "^2"
   },
   "devDependencies": {
     "jasminum": "^2.0.7"
@@ -29,6 +29,6 @@
   "scripts": {
     "test": "jasminum test",
     "test-phantom": "jasminum-phantom test",
-    "build": "sysjs proof.js > public/proof.js && sysjs sample.js > public/sample.js && sysjs tengwar.js > public/tengwar.js"
+    "build": "jscat proof.js > public/proof.js && jscat sample.js > public/sample.js && jscat tengwar.js > public/tengwar.js"
   }
 }

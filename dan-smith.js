@@ -60,12 +60,17 @@ exports.tengwar = {
     "anga-extended": "S",
     "ungwe-extended": "X",
     // punctuation
+    "colon": "ˆ",
+    "apostrophe": "²",
+    "hyphen": ":",
+    "semi-colon": "Â",
     "comma": "=",
     "full-stop": "-",
     "exclamation-point": "Á",
     "question-mark": "À",
-    "open-paren": "=", // alt "&#140;",
-    "close-paren": "=", // alt "&#156;",
+    "open-bracket": "›",
+    "close-bracket": "›",
+    // open-paren and close-paren vary by font.
     "flourish-left": "Ğ",
     "flourish-right": "ğ",
     // numbers

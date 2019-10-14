@@ -3,7 +3,11 @@ var Alphabet = require("./alphabet");
 var Bindings = require("./dan-smith");
 var makeFontColumn = require("./column");
 
-var tengwar = exports.tengwar = Bindings.tengwar;
+var tengwar = exports.tengwar = {
+    ...Bindings.tengwar,
+    "open-paren": "Œ", // alt "&#140;",
+    "close-paren": "œ", // alt "&#156;",
+};
 var tehtar = exports.tehtar = Bindings.tehtar;
 
 var positions = exports.positions = {

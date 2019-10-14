@@ -4,6 +4,11 @@ let Alphabet = require("./alphabet");
 let TengwarParmaite = require("./tengwar-parmaite");
 let TengwarAnnatar = require("./tengwar-annatar");
 
+var fonts = {
+    parmaite: TengwarParmaite,
+    annatar: TengwarAnnatar,
+};
+
 let classical = require("./classical");
 let beleriand = require("./beleriand");
 let generalUse = require("./general-use");
@@ -17,13 +22,14 @@ let pass = true;
 function equals(name, expected, actual, errata) {
     if (expected === actual) {
         return `<div class="case pass">
+            ${errata}<br>
             <tt>${name} <strong>input</strong></tt><br>
             <tt>${expected} <strong>output</strong></tt>
-            ${errata}
         </div>`
     }
     pass = false;
     return `<div class="case fail">
+        ${errata}</br>
         ${name}
         <ul>
             <tt>${expected}</tt> expected<br>
@@ -32,15 +38,16 @@ function equals(name, expected, actual, errata) {
     </div>`;
 }
 
-
-for (let [language, cases] of Object.entries(generalUseTests)) {
-    document.querySelector("#" + language + "GeneralUse").innerHTML = Object.entries(cases).map(function ([input, expected]) {
-        let actual = generalUse.encode(input, {language});
-        let font = language === "blackSpeech" ? "annatar" : "parmaite";
-        return equals(input, expected, actual, `<br>
-            <span class="rendered tengwar ${font}">${generalUse.transcribe(input, {language})}</span>
-        `);
-    }).join("");
+for (let [fontName, fontTests] of Object.entries(generalUseTests)) {
+    for (let [language, tests] of Object.entries(fontTests)) {
+        document.querySelector("#" + fontName + "-" + language + "-generalUse").innerHTML = Object.entries(tests).map(function ([input, expected]) {
+            var font = fonts[fontName];
+            let actual = generalUse.encode(input, {language, font});
+            return equals(input, expected, actual, `
+                <span class="rendered tengwar ${fontName}">${generalUse.transcribe(input, {language, font})}</span>
+            `);
+        }).join("");
+    }
 }
 
 document.querySelector("#classical").innerHTML = Object.entries(classicalTests).map(function ([input, expected]) {
