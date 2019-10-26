@@ -43,7 +43,7 @@ function makeOptions(options) {
         language: options.language,
         // by default, no change
         // "english": final e implicitly silent
-        // "black speech": sh is calma-extended, gh is ungwe-extended, as in
+        // "black speech": sh is harmacalma, gh is unqueungwe, as in
         // the ring inscription
         // not "black-speech": sh is harma, gh is unque
         noAchLaut: options.noAchLaut,
@@ -236,7 +236,7 @@ function parseWordTail(callback, length, options, columns, previous) {
 }
 
 function makeOf(makeColumn) {
-    return makeColumn("umbar-extended", {from: "of"})
+    return makeColumn("ampaumbar", {from: "of"})
         .varies();
 }
 
@@ -252,7 +252,7 @@ function makeOfPrimePrime(makeColumn) {
 }
 
 function makeThe(makeColumn) {
-    return makeColumn("ando-extended", {from: "the"})
+    return makeColumn("antoando", {from: "the"})
         .varies();
 }
 
@@ -266,7 +266,7 @@ function makeThePrimePrime(makeColumn) {
 }
 
 function makeOfThe(makeColumn) {
-    return makeColumn("umbar-extended", {from: "of the"})
+    return makeColumn("ampaumbar", {from: "of the"})
         .addTildeBelow({from: ""});
 }
 
@@ -573,7 +573,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return Parser.countPrimes(function (primes) {
                         var column;
                         if (primes === 0) {
-                            column = makeColumn("parma-extended", {from: "ph"}).varies();
+                            column = makeColumn("formenparma", {from: "ph"}).varies();
                         } else if (primes >= 1) {
                             column = makeColumn("formen", {from: "ph"});
                         }
@@ -639,7 +639,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeBelow({from: "g"}), tehta, tehtaFrom);
                 } else if (character === "h") { // gh
                     if (options.language === "black-speech") {
-                        return callback(makeColumn("ungwe-extended", {from: "gh"}), tehta, tehtaFrom);
+                        return callback(makeColumn("unqueungwe", {from: "gh"}), tehta, tehtaFrom);
                     } else {
                         return callback(makeColumn("unque", {from: "gh"}), tehta, tehtaFrom);
                     }
@@ -690,7 +690,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     });
                 } else if (character === "h") { // sh
                     if (options.language === "black-speech") {
-                        return callback(makeColumn("calma-extended", {from: "sh"}), tehta, tehtaFrom);
+                        return callback(makeColumn("harmacalma", {from: "sh"}), tehta, tehtaFrom);
                     } else {
                         return callback(makeColumn("harma", {from: "sh"}), tehta, tehtaFrom);
                     }
