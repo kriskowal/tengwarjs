@@ -23,7 +23,7 @@
   "devDependencies": {
     "browserify": "^16.5.0",
     "frb": "~0.2",
-    "qs": "~0.5",
+    "qs": "^6.9.0",
     "tengwar": "^1.2.6"
   },
   "scripts": {
