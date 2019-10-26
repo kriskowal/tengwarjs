@@ -23,13 +23,11 @@
   "devDependencies": {
     "browserify": "^16.5.0",
     "frb": "~0.2",
-    "jasminum": "^2.0.7",
-    "qs": "~0.5",
+    "qs": "^6.9.0",
     "tengwar": "^1.2.6"
   },
   "scripts": {
-    "test": "jasminum test",
-    "test-phantom": "jasminum-phantom test",
+    "test": "node test",
     "build": "bash build.sh"
   }
 }
