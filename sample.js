@@ -1,7 +1,8 @@
 // Compiles to public/sample.js
 
-var classical = require("./classical");
-var generalUse = require("./general-use");
+var GeneralUse = require("./general-use");
+var Classical = require("./classical");
+var TengwarParmaite = require("./tengwar-parmaite");
 
 var body = document.body;
 function report(latin, mode, font) {
@@ -26,19 +27,17 @@ function report(latin, mode, font) {
     $("<h1>tengwar " + font + "</h1>").appendTo(body);
 
     $("<h2>Classical</h2>").appendTo(body);
-    Object.keys(classical).forEach(function (latin) {
+    Object.keys(Classical).forEach(function (latin) {
         report(latin, "classical", font);
     });
 
     $("<h2>General Use</h2>").appendTo(body);
-    Object.keys(generalUse).forEach(function (latin) {
+    Object.keys(GeneralUse).forEach(function (latin) {
         report(latin, "general-use", font);
     });
 
 });
 
-var GeneralUse = require("../general-use");
-var TengwarParmaite = require("../tengwar-parmaite");
 $(".transcribe").each(function () {
     var element = this;
     setTimeout(function () {

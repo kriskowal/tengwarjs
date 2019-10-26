@@ -47,8 +47,8 @@ function makeOptions(options) {
         // the ring inscription
         // not "black-speech": sh is harma, gh is unque
         noAchLaut: options.noAchLaut,
-        // false: "ch" is interpreted as ach-laut, "cc" as "ch" as in "chew"
-        // true: "ch" is interpreted as "ch" as in chew
+        // false: "kh" is interpreted as ach-laut, as in "bach".
+        // true: "kh" is interpreted as merely "k", as in "khan".
         sHook: options.sHook,
         // false: "is" is silme with I tehta
         // true: "is" is short carrier with S hook and I tehta
@@ -401,14 +401,22 @@ function makeCarrier(tehta, tehtaFrom, options) {
 
 function parseTehta(callback, options) {
     return function (character) {
+        if (character === "") {
+            return callback();
+        }
+
         var from = character;
         if (character === "ë" && options.language !== "english") {
             character = "e";
         }
-        character = normalVowels[character] || character;
-        if (character === "") {
-            return callback();
-        } else if (lengthenableVowels.indexOf(character) !== -1) {
+
+        var caretIndex = caretVowels.indexOf(character);
+        if (caretIndex !== -1) {
+            character = acuteVowels[caretIndex];
+        }
+
+        var shortIndex = shortVowels.indexOf(character);
+        if (shortIndex !== -1) {
             return function (nextCharacter) {
                 // Doubling vowels as in the English word GREEN is generally
                 // rendered orthographically, with two separate E tehtar.
@@ -416,7 +424,7 @@ function parseTehta(callback, options) {
                 // who do not have ready access to diacrtics on their keyboard
                 // the ability to get a long vowel by doubling.
                 if (options.language !== "english" && nextCharacter === character) { // doubled
-                    return callback(longerVowels[character], character + nextCharacter);
+                    return callback(acuteVowels[shortIndex], character + nextCharacter);
                 } else {
                     return callback(character, from)(nextCharacter);
                 }
@@ -429,10 +437,10 @@ function parseTehta(callback, options) {
     };
 }
 
-var normalVowels = {"â": "á", "ê": "é", "î": "í", "ô": "ó", "û": "ú"};
-var lengthenableVowels = "aeiou";
-var longerVowels = {"a": "á", "e": "é", "i": "í", "o": "ó", "u": "ú"};
-var nonLengthenableVowels = "aeióúy";
+var caretVowels = "âêîôû";
+var acuteVowels = "áéíóú";
+var shortVowels = "aeiou";
+var nonLengthenableVowels = "áéíóúy";
 var tehtarThatCanBeAddedAbove = "aeiouóú";
 var vowels = "aeëiouáéíóú";
 var shorterVowels = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"};
@@ -600,9 +608,13 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
             };
         } else if (character === "k") {
             return function (character2) {
-                if (character2 === "h" && !options.noAchLaut) { // ach laut
-                    return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
-                } else { // c.
+                if (character2 === "h") { // kh is ach laut
+                    if (!options.noAchLaut) {
+                        return callback(makeColumn("hwesta", {from: character + character2}), tehta, tehtaFrom);
+                    } else { // kh is just k
+                        return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom);
+                    }
+                } else { // c. or k.
                     return callback(makeColumn("quesse", {from: character}), tehta, tehtaFrom)(character2);
                 }
             };

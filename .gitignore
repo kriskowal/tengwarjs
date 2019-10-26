@@ -2,3 +2,5 @@ node_modules
 /public/proof.js
 /public/sample.js
 /public/tengwar.js
+/public/editor.js
+/public/modes.js

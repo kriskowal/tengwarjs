@@ -97,6 +97,23 @@ module.exports = {
         },
 
         sindarin: {
+            // King's Letter
+            "Elessar Telcontar: Aragorn Arathornion Edhelharn, aran Gondor ar Hîr i Mbair Annui, anglennatha i Varanduiniant erin dolothen Ethuil, egor ben genediad Drannail erin Gwirith edwen.":
+                "lambe:e;silme-nuquerna:e,tilde-below;ore:a " +
+                "tinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;colon " +
+                "romen:a;ungwe:a;romen:o;numen " +
+                "romen:a;thule:a;romen:o;numen;short-carrier:i;numen:o " +
+                "anto:e;alda:e;romen:a;numen;comma romen:a;numen:a " +
+                "ungwe;ando:o,tilde-above;ore:o ore:a hyarmen;long-carrier:i;ore short-carrier:i " +
+                "umbar:tilde-above;anna:a;ore numen:a,tilde-above;anna:u;comma " +
+                "ungwe:a,tilde-above;lambe;numen:e,tilde-above;thule:a;short-carrier:a " +
+                "short-carrier:i " +
+                "ampa;romen:a;ando:a,tilde-above;anna:u;numen;short-carrier:i;tinco:a,tilde-above " +
+                "romen:e;numen:i ando;lambe:o;thule:o;numen:e thule:e;anna:u;lambe;comma " +
+                "ungwe:e;ore:o umbar;numen:e ungwe;numen:e;ando:e;short-carrier:i;ando:a " +
+                "ando;romen;numen:a,tilde-above;anna:a;lambe romen:e;numen:i " +
+                "ungwe:w;romen:i;thule:i ando:e;vala;numen:e;full-stop",
+
             // (sorted)
             "Aragorn Arathorn:\nTelcontar, Elessar": "romen:a;ungwe:a;romen:o;numen romen:a;thule:a;romen:o;numen;colon\ntinco;lambe:e;quesse;tinco:o,tilde-above;ore:a;comma lambe:e;silme-nuquerna:e,tilde-below;ore:a",
             "ainur": "anna:a;numen;ore:u",
@@ -114,6 +131,8 @@ module.exports = {
             "gwaith iaur arnor": "ungwe:w;anna:a;thule yanta;vala:a;ore romen:a;numen;ore:o",
             "gwathló": "ungwe:w;thule:a;lambe;long-carrier:o",
             "hwesta sindarinwa": "hwesta-sindarinwa;silme-nuquerna:e;tinco;short-carrier:a silme;ando:i,tilde-above;romen:a;short-carrier:i;numen:w;short-carrier:a",
+            "hír": "hyarmen;long-carrier:i;ore",
+            "hîr": "hyarmen;long-carrier:i;ore",
             "iant": "yanta;tinco:a,tilde-above",
             "iaur": "yanta;vala:a;ore",
             "isildur": "silme-nuquerna:i;lambe:i;ando;ore:u",
@@ -142,7 +161,7 @@ module.exports = {
             "thrakatulûk": "thule;romen;quesse:a;tinco:a;lambe:o;quesse:ó",
             "agh": "unqueungwe:a",
             "burzumishi": "umbar;ore:o;esse;malta:o;harmacalma:i;short-carrier:i",
-            "krimpatul": "quesse;romen;parma:i,tilde-above;tinco:a;lambe:o"
+            "krimpatul": "quesse;romen;parma:i,tilde-above;tinco:a;lambe:o",
         },
 
     },
