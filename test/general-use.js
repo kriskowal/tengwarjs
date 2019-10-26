@@ -68,7 +68,7 @@ module.exports = {
             "hobbits``": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
             "hobbits```": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
             "onyx": "numen:o;quesse:y-english,s",
-            "phone": "parma-extended;numen:o,i-below",
+            "phone": "formenparma;numen:o,i-below",
             "style": "silme;tinco:y-english;lambe:i-below",
             "these": "thule;silme-nuquerna:e;short-carrier:i-below",
             "these`": "thule;silme-nuquerna:e;short-carrier:e", // invalid input
@@ -83,10 +83,10 @@ module.exports = {
             "yippy": "anna;parma:i,tilde-below;short-carrier:y-english",
 
             // abbreviated words
-            "of": "umbar-extended",
-            "the": "ando-extended",
-            "of the": "umbar-extended:tilde-below",
-            "of`the": "umbar-extended ando-extended",
+            "of": "ampaumbar",
+            "the": "antoando",
+            "of the": "ampaumbar:tilde-below",
+            "of`the": "ampaumbar antoando",
             "and": "ando:tilde-above",
             "and`": "ando:i-below,tilde-above"
 
@@ -135,13 +135,13 @@ module.exports = {
 
         blackSpeech: {
             // in order of appearance in the ring poem
-            "ash": "calma-extended:a",
+            "ash": "harmacalma:a",
             "nazg": "numen;esse-nuquerna:a;ungwe",
             "durbatulûk": "ando;ore:o;umbar;tinco:a;lambe:o;quesse:ó", // swap o and u, medial ore before consonant
             "gimbatul": "ungwe;umbar:i,tilde-above;tinco:a;lambe:o",
             "thrakatulûk": "thule;romen;quesse:a;tinco:a;lambe:o;quesse:ó",
-            "agh": "ungwe-extended:a",
-            "burzumishi": "umbar;ore:o;esse;malta:o;calma-extended:i;short-carrier:i",
+            "agh": "unqueungwe:a",
+            "burzumishi": "umbar;ore:o;esse;malta:o;harmacalma:i;short-carrier:i",
             "krimpatul": "quesse;romen;parma:i,tilde-above;tinco:a;lambe:o"
         },
 

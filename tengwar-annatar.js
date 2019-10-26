@@ -282,22 +282,22 @@ var positions = exports.positions = {
     },
     "round-carrier": 3,
 
-    "tinco-extended": 3,
-    "parma-extended": 3,
-    "calma-extended": {
+    "thuletinco": 3,
+    "formenparma": 3,
+    "harmacalma": {
         "o": 3,
         "u": 7,
         "ó": 2,
         "ú": 2,
         "others": 1
     },
-    "quesse-extended": {
+    "hwestaquesse": {
         "o": 0,
         "u": 7,
         "others": 1
     },
 
-    "ando-extended": {
+    "antoando": {
         "wide": true,
         "e": 1,
         "o": 2,
@@ -305,7 +305,7 @@ var positions = exports.positions = {
         "ú": 1,
         "others": 0
     },
-    "umbar-extended": {
+    "ampaumbar": {
         "wide": true,
         "e": 1,
         "o": 2,
@@ -313,14 +313,14 @@ var positions = exports.positions = {
         "ú": 1,
         "others": 0
     },
-    "anga-extended": {
+    "ancaanga": {
         "wide": true,
         "e": 1,
         "ó": 1,
         "ú": 1,
         "others": 0
     },
-    "ungwe-extended": {
+    "unqueungwe": {
         "wide": true,
         "e": 1,
         "o": 1,
