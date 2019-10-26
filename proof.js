@@ -51,9 +51,9 @@ for (let [fontName, fontTests] of Object.entries(generalUseTests)) {
 }
 
 document.querySelector("#classical").innerHTML = Object.entries(classicalTests).map(function ([input, expected]) {
-    let actual = classical.encode(input, {font: TengwarParmaite});
+    let actual = classical.encode(input, {font: TengwarAnnatar});
     return equals(input, expected, actual, `<br>
-        <span class="rendered tengwar parmaite">${classical.transcribe(input, {font: TengwarParmaite})}</span>
+        <span class="rendered tengwar annatar">${classical.transcribe(input, {font: TengwarAnnatar})}</span>
     `);
 }).join("");
 
