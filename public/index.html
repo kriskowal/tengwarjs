@@ -1,158 +1,58 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="tengwar-annatar.css">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Tengwar Transcriber</title>
         <link rel="stylesheet" type="text/css" href="tengwar-parmaite.css">
-        <link rel="stylesheet" type="text/css" href="proof.css">
+        <link rel="stylesheet" type="text/css" href="tengwar-annatar.css">
+        <link rel="stylesheet" type="text/css" href="app.css">
     </head>
     <body>
 
-        <h1>Tengwar Proofs</h1>
+        <noscript>
+            <br>This transcriber makes extensive use
+            of JavaScript and very new CSS tricks.
+            You might try using the much older
+            <a href="http://tengwar.art.pl/tengwar/ott/start.php?l=en">
+                tengwar transcriber
+            </a> if your browser does not support
+            these features.
+        </noscript>
 
-        <p id="summary" class="case fail">
-            Tests failed due to JavaScript correctness errors.
-            Check the browser’s developer console for details.
-        </p>
-
-        <p>
-        The following sections cover automated test results and manual proofs
-        for reviewing the tengwar transcriber’s behaviors.
-        Please carefully consider each section and make sure that the necessary
-        tests are present and passing for the corresponding code changes.
-        </p>
-
-
-        <h1>The mode for general use</h1>
-
-        <p>The mode for general use has submodes for each of the rendered
-        languages and slightly different behavior depending on the rendering
-        font.</p>
-
-        <h2>Tengwar Parmaitë, no particular language</h2>
-        <div id="parmaite-any-generalUse">Error.</div>
-        <h2>Tengwar Annatar, no particular language</h2>
-        <div id="annatar-any-generalUse">Error.</div>
-        <h2>English</h2>
-        <div id="annatar-english-generalUse">Error.</div>
-        <h2>Old English</h2>
-        <div id="annatar-oldEnglish-generalUse">Error.</div>
-        <h2>Sindarin</h2>
-        <div id="annatar-sindarin-generalUse">Error.</div>
-        <h2>Black Speech</h2>
-        <img src="ring-inscription.jpg">
-        <div id="annatar-blackSpeech-generalUse">Error.</div>
-        <h2>Quenya (misuse of mode)</h2>
-        <div id="annatar-quenya-generalUse">Error.</div>
-
-        <h1>The Classical Mode</h1>
-        <p>The classical mode applies for Quenya.</p>
-        <div id="classical">Error.</div>
-
-        <h2>The Namárië Poem</h2>
-
-        <div class="tables">
-            <div class="tengwar parmaite"
-                data-tengwar="Ai! laurië lantar lassi súrinen,
-                Yéni únótimë ve rámar aldaron!
-                Yéni ve lintë yuldar avánier
-                mi oromardi lisse-miruvóreva
-                Andúnë pella, Vardo tellumar
-                nu luini yassen tintilar i eleni
-                ómaryo airetári-lírinen.
-                Sí man i yulma nin enquantuva?
-                An sí Tintallë Varda Oiolossëo
-                ve fanyar máryat Elentári ortanë
-                ar ilyë tier undulávë lumbulë;
-                ar sindanóriello caita mornië
-                i falmalinnar imbë met, ar hísië
-                untúpa Calaciryo míri oialë.
-                Si vanwa ná, Rómello vanwa, Valimar!
-                Namárië! Nai hiruvalyë Valimar.
-                Nai elyë hiruva. Namárië!"
-                data-mode="classical">
+        <div id="body-box">
+            <div id="output-box">
+                <div id="output" class="tengwar annatar rendered"></div>
             </div>
-            <div>
-                <img src="namarie.jpg" style="width: 50ex">
+            <div id="transliteration-box">
+            </div>
+            <div id="divider"></div>
+            <div id="input-box">
+                <div id="form-box">
+                    <a id="select-mode" href="#">Select Mode</a>
+                </div>
+                <div id="content-box" style="">
+                    <textarea id="input" spellcheck="false"></textarea>
+                    <!--<div id="input" contenteditable spellcheck="false"></div>-->
+                </div>
+                <div id="about-box">
+                    <a href="about.html">About</a>
+                </div>
             </div>
         </div>
 
-        <blockquote>
-            <p>Ai! laurië lantar lassi súrinen,<br>
-            Yéni únótimë ve rámar aldaron!<br>
-            Yéni ve lintë yuldar avánier<br>
-            mi oromardi lisse-miruvóreva<br>
-            Andúnë pella, Vardo tellumar<br>
-            nu luini yassen tintilar i eleni<br>
-            ómaryo airetári-lírinen.
+        <script src="editor.js"></script>
 
-            <p>Sí man i yulma nin enquantuva?</p>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-25808349-1']);
+            _gaq.push(['_setDomainName', '.3rin.gs']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
 
-            <p>An sí Tintallë Varda Oiolossëo<br>
-            ve fanyar máryat Elentári ortanë<br>
-            ar ilyë tier undulávë lumbulë;<br>
-            ar sindanóriello caita mornië<br>
-            i falmalinnar imbë met, ar hísië<br>
-            untúpa Calaciryo míri oialë.<br>
-            Si vanwa ná, Rómello vanwa, Valimar!
-
-            <p>Namárië! Nai hiruvalyë Valimar.<br>
-            Nai elyë hiruva. Namárië!</p>
-
-            </p>
-        </blockquote>
-
-        <h1>The Mode of Beleriand</h1>
-
-        <p>The mode of Beleriand uses tengwar for vowels and was used by the
-        elves of Hollin (<em>Eregion</em>) who communicated with the dwarves of
-        Moria.</p>
-
-        <img src="durin.jpg">
-
-        <div id="beleriand">Error.</div>
-
-
-        <h1>Tengwar to Tehtar Matching Tables</h1>
-
-        <p>
-        In Dan Smith style fonts, the tehtar are zero-width characters that
-        draw diacritics on the glyph behind them.
-        Since the tengwar typically vary in width, Dan Smith fonts provide at
-        least four variations on each tehtar, so they can be drawn different
-        distances behind the cursor.
-        </p>
-
-        <p>
-        While in the theory of Dan Smith fonts it should be possible to use the
-        same text for any of the Dan Smith fonts, in practice, ugly details
-        emerge.
-        The flowing script of the one ring, Tengwar Annatar, in particular,
-        produces many pesky exceptions that the more regular fonts do not
-        exhibit.
-        The positions of the tehtar vary and, not every tehta can be rendered
-        over every tengwa, forcing the transcriber to choose other variations
-        of the tengwa or simply pass the tehta to a subsequent carrier.
-        </p>
-
-        <p>
-        The following tables provide a means for manually confirming that
-        drivers for each font produce an aesthetically appropriate solution for
-        each tehta and tengwa combination, or are simply greyed out if the
-        combination is not sensible.
-        </p>
-
-
-        <h2>Tengwar Parmaitë</h2>
-
-        <div id="parmaite" class="tables">Error.</div>
-
-
-        <h2>Tengwar Annatar</h2>
-
-        <div id="annatar" class="tables">Error.</div>
-
-        <script src="tengwar.js"></script>
-        <script src="proof.js"></script>
     </body>
 </html>

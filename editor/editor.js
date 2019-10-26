@@ -2,8 +2,8 @@
 var Bindings = require("frb");
 require("frb/dom");
 var QS = require("qs");
-var modes = require("tengwar/modes");
-var fonts = require("tengwar/fonts");
+var modes = require("../modes");
+var fonts = require("../fonts");
 
 var state;
 if (window.location.search) {
