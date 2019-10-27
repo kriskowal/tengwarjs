@@ -151,6 +151,7 @@ exports.tehtar = {
         "tinco": "+",
         "ando": "+",
         "numen": "+",
+        "malta": "+",
         "lambe": "_"
     },
     "s-inverse": {

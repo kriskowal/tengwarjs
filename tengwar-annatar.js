@@ -10,6 +10,10 @@ var tengwar = exports.tengwar = {
 };
 var tehtar = exports.tehtar = Bindings.tehtar;
 
+// The malta in tengwar annatar has a slightly upward curl on the baseline that
+// prevents it from combining gracefully with the final sa-rince.
+tehtar["s-final"].malta = null;
+
 var positions = exports.positions = {
 
     "tinco": {
