@@ -76,6 +76,10 @@ module.exports = {
             "yes": "anna;silme-nuquerna:e",
 
             // for code coverage
+            // (sorted)
+            "aks": "quesse:a,s",
+            "aks`": "quesse:a;silme-nuquerna",
+            "ax": "quesse:a,s",
             "ie": "yanta:i",
             "oe": "yanta:o",
             "x": "quesse:s",
