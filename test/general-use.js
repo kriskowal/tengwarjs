@@ -23,6 +23,9 @@ module.exports = {
             ",:.": "comma;colon;full-stop",
             "'": "apostrophe",
 
+            // Regression test for #9
+            "vs.": "ampa;silme;full-stop",
+
             // interesting clusters
             "Alyssa": "lambe:a;silme-nuquerna:y-sindarin,tilde-below;short-carrier:a",
             "allys": "lambe:a,tilde-below;silme-nuquerna:y-sindarin",
