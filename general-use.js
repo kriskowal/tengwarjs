@@ -823,13 +823,24 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 tehtaFrom
             );
         } else if (character === "`" && options.language === "english" && tehta === "e") {
-            // final e/ in english should be equivalent to diaresis
-            return callback(
-                makeColumn("short-carrier", {from: ""})
-                    .addAbove("e", {from: "e"})
-            );
+            return function (character2) {
+                if (character2 === "") {
+                    // final e` in english should be equivalent to diaresis.
+                    // tehta deliberately consumed in this case, not passed forward.
+                    return callback(
+                        makeColumn("short-carrier", {from: ""})
+                            .addAbove("e", {from: "e"})
+                    );
+                } else {
+                    // tehta deliberately consumed in this case, not passed forward.
+                    return callback(
+                        makeColumn("short-carrier", {from: ""})
+                            .addBelow("i-below", {from: "e", silent: true})
+                    )(character)(character2);
+                }
+            };
         } else if (character === "" && options.language === "english" && tehta === "e") {
-            // tehta deliberately consumed in this one case, not passed forward
+            // tehta deliberately consumed in this case, not passed forward.
             return callback(
                 makeColumn("short-carrier", {from: ""})
                     .addBelow("i-below", {from: "e", silent: true})
