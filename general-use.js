@@ -363,7 +363,7 @@ function parseColumn(callback, length, options, previous) {
             } else {
                 return function (character) {
                     if (Parser.isBreak(character)) {
-                        return callback([]);
+                        return callback([])(character);
                     } else if (/\d/.test(character)) {
                         return parseNumber(callback, options)(character);
                     } else if (punctuation[character]) {
@@ -949,7 +949,7 @@ function parseFollowing(callback, column) {
                                 while (primes-- > 0) {
                                     state = state("`");
                                 }
-                                return state;
+                                return state(character);
                             }
                             return callback(column)(character);
                         } else {
