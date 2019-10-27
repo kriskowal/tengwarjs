@@ -5,7 +5,13 @@ function makeColumn(font, tengwa, tengwaNote) {
 };
 
 var Column = function (font, tengwa, tengwaNote) {
-    this.font = font;
+    Object.defineProperty(this, "font", {
+        value: font,
+        writable: true,
+        configurable: true,
+        enumerable: false,
+    });
+
     this.above = void 0;
     this.tildeAbove = void 0;
     this.tengwa = tengwa;
