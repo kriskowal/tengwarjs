@@ -1,3 +1,4 @@
+"use strict";
 
 /*!
  * isFontFaceSupported - v0.9 - 12/19/2009

@@ -1,3 +1,4 @@
+"use strict";
 
 exports.tengwar = [
     ["tinco", "parma", "calma", "quesse"],

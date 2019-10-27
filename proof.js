@@ -1,5 +1,7 @@
 // Compiles to public/proof.js
 
+"use strict";
+
 let Alphabet = require("./alphabet");
 let TengwarParmaite = require("./tengwar-parmaite");
 let TengwarAnnatar = require("./tengwar-annatar");

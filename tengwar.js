@@ -1,5 +1,7 @@
 // Compiles to public/tengwar.js
 
+"use strict";
+
 var GeneralUse = require("./general-use");
 var Classical = require("./classical");
 var Beleriand = require("./beleriand");

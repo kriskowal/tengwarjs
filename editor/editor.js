@@ -1,3 +1,4 @@
+"use strict";
 
 var Bindings = require("frb");
 require("frb/dom");

@@ -1,3 +1,4 @@
+"use strict";
 
 exports.encode = encode;
 function encode(sections) {

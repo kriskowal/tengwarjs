@@ -1,3 +1,4 @@
+"use strict";
 
 var TengwarAnnatar = require("./tengwar-annatar");
 var Notation = require("./notation");

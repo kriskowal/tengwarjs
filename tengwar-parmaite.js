@@ -1,3 +1,4 @@
+"use strict";
 
 var Alphabet = require("./alphabet");
 var Bindings = require("./dan-smith");

@@ -1,3 +1,4 @@
+"use strict";
 
 exports.transcribe = function (text, mode, font, options) {
     options = mode.makeOptions(options);

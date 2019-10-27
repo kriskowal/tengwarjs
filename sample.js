@@ -1,5 +1,7 @@
 // Compiles to public/sample.js
 
+"use strict";
+
 var GeneralUse = require("./general-use");
 var Classical = require("./classical");
 var TengwarParmaite = require("./tengwar-parmaite");
