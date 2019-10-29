@@ -56,14 +56,18 @@ module.exports = {
         english: {
 
             // english (appropriate mode) (sorted)
+            "Aaron": "short-carrier:a;romen:a;numen:o",
             "Alyssa": "lambe:a;silme-nuquerna:y-english,tilde-below;short-carrier:a",
             "Jack": "anga;quesse:a,tilde-below",
             "cake": "quesse;quesse:a,i-below",
             "cakes": "quesse;quesse:a;silme-nuquerna:e",
             "cats.": "quesse;tinco:a,s-final;full-stop", // regression
+            "feel": "formen;short-carrier:e;lambe:e",
+            "feet": "formen;short-carrier:e;tinco:e",
             "finwe": "formen;short-carrier:i;numen:w,i-below", // invalid input
             "finwë": "formen;short-carrier:i;numen:w;short-carrier:e",
             "font": "formen;tinco:o,tilde-above",
+            "foot": "formen;short-carrier:o;tinco:o",
             "green": "ungwe;romen;short-carrier:e;numen:e",
             "happy": "hyarmen;parma:a,tilde-below;short-carrier:y-english",
             "helcaraxe": "hyarmen;lambe:e;quesse;romen:a;quesse:a,s;short-carrier:i-below", // invalid input
@@ -72,6 +76,7 @@ module.exports = {
             "hobbits`": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
             "hobbits``": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
             "hobbits```": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
+            "loo": "lambe;short-carrier:o;short-carrier:o",
             "onyx": "numen:o;quesse:y-english,s",
             "phone": "formenparma;numen:o,i-below",
             "style": "silme;tinco:y-english;lambe:i-below",
@@ -82,10 +87,12 @@ module.exports = {
 
             // for code coverage
             "ie": "yanta:i",
+            "j": "anga",
             "oe": "yanta:o",
+            "ph": "formenparma",
             "x": "quesse:s",
             "y": "anna",
-            "yippy": "anna;parma:i,tilde-below;short-carrier:y-english",
+            "yippy": "anna;parma:i,tilde-below;short-carrier:y-english", // both consonantal and vowel Y
 
             // abbreviated words
             "of": "ampaumbar",
