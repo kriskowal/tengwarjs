@@ -8,6 +8,7 @@ module.exports = {
             "()": "open-paren;close-paren",
             "[]": "open-bracket;close-bracket",
             ",:.": "comma;colon;full-stop",
+            "-": "hyphen",
             "'": "apostrophe",
         },
 
@@ -21,6 +22,7 @@ module.exports = {
             "()": "open-paren;close-paren",
             "[]": "open-bracket;close-bracket",
             ",:.": "comma;colon;full-stop",
+            "-": "hyphen",
             "'": "apostrophe",
 
             // Regression test for #9
