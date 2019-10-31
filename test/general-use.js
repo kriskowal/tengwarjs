@@ -58,6 +58,7 @@ module.exports = {
             // english (appropriate mode) (sorted)
             "Alyssa": "lambe:a;silme-nuquerna:y-english,tilde-below;short-carrier:a",
             "Jack": "anga;quesse:a,tilde-below",
+            "axe": "quesse:a,s;short-carrier:i-below",
             "cake": "quesse;quesse:a,i-below",
             "cakes": "quesse;quesse:a;silme-nuquerna:e",
             "cats.": "quesse;tinco:a,s-final;full-stop", // regression
@@ -81,7 +82,11 @@ module.exports = {
             "yes": "anna;silme-nuquerna:e",
 
             // for code coverage
-            "ie": "yanta:i",
+            "e": "short-carrier:i-below", // final e is silent
+            "e`": "short-carrier:e", // effectively a diaeresis
+            "en": "numen:e", // medial e is voiced
+            "ie": "yanta:i", // ie treated as diphthong regardless of pronunciation
+            "ne": "numen;short-carrier:i-below", // tehta carried forward, still silent when final
             "oe": "yanta:o",
             "x": "quesse:s",
             "y": "anna",
