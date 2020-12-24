@@ -153,6 +153,14 @@ function parseTengwa(callback, options, previous) {
                             return callback([makeColumn("anca", {from: "ñ" + character2})])(character3);
                         }
                     };
+                } else if (character2 === "q") {
+                    return function (character3) {
+                        if (character3 === "u") { // nqu
+                            return callback([makeColumn("unque", {from: "nqu"})]);
+                        } else {
+                            return callback([makeColumn("unque", {from: "nq"})])(character3);
+                        }
+                    };
                 } else {
                     return callback([makeColumn("numen", {from: "n"})])(character2);
                 }
