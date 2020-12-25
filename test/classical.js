@@ -11,6 +11,7 @@ module.exports = {
     "syi": "silme:y-quenya;short-carrier:i", //*
     "thúlë": "thule:ú;lambe:e",
     "tyelpe": "tinco:e,y-quenya;lambe;parma:e",
+    "unque": "short-carrier:u;unque:e",
     "vanwa": "vala:a;numen;wilya:a",
     "yuldar": "anna:u,y-quenya;alda:a;ore",
 
