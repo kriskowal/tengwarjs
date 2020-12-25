@@ -40,9 +40,9 @@ options can also be applied.
 
 If the element has a `data-encoded` property, the value is expected to
 be a description of the tengwar and tehtar to display like
-`romen:a;ungwe:a;romen:o;numen` for "Aragorn" in the General Use mode.
+`rómen:a;ungwe:a;rómen:o;númen` for "Aragorn" in the General Use mode.
 
-    data-encoded="romen:a;ungwe:a;romen:o;numen"
+    data-encoded="rómen:a;ungwe:a;rómen:o;númen"
 
 Of course, a page can bypass the whole automated transcription process
 by statically populating the element with the desired key bindings and
@@ -55,94 +55,94 @@ Using the Modules
 =================
 
 -   `tengwar/general-use` transcribes phonetic latin letters, as Tolkien
-    wrote it, into Tengwar Notation in the General Use mode, suitable
-    for Sindarin and many other languages.
-    -   `transcribe(text, options)` to key bindings for the font.
-        Tengwar Annatar by default.
-    -   `encode(text, options)` to Tengwar Notation
-    -   `parse(text, options)` to Tengwar Object Notation
-    -   `makeOptions(options)`
-        -   `font` defaults to the TengwarAnnatar module.
-        -   `block` whether to include HTML tags for paragraphs and line
-            breaks.
-        -   `plain` whether to exclude all HTML from the output,
-            making it suitable for plain text..
-        -   `blackSpeech`: In the Black Speech of the ring inscription,
-            the "o" and "u" curls are reversed, medial "r" is ore before
-            consonants in addition to final "r", and "sh" and "gh" used
-            extended tengwar.  This implies `reverseCurls` and
-            `medialOre`.
-        -   `doubleNasalsWithTildeBelow`: Many tengwa can be doubled in
-            General Use mode by placing a tilde above the tengwa, and
-            many tengwa can be prefixed with the sound of the
-            corresponding nasal by putting a tilde below the tengwa.
-            Tengwar that represent nasal sounds have the special
-            distinction that either rule might apply in order to double
-            their value.
-            -   `false`: by default, a tilde above doubles a nasal
-            -   `true`: a tilde below doubles a nasal
-        -   `reverseCurls`: In the Black Speech of the ring inscription,
-            among other samples, the "o" and "u" tehtar are reversed.
-            -   `false`: by default, the "o" tehta curls forward, and
-                "u" backward.
-            -   `true`: "o" curls backward, "u" forward.
-        -   `swapDotSlash`
-            -   `false`: by default, "i" is a dot and "e" is a slash.
-            -   `true`: "i" is a slash, "e" is a dot.
-        -   `noAchLaut`
-            -   `false`: by default, "ch" is transcribed as ach-laut,
-                the "ch" as in "Bach".  "cc" is transcribed as "ch" as
-                in "chew".
-            -   `true`: "ch" is interpreted as the "ch" as in "chew".
-        -   `sHook`
-            -   `false`: by default, "is" is silme-nuquerna with an I
-                tehta.
-            -   `true`: "is" is a short carrier with an I tehta and S
-                hook.
+  wrote it, into Tengwar Notation in the General Use mode, suitable
+  for Sindarin and many other languages.
+  -   `transcribe(text, options)` to key bindings for the font.
+      Tengwar Annatar by default.
+  -   `encode(text, options)` to Tengwar Notation
+  -   `parse(text, options)` to Tengwar Object Notation
+  -   `makeOptions(options)`
+      -   `font` defaults to the TengwarAnnatar module.
+      -   `block` whether to include HTML tags for paragraphs and line
+          breaks.
+      -   `plain` whether to exclude all HTML from the output,
+          making it suitable for plain text..
+      -   `blackSpeech`: In the Black Speech of the ring inscription,
+          the "o" and "u" curls are reversed, medial "r" is "óre" before
+          consonants in addition to final "r", and "sh" and "gh" used
+          extended tengwar.  This implies `reverseCurls` and
+          `medialOre`.
+      -   `doubleNasalsWithTildeBelow`: Many tengwa can be doubled in
+          General Use mode by placing a tilde above the tengwa, and
+          many tengwa can be prefixed with the sound of the
+          corresponding nasal by putting a tilde below the tengwa.
+          Tengwar that represent nasal sounds have the special
+          distinction that either rule might apply in order to double
+          their value.
+          -   `false`: by default, a tilde above doubles a nasal
+          -   `true`: a tilde below doubles a nasal
+      -   `reverseCurls`: In the Black Speech of the ring inscription,
+          among other samples, the "o" and "u" tehtar are reversed.
+          -   `false`: by default, the "o" tehta curls forward, and
+              "u" backward.
+          -   `true`: "o" curls backward, "u" forward.
+      -   `swapDotSlash`
+          -   `false`: by default, "i" is a dot and "e" is a slash.
+          -   `true`: "i" is a slash, "e" is a dot.
+      -   `noAchLaut`
+          -   `false`: by default, "ch" is transcribed as ach-laut,
+              the "ch" as in "Bach".  "cc" is transcribed as "ch" as
+              in "chew".
+          -   `true`: "ch" is interpreted as the "ch" as in "chew".
+      -   `sHook`
+          -   `false`: by default, "is" is silme-nuquerna with an I
+              tehta.
+          -   `true`: "is" is a short carrier with an I tehta and S
+              hook.
 
 -   `tengwar/classical` transcribes phonetic latin letters into Tengwar
-    Notation in the Classical mode, most commonly used for Quenya.
-    -   `transcribe(text, options)` to key bindings for the font.
-        Tengwar Annatar by default.
-    -   `encode(text, options)` to Tengwar Notation
-    -   `parse(text, options)` to Tengwar Object Notation
-    -   `makeOptions(options)`
-        -   `font` defaults to the TengwarAnnatar module.
-        -   `block` whether to include HTML tags for paragraphs and line
-            breaks.
-        -   `plain` whether to exclude all HTML from the output,
-            making it suitable for plain text..
-        -   `viyla`: In the earlier forms of the mode, the tengwa
-            "vilya" represented the sound of the letter V.  The tengwa
-            "vala" eventually replaced its role and "vilya" was renamed
-            "wilya", and used for the sound of W, consonantal U.
-            -   `false`: by default "wilya" serves for W and "vala" for
-                V.
-            -   `true`: "vilya" serves for V, and W is interpreted as
-                the vowel U.
-        -   `reverseCurls`: In the Black Speech of the ring inscription,
-            among other samples, the "o" and "u" tehtar are reversed.
-            -   `false`: by default, the "o" tehta curls forward, and
-                "u" backward.
-            -   `true`: "o" curls backward, "u" forward.
-        -   `iuRising`: In the Third Age, IU is a rising diphthong,
-            meaning that the stress is on the second sound.  Whether to
-            represent a rising diphthong in the same fashion as other
-            diphthongs is a matter of conjecture.
-            -   `false`: by default, IU is rendered as the I tehta over
-                "ure", the U tehta.
+  Notation in the Classical mode, most commonly used for Quenya.
+  -   `transcribe(text, options)` to key bindings for the font.
+      Tengwar Annatar by default.
+  -   `encode(text, options)` to Tengwar Notation
+  -   `parse(text, options)` to Tengwar Object Notation
+  -   `makeOptions(options)`
+      -   `font` defaults to the TengwarAnnatar module.
+      -   `block` whether to include HTML tags for paragraphs and line
+          breaks.
+      -   `plain` whether to exclude all HTML from the output,
+          making it suitable for plain text..
+      -   `viyla`: In the earlier forms of the mode, the tengwa
+          "vilya" represented the sound of the letter V.  The tengwa
+          "vala" eventually replaced its role and "vilya" was renamed
+          "wilya", and used for the sound of W, consonantal U.
+          -   `false`: by default "wilya" serves for W and "vala" for
+              V.
+          -   `true`: "vilya" serves for V, and W is interpreted as
+              the vowel U.
+      -   `reverseCurls`: In the Black Speech of the ring inscription,
+          among other samples, the "o" and "u" tehtar are reversed.
+          -   `false`: by default, the "o" tehta curls forward, and
+              "u" backward.
+          -   `true`: "o" curls backward, "u" forward.
+      -   `iuRising`: In the Third Age, IU is a rising diphthong,
+          meaning that the stress is on the second sound.  Whether to
+          represent a rising diphthong in the same fashion as other
+          diphthongs is a matter of conjecture.
+          -   `false`: by default, IU is rendered as the I tehta over
+              "úre", the U tehta.
             -   `true`: IU is rendered as the tengwa "anna" with a Y
                 tehta below, and a U tehta above.
         -   `classical`: Before the Third Age (as defined by the
             Namarië) transcribers dealt with R and H differently.  R can
-            be rendered as either "romen" or "ore", but the rules
-            differ.  In the classical period, R is interpreted as "ore"
+            be rendered as either "rómen" or "óre", but the rules
+            differ.  In the classical period, R is interpreted as "óre"
             only when it appears between vowel sounds.  In the Third
-            Age, R is interpreted as "ore" before consonants and at the
+            Age, R is interpreted as "óre" before consonants and at the
             end of words.  The treatment of H is more complex and I have
             only given it a rough draft.
             -   `false`: by default, we transcribe in the pattern of the
-                Namarië poem, where "ore" is used finally and before
+                Namarië poem, where "óre" is used finally and before
                 consonants.
                 -   H is interpreted as "hyarmen".
                 -   HY is interpreted as "hyarmen" with the underposed
@@ -152,8 +152,8 @@ Using the Modules
                 -   HT is interpreted as "harma" followed by "tinco".
                     Therby, HT implies CHT.
                 -   HL is interpreted as "halla" followed by "lambe".
-                -   HR is interpreted as "halla" followed by "romen".
-            -   `true`: "ore" appears only between vowels.  The
+                -   HR is interpreted as "halla" followed by "rómen".
+            -   `true`: "óre" appears only between vowels.  The
                 treatment of "H" depends on whether "harma" has been
                 introduced yet.
         -   `harma`: In the Classical period, "hyarmen" implied the

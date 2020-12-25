@@ -43,7 +43,7 @@ var positions = exports.positions = {
         "others": 0
     },
 
-    "thule": {
+    "thúle": {
         "a": 3,
         "w": 3,
         "y-sindarin": 3,
@@ -89,7 +89,7 @@ var positions = exports.positions = {
         "others": 0
     },
 
-    "numen": {
+    "númen": {
         "wide": true,
         "others": 0
     },
@@ -101,12 +101,12 @@ var positions = exports.positions = {
         "wide": true,
         "others": 0
     },
-    "nwalme": {
+    "ñwalme": {
         "wide": true,
         "others": 0
     },
 
-    "ore": {
+    "óre": {
         "a": 1,
         "e": 2,
         "i": 1,
@@ -140,7 +140,7 @@ var positions = exports.positions = {
         "others": 1
     },
 
-    "romen": {
+    "rómen": {
         "a": 1,
         "e": 1,
         "i": 2,
@@ -225,7 +225,7 @@ var positions = exports.positions = {
         "a": 1,
         "others": 2
     },
-    "ure": {
+    "úre": {
         "a": 1,
         "others": 2
     },
@@ -235,19 +235,19 @@ var positions = exports.positions = {
         "o-below": 3,
         "others": null
     },
-    "short-carrier": {
+    "telco": {
         "y-quenya": null,
         "others": 3
     },
-    "long-carrier": {
+    "ára": {
         "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 3
     },
-    "round-carrier": 2,
+    "osse": 2,
 
-    "thuletinco": {
+    "thúletinco": {
         "a": 3,
         "w": 3,
         "y-quenya": 3,

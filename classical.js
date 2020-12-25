@@ -30,9 +30,9 @@ function makeOptions(options) {
         // before the third age
         // affects use of "r" and "h"
         // without classic, we default to the mode from the namarie poem.
-        // in the classical period, "r" was transcribed as "ore" only between
+        // in the classical period, "r" was transcribed as "óre" only between
         // vowels.
-        // in the third age, through the namarie poem, "r" is only "ore" before
+        // in the third age, through the namarie poem, "r" is only "óre" before
         // consontants and at the end of words.
         swapDotSlash: options.swapDotSlash,
         // false: by default, e is a slash, i is a dot
@@ -43,7 +43,7 @@ function makeOptions(options) {
         // true: o is backward, u is forward
         iuRising: options.iuRising,
         // iuRising thirdAge: anna:y,u
-        // otherwise: ure:i
+        // otherwise: úre:i
         // in the third age, "iu" is a rising diphthong,
         // whereas all others are falling.  rising means
         // that they are stressed on the second sound, as
@@ -112,7 +112,7 @@ function parseColumn(callback, options, previous) {
                     } else if (punctuation[character]) {
                         return callback([makeColumn(punctuation[character], {from: character})]);
                     } else {
-                        return callback([makeColumn("ure", {}).addError(
+                        return callback([makeColumn("úre", {}).addError(
                             "Cannot transcribe " + JSON.stringify(character) +
                             " in Classical Mode"
                         )]);
@@ -132,7 +132,7 @@ function parseTengwa(callback, options, previous) {
         if (character === "n") { // n
             return function (character2) {
                 if (character2 === "n") { // nn
-                    return callback([makeColumn("numen", {from: "n"}).addTildeBelow({from: "n"})]);
+                    return callback([makeColumn("númen", {from: "n"}).addTildeBelow({from: "n"})]);
                 } else if (character2 === "t") { // nt
                     return callback([makeColumn("anto", {from: "nt"})]);
                 } else if (character2 === "d") { // nd
@@ -162,9 +162,9 @@ function parseTengwa(callback, options, previous) {
                         }
                     };
                 } else if (character2 === "w" && previous == null) {
-                    return callback([makeColumn("nwalme", {from: "nw"})]);
+                    return callback([makeColumn("ñwalme", {from: "nw"})]);
                 } else {
-                    return callback([makeColumn("numen", {from: "n"})])(character2);
+                    return callback([makeColumn("númen", {from: "n"})])(character2);
                 }
             };
         } else if (character === "m") {
@@ -197,6 +197,8 @@ function parseTengwa(callback, options, previous) {
                             return callback([makeColumn("anca", {from: "ñc"})]);
                         }
                     }
+                } else if (character === "w") {
+                    return callback([makeColumn("ñwalme", {from: "ñw"})]);
                 } else {
                     return callback([makeColumn("noldo", {from: "ñ"})])(character);
                 }
@@ -214,7 +216,7 @@ function parseTengwa(callback, options, previous) {
                 } else if (character === "y") { // ty
                     return callback([makeColumn("tinco", {from: "t"}).addBelow("y-quenya", {from: "y"})]);
                 } else if (character === "h") { // th
-                    return callback([makeColumn("thule", {from: "th"})]);
+                    return callback([makeColumn("thúle", {from: "th"})]);
                 } else if (character === "s") {
                     return function (character) {
                         // TODO s-inverse, s-extended, s-flourish
@@ -307,26 +309,26 @@ function parseTengwa(callback, options, previous) {
                     var error = "R should preceed H in the HR diagraph in Classical mode.";
                     return callback([
                         makeColumn("halla", {from: "h"}).addError(error),
-                        makeColumn("romen", {from: "r"}).addError(error)
+                        makeColumn("rómen", {from: "r"}).addError(error)
                     ]);
                 } else if (options.classicalR) {
-                    // pre-namarie style, ore when r between vowels
+                    // pre-namarie style, óre when r between vowels
                     if (
                         previous &&
                         previous.above &&
                         !Parser.isFinal(character) &&
                         vowels.indexOf(character) !== -1
                     ) {
-                        return callback([makeColumn("ore", {from: "r"})])(character);
+                        return callback([makeColumn("óre", {from: "r"})])(character);
                     } else {
-                        return callback([makeColumn("romen", {from: "r"})])(character);
+                        return callback([makeColumn("rómen", {from: "r"})])(character);
                     }
                 } else {
                     // pre-consonant and word-final
-                    if (Parser.isFinal(character) || vowels.indexOf(character) === -1) { // ore
-                        return callback([makeColumn("ore", {from: "r"})])(character);
-                    } else { // romen
-                        return callback([makeColumn("romen", {from: "r"})])(character);
+                    if (Parser.isFinal(character) || vowels.indexOf(character) === -1) { // óre
+                        return callback([makeColumn("óre", {from: "r"})])(character);
+                    } else { // rómen
+                        return callback([makeColumn("rómen", {from: "r"})])(character);
                     }
                 }
             };
@@ -376,7 +378,7 @@ function parseTengwa(callback, options, previous) {
                 } else if (character === "r") {
                     return callback([
                         makeColumn("halla", {from: "h"}),
-                        makeColumn("romen", {from: "r"})
+                        makeColumn("rómen", {from: "r"})
                     ]);
                 } else if (character === "w") { // hw
                     return callback([makeColumn("hwesta", {from: "hw"})]);
@@ -418,7 +420,7 @@ function parseTengwa(callback, options, previous) {
         } else if (character === "g") {
             return callback([makeColumn("anga", {from: "g"}).addError("G cannot appear except after N or Ñ in Classical Mode")]);
         } else if (character === "j") {
-            return callback([makeColumn("ure", {from: "j"}).addError("J cannot be transcribed in Classical Mode")]);
+            return callback([makeColumn("úre", {from: "j"}).addError("J cannot be transcribed in Classical Mode")]);
         } else {
             return callback([])(character);
         }
@@ -436,11 +438,11 @@ function parseTehta(callback, options, previous) {
                 } else if (character === "i") {
                     return callback([previous, makeColumn("yanta", {from: "i", diphthong: true}).addAbove("a", {from: "a"})]);
                 } else if (character === "u") {
-                    return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove("a", {from: "a"})]);
+                    return callback([previous, makeColumn("úre", {from: "u", diphthong: true}).addAbove("a", {from: "a"})]);
                 } else if (previous && previous.canAddAbove("a")) {
                     return callback([previous.addAbove("a", {from: "a"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "a"}).addAbove("a", {})])(character);
+                    return callback([previous, makeColumn("telco", {from: "a"}).addAbove("a", {})])(character);
                 }
             };
         } else if (character === "e" || character === "ë") {
@@ -449,11 +451,11 @@ function parseTehta(callback, options, previous) {
                 if (character === "e") {
                     return parseTehta(callback, options, previous)("é");
                 } else if (character === "u") {
-                    return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove(tehta, {from: "e"})]);
+                    return callback([previous, makeColumn("úre", {from: "u", diphthong: true}).addAbove(tehta, {from: "e"})]);
                 } else if (previous && previous.canAddAbove("e")) {
                     return callback([previous.addAbove(tehta, {from: "e"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "e"}).addAbove(tehta, {})])(character);
+                    return callback([previous, makeColumn("telco", {from: "e"}).addAbove(tehta, {})])(character);
                 }
             };
         } else if (character === "i") {
@@ -465,12 +467,12 @@ function parseTehta(callback, options, previous) {
                     if (options.iuRising) {
                         return callback([previous, makeColumn("anna", {from: "i", diphthong: true}).addAbove(reverseCurls("u", options), {from: "u"}).addBelow("y-quenya", {from: "y"})]);
                     } else {
-                        return callback([previous, makeColumn("ure", {from: "u", diphthong: true}).addAbove(iTehta, {from: "i"})]);
+                        return callback([previous, makeColumn("úre", {from: "u", diphthong: true}).addAbove(iTehta, {from: "i"})]);
                     }
                 } else if (previous && previous.canAddAbove(iTehta)) {
                     return callback([previous.addAbove(iTehta, {from: "i"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "i"}).addAbove(iTehta, {})])(character);
+                    return callback([previous, makeColumn("telco", {from: "i"}).addAbove(iTehta, {})])(character);
                 }
             };
         } else if (character === "o") {
@@ -482,7 +484,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("o")) {
                     return callback([previous.addAbove(reverseCurls("o", options), {from: "o"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "o"}).addAbove(reverseCurls("o", options), {})])(character);
+                    return callback([previous, makeColumn("telco", {from: "o"}).addAbove(reverseCurls("o", options), {})])(character);
                 }
             };
         } else if (character === "u") {
@@ -494,7 +496,7 @@ function parseTehta(callback, options, previous) {
                 } else if (previous && previous.canAddAbove("u")) {
                     return callback([previous.addAbove(reverseCurls("u", options), {from: "u"})])(character);
                 } else {
-                    return callback([previous, makeColumn("short-carrier", {from: "u"}).addAbove(reverseCurls("u", options), {})])(character);
+                    return callback([previous, makeColumn("telco", {from: "u"}).addAbove(reverseCurls("u", options), {})])(character);
                 }
             };
         } else if (character === "y") {
@@ -507,22 +509,22 @@ function parseTehta(callback, options, previous) {
                 }, options, next);
             }
         } else if (character === "á" || character === "â") {
-            return callback([previous, makeColumn("long-carrier", {from: character}).addAbove("a", {})]);
+            return callback([previous, makeColumn("ára", {from: character}).addAbove("a", {})]);
         } else if (character === "é" || character === "ê") {
-            return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(swapDotSlash("e", options), {})]);
+            return callback([previous, makeColumn("ára", {from: character}).addAbove(swapDotSlash("e", options), {})]);
         } else if (character === "í" || character === "î") {
-            return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(swapDotSlash("i", options), {})]);
+            return callback([previous, makeColumn("ára", {from: character}).addAbove(swapDotSlash("i", options), {})]);
         } else if (character === "ó" || character === "ô") {
             if (previous && previous.canAddAbove("ó")) {
                 return callback([previous.addAbove(reverseCurls("ó", options), {from: character})]);
             } else {
-               return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(reverseCurls("o", options), {})]);
+               return callback([previous, makeColumn("ára", {from: character}).addAbove(reverseCurls("o", options), {})]);
             }
         } else if (character === "ú" || character === "û") {
             if (previous && previous.canAddAbove("ú")) {
                 return callback([previous.addAbove(reverseCurls("ú", options), {from: character})]);
             } else {
-                return callback([previous, makeColumn("long-carrier", {from: character}).addAbove(reverseCurls("u", options), {})]);
+                return callback([previous, makeColumn("ára", {from: character}).addAbove(reverseCurls("u", options), {})]);
             }
         } else {
             return callback([previous])(character);
@@ -593,7 +595,7 @@ function swapDotSlash(tehta, options) {
 //   altered: breath h initial
 //   third-age: only used for hl and hr
 //
-// hr: halla romen
+// hr: halla rómen
 // hl: halla lambe
 // ht: harma
 // hy:
