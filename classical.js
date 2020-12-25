@@ -161,6 +161,8 @@ function parseTengwa(callback, options, previous) {
                             return callback([makeColumn("unque", {from: "nq"})])(character3);
                         }
                     };
+                } else if (character2 === "w" && previous == null) {
+                    return callback([makeColumn("nwalme", {from: "nw"})]);
                 } else {
                     return callback([makeColumn("numen", {from: "n"})])(character2);
                 }
