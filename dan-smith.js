@@ -12,7 +12,7 @@ exports.tengwar = {
     "anga" : "s", // ng
     "ungwe": "x", // ngw
     // 3
-    "thule" : "3", // th
+    "thúle" : "3", // th
     "formen": "e", // ph / f
     "harma" : "d", // h / ch
     "hwesta": "c", // hw / chw
@@ -22,17 +22,17 @@ exports.tengwar = {
     "anca" : "f", // nc
     "unque": "v", // nqu
     // 5
-    "numen" : "5", // n
+    "númen" : "5", // n
     "malta" : "t", // m
     "noldo" : "g", // ng
-    "nwalme": "b", // ngw / nw
+    "ñwalme": "b", // ngw / nw
     // 6
-    "ore"  : "6", // r
+    "óre"  : "6", // r
     "vala" : "y", // v
     "anna" : "h", // -
     "wilya": "n", // w / v
     // 7
-    "romen": "7", // medial r
+    "rómen": "7", // medial r
     "arda" : "u", // rd / rh
     "lambe": "j", // l
     "alda" : "m", // ld / lh
@@ -45,14 +45,14 @@ exports.tengwar = {
     "hyarmen":           "9", // hyarmen
     "hwesta-sindarinwa": "o", // hwesta sindarinwa
     "yanta":             "l", // yanta
-    "ure":               ".", // ure
+    "úre":               ".", // úre
     // 10
     "halla": "½", // halla
-    "short-carrier": "`",
-    "long-carrier": "~",
-    "round-carrier": "]",
+    "telco": "`",
+    "ára": "~",
+    "osse": "]",
     // I
-    "thuletinco": "!",
+    "thúletinco": "!",
     "formenparma": "Q",
     "harmacalma": "A",
     "hwestaquesse": "Z",
@@ -145,13 +145,13 @@ exports.tehtar = {
         "special": true,
         "calma": "|",
         "quesse": "|",
-        "short-carrier": "}"
+        "telco": "}"
     },
     "s-final": {
         "special": true,
         "tinco": "+",
         "ando": "+",
-        "numen": "+",
+        "númen": "+",
         "malta": "+",
         "lambe": "_"
     },

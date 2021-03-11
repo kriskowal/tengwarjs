@@ -39,8 +39,8 @@ function makeOptions(options) {
         // false: by default, e is a slash, i is a dot
         // true: e is a dot, i is a slash
         medialOre: options.medialOre || options.language === "black-speech",
-        // false: by default, ore only appears in final position
-        // true: ore also appears before consonants, as in the ring inscription
+        // false: by default, "óre" only appears in final position
+        // true: "óre" also appears before consonants, as in the ring inscription
         language: options.language,
         // by default, no change
         // "english": final e implicitly silent
@@ -168,7 +168,7 @@ function parseWord(callback, options) {
             } else if (word === "we") {
                 return callback([
                     makeColumn("vala", {from: "w"}),
-                    makeColumn("short-carrier", {from: ""})
+                    makeColumn("telco", {from: ""})
                         .addAbove("e", {from: "e"})
                         .varies()
                 ]);
@@ -191,11 +191,11 @@ function parseWord(callback, options) {
 
 var book = {
     "iant": "yanta;tinco:a,tilde-above",
-    "iaur": "yanta;vala:a;ore",
-    "baranduiniant": "umbar;romen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
-    "ioreth": "yanta;romen:o;thule:e",
-    "noldo": "nwalme;lambe:o;ando;short-carrier:o",
-    "noldor": "nwalme;lambe:o;ando;ore:o"
+    "iaur": "yanta;vala:a;óre",
+    "baranduiniant": "umbar;rómen:a;ando:a,tilde-above;anna:u;yanta;anto:a,tilde-above",
+    "ioreth": "yanta;rómen:o;thúle:e",
+    "noldo": "ñwalme;lambe:o;ando;telco:o",
+    "noldor": "ñwalme;lambe:o;ando;óre:o"
 };
 
 // TODO Fix bug where "of", "the", and "and" decompose with following
@@ -263,7 +263,7 @@ function makeThePrime(makeColumn) {
 }
 
 function makeThePrimePrime(makeColumn) {
-    return makeColumn("thule", {from: "th"}).addBelow("i-below", {from: "e", silent: true});
+    return makeColumn("thúle", {from: "th"}).addBelow("i-below", {from: "e", silent: true});
 }
 
 function makeOfThe(makeColumn) {
@@ -309,7 +309,7 @@ function parseColumn(callback, length, options, previous) {
                 if (tehta) {
                     if (column.tengwa === "silme" && tehta && options.sHook) {
                         return callback([
-                            makeColumn("short-carrier", {from: ""})
+                            makeColumn("telco", {from: ""})
                             .addAbove(tehta, {from: tehtaFrom})
                             .addBelow("s", {from: "s"})
                         ]);
@@ -349,9 +349,9 @@ function parseColumn(callback, length, options, previous) {
             } else if (tehta === "y") {
                 var column;
                 if (options.language === "english") {
-                    column = makeColumn("short-carrier").addAbove("y-english", {from: "y"});
+                    column = makeColumn("telco").addAbove("y-english", {from: "y"});
                 } else {
-                    column = makeColumn("short-carrier").addAbove("y-sindarin", {from: "y"});
+                    column = makeColumn("telco").addAbove("y-sindarin", {from: "y"});
                 }
                 return parseTengwaAnnotations(function (column) {
                     return callback([column]);
@@ -370,7 +370,7 @@ function parseColumn(callback, length, options, previous) {
                         return callback([makeColumn(punctuation[character], {from: character})]);
                     } else {
                         return callback([
-                            makeColumn("ure", {from: character})
+                            makeColumn("úre", {from: character})
                             .addError(
                                 "Cannot transcribe " +
                                 JSON.stringify(character) +
@@ -392,10 +392,10 @@ function makeCarrier(tehta, tehtaFrom, options) {
         return makeColumn("anna", {from: "a"})
             .addAbove("a", {from: "a"});
     } else if (shorterVowels[tehta]) {
-        return makeColumn("long-carrier", {from: tehtaFrom})
+        return makeColumn("ára", {from: tehtaFrom})
             .addAbove(shorterVowels[tehta], {from: ""});
     } else {
-        return makeColumn("short-carrier", {from: tehtaFrom})
+        return makeColumn("telco", {from: tehtaFrom})
             .addAbove(tehta, {from: ""});
     }
 }
@@ -461,14 +461,14 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 if (character === "n") { // nn
                     if (options.doubleNasalsWithTildeBelow) {
                         return callback(
-                            makeColumn("numen", {from: "n"})
+                            makeColumn("númen", {from: "n"})
                                 .addTildeBelow({from: "n"}),
                             tehta,
                             tehtaFrom
                         );
                     } else {
                         return callback(
-                            makeColumn("numen", {from: "n"})
+                            makeColumn("númen", {from: "n"})
                                 .addTildeAbove({from: "n"}),
                             tehta,
                             tehtaFrom
@@ -478,7 +478,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     return function (character) {
                         if (character === "h") { // nth
                             return callback(
-                                makeColumn("thule", {from: "th"})
+                                makeColumn("thúle", {from: "th"})
                                     .addTildeAbove({from: "n"}),
                                 tehta,
                                 tehtaFrom
@@ -501,25 +501,25 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 } else if (character === "j") { // nj
                     return callback(makeColumn("anca", {from: "j"}).addTildeAbove({from: "n"}), tehta, tehtaFrom);
                 } else if (character === "f") { // nf -> nv
-                    return callback(makeColumn("numen", {from: "n"}), tehta, tehtaFrom)("v");
+                    return callback(makeColumn("númen", {from: "n"}), tehta, tehtaFrom)("v");
                 } else  if (character === "w") { // nw -> ñw
                     return function (character) {
                         if (character === "a") { // nwa
                             return function (character) { // nwal
                                 if (character === "l") {
-                                    return callback(makeColumn("nwalme", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)("a")(character);
+                                    return callback(makeColumn("ñwalme", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)("a")(character);
                                 } else { // nwa.
-                                    return callback(makeColumn("numen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)("a")(character);
+                                    return callback(makeColumn("númen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)("a")(character);
                                 }
                             };
                         } else if (character === "nw`") { // nw/ prime -> ñw
-                            return callback(makeColumn("nwalme", {from: "ñ"}).addAbove("w", {from: "w"}), tehta, tehtaFrom);
+                            return callback(makeColumn("ñwalme", {from: "ñ"}).addAbove("w", {from: "w"}), tehta, tehtaFrom);
                         } else { // nw.
-                            return callback(makeColumn("numen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)(character);
+                            return callback(makeColumn("númen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)(character);
                         }
                     };
                 } else { // n.
-                    return callback(makeColumn("numen", {from: "n"}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("númen", {from: "n"}), tehta, tehtaFrom)(character);
                 }
             };
         } else if (character === "m") { // m
@@ -551,7 +551,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 } else if (character === "g") { // ñg
                     return callback(makeColumn("ungwe", {from: "g"}).addTildeAbove({from: "ñ"}), tehta, tehtaFrom);
                 } else { // ñ.
-                    return callback(makeColumn("nwalme", {from: "ñ"}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("ñwalme", {from: "ñ"}), tehta, tehtaFrom)(character);
                 }
             };
         } else if (character === "t") { // t
@@ -559,7 +559,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 if (character === "t") { // tt
                     return callback(makeColumn("tinco", {from: "t"}).addTildeBelow({from: "t"}), tehta, tehtaFrom);
                 } else if (character === "h") { // th
-                    return callback(makeColumn("thule", {from: "th"}), tehta, tehtaFrom);
+                    return callback(makeColumn("thúle", {from: "th"}), tehta, tehtaFrom);
                 } else if (character === "c") { // tc
                     return function (character) {
                         if (character === "h") { // tch -> tinco calma
@@ -761,7 +761,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
         } else if (character === "r") { // r
             return function (character) {
                 if (character === "r") { // rr
-                    return callback(makeColumn("romen", {from: "r"}).addTildeBelow({from: "r"}), tehta, tehtaFrom);
+                    return callback(makeColumn("rómen", {from: "r"}).addTildeBelow({from: "r"}), tehta, tehtaFrom);
                 } else if (character === "h") { // rh
                     return callback(makeColumn("arda", {from: "rh"}), tehta, tehtaFrom);
                 } else if (
@@ -770,9 +770,9 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                         vowels.indexOf(character) === -1
                     )
                 ) { // r final (optionally r before consonant)
-                    return callback(makeColumn("ore", {from: "r", final: true}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("óre", {from: "r", final: true}), tehta, tehtaFrom)(character);
                 } else { // r.
-                    return callback(makeColumn("romen", {from: "r"}), tehta, tehtaFrom)(character);
+                    return callback(makeColumn("rómen", {from: "r"}), tehta, tehtaFrom)(character);
                 }
             };
         } else if (character === "l") {
@@ -804,16 +804,16 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
         } else if (character === "e" && (!tehta || tehta === "o")) { // oe or e after consonants
             return callback(makeColumn("yanta", {from: "e", diphthong: true}), tehta, tehtaFrom);
         } else if (character === "ë") { // if "ë" makes it this far, it's a diaresis for english
-            return callback(makeColumn("short-carrier", {from: ""}).addAbove("e", {from: "e"}));
+            return callback(makeColumn("telco", {from: ""}).addAbove("e", {from: "e"}));
         } else if (character === "y") {
             return Parser.countPrimes(function (primes) {
                 if (primes === 0) {
                   return callback(makeColumn("anna", {from: ""}), tehta, tehtaFrom);
                   // 21-9-19 HH edit return callback(makeColumn("wilya", {from: ""}).addBelow("y", {from: "y"}), tehta, tehtaFrom);
                 } else if (primes === 1) {
-                    return callback(makeColumn("long-carrier", {from: "y"}).addAbove("i", {from: ""}), tehta, tehtaFrom);
+                    return callback(makeColumn("ára", {from: "y"}).addAbove("i", {from: ""}), tehta, tehtaFrom);
                 } else {
-                    return callback(makeColumn("ure", {from: "y"}).addError("Consonantal Y only has one variation"));
+                    return callback(makeColumn("úre", {from: "y"}).addError("Consonantal Y only has one variation"));
                 }
             });
         } else if (shorterVowels[character]) {
@@ -829,13 +829,13 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                     // final e` in english should be equivalent to diaresis.
                     // tehta deliberately consumed in this case, not passed forward.
                     return callback(
-                        makeColumn("short-carrier", {from: ""})
+                        makeColumn("telco", {from: ""})
                             .addAbove("e", {from: "e"})
                     );
                 } else {
                     // tehta deliberately consumed in this case, not passed forward.
                     return callback(
-                        makeColumn("short-carrier", {from: ""})
+                        makeColumn("telco", {from: ""})
                             .addBelow("i-below", {from: "e", silent: true})
                     )(character)(character2);
                 }
@@ -843,7 +843,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
         } else if (character === "" && options.language === "english" && tehta === "e") {
             // tehta deliberately consumed in this case, not passed forward.
             return callback(
-                makeColumn("short-carrier", {from: ""})
+                makeColumn("telco", {from: ""})
                     .addBelow("i-below", {from: "e", silent: true})
             )(character);
         } else {

@@ -3,15 +3,15 @@
 exports.tengwar = [
     ["tinco", "parma", "calma", "quesse"],
     ["ando", "umbar", "anga", "ungwe"],
-    ["thule", "formen", "harma", "hwesta"],
+    ["thúle", "formen", "harma", "hwesta"],
     ["anto", "ampa", "anca", "unque"],
-    ["numen", "malta", "noldo", "nwalme"],
-    ["ore", "vala", "anna", "wilya"],
-    ["romen", "arda", "lambe", "alda"],
+    ["númen", "malta", "noldo", "ñwalme"],
+    ["óre", "vala", "anna", "wilya"],
+    ["rómen", "arda", "lambe", "alda"],
     ["silme", "silme-nuquerna", "esse", "esse-nuquerna"],
-    ["hyarmen", "hwesta-sindarinwa", "yanta", "ure"],
-    ["halla", "short-carrier", "long-carrier", "round-carrier"],
-    ["thuletinco", "formenparma", "harmacalma", "hwestaquesse"],
+    ["hyarmen", "hwesta-sindarinwa", "yanta", "úre"],
+    ["halla", "telco", "ára", "osse"],
+    ["thúletinco", "formenparma", "harmacalma", "hwestaquesse"],
     ["antoando", "ampaumbar", "ancaanga", "unqueungwe"]
 ];
 
