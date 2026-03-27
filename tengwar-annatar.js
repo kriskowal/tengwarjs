@@ -73,7 +73,7 @@ var positions = exports.positions = {
         "others": 0
     },
 
-    "thule": {
+    "thúle": {
         "others": 3
     },
     "formen": 3,
@@ -119,7 +119,7 @@ var positions = exports.positions = {
         "others": 0
     },
 
-    "numen": {
+    "númen": {
         "wide": true,
         "ó": 1,
         "ú": 1,
@@ -137,14 +137,14 @@ var positions = exports.positions = {
         "ú": 1,
         "others": 0
     },
-    "nwalme": {
+    "ñwalme": {
         "wide": true,
         "ó": 1,
         "ú": 1,
         "others": 0
     },
 
-    "ore": {
+    "óre": {
         "e": 3,
         "o": 3,
         "u": 3,
@@ -177,7 +177,7 @@ var positions = exports.positions = {
         "others": 1
     },
 
-    "romen": {
+    "rómen": {
         "e": 3,
         "o": 3,
         "u": 3,
@@ -264,7 +264,7 @@ var positions = exports.positions = {
         "ú": 2,
         "others": 1
     },
-    "ure": {
+    "úre": {
         "e": 3,
         "o": 3,
         "u": 3,
@@ -278,16 +278,16 @@ var positions = exports.positions = {
         "i-below": 3,
         "others": null
     },
-    "short-carrier": 3,
-    "long-carrier": {
+    "telco": 3,
+    "ára": {
         "y-quenya": null,
         "o-below": null,
         "i-below": null,
         "others": 3
     },
-    "round-carrier": 3,
+    "osse": 3,
 
-    "thuletinco": 3,
+    "thúletinco": 3,
     "formenparma": 3,
     "harmacalma": {
         "o": 3,

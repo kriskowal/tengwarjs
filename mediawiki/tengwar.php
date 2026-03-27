@@ -42,7 +42,7 @@ function wfMakeTengwar($input, array $args, $tag) {
     );
 }
 
-$temp= wfMakeTengwar("numen;anna", array("encoded"=>true), "span");
+$temp= wfMakeTengwar("númen;anna", array("encoded"=>true), "span");
 echo $temp[0];
 
 ?>

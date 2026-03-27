@@ -96,7 +96,7 @@ module.exports = {
         }
     },
 
-    thule: {
+    thúle: {
         name: "thúle",
         phone: "th",
         meaning: "spirit",
@@ -196,7 +196,7 @@ module.exports = {
         }
     },
 
-    numen: {
+    númen: {
         name: "númen",
         meaning: "west",
         phone: "n",
@@ -232,7 +232,7 @@ module.exports = {
             name: "nyé"
         }
     },
-    nwalme: {
+    ñwalme: {
         meaning: "torment",
         phone: "nw",
         original: {
@@ -248,7 +248,7 @@ module.exports = {
         }
     },
 
-    ore: {
+    óre: {
         name: "óre",
         meaning: "heart (inner mind)",
         phone: "-r-",
@@ -305,7 +305,7 @@ module.exports = {
         }
     },
 
-    romen: {
+    rómen: {
         name: "rómen",
         meaning: "east",
         phone: "r",
@@ -432,7 +432,7 @@ module.exports = {
             name: "ai"
         }
     },
-    ure: {
+    úre: {
         name: "úre",
         phone: "u",
         meaning: "heat",
@@ -475,7 +475,7 @@ module.exports = {
         phone: "ndy"
     },
     istyar: {
-        yed: "thule",
+        yed: "thúle",
         y: "below",
         meaning: "wizard, lore-master",
         phone: "sty"
@@ -502,7 +502,7 @@ module.exports = {
         }
     },
     nyelle: {
-        yed: "numen",
+        yed: "númen",
         y: "above",
         meaning: "bell",
         phone: "ny",
@@ -513,12 +513,12 @@ module.exports = {
         }
     },
     arya: {
-        yed: "ore/romen",
+        yed: "óre/rómen",
         y: "above",
         meaning: "day",
         ace: {
             name: "nyelle",
-            yed: "ore",
+            yed: "óre",
             y: "above",
             meaning: "bell"
         }

@@ -1,34 +1,35 @@
 module.exports = {
-    "eldarinwa": "short-carrier:e;alda:a;romen:i;numen;wilya:a", // suggested by arnog
+    "eldarinwa": "telco:e;alda:a;rómen:i;númen;wilya:a", // suggested by arnog
     "hlóce": "halla;lambe:ó;calma:e", // attested
-    "hríve": "halla;romen;long-carrier:i;vala:e", // attested
-    "hyarmen": "hyarmen:a,y-quenya;ore;malta:e;numen",
+    "hríve": "halla;rómen;ára:i;vala:e", // attested
+    "hyarmen": "hyarmen:a,y-quenya;óre;malta:e;númen",
     "lambe": "lambe:a;umbar:e",
-    "moria": "malta:o;romen:i;short-carrier:a",
-    "namaarië": "numen:a;malta;long-carrier:a;romen:i;short-carrier:e",
-    "namárië": "numen:a;malta;long-carrier:a;romen:i;short-carrier:e",
-    "nwalme": "nwalme:a;lambe;malta:e",
-    "quenya": "quesse:e;numen:a,y-quenya",
+    "moria": "malta:o;rómen:i;telco:a",
+    "namaarië": "númen:a;malta;ára:a;rómen:i;telco:e",
+    "namárië": "númen:a;malta;ára:a;rómen:i;telco:e",
+    "nwalme": "ñwalme:a;lambe;malta:e",
+    "ñwalme": "ñwalme:a;lambe;malta:e",
+    "quenya": "quesse:e;númen:a,y-quenya",
     "silme": "silme-nuquerna:i;lambe;malta:e",
-    "syi": "silme:y-quenya;short-carrier:i", //*
-    "thúlë": "thule:ú;lambe:e",
+    "syi": "silme:y-quenya;telco:i", //*
+    "thúlë": "thúle:ú;lambe:e",
     "tyelpe": "tinco:e,y-quenya;lambe;parma:e",
-    "unque": "short-carrier:u;unque:e",
-    "vanwa": "vala:a;numen;wilya:a",
-    "yonwa": "anna:o,y-quenya;numen;wilya:a", // suggested by arnog
-    "yuldar": "anna:u,y-quenya;alda:a;ore",
+    "unque": "telco:u;unque:e",
+    "vanwa": "vala:a;númen;wilya:a",
+    "yonwa": "anna:o,y-quenya;númen;wilya:a", // suggested by arnog
+    "yuldar": "anna:u,y-quenya;alda:a;óre",
 
     // long vowels
-    "á": "long-carrier:a",
-    "aa": "long-carrier:a",
-    "é": "long-carrier:e",
-    "ee": "long-carrier:e",
-    "í": "long-carrier:i",
-    "ii": "long-carrier:i",
-    "ó": "long-carrier:o",
-    "oo": "long-carrier:o",
-    "ú": "long-carrier:u",
-    "uu": "long-carrier:u",
+    "á": "ára:a",
+    "aa": "ára:a",
+    "é": "ára:e",
+    "ee": "ára:e",
+    "í": "ára:i",
+    "ii": "ára:i",
+    "ó": "ára:o",
+    "oo": "ára:o",
+    "ú": "ára:u",
+    "uu": "ára:u",
 
     // for code coverage
     "x": "calma:s",
