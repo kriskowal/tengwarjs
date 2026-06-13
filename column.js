@@ -119,7 +119,7 @@ Column.prototype.addError = function (error) {
     return this;
 };
 
-Column.prototype.varies = function () {
+Column.prototype.markAsVariant = Column.prototype.varies = function () {
     this.hasVariant = true;
     return this;
 };

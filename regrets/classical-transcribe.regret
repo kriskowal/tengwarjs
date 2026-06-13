@@ -1,0 +1,12 @@
+cluster: classical-transcribe
+version: 1
+fingerprint: 4c84zgt
+captured: 2026-06-13T16:20:46.807Z
+watches: [transcribe]
+entry: transcribe
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "namarie"
+OUTPUT "5#t#7T`V"
+HASH   4c84zgt
