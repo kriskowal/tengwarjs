@@ -1,0 +1,28 @@
+{
+  "chains": [
+    {
+      "id": "general-use-to-beleriand",
+      "description": "Same text transcribed through General Use then Beleriand mode",
+      "steps": [
+        { "cluster": "general-use-encode", "input": "mellon" },
+        { "cluster": "beleriand-encode", "input": "mellon" }
+      ]
+    },
+    {
+      "id": "black-speech-reverse-curls",
+      "description": "Black Speech implies reverse curls — verify both produce same curl behavior",
+      "steps": [
+        { "cluster": "general-use-encode-black-speech", "input": "ash nazg" },
+        { "cluster": "general-use-encode-reverse-curls", "input": "ash nazg" }
+      ]
+    },
+    {
+      "id": "classical-vs-early",
+      "description": "Same text in Third Age Classical vs pre-Third Age Classical",
+      "steps": [
+        { "cluster": "classical-encode", "input": "namarie" },
+        { "cluster": "classical-encode-early", "input": "namarie" }
+      ]
+    }
+  ]
+}

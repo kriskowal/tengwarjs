@@ -1,0 +1,12 @@
+cluster: beleriand-encode
+version: 1
+fingerprint: 20b9l5h
+captured: 2026-06-13T17:14:18.951Z
+watches: [encode]
+entry: encode
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "mellon"
+OUTPUT "vala;yanta;lambe;lambe;anna;ore"
+HASH   20b9l5h

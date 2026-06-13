@@ -1,0 +1,12 @@
+cluster: general-use-encode
+version: 1
+fingerprint: 2heyimj
+captured: 2026-06-13T17:14:18.941Z
+watches: [encode]
+entry: encode
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "hello"
+OUTPUT "hyarmen;lambe:e,tilde-below;short-carrier:o"
+HASH   2heyimj

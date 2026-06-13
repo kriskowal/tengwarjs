@@ -1,0 +1,12 @@
+cluster: classical-encode-early
+version: 1
+fingerprint: s3dh268
+captured: 2026-06-13T17:14:18.949Z
+watches: [module.exports]
+entry: module.exports
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "namarie"
+OUTPUT "numen:a;malta:a;ore:i;short-carrier:e"
+HASH   s3dh268

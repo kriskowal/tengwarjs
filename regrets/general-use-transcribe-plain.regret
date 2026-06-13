@@ -1,0 +1,12 @@
+cluster: general-use-transcribe-plain
+version: 1
+fingerprint: 5xgljhq
+captured: 2026-06-13T17:14:18.946Z
+watches: [module.exports]
+entry: module.exports
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "hello"
+OUTPUT "9jR°`N"
+HASH   5xgljhq
