@@ -1,0 +1,12 @@
+cluster: index-transcribe
+version: 1
+fingerprint: 3qmwrpw
+captured: 2026-06-13T16:20:46.812Z
+watches: [transcribe]
+entry: transcribe
+stack: js
+fingerprintLevel: entry
+---
+INPUT  ["hello","general-use","annatar"]
+OUTPUT "9jR°`N"
+HASH   3qmwrpw

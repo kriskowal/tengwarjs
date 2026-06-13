@@ -1,0 +1,12 @@
+cluster: classical-encode
+version: 1
+fingerprint: 3w6m0l5
+captured: 2026-06-13T16:20:46.807Z
+watches: [encode]
+entry: encode
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "namarie"
+OUTPUT "numen:a;malta:a;romen:i;short-carrier:e"
+HASH   3w6m0l5

@@ -1,0 +1,12 @@
+cluster: beleriand-transcribe
+version: 1
+fingerprint: 7r3lpn4
+captured: 2026-06-13T16:20:46.809Z
+watches: [transcribe]
+entry: transcribe
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "mordor"
+OUTPUT "yh72h7"
+HASH   7r3lpn4

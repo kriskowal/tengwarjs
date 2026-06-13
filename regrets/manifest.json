@@ -1,0 +1,147 @@
+{
+  "clusters": [
+    {
+      "id": "general-use-transcribe",
+      "entry": "transcribe",
+      "watches": ["transcribe"],
+      "file": "general-use.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Transcribes Latin text to Tengwar HTML using General Use mode (English/Sindarin)",
+      "inputs": [
+        "hello",
+        "The Lord of the Rings",
+        "Aragorn",
+        "frodo",
+        ""
+      ]
+    },
+    {
+      "id": "general-use-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "general-use.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Encodes Latin text to Tengwar Notation using General Use mode",
+      "inputs": [
+        "hello",
+        "Aragorn",
+        ""
+      ]
+    },
+    {
+      "id": "general-use-make-options",
+      "entry": "makeOptions",
+      "watches": ["makeOptions"],
+      "file": "general-use.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Creates normalized options object for General Use mode transcription",
+      "inputs": [
+        null,
+        {"blackSpeech": true},
+        {"reverseCurls": true, "swapDotSlash": true},
+        {"language": "black-speech"},
+        {"duodecimal": true}
+      ]
+    },
+    {
+      "id": "classical-transcribe",
+      "entry": "transcribe",
+      "watches": ["transcribe"],
+      "file": "classical.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Transcribes Latin text to Tengwar HTML using Classical mode (Quenya)",
+      "inputs": [
+        "namarie",
+        "elbereth",
+        ""
+      ]
+    },
+    {
+      "id": "classical-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "classical.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Encodes Latin text to Tengwar Notation using Classical mode",
+      "inputs": [
+        "namarie",
+        ""
+      ]
+    },
+    {
+      "id": "beleriand-transcribe",
+      "entry": "transcribe",
+      "watches": ["transcribe"],
+      "file": "beleriand.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Transcribes Latin text to Tengwar HTML using Beleriand mode",
+      "inputs": [
+        "mordor",
+        "gondolin",
+        ""
+      ]
+    },
+    {
+      "id": "beleriand-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "beleriand.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Encodes Latin text to Tengwar Notation using Beleriand mode",
+      "inputs": [
+        "mordor",
+        ""
+      ]
+    },
+    {
+      "id": "notation-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "notation.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Encodes parsed Tengwar sections to Tengwar Notation string format",
+      "inputs": [
+        [[[[]]]]
+      ]
+    },
+    {
+      "id": "index-transcribe",
+      "entry": "transcribe",
+      "watches": ["transcribe"],
+      "file": "regrets/test-index.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "multiArgs": true,
+      "description": "Top-level transcribe via index.js — wraps mode.transcribe with font assignment",
+      "inputs": [
+        ["hello", "general-use", "annatar"],
+        ["namarie", "classical", "annatar"],
+        ["mordor", "beleriand", "parmaite"],
+        ["The Ring", "general-use", "annatar"]
+      ]
+    },
+    {
+      "id": "index-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "regrets/test-index.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "multiArgs": true,
+      "description": "Top-level encode via index.js — wraps mode.encode with font assignment",
+      "inputs": [
+        ["hello", "general-use", "annatar"],
+        ["namarie", "classical", "annatar"],
+        ["mordor", "beleriand", "parmaite"]
+      ]
+    }
+  ]
+}

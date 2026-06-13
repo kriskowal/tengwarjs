@@ -1,8 +1,7 @@
 "use strict";
 
-var Alphabet = require("./alphabet");
 var Bindings = require("./dan-smith");
-var makeFontColumn = require("./column");
+var createFontTranscriber = require("./font-transcriber");
 
 var tengwar = exports.tengwar = {
     ...Bindings.tengwar,
@@ -335,81 +334,13 @@ var positions = exports.positions = {
     }
 };
 
-exports.transcribe = transcribe;
-function transcribe(sections, options) {
-    options = options || {};
-    var block = options.block || false;
-    var beginParagraph = block ? "<p>" : "";
-    var delimitParagraph = "<br>";
-    var endParagraph = block ? "</p>" : "";
-    return sections.map(function (section) {
-        return section.map(function (paragraph) {
-            return beginParagraph + paragraph.map(function (line) {
-                return line.map(function (word) {
-                    return word.map(function (column) {
-                        return transcribeColumn(column, options);
-                    }).join("");
-                }).join(" ");;
-            }).join(delimitParagraph + "\n") + endParagraph;
-        }).join("\n\n");
-    }).join("\n\n\n");
-}
+// Annatar has no longVowels check and uses "" as tehta fallback
+var transcriber = createFontTranscriber(exports, {
+    longVowels: "",
+    tehtaFallback: ""
+});
 
-exports.transcribeColumn = transcribeColumn;
-function transcribeColumn(column, options) {
-    options = options || {};
-    var plain = options.plain || false;
-    var tengwa = column.tengwa || "anna";
-    var tehtar = [];
-    if (column.above) tehtar.push(column.above);
-    if (column.below) tehtar.push(column.below);
-    if (column.tildeBelow) tehtar.push("tilde-below");
-    if (column.tildeAbove) tehtar.push("tilde-above");
-    if (column.following) tehtar.push(column.following);
-    var html = tengwar[tengwa] + tehtar.map(function (tehta) {
-        return tehtaForTengwa(tengwa, tehta);
-    }).join("");
-    if (column.errors && !plain) {
-        html = "<abbr class=\"error\" title=\"" + column.errors.join("\n").replace(/"/g, "&quot;") + "\">" + html + "</abbr>";
-    }
-    return html;
-}
-
-exports.tehtaForTengwa = tehtaForTengwa;
-function tehtaForTengwa(tengwa, tehta) {
-    var tehtaKey = tehtaKeyForTengwa(tengwa, tehta);
-    if (tehtaKey == null)
-        return null;
-    return (
-        tehtar[tehta][tengwa] ||
-        tehtar[tehta][tehtaKey] ||
-        ""
-    );
-}
-
-function tehtaKeyForTengwa(tengwa, tehta) {
-    if (!tehtar[tehta])
-        return null;
-    if (tehtar[tehta].special)
-        return tehtar[tehta][tengwa] || null;
-    if (Alphabet.barsAndTildes.indexOf(tehta) !== -1) {
-        if (tengwa === "lambe" || tengwa === "alda" && tehtar[tehta].length >= 2)
-            return 2;
-        return positions[tengwa].wide ? 0 : 1;
-    }
-    if (positions[tengwa] == null)
-        return null;
-    if (positions[tengwa][tehta] === null)
-        return null;
-    if (positions[tengwa][tehta] != null)
-        return positions[tengwa][tehta];
-    if (positions[tengwa].others != null)
-        return positions[tengwa].others;
-    return positions[tengwa];
-}
-
-exports.makeColumn = makeColumn;
-function makeColumn(tengwa, tengwarFrom) {
-    return makeFontColumn(exports, tengwa, tengwarFrom);
-}
-
+exports.transcribe = transcriber.transcribe;
+exports.transcribeColumn = transcriber.transcribeColumn;
+exports.tehtaForTengwa = transcriber.tehtaForTengwa;
+exports.makeColumn = transcriber.makeColumn;
