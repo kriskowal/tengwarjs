@@ -1,0 +1,117 @@
+{
+  "general-use-encode": {
+    "entry": "encode",
+    "outputs": [
+      {
+        "input": "hello",
+        "output": "hyarmen;lambe:e,tilde-below;short-carrier:o"
+      },
+      {
+        "input": "aragorn",
+        "output": "romen:a;ungwe:a;romen:o;numen"
+      },
+      {
+        "input": "mellon",
+        "output": "malta;lambe:e,tilde-below;numen:o"
+      },
+      {
+        "input": "namarie",
+        "output": "numen;malta:a;romen:a;yanta:i"
+      },
+      {
+        "input": "frodo",
+        "output": "formen;romen;ando:o;short-carrier:o"
+      }
+    ]
+  },
+  "general-use-encode-black-speech": {
+    "entry": "module.exports",
+    "outputs": [
+      {
+        "input": "ash nazg",
+        "output": "harmacalma:a numen;esse-nuquerna:a;ungwe"
+      },
+      {
+        "input": "durbatuluk",
+        "output": "ando;ore:o;umbar;tinco:a;lambe:o;quesse:o"
+      },
+      {
+        "input": "gimbatul",
+        "output": "ungwe;umbar:i,tilde-above;tinco:a;lambe:o"
+      }
+    ]
+  },
+  "general-use-encode-reverse-curls": {
+    "entry": "module.exports",
+    "outputs": [
+      {
+        "input": "hello",
+        "output": "hyarmen;lambe:e,tilde-below;short-carrier:u"
+      },
+      {
+        "input": "orodruin",
+        "output": "romen:u;ando:u;romen;anna:o;numen"
+      }
+    ]
+  },
+  "general-use-transcribe-plain": {
+    "entry": "module.exports",
+    "outputs": [
+      {
+        "input": "hello",
+        "output": "9jR°`N"
+      },
+      {
+        "input": "aragorn",
+        "output": "7Ex#7N5"
+      }
+    ]
+  },
+  "classical-encode": {
+    "entry": "encode",
+    "outputs": [
+      {
+        "input": "namarie",
+        "output": "numen:a;malta:a;romen:i;short-carrier:e"
+      },
+      {
+        "input": "elbereth",
+        "output": "short-carrier:e;lambe;umbar:e;romen:e;thule"
+      },
+      {
+        "input": "tinco",
+        "output": "tinco:i;anca:o"
+      }
+    ]
+  },
+  "classical-encode-early": {
+    "entry": "module.exports",
+    "outputs": [
+      {
+        "input": "namarie",
+        "output": "numen:a;malta:a;ore:i;short-carrier:e"
+      },
+      {
+        "input": "hwesta",
+        "output": "hwesta:e;silme;tinco:a"
+      }
+    ]
+  },
+  "beleriand-encode": {
+    "entry": "encode",
+    "outputs": [
+      {
+        "input": "mellon",
+        "output": "vala;yanta;lambe;lambe;anna;ore"
+      },
+      {
+        "input": "barad dur",
+        "output": "umbar;round-carrier;romen;round-carrier;ando ando;ure;romen"
+      },
+      {
+        "input": "dagor",
+        "output": "ando;round-carrier;anga;anna;romen"
+      }
+    ]
+  }
+}

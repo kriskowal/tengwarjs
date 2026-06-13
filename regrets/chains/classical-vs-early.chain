@@ -1,0 +1,17 @@
+chain: classical-vs-early
+chain_hash: 2k3nbd0
+captured: 2026-06-13T17:14:47.442Z
+steps:
+  1. cluster: classical-encode
+     fingerprint: 3w6m0l5
+  2. cluster: classical-encode-early
+     fingerprint: s3dh268
+---
+STEP 1  classical-encode
+  INPUT  "namarie"
+  OUTPUT "numen:a;malta:a;romen:i;short-carrier:e"
+  HASH   3w6m0l5
+STEP 2  classical-encode-early
+  INPUT  "namarie"
+  OUTPUT "numen:a;malta:a;ore:i;short-carrier:e"
+  HASH   s3dh268

@@ -1,0 +1,17 @@
+chain: black-speech-reverse-curls
+chain_hash: 3c1yvbj
+captured: 2026-06-13T17:14:47.439Z
+steps:
+  1. cluster: general-use-encode-black-speech
+     fingerprint: 3guncp2
+  2. cluster: general-use-encode-reverse-curls
+     fingerprint: 23chjym
+---
+STEP 1  general-use-encode-black-speech
+  INPUT  "ash nazg"
+  OUTPUT "harmacalma:a numen;esse-nuquerna:a;ungwe"
+  HASH   3guncp2
+STEP 2  general-use-encode-reverse-curls
+  INPUT  "ash nazg"
+  OUTPUT "harma:a numen;esse-nuquerna:a;ungwe"
+  HASH   23chjym

@@ -1,0 +1,74 @@
+{
+  "clusters": [
+    {
+      "id": "general-use-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "general-use.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "General Use mode encode — Latin text to Tengwar Notation (Sindarin/English)",
+      "inputs": ["hello", "aragorn", "mellon", "namarie", "frodo"]
+    },
+    {
+      "id": "general-use-encode-black-speech",
+      "entry": "module.exports",
+      "watches": ["module.exports"],
+      "file": "regrets/adapters/general-use-black-speech.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "General Use Black Speech mode encode — Ash nazg durbatuluk",
+      "inputs": ["ash nazg", "durbatuluk", "gimbatul"]
+    },
+    {
+      "id": "general-use-encode-reverse-curls",
+      "entry": "module.exports",
+      "watches": ["module.exports"],
+      "file": "regrets/adapters/general-use-reverse-curls.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "General Use reverse curls mode encode",
+      "inputs": ["hello", "orodruin"]
+    },
+    {
+      "id": "general-use-transcribe-plain",
+      "entry": "module.exports",
+      "watches": ["module.exports"],
+      "file": "regrets/adapters/general-use-transcribe-plain.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "General Use transcribe plain mode — no HTML tags",
+      "inputs": ["hello", "aragorn"]
+    },
+    {
+      "id": "classical-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "classical.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Classical mode encode — Latin to Tengwar Notation (Quenya, Third Age)",
+      "inputs": ["namarie", "elbereth", "tinco"]
+    },
+    {
+      "id": "classical-encode-early",
+      "entry": "module.exports",
+      "watches": ["module.exports"],
+      "file": "regrets/adapters/classical-early.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Classical early mode encode — pre-Third Age R and H treatment",
+      "inputs": ["namarie", "hwesta"]
+    },
+    {
+      "id": "beleriand-encode",
+      "entry": "encode",
+      "watches": ["encode"],
+      "file": "beleriand.js",
+      "stack": "js",
+      "fingerprintLevel": "entry",
+      "description": "Beleriand mode encode — Latin to Tengwar Notation (Sindarin, full vowel tengwar)",
+      "inputs": ["mellon", "barad dur", "dagor"]
+    }
+  ]
+}

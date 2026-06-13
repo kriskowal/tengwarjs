@@ -1,0 +1,68 @@
+{
+  "fingerprints": {
+    "beleriand-encode": {
+      "fingerprint": "20b9l5h",
+      "captured": "2026-06-13T17:14:18.951Z",
+      "goldenHash": "20b9l5h",
+      "input": " \"mellon\"",
+      "output": "\"vala;yanta;lambe;lambe;anna;ore\""
+    },
+    "classical-encode-early": {
+      "fingerprint": "s3dh268",
+      "captured": "2026-06-13T17:14:18.949Z",
+      "goldenHash": "s3dh268",
+      "input": " \"namarie\"",
+      "output": "\"numen:a;malta:a;ore:i;short-carrier:e\""
+    },
+    "classical-encode": {
+      "fingerprint": "3w6m0l5",
+      "captured": "2026-06-13T17:14:18.948Z",
+      "goldenHash": "3w6m0l5",
+      "input": " \"namarie\"",
+      "output": "\"numen:a;malta:a;romen:i;short-carrier:e\""
+    },
+    "general-use-encode-black-speech": {
+      "fingerprint": "3guncp2",
+      "captured": "2026-06-13T17:14:18.944Z",
+      "goldenHash": "3guncp2",
+      "input": " \"ash nazg\"",
+      "output": "\"harmacalma:a numen;esse-nuquerna:a;ungwe\""
+    },
+    "general-use-encode-reverse-curls": {
+      "fingerprint": "642tn7o",
+      "captured": "2026-06-13T17:14:18.945Z",
+      "goldenHash": "642tn7o",
+      "input": " \"hello\"",
+      "output": "\"hyarmen;lambe:e,tilde-below;short-carrier:u\""
+    },
+    "general-use-encode": {
+      "fingerprint": "2heyimj",
+      "captured": "2026-06-13T17:14:18.941Z",
+      "goldenHash": "2heyimj",
+      "input": " \"hello\"",
+      "output": "\"hyarmen;lambe:e,tilde-below;short-carrier:o\""
+    },
+    "general-use-transcribe-plain": {
+      "fingerprint": "5xgljhq",
+      "captured": "2026-06-13T17:14:18.946Z",
+      "goldenHash": "5xgljhq",
+      "input": " \"hello\"",
+      "output": "\"9jR°`N\""
+    }
+  },
+  "chains": {
+    "black-speech-reverse-curls": {
+      "chainHash": "3c1yvbj",
+      "captured": "2026-06-13T17:14:47.439Z"
+    },
+    "classical-vs-early": {
+      "chainHash": "2k3nbd0",
+      "captured": "2026-06-13T17:14:47.442Z"
+    },
+    "general-use-to-beleriand": {
+      "chainHash": "187ot9u",
+      "captured": "2026-06-13T17:14:47.436Z"
+    }
+  },
+  "savedAt": "2026-06-13T17:15:42.840Z"
+}

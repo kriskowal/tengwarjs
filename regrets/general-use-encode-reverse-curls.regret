@@ -1,0 +1,12 @@
+cluster: general-use-encode-reverse-curls
+version: 1
+fingerprint: 642tn7o
+captured: 2026-06-13T17:14:18.945Z
+watches: [module.exports]
+entry: module.exports
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "hello"
+OUTPUT "hyarmen;lambe:e,tilde-below;short-carrier:u"
+HASH   642tn7o

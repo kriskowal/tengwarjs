@@ -1,0 +1,17 @@
+chain: general-use-to-beleriand
+chain_hash: 187ot9u
+captured: 2026-06-13T17:14:47.436Z
+steps:
+  1. cluster: general-use-encode
+     fingerprint: 1wktlso
+  2. cluster: beleriand-encode
+     fingerprint: 20b9l5h
+---
+STEP 1  general-use-encode
+  INPUT  "mellon"
+  OUTPUT "malta;lambe:e,tilde-below;numen:o"
+  HASH   1wktlso
+STEP 2  beleriand-encode
+  INPUT  "mellon"
+  OUTPUT "vala;yanta;lambe;lambe;anna;ore"
+  HASH   20b9l5h

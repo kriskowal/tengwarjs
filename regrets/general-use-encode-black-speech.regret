@@ -1,0 +1,12 @@
+cluster: general-use-encode-black-speech
+version: 1
+fingerprint: 3guncp2
+captured: 2026-06-13T17:14:18.944Z
+watches: [module.exports]
+entry: module.exports
+stack: js
+fingerprintLevel: entry
+---
+INPUT  "ash nazg"
+OUTPUT "harmacalma:a numen;esse-nuquerna:a;ungwe"
+HASH   3guncp2

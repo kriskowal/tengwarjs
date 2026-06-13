@@ -1,0 +1,51 @@
+{
+  "fingerprints": {
+    "beleriand-encode": {
+      "fingerprint": "20b9l5h",
+      "goldenHash": "20b9l5h",
+      "captured": "2026-06-13T17:14:18.951Z"
+    },
+    "classical-encode-early": {
+      "fingerprint": "s3dh268",
+      "goldenHash": "s3dh268",
+      "captured": "2026-06-13T17:14:18.949Z"
+    },
+    "classical-encode": {
+      "fingerprint": "3w6m0l5",
+      "goldenHash": "3w6m0l5",
+      "captured": "2026-06-13T17:14:18.948Z"
+    },
+    "general-use-encode-black-speech": {
+      "fingerprint": "3guncp2",
+      "goldenHash": "3guncp2",
+      "captured": "2026-06-13T17:14:18.944Z"
+    },
+    "general-use-encode-reverse-curls": {
+      "fingerprint": "642tn7o",
+      "goldenHash": "642tn7o",
+      "captured": "2026-06-13T17:14:18.945Z"
+    },
+    "general-use-encode": {
+      "fingerprint": "2heyimj",
+      "goldenHash": "2heyimj",
+      "captured": "2026-06-13T17:14:18.941Z"
+    },
+    "general-use-transcribe-plain": {
+      "fingerprint": "5xgljhq",
+      "goldenHash": "5xgljhq",
+      "captured": "2026-06-13T17:14:18.946Z"
+    }
+  },
+  "chains": {
+    "black-speech-reverse-curls": {
+      "chainHash": "3c1yvbj"
+    },
+    "classical-vs-early": {
+      "chainHash": "2k3nbd0"
+    },
+    "general-use-to-beleriand": {
+      "chainHash": "187ot9u"
+    }
+  },
+  "savedAt": "2026-06-13T17:28:05.609Z"
+}
