@@ -13,6 +13,19 @@ var tehtar = exports.tehtar = Bindings.tehtar;
 
 var positions = exports.positions = {
 
+    "0": {"i": 1, "i-below": 1},
+    "1": {"i": 1, "i-below": 1},
+    "2": {"i": 0, "i-below": 0},
+    "3": {"i": 0, "i-below": 0},
+    "4": {"i": 2, "i-below": 2},
+    "5": {"i": 1, "i-below": 0},
+    "6": {"i": 0, "i-below": 2},
+    "7": {"i": 0, "i-below": 2},
+    "8": {"i": 2, "i-below": 3},
+    "9": {"i": 0, "i-below": 0},
+    "10": {"i": 0, "i-below": 1},
+    "11": {"i": 0, "i-below": 2},
+
     "tinco": 2,
     "parma": 2,
     "calma": {
@@ -349,7 +362,7 @@ function tehtaForTengwa(tengwa, tehta) {
     if (tehtaKey == null)
         return null;
     return (
-        tehtar[tehta][tengwa] ||
+        (tehtar[tehta].special && tehtar[tehta][tengwa]) ||
         tehtar[tehta][tehtaKey] ||
         null
     );

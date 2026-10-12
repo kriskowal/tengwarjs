@@ -5,6 +5,8 @@ var Classical = require("../classical");
 var ClassicalTests = require("./classical");
 var GeneralUse = require("../general-use");
 var GeneralUseTests = require("./general-use");
+var Fonts = require("../fonts");
+var NumberTests = require("./numbers");
 
 function equal(label, actual, expected) {
     if (expected !== actual) {
@@ -43,6 +45,31 @@ Object.entries(BeleriandTests).forEach(function ([input, expected]) {
         Beleriand.encode(input),
         expected,
     );
+});
+
+[GeneralUse, Classical, Beleriand].forEach(function (mode) {
+    Object.entries(Fonts).forEach(function ([fontName, font]) {
+        Object.entries(NumberTests).forEach(function ([base, tests]) {
+            var options = {
+                font: font,
+                duodecimal: base === "duodecimal"
+            };
+            Object.entries(tests.encode).forEach(function ([input, expected]) {
+                equal(
+                    `${mode.name}, ${fontName}, ${base}: ${input}`,
+                    mode.encode(input, options),
+                    expected,
+                );
+            });
+            Object.entries(tests.transcribe[fontName]).forEach(function ([input, expected]) {
+                equal(
+                    `${mode.name}, ${fontName}, ${base} marks: ${input}`,
+                    mode.transcribe(input, options),
+                    expected,
+                );
+            });
+        });
+    });
 });
 
 if (!process.exitCode) {
