@@ -45,9 +45,15 @@ function convert(string, alt, options) {
         error = alt > 1;
     }
     var number = parseInt(string, 10);
-    var string = number.toString(radix).split("");
+    // Numerals are written units first (Quettar Special Publication No. 1, p. 15).
+    var string = number.toString(radix).split("").reverse();
     return string.map(function (character) {
         var column = makeColumn(""+parseInt(character, 12));
+        if (radix === 10) {
+            column.addAbove("i");
+        } else {
+            column.addBelow("i-below");
+        }
         if (error) {
             column.addError("Numbers can only be parsed in either decimal or dudecimal.");
         }

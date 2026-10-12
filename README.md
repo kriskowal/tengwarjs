@@ -211,6 +211,14 @@ Using the Modules
     -   `decodeWord(tengwarNotation makeColumn)`: to Tengwar Object
         Notation for just one word (no nested arrays).
 
+## Numbers
+
+All modes accept decimal input and write numerals with the units digit first.
+Decimal output has a dot above each digit. With `duodecimal: true` (or
+`duodecimal` in `data-mode`), output uses base 12 with a dot below each digit.
+A backtick after a number switches its output base. The digit order and dots follow
+[Quettar Special Publication No. 1, p. 15](https://www.quettar.org/special1.pdf#page=17).
+
 ## Tengwar Notation
 
 Tengwar Notation is useful for succinctly representing the first stage

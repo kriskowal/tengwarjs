@@ -17,6 +17,19 @@ tehtar["s-final"].malta = null;
 
 var positions = exports.positions = {
 
+    "0": {"i": 0, "i-below": 3},
+    "1": {"i": 0, "i-below": 3},
+    "2": {"i": 0, "i-below": 1},
+    "3": {"i": 0, "i-below": 0},
+    "4": {"i": 0, "i-below": 3},
+    "5": {"i": 1, "i-below": 1},
+    "6": {"i": 0, "i-below": 3},
+    "7": {"i": 0, "i-below": 0},
+    "8": {"i": 1, "i-below": 1},
+    "9": {"i": 0, "i-below": 0},
+    "10": {"i": 0, "i-below": 3},
+    "11": {"i": 0, "i-below": 3},
+
     "tinco": {
         "o": 3,
         "w": 3,
@@ -381,7 +394,7 @@ function tehtaForTengwa(tengwa, tehta) {
     if (tehtaKey == null)
         return null;
     return (
-        tehtar[tehta][tengwa] ||
+        (tehtar[tehta].special && tehtar[tehta][tengwa]) ||
         tehtar[tehta][tehtaKey] ||
         ""
     );
