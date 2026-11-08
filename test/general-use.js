@@ -31,6 +31,7 @@ module.exports = {
             // interesting clusters
             "Alyssa": "lambe:a;silme-nuquerna:y-sindarin,tilde-below;short-carrier:a",
             "allys": "lambe:a,tilde-below;silme-nuquerna:y-sindarin",
+            "constructor": "quesse;numen:o;silme;tinco;romen;quesse:u;tinco;ore:o",
             "iqs": "quesse:i,s",
             "ls": "lambe:s-final",
             "ls`": "lambe:s-flourish",

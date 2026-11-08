@@ -179,7 +179,7 @@ function parseWord(callback, options) {
                 ]);
             }
         }
-        if (book[word]) {
+        if (Object.prototype.hasOwnProperty.call(book, word)) {
             return callback(Notation.decodeWord(book[word], makeColumn), {
                 from: word
             });
