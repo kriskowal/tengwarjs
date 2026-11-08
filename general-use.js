@@ -175,7 +175,7 @@ function parseWord(callback, options) {
             } else if (word === "we`") { // Unattested, my invention - kriskowal
                 return callback([
                     makeColumn("vala", {from: "w", diphthong: true})
-                        .addBelow("y", {from: "ē"})
+                        .addBelow("y-quenya", {from: "ē"})
                 ]);
             }
         }
@@ -512,7 +512,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                                     return callback(makeColumn("numen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)("a")(character);
                                 }
                             };
-                        } else if (character === "nw`") { // nw/ prime -> ñw
+                        } else if (character === "`") { // nw/ prime -> ñw
                             return callback(makeColumn("nwalme", {from: "ñ"}).addAbove("w", {from: "w"}), tehta, tehtaFrom);
                         } else { // nw.
                             return callback(makeColumn("numen", {from: "n"}).addAbove("w", {from: "w"}), tehta, tehtaFrom)(character);
@@ -563,7 +563,7 @@ function parseTengwa(callback, options, tehta, tehtaFrom) {
                 } else if (character === "c") { // tc
                     return function (character) {
                         if (character === "h") { // tch -> tinco calma
-                            return callback(makeColumn("tinco", {from: "t"}), tehta, tehtaFrom)("c")("h")("`");
+                            return callback(makeColumn("tinco", {from: "t"}), tehta, tehtaFrom)("c")("c");
                         } else {
                             return callback(makeColumn("tinco", {from: "t"}), tehta, tehtaFrom)("c")(character);
                         }
