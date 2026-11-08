@@ -34,6 +34,8 @@ module.exports = {
             "iqs": "quesse:i,s",
             "ls": "lambe:s-final",
             "ls`": "lambe:s-flourish",
+            "nw`": "nwalme:w",
+            "tch": "tinco;calma",
             "tsts": "tinco;silme;tinco:s-final",
             "xx": "quesse:s;quesse:s",
 
@@ -73,11 +75,13 @@ module.exports = {
             "hobbits`": "hyarmen;umbar:o,tilde-below;tinco:i,s-inverse",
             "hobbits``": "hyarmen;umbar:o,tilde-below;tinco:i,s-extended",
             "hobbits```": "hyarmen;umbar:o,tilde-below;tinco:i,s-flourish",
+            "matched": "malta;tinco:a;calma;ando:e",
             "onyx": "numen:o;quesse:y-english,s",
             "phone": "formenparma;numen:o,i-below",
             "style": "silme;tinco:y-english;lambe:i-below",
             "these": "thule;silme-nuquerna:e;short-carrier:i-below",
             "these`": "thule;silme-nuquerna:e;short-carrier:e", // invalid input
+            "we`": "vala:y-quenya",
             "yellow": "anna;lambe:e,tilde-below;vala:o",
             "yes": "anna;silme-nuquerna:e",
 
